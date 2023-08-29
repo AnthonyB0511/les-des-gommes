@@ -1,0 +1,21 @@
+.header{
+    padding: 10px 20px;
+    box-shadow: var(--box-shadow-nav);
+    font-family: var(--font-family);
+    background-color: var(--blue);
+    border-radius: 0 0 10vh 0;
+    width: 100%;
+    img{
+        width: 12%;
+        padding: 1% 0;
+        position:relative;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+    i{
+        font-size: 30px;
+    }
+    .icon{
+        justify-self: flex-end;
+    }
+}

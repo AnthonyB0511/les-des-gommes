@@ -1,0 +1,28 @@
+organisation site
+
+NavBar : Menu Burger (Les actualités / L'association / Nos activités /  Nos partenaires /Nous contacter / Forum / Mon compte)
+Footer : "Suivez-vous sur nous facebook / Contact par mail/Les dégommés
+
+Les différentes pages :
+
+1/ Actualités :
+2 blocs
+Présentation rapide
++2 actualités
+2ème bloc avec carroussel et petite présentation du jeu  sur 3 blocs !!!
+
+2/ Association
+- qui sommes nous (statut officiel / plus cool)
+- comment adhérer 
+- plan d'accès
+
+3/Ludothèque (à voire)
+
+4/Nos activités (lundi soir / samedi après- midi / jeu de rôle /blood bowl)
+
+5/ Contact
+
+6/Forumn   /
+
+
+
