@@ -1,7 +1,9 @@
 import { Card } from "./Card"
-import { actu } from "../data/actu"
 import { DernieresSeances } from "./DernieresSeances";
-import styles from "./Content.module.scss"
+import MustHave from "./MustHave";
+import styles from "./Content.module.scss";
+import { actu } from "../data/actu";
+import { must } from "../data/must"
 export default function Content(){
     return (
         <>
@@ -10,6 +12,8 @@ export default function Content(){
             actu={actu}/>
             <DernieresSeances />
         </div>
+            <MustHave 
+            must={must} />
     </>
     
     )

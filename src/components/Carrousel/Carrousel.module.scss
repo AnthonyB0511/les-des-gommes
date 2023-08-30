@@ -1,0 +1,15 @@
+.carrousel{
+    width: 75%;
+    // height: 25vh;
+    margin: 15% auto;
+    .div{
+        position: relative;
+    }
+    .border{
+        border-radius: 10vh 0 10vh 0;
+        border: 2px var(--red) solid;
+        height: 50vh;
+        box-shadow: var(--box-shadow);
+        width: 100%;
+    }
+}

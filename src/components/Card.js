@@ -1,4 +1,5 @@
 import styles from "./Card.module.scss"
+import { Button } from "./Button"
 
 export function Card ({actu}) {
     return(
@@ -10,10 +11,14 @@ export function Card ({actu}) {
                 </div>
                 <div className={`${styles.content}`}>
                     <p>{oneActu.text}</p>
+                    <Button 
+                    needButton={oneActu.needButton}
+                    txtButton="Cliquer ICI"/>
                 </div>
             </div>
+
         ))}
-        </div>       
+      </div>       
         
     )
 }
