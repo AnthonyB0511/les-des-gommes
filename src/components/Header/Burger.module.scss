@@ -1,8 +1,13 @@
 .icon{
     color:var(--red);
+    border-radius:5vh;
     position: fixed;
-    right: 15%;
+    right: 14%;
+    top: 12.5%;
     z-index:8;
+    backdrop-filter: blur(12px);
+    align-items: center;
+    padding: 0.5%;
     i{
         font-size: 2.8em;
     }
