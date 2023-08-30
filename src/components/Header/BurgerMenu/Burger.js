@@ -1,19 +1,30 @@
 import styles from "./Burger.module.scss";
 import { Nav } from "./Nav";
 import { useState } from "react";
+import { motion } from 'framer-motion'
+
 export default function Burger(){
     const [open,setOpen] = useState(false);
 
-    const HamburgerIcon = <div 
+    const HamburgerIcon = <motion.div 
                             className={`${styles.icon}`}
-                            onClick={() => setOpen(!open)}>
+                            onClick={() => setOpen(!open)}
+                            initial={{visibility:"hidden"}}
+                            animate={{visibility:"visible"}}
+                            transition={{ type: "spring", bounce: 0.5 }}
+                            >
                             <i className="fa-solid fa-bars"></i>
-                        </div>
+                        </motion.div>
     const CloseIcon = <>
-                        <Nav />
+                        <Nav 
+                        initial="hidden"
+                        animate="visible"/>
                         <div 
                         className={`${styles.icon}`}
-                        onClick={() => setOpen(!open)}>
+                        onClick={() => setOpen(!open)}
+                        initial={{visibility:"hidden"}}
+                        animate={{visibility:"visible"}}
+                        transition={{ type: "spring", bounce: 0.5 }}>
                            <i className="fa-solid fa-circle-xmark"></i>
                         </div>
                     </>

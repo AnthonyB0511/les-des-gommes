@@ -3,17 +3,6 @@ footer {
     color: var(--text-color);
     padding: 2%;
     border-radius: 10vh 0 0 0;
-    a{
-        text-decoration: none;
-        color:var(--text-color);
-    }
-    i{
-        font-size: 25px;
-        padding-right: 1%;
-    }
-    p{
-        margin: 10px ;
-    }
     .rights{
         font-style: italic;
         font-weight: 200;
@@ -22,6 +11,11 @@ footer {
         font-style: italic;
         font-size: 15px;
         font-weight: 300;
+        a{
+            color: var(--text-color);
+            text-decoration: none;
+            padding:0 0.5%;
+        }
     }
     
 
