@@ -1,7 +1,6 @@
 .container{
     width: 60%;
     margin: 1% auto;
-    
     .img{
         width: 40%;
         height: 100%;
@@ -11,8 +10,8 @@
             border-top: solid 2px var(--red);
             border-left: solid 2px var(--red);
             border-bottom: solid 2px var(--red);
+            box-shadow: var(--box-shadow);
         }
-        
     }
     .content{
         width: 60%;
@@ -34,4 +33,29 @@
             text-align: center ;
         }
     }
+}
+.reverse{
+    display: flex;
+    flex-direction: row-reverse;
+    .img{
+        img{
+            border-radius: 0 0 10vh 0;
+            height: 26vh;
+            border-top: solid 2px var(--red);
+            border-right: solid 2px var(--red);
+            border-bottom: solid 2px var(--red);
+            border-left: 0;
+            box-shadow: var(--box-shadow);
+        }
+    }
+    .content{
+            border-radius: 10vh 0 0 0;
+            height: 26vh;
+            border-top: solid 2px var(--red);
+            border-left: solid 2px var(--red);
+            border-bottom: solid 2px var(--red);
+            border-right: 0;
+            box-shadow: var(--box-shadow);
+
+        }
 }

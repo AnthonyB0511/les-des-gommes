@@ -8,8 +8,12 @@ export default function Content(){
     return (
         <>
         <div className= {`${styles.flex}`}>
-            <Card 
-            actu={actu}/>
+            <div className={`${styles.container}`}>
+            {actu.map((oneActu)=>(
+                <Card 
+                actu={oneActu}/>
+            ))}
+            </div>
             <DernieresSeances />
         </div>
             <MustHave 

@@ -9,7 +9,7 @@ export default function MustHave({must}){
             <Line />
            
             {must.map ((oneGame) => (
-                <div className={`${styles.container} d-flex p20 mb20`}>
+                <div className={`${styles.container} ${oneGame.reverse && styles.reverse} d-flex p20 mb20`}>
                     <div className={`${styles.img}`}>
                         <img src={oneGame.image} alt="" />
                     </div>

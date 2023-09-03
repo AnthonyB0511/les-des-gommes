@@ -1,4 +1,10 @@
 .flex{
     width:100%;
     display:flex;
+    .container{
+        width: 50%;
+        margin: 0 auto;
+        flex-direction: column;
+        display: flex;
+    }
 }

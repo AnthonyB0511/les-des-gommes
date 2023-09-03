@@ -3,22 +3,18 @@ import { Button } from "./Button"
 
 export function Card ({actu}) {
     return(
-        <div className={`${styles.container}`}>
-            {actu.map((oneActu) => (
-            <div className={`${styles.card} m20`}>
-                <div className={`${styles.img}`}>
-                    <img src={oneActu.image} alt="" />
-                </div>
-                <div className={`${styles.content}`}>
-                    <p>{oneActu.text}</p>
-                    <Button 
-                    needButton={oneActu.needButton}
-                    txtButton="Cliquer ICI"/>
-                </div>
+        <div className={`${styles.card} m20`}>
+            <div className={`${styles.img}`}>
+                <img src={actu.image} alt="" />
             </div>
-
-        ))}
-      </div>       
+            <div className={`${styles.content}`}>
+                <p>{actu.text}</p>
+                <Button 
+                needButton={actu.needButton}
+                txtButton="Cliquer ICI"/>
+            </div>
+        </div>
+       
         
     )
 }

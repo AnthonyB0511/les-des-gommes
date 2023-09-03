@@ -1,10 +1,10 @@
 import styles from "./Nav.module.scss";
 import { LineNav } from "./LineNav";
 import { Contact } from "../../Footer/Contact"
-
 export const Nav = () =>{
     return(
         <>
+        
             <div className={`${styles.burgerMenu} `}>
                 <nav className={`${styles.nav}`}>
                     <ul className={`${styles.ul}`}>
@@ -23,6 +23,7 @@ export const Nav = () =>{
                 </nav>
                 <Contact />
             </div>
+            
         </>
     )
 }
