@@ -1,15 +1,80 @@
-.carrousel{
+@use"../../assets/styles/mixin" as mixin;
+
+.carrousel {
     width: 75%;
     // height: 25vh;
     margin: 15% auto;
-    .div{
+
+    @include mixin.md-lt {
+        margin: 8% auto;
+
+    }
+
+    @include mixin.xs {
+        width: 90%;
+
+    }
+
+    @include mixin.intxs {
+        width: 90%;
+
+    }
+
+    @include mixin.intxxs {
+        width: 95%;
+
+    }
+
+    .div {
         position: relative;
     }
-    .border{
+
+    .border {
         border-radius: 10vh 0 10vh 0;
         border: 2px var(--red) solid;
         height: 50vh;
         box-shadow: var(--box-shadow);
         width: 100%;
+
+        @include mixin.xl {
+            height: 40vh;
+
+        }
+
+        @include mixin.lg-lt {
+            height: 40vh;
+
+        }
+
+        @include mixin.md-lt {
+            height: 50vh;
+
+        }
+
+        @include mixin.sm-lt {
+            height: 40vh;
+
+        }
+
+        @include mixin.xs {
+            height: 35vh;
+
+        }
+
+        @include mixin.intxs {
+            height: 30vh;
+
+        }
+
+        @include mixin.intxxs {
+            height: 25vh;
+
+        }
+
+        @include mixin.smallest {
+            height: 20vh;
+            margin: 5% auto;
+
+        }
     }
 }

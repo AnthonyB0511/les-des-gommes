@@ -1,19 +1,87 @@
-.container{
+@use"../assets/styles/mixin" as mixin;
+
+.container {
     width: 60%;
     margin: 1% auto;
-    .img{
+
+    @include mixin.md-lt {
+        width: 90%;
+    }
+
+    @include mixin.xs {
+        width: 95%;
+
+    }
+
+    @include mixin.xxs {
+        flex-wrap: wrap;
+
+    }
+
+    @include mixin.xxxs {
+        flex-wrap: wrap;
+
+    }
+
+    @include mixin.intxxs {
+        flex-wrap: wrap;
+
+    }
+
+    .img {
         width: 40%;
         height: 100%;
-        img{
+
+        @include mixin.xxs {
+            width: 100%;
+
+        }
+
+        @include mixin.xs {
+            width: 50%;
+
+        }
+
+        @include mixin.xxxs {
+            width: 100%;
+
+        }
+
+        @include mixin.intxxs {
+            width: 100%;
+
+        }
+
+        img {
             border-radius: 10vh 0 0 0;
             height: 26vh;
             border-top: solid 2px var(--red);
             border-left: solid 2px var(--red);
             border-bottom: solid 2px var(--red);
             box-shadow: var(--box-shadow);
+
+            @include mixin.intxs {
+                border-radius: 5vh 0 0 0;
+                border-left: solid 2px var(--red);
+                border-right: solid 2px var(--red);
+                border-top: solid 2px var(--red);
+                border-bottom: 0;
+                box-shadow: var(--box-shadow);
+            }
+
+            @include mixin.xxxs {
+                border-radius: 5vh 0 0 0;
+                border-left: solid 2px var(--red);
+                border-right: solid 2px var(--red);
+                border-top: solid 2px var(--red);
+                border-bottom: 0;
+                box-shadow: var(--box-shadow);
+            }
+
         }
     }
-    .content{
+
+    .content {
         width: 60%;
         background-color: var(--blue);
         border-radius: 0 0 10vh 0;
@@ -22,23 +90,78 @@
         border-right: solid 2px var(--red);
         border-bottom: solid 2px var(--red);
         box-shadow: var(--box-shadow);
-        h3{
+
+        @include mixin.intxs {
+            width: 100%;
+            border-radius: 0 0 5vh 0;
+            border-left: solid 2px var(--red);
+            border-right: solid 2px var(--red);
+            border-bottom: solid 2px var(--red);
+            border-top: 0px;
+            box-shadow: var(--box-shadow);
+
+        }
+
+        h3 {
             text-align: center;
             padding-top: 3%;
             text-transform: uppercase;
             font-size: 1.5em;
+
+            @include mixin.xs {
+                font-size: 1.2rem;
+
+            }
+
+            @include mixin.xxs {
+                font-size: 1rem;
+
+            }
+
+            @include mixin.xxxs {
+                font-size: 1.2rem;
+
+            }
+
+            @include mixin.intxxs {
+                font-size: 1rem;
+
+            }
         }
-        p{
+
+        p {
             padding: 5%;
-            text-align: center ;
+            text-align: center;
+
+            @include mixin.xs {
+                font-size: 0.9rem;
+
+            }
+
+            @include mixin.xxs {
+                font-size: 0.9rem;
+
+            }
+
+            @include mixin.xxxs {
+                font-size: 0.9rem;
+
+            }
+
+            @include mixin.intxxs {
+                font-size: 0.9rem;
+
+            }
         }
     }
 }
-.reverse{
+
+.reverse {
     display: flex;
     flex-direction: row-reverse;
-    .img{
-        img{
+
+    .img {
+        img {
             border-radius: 0 0 10vh 0;
             height: 26vh;
             border-top: solid 2px var(--red);
@@ -46,16 +169,40 @@
             border-bottom: solid 2px var(--red);
             border-left: 0;
             box-shadow: var(--box-shadow);
+
+            @include mixin.intxs {
+                width: 100%;
+                border-radius: 5vh 0 0 0;
+                border-left: solid 2px var(--red);
+                border-right: solid 2px var(--red);
+                border-top: solid 2px var(--red);
+                border-bottom: 0px;
+                box-shadow: var(--box-shadow);
+
+            }
         }
     }
-    .content{
-            border-radius: 10vh 0 0 0;
-            height: 26vh;
-            border-top: solid 2px var(--red);
+
+    .content {
+        border-radius: 10vh 0 0 0;
+        height: 26vh;
+        border-top: solid 2px var(--red);
+        border-left: solid 2px var(--red);
+        border-bottom: solid 2px var(--red);
+        border-right: 0;
+        box-shadow: var(--box-shadow);
+
+        @include mixin.intxs {
+            border-radius: 0 0 5vh 0;
+            width: 100%;
             border-left: solid 2px var(--red);
+            border-right: solid 2px var(--red);
             border-bottom: solid 2px var(--red);
-            border-right: 0;
+            border-top: 0px;
             box-shadow: var(--box-shadow);
 
         }
+
+
+    }
 }

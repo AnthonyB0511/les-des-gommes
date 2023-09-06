@@ -7,10 +7,6 @@ import { Link } from "react-router-dom";
 
 export default function Burger() {
     const [open, setOpen] = useState(false);
-    const changeBorder = (e) => {
-
-    }
-
 
     const HamburgerIcon = <div
         className={`${styles.icon}`}
@@ -41,10 +37,6 @@ export default function Burger() {
 
                 <Contact />
             </div>
-
-
-
-
             <div
                 className={`${styles.icon}`}
                 onClick={() => setOpen(!open)}>

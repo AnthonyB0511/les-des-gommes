@@ -1,4 +1,6 @@
-.header{
+@use"../../assets/styles/mixin" as mixin;
+
+.header {
     padding: 10px 20px;
     box-shadow: var(--box-shadow-nav);
     font-family: var(--font-family);
@@ -7,17 +9,119 @@
     width: 100%;
     display: flex;
     align-items: center;
-    img{
+    position: relative;
+    top: 0;
+    left: 0;
+
+    @include mixin.md-lt {
+        border-radius: 0 0 7vh 0;
+    }
+
+    @include mixin.xs {
+        border-radius: 0 0 5vh 0;
+    }
+
+    @include mixin.intxs {
+        border-radius: 0 0 5vh 0;
+    }
+
+    .icone {
+        display: flex;
+        align-items: center;
+        position: fixed;
+        top: 10%;
+        right: 15%;
+        z-index: 8;
+
+        @include mixin.xxxl {
+            top: 8%;
+        }
+
+        @include mixin.intxl {
+            top: 7%;
+        }
+
+        @include mixin.xl {
+            top: 6%;
+        }
+
+        @include mixin.lg-lt {
+            top: 5%;
+        }
+
+        @include mixin.md-lt {
+            top: 6%;
+        }
+
+        @include mixin.sm-lt {
+            top: 3%;
+
+        }
+
+        @include mixin.xs {
+            width: 25%;
+            top: 5%;
+        }
+
+        @include mixin.intxs {
+            width: 50%;
+            top: 5.5%;
+            right: -15%;
+        }
+
+        @include mixin.intxxs {
+            top: 4%;
+            width: 55%;
+
+        }
+
+
+
+    }
+
+    img {
         width: 10%;
         padding: 1% 0;
-        position:relative;
+        position: relative;
         left: 50%;
         transform: translateX(-50%);
+
+        @include mixin.md-lt {
+            width: 15%;
+        }
+
+        @include mixin.sm-lt {
+            width: 15%;
+        }
+
+        @include mixin.xs {
+            width: 20%;
+        }
+
+        @include mixin.xxs {
+            width: 25%;
+        }
+
+        @include mixin.xxxs {
+            width: 28%;
+        }
+
+        @include mixin.intxs {
+            width: 28%;
+        }
+
+        @include mixin.smallest {
+            width: 28%;
+        }
+
+
     }
-    i{
+
+    i {
         font-size: 30px;
     }
-    .icon{
+
+    .icon {
         justify-self: flex-end;
     }
 }

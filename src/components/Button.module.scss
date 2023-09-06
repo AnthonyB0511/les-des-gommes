@@ -1,9 +1,37 @@
-.button{
+@use"../assets/styles/mixin" as mixin;
+
+.button {
     margin-top: 50px;
     text-transform: uppercase;
     background-color: var(--action);
     border-radius: 10vh 0 10vh 0;
     font-weight: 800;
     padding: 0.8em 2em;
-    font-size:1.2rem;
+    font-size: 1.2rem;
+
+    @include mixin.xl {
+        width: 100%;
+        font-size: 1rem;
+        padding: 0.5em 1.5em;
+        margin-top: 30px;
+    }
+
+    @include mixin.lg-lt {
+        margin-top: 20px;
+        font-size: 0.9rem;
+    }
+
+    @include mixin.xs {
+        display: block;
+        margin: 2% auto;
+    }
+
+    @include mixin.intxs {
+        border-radius: 5vh 0 5vh 0;
+        margin: 1% auto;
+        font-size: 0.8rem;
+        padding: 0.4em 1.4em;
+    }
+
+
 }

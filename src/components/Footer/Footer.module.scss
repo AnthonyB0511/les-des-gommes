@@ -1,22 +1,71 @@
+@use"../../assets/styles/mixin" as mixin;
+
 footer {
     background-color: var(--blue);
     color: var(--text-color);
     padding: 2%;
     border-radius: 10vh 0 0 0;
-    .rights{
+
+    @include mixin.md-lt {
+        font-size: 14px;
+        border-radius: 7vh 0 0 0;
+    }
+
+    @include mixin.intxs {
+        border-radius: 5vh 0 0 0;
+    }
+
+    @include mixin.intxxs {
+        font-size: 12px;
+    }
+
+    @include mixin.smallest {
+        font-size: 0.7rem;
+        border-radius: 3vh 0 0 0;
+        padding: 3%;
+    }
+
+    .rights {
         font-style: italic;
         font-weight: 200;
+
+        @include mixin.md-lt {
+            font-size: 14px;
+        }
+
+        @include mixin.intxs {
+            font-size: 12px;
+        }
+
+        @include mixin.intxxs {
+            font-size: 10px;
+        }
     }
-    .mention{
+
+    .mention {
         font-style: italic;
         font-size: 15px;
         font-weight: 300;
-        a{
+
+        @include mixin.md-lt {
+            font-size: 12px;
+        }
+
+        @include mixin.intxs {
+            font-size: 10px;
+        }
+
+        @include mixin.intxxs {
+            font-size: 8px;
+        }
+
+        a {
             color: var(--text-color);
             text-decoration: none;
-            padding:0 0.5%;
+            padding: 0 0.5%;
         }
+
     }
-    
+
 
 }
