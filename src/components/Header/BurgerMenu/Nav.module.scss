@@ -1,5 +1,5 @@
-.burgerMenu{
-    margin:0;
+.burgerMenu {
+    margin: 0;
     padding: 0;
     position: fixed;
     height: 100%;
@@ -10,25 +10,28 @@
     justify-content: center;
     background-color: var(--blue);
     opacity: 0.9;
-    z-index: 4 ;
+    z-index: 4;
     top: 0;
     left: 0;
     transition: all .5s;
-    .nav{
+
+    .nav {
         width: 80%;
         margin-bottom: 2%;
-        .ul{
-            font-size:0;
-            .li{
+
+        .ul {
+            font-size: 0;
+
+            .li {
                 text-align: center;
-                .a{
+
+                a {
                     text-align: center;
                     font-size: 3rem;
-                    padding:5% 0;
+                    padding: 5% 0;
                     letter-spacing: 5px;
                     text-decoration: none;
                     color: var(--text-color);
-
                 }
             }
         }

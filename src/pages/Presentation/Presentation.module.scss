@@ -1,0 +1,126 @@
+.presentation{
+    width: 80%;
+    margin: 0 auto;
+    .container{ 
+        margin-block: 7%;
+        justify-content: center;
+        align-items: center;
+        .content{
+            width: 50%;
+            .title{
+                margin: 0 auto;
+                .question1{
+                    font-size: 2rem;
+                    transform: rotate(-12deg);
+                    padding: 0 1%
+                }
+                .question2{
+                    font-size: 2rem;
+                    transform: rotate(12deg);
+                    padding: 0 1%
+                }
+            }
+            p{
+                font-size: 1.6em;
+                width: 75%;
+                margin: 3% auto;
+                text-align: center;
+            }
+        }
+        .img{
+            width: 50%;
+            margin: 0 auto;
+            img{
+                width: 50%;
+                margin: 0 auto;
+            }
+        }
+    }
+    .whatElse{
+        margin-block: 7%;
+        i{
+            font-size: 2em;
+            padding: 0 2%
+        }
+        .content{
+            margin-block: 2%;
+            .p{ 
+            font-size : 1.6em;
+            text-align:justify;
+            margin-block: 0.5%;
+            span{
+                font-weight: 800;
+            }
+            } 
+            ul{
+                list-style: inside;
+                .li{
+                    font-size:1.6em
+                }
+            }
+        }
+    }
+    .joinUs{
+        margin-block:10%;
+        .title{
+            i{
+                font-size: 2em;
+                padding: 0 2%;
+            }
+            
+        }
+        p{
+            text-align: center;
+            font-size:1.6em;
+            margin-block:3%
+            }
+    }
+    .map {
+        display :flex;
+        align-items: center;
+        width: 100%;
+        margin-block: 10%;
+        .content{
+            width: 50%;
+            .title{
+                margin-bottom: 5%;
+                i{
+                    font-size: 2em;
+                    padding: 0 2%;
+                }
+            }
+            .adress{
+                p{
+                    text-align: center;
+                    font-size: 1.6em;
+                }
+            }
+        }
+        .img{
+            width: 50%;
+            img{
+                width:75%;
+                margin:0 auto;
+            }
+        }
+    }
+    .partners{
+        .title{
+            i{
+                font-size: 2em;
+                padding: 0 2%;
+            }
+        }
+        .images{
+            margin-block: 5%;
+           a{
+            width: 100%;
+            img{
+                width: 75%;
+                margin: 0 auto;
+            }
+           }
+            
+        }  
+    }
+}

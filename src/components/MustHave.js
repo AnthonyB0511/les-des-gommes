@@ -5,7 +5,7 @@ import { Line } from "./Line"
 export default function MustHave({must}){
     return(
         <div className="mb50">
-            <SecondTitle name="Les jeux plébbiscités par les adhérents"/>
+            <SecondTitle name="Les jeux plébiscités par les adhérents"/>
             <Line />
            
             {must.map ((oneGame) => (

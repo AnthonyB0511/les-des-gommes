@@ -1,10 +1,10 @@
 import styles from "./Nav.module.scss";
 import { LineNav } from "./LineNav";
 import { Contact } from "../../Footer/Contact"
-export const Nav = () =>{
-    return(
+export const Nav = () => {
+    return (
         <>
-        
+
             <div className={`${styles.burgerMenu} `}>
                 <nav className={`${styles.nav}`}>
                     <ul className={`${styles.ul}`}>
@@ -16,14 +16,14 @@ export const Nav = () =>{
                         <LineNav />
                         <li className={`${styles.li}`}><a href="" className={`${styles.a}`}>CONTACT</a></li>
                         <LineNav />
-                        <li className={`${styles.li}`}><a href=""className={`${styles.a}`}>FORUM</a></li>
+                        <li className={`${styles.li}`}><a href="" className={`${styles.a}`}>FORUM</a></li>
                         <LineNav />
-                        <li className={`${styles.li}`}><a href=""className={`${styles.a}`}>MON COMPTE</a></li>
+                        <li className={`${styles.li}`}><a href="" className={`${styles.a}`}>MON COMPTE</a></li>
                     </ul>
                 </nav>
                 <Contact />
             </div>
-            
+
         </>
     )
 }
