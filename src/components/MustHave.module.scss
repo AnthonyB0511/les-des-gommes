@@ -102,6 +102,21 @@
 
         }
 
+        @include mixin.xxs {
+            height: 100%;
+
+        }
+
+        @include mixin.xxxs {
+            height: 100%;
+
+        }
+
+        @include mixin.intxxs {
+            height: 100%;
+
+        }
+
         h3 {
             text-align: center;
             padding-top: 3%;
