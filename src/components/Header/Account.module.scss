@@ -15,16 +15,22 @@
     width: 4.8em;
     transition: .5s all;
 
+    @include mixin.sm-lt {
+        margin-left: 5%;
+        height: 2.9em;
+        width: 2.9em;
+    }
+
     @include mixin.xs {
         margin-left: 10%;
-        height: 3.5em;
-        width: 3.5em;
+        height: 2.7em;
+        width: 2.7em;
     }
 
     @include mixin.intxs {
         margin-left: 10%;
-        height: 3em;
-        width: 3em;
+        height: 2.7em;
+        width: 2.7em;
     }
 
 

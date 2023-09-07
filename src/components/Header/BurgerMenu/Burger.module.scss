@@ -17,6 +17,12 @@
     transition: box-shadow 0.5s ease-in-out;
     margin-left: 15%;
 
+    @include mixin.sm-lt {
+        margin-left: 50%;
+        height: 2.9em;
+        width: 2.9em;
+    }
+
     @include mixin.xs {
         margin-left: 10%;
         height: 3.5em;
