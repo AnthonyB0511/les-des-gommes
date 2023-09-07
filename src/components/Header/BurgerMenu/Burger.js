@@ -8,12 +8,33 @@ import { Link } from "react-router-dom";
 export default function Burger() {
     const [open, setOpen] = useState(false);
 
-    const HamburgerIcon = <div
-        className={`${styles.icon}`}
-        onClick={() => setOpen(!open)}
-    >
-        <i className="fa-solid fa-bars"></i>
-    </div>
+    const HamburgerIcon = <>
+        <div className={`${styles.burgerMenu} ${styles.noShow} `}>
+            <nav className={`${styles.nav}`}>
+                <ul className={`${styles.ul}`}>
+                    <li className={`${styles.li}`}><Link to="/" onClick={() => setOpen(!open)}>ACCUEIL</Link></li>
+                    <LineNav />
+                    <li className={`${styles.li}`} ><Link to="/presentation" onClick={() => setOpen(!open)}> L'ASSO</Link></li>
+                    <LineNav />
+                    <li className={`${styles.li}`}><Link to="/ludotheque" onClick={() => setOpen(!open)}>LA LUDOTHEQUE</Link></li>
+                    <LineNav />
+                    <li className={`${styles.li}`}><Link onClick={() => setOpen(!open)}>CONTACT</Link></li>
+                    <LineNav />
+                    <li className={`${styles.li}`}><Link onClick={() => setOpen(!open)}>FORUM</Link></li>
+                    <LineNav />
+                    <li className={`${styles.li}`}><Link onClick={() => setOpen(!open)}>MON COMPTE</Link></li>
+                </ul>
+            </nav>
+
+            <Contact />
+        </div>
+        <div
+            className={`${styles.icon}`}
+            onClick={() => setOpen(!open)}
+        >
+            <i className="fa-solid fa-bars"></i>
+        </div>
+    </>
 
     const CloseIcon =
         <>

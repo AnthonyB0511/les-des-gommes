@@ -67,6 +67,11 @@
     }
 }
 
+.noShow {
+    translate: 100%;
+    transition: all ease-out 0.3s;
+}
+
 .burgerMenu {
     margin: 0;
     padding: 0;
