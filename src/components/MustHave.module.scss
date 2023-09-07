@@ -218,6 +218,21 @@
             border-top: 0px;
             box-shadow: var(--box-shadow);
 
+            @include mixin.xxs {
+                height: 100%;
+
+            }
+
+            @include mixin.xxxs {
+                height: 100%;
+
+            }
+
+            @include mixin.intxxs {
+                height: 100%;
+
+            }
+
         }
 
 
