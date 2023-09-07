@@ -45,8 +45,12 @@
             font-size: 1.8em;
         }
 
-        @include mixin.xxxs {
+        @include mixin.xxs {
             font-size: 1.5em;
+        }
+
+        @include mixin.xxxs {
+            font-size: 1.3em;
         }
 
         @include mixin.xxxxs {
