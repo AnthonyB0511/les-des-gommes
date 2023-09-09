@@ -4,12 +4,24 @@
     width: 60%;
     margin: 1% auto;
 
+    @include mixin.xxl {
+        width: 70%;
+    }
+
+    @include mixin.xl {
+        width: 75%;
+    }
+
+    @include mixin.lg-lt {
+        width: 85%;
+    }
+
     @include mixin.md-lt {
         width: 90%;
     }
 
     @include mixin.xs {
-        width: 95%;
+        width: 100%;
 
     }
 
@@ -30,7 +42,8 @@
 
     .img {
         width: 40%;
-        height: 100%;
+        display: flex;
+        align-items: stretch;
 
         @include mixin.xxs {
             width: 100%;
@@ -54,11 +67,11 @@
 
         img {
             border-radius: 10vh 0 0 0;
-            height: 26vh;
             border-top: solid 2px var(--red);
             border-left: solid 2px var(--red);
             border-bottom: solid 2px var(--red);
             box-shadow: var(--box-shadow);
+
 
             @include mixin.intxs {
                 border-radius: 5vh 0 0 0;
@@ -85,7 +98,6 @@
         width: 60%;
         background-color: var(--blue);
         border-radius: 0 0 10vh 0;
-        height: 26vh;
         border-top: solid 2px var(--red);
         border-right: solid 2px var(--red);
         border-bottom: solid 2px var(--red);
@@ -147,6 +159,17 @@
         p {
             padding: 5%;
             text-align: center;
+            font-size: 1.3em;
+
+            @include mixin.md-lt {
+                font-size: 1rem;
+
+            }
+
+            @include mixin.sm-lt {
+                font-size: 0.9rem;
+
+            }
 
             @include mixin.xs {
                 font-size: 0.9rem;
@@ -176,11 +199,14 @@
 .reverse {
     display: flex;
     flex-direction: row-reverse;
+    align-items: stretch;
 
     .img {
+        display: flex;
+        align-items: stretch;
+
         img {
             border-radius: 0 0 10vh 0;
-            height: 26vh;
             border-top: solid 2px var(--red);
             border-right: solid 2px var(--red);
             border-bottom: solid 2px var(--red);
@@ -202,7 +228,6 @@
 
     .content {
         border-radius: 10vh 0 0 0;
-        height: 26vh;
         border-top: solid 2px var(--red);
         border-left: solid 2px var(--red);
         border-bottom: solid 2px var(--red);

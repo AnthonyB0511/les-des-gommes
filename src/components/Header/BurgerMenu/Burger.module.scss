@@ -75,14 +75,15 @@
 
 
         &:hover {
-            transform: scale(1.1);
+            transform: scale(1.05);
 
         }
     }
 }
 
 .noShow {
-    translate: 100%;
+    transform: translateX(100%);
+    transform-origin: right;
     transition: all ease-out 0.3s;
 }
 
@@ -119,8 +120,8 @@
 
 
     .nav {
-        width: 80%;
-        margin-block: 2%;
+        width: 75%;
+        margin: 10% auto 2% auto;
 
         .ul {
             font-size: 0;
