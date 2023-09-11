@@ -1,126 +1,358 @@
-.presentation{
+@use"../../assets/styles/mixin" as mixin;
+
+.presentation {
     width: 80%;
     margin: 0 auto;
-    .container{ 
+
+    @include mixin.intxs {
+        width: 90%;
+    }
+
+    .container {
         margin-block: 7%;
         justify-content: center;
         align-items: center;
-        .content{
+
+        .content {
             width: 50%;
-            .title{
+
+            @include mixin.lg-lt {
+                width: 80%;
+            }
+
+            @include mixin.intxs {
+                width: 100%;
+            }
+
+            .title {
                 margin: 0 auto;
-                .question1{
+
+                @include mixin.sm-lt {
+                    width: 110%;
+                    margin: 0
+                }
+
+                @include mixin.sm-lt {
+                    width: 120%;
+                    margin: 0
+                }
+
+                @include mixin.intxs {
+                    width: 100%;
+                }
+
+
+                .question1 {
                     font-size: 2rem;
                     transform: rotate(-12deg);
-                    padding: 0 1%
+                    padding: 0 1%;
+
+                    @include mixin.md-lt {
+                        font-size: 1.8rem;
+                    }
+
+                    @include mixin.intxs {
+                        font-size: 1.5rem;
+                    }
                 }
-                .question2{
+
+                .question2 {
                     font-size: 2rem;
                     transform: rotate(12deg);
-                    padding: 0 1%
+                    padding: 0 1%;
+
+                    @include mixin.md-lt {
+                        font-size: 1.8rem;
+                    }
+
+                    @include mixin.intxs {
+                        font-size: 1.5rem;
+                    }
+
                 }
             }
-            p{
+
+            p {
                 font-size: 1.6em;
                 width: 75%;
                 margin: 3% auto;
                 text-align: center;
+
+                @include mixin.lg-lt {
+                    font-size: 1.4em;
+                    width: 90%;
+                }
+
+                @include mixin.md-lt {
+                    font-size: 1.3rem;
+                }
+
+                @include mixin.sm-lt {
+                    font-size: 1.2rem;
+                    width: 95%;
+                }
+
+                @include mixin.intxs {
+                    font-size: 1rem;
+                }
             }
         }
-        .img{
+
+        .img {
             width: 50%;
             margin: 0 auto;
-            img{
+
+            @include mixin.intxs {
+                display: none;
+            }
+
+            img {
                 width: 50%;
                 margin: 0 auto;
-            }
-        }
-    }
-    .whatElse{
-        margin-block: 7%;
-        i{
-            font-size: 2em;
-            padding: 0 2%
-        }
-        .content{
-            margin-block: 2%;
-            .p{ 
-            font-size : 1.6em;
-            text-align:justify;
-            margin-block: 0.5%;
-            span{
-                font-weight: 800;
-            }
-            } 
-            ul{
-                list-style: inside;
-                .li{
-                    font-size:1.6em
+
+                @include mixin.lg-lt {
+                    width: 80%;
                 }
             }
         }
     }
-    .joinUs{
-        margin-block:10%;
-        .title{
-            i{
+
+    .whatElse {
+        margin-block: 7%;
+
+        i {
+            font-size: 2em;
+            padding: 0 2%;
+
+            @include mixin.md-lt {
+                font-size: 1.8rem;
+            }
+
+            @include mixin.intxs {
+                font-size: 1.5rem;
+            }
+        }
+
+        .content {
+            margin-block: 2%;
+
+            .p {
+                font-size: 1.6em;
+                text-align: justify;
+                margin-block: 0.5%;
+
+                @include mixin.lg-lt {
+                    font-size: 1.4em;
+                }
+
+                @include mixin.md-lt {
+                    font-size: 1.3rem;
+                }
+
+                @include mixin.sm-lt {
+                    font-size: 1.2rem;
+                }
+
+                @include mixin.intxs {
+                    font-size: 1rem;
+                }
+
+                span {
+                    font-weight: 800;
+                }
+            }
+
+            ul {
+                list-style: inside;
+
+                .li {
+                    font-size: 1.6em;
+
+                    @include mixin.lg-lt {
+                        font-size: 1.4em;
+                    }
+
+                    @include mixin.md-lt {
+                        font-size: 1.3rem;
+                    }
+
+                    @include mixin.sm-lt {
+                        font-size: 1.2rem;
+                    }
+
+                    @include mixin.intxs {
+                        font-size: 1rem;
+                    }
+
+                }
+            }
+        }
+    }
+
+    .joinUs {
+        margin-block: 10%;
+
+        .title {
+            i {
                 font-size: 2em;
                 padding: 0 2%;
+
+                @include mixin.md-lt {
+                    font-size: 1.8rem;
+                }
+
+                @include mixin.intxs {
+                    font-size: 1.5rem;
+                }
             }
-            
+
         }
-        p{
+
+        p {
             text-align: center;
-            font-size:1.6em;
-            margin-block:3%
+            font-size: 1.6em;
+            margin-block: 3%;
+
+            @include mixin.lg-lt {
+                font-size: 1.4em;
             }
+
+            @include mixin.md-lt {
+                font-size: 1.3rem;
+            }
+
+            @include mixin.sm-lt {
+                font-size: 1.2rem;
+                width: 95%;
+            }
+
+            @include mixin.intxs {
+                font-size: 1rem;
+            }
+        }
     }
+
     .map {
-        display :flex;
+        display: flex;
         align-items: center;
         width: 100%;
         margin-block: 10%;
-        .content{
+
+        @include mixin.xs {
+            flex-wrap: wrap;
+        }
+
+        @include mixin.intxs {
+            flex-wrap: wrap;
+        }
+
+
+        .content {
             width: 50%;
-            .title{
+
+            @include mixin.xs {
+                width: 100%;
+            }
+
+            @include mixin.intxs {
+                width: 100%;
+            }
+
+            .title {
                 margin-bottom: 5%;
-                i{
+
+                i {
                     font-size: 2em;
                     padding: 0 2%;
+
+                    @include mixin.md-lt {
+                        font-size: 1.8rem;
+                    }
+
+                    @include mixin.intxs {
+                        font-size: 1.5rem;
+                    }
                 }
             }
-            .adress{
-                p{
+
+            .adress {
+                p {
                     text-align: center;
                     font-size: 1.6em;
+
+                    @include mixin.lg-lt {
+                        font-size: 1.4em;
+                    }
+
+                    @include mixin.md-lt {
+                        font-size: 1.3rem;
+                    }
+
+                    @include mixin.sm-lt {
+                        font-size: 1.2rem;
+                    }
+
+                    @include mixin.intxs {
+                        font-size: 1rem;
+                    }
                 }
             }
         }
-        .img{
+
+        .img {
             width: 50%;
-            img{
-                width:75%;
-                margin:0 auto;
+
+            @include mixin.xs {
+                width: 100%;
+                margin-top: 15px;
             }
-        }
-    }
-    .partners{
-        .title{
-            i{
-                font-size: 2em;
-                padding: 0 2%;
+
+            @include mixin.intxs {
+                width: 100%;
+                margin-top: 15px;
             }
-        }
-        .images{
-            margin-block: 5%;
-           a{
-            width: 100%;
-            img{
+
+            @include mixin.intxs {
+                width: 100%;
+                margin-top: 15px
+            }
+
+
+            img {
                 width: 75%;
                 margin: 0 auto;
             }
-           }
-            
-        }  
+        }
+    }
+
+    .partners {
+        .title {
+            i {
+                font-size: 2em;
+                padding: 0 2%;
+
+                @include mixin.md-lt {
+                    font-size: 1.8rem;
+                }
+
+                @include mixin.intxs {
+                    font-size: 1.5rem;
+                }
+            }
+        }
+
+        .images {
+            margin-block: 5%;
+
+            a {
+                width: 100%;
+
+                img {
+                    width: 75%;
+                    margin: 0 auto;
+                }
+            }
+
+        }
     }
 }

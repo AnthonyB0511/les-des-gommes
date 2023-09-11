@@ -5,8 +5,12 @@
     font-size: 2rem;
     text-align: center;
 
+    @include mixin.md-lt {
+        font-size: 1.7rem;
+    }
+
     @include mixin.sm-lt {
-        font-size: 1.8rem;
+        font-size: 1.7rem;
 
     }
 
@@ -16,18 +20,17 @@
     }
 
     @include mixin.intxs {
-        font-size: 1.3rem;
+        font-size: 1.7rem;
 
     }
 
     @include mixin.xxxs {
-        font-size: 1.2rem;
+        font-size: 1.3rem;
 
     }
 
-    @include mixin.intxs {
-        font-size: 1rem;
-
+    @include mixin.intxxs {
+        font-size: 1.2rem;
     }
 
     @include mixin.smallest {

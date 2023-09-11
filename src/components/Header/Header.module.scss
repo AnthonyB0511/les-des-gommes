@@ -33,30 +33,6 @@
         right: 15%;
         z-index: 8;
 
-        // @include mixin.xxxl {
-        //     top: 8%;
-        // }
-
-        // @include mixin.intxl {
-        //     top: 7%;
-        // }
-
-        // @include mixin.xl {
-        //     top: 6%;
-        // }
-
-        // @include mixin.lg-lt {
-        //     top: 5%;
-        // }
-
-        // @include mixin.md-lt {
-        //     top: 6%;
-        // }
-
-        // @include mixin.sm-lt {
-        //     top: 3%;
-
-        // }
 
         @include mixin.xs {
             width: 25%;
@@ -66,15 +42,13 @@
         @include mixin.intxs {
             width: 25%;
             right: 10%;
-            //     top: 5.5%;
-            //     right: -15%;
         }
 
-        // @include mixin.intxxs {
-        //     top: 5%;
-        //     width: 55%;
+        @include mixin.intxxs {
+            width: 35%;
+            right: 0;
 
-        // }
+        }
 
 
 
