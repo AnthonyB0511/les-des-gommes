@@ -1,0 +1,163 @@
+@use"../../../assets/styles/mixin" as mixin;
+
+
+.icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--red);
+    border-radius: 5vh;
+    backdrop-filter: blur(5px);
+    align-items: center;
+    padding-top: 0.2%;
+    height: 4.8em;
+    z-index: 8;
+    position: relative;
+    width: 4.8em;
+    transition: box-shadow 0.5s ease-in-out;
+    margin-left: 15%;
+
+    @include mixin.sm-lt {
+        margin-left: 50%;
+        height: 2.9em;
+        width: 2.9em;
+    }
+
+    @include mixin.xs {
+        margin-left: 10%;
+        height: 3.5em;
+        width: 3.5em;
+    }
+
+    @include mixin.intxs {
+        margin-left: 10%;
+        height: 3em;
+        width: 3em;
+    }
+
+    &:hover {
+        box-shadow: 10px 5px 5px var(--red);
+    }
+
+    i {
+        font-size: 3rem;
+        cursor: pointer;
+        transition: .5s ease-in-out;
+
+        @include mixin.lg-lt {
+            font-size: 2.2em;
+        }
+
+        @include mixin.xs {
+            font-size: 1.8em;
+        }
+
+        @include mixin.xxs {
+            font-size: 1.5em;
+        }
+
+        @include mixin.xxxs {
+            font-size: 1.3em;
+        }
+
+        @include mixin.xxxs {
+            font-size: 1.5em;
+        }
+
+        @include mixin.xxxxs {
+            font-size: 1.5em;
+        }
+
+        @include mixin.smallest {
+            font-size: 1.5em;
+
+        }
+
+
+        &:hover {
+            transform: scale(1.05);
+
+        }
+    }
+}
+
+.noShow {
+    transform: translateX(100%);
+    transform-origin: right;
+    transition: all ease-out 0.3s;
+}
+
+.burgerMenu {
+    margin: 0;
+    padding: 0;
+    position: fixed;
+    transition: ease-out 0.3s;
+    height: 100%;
+    width: 32%;
+    border-radius: 10vh 0 0 10vh;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    background-color: var(--blue);
+    opacity: 0.95;
+    z-index: 5;
+    top: 0;
+    right: 0;
+
+    @include mixin.lg-lt {
+        width: 40%;
+    }
+
+    @include mixin.md-lt {
+        width: 50%;
+    }
+
+    @include mixin.sm-lt {
+        width: 100%;
+        border-radius: 0
+    }
+
+
+    .nav {
+        width: 75%;
+        margin: 10% auto 2% auto;
+
+        .ul {
+            font-size: 0;
+
+            .li {
+                text-align: center;
+                margin-block: 4%;
+
+
+                a {
+                    text-align: center;
+                    font-size: 2.5rem;
+                    padding: 5% 0;
+                    letter-spacing: 5px;
+                    text-decoration: none;
+                    color: var(--text-color);
+
+                    @include mixin.intxl {
+                        font-size: 2rem;
+                    }
+
+                    @include mixin.md-lt {
+                        font-size: 1.7rem;
+                    }
+
+                    @include mixin.intxxs {
+                        font-size: 1.5rem;
+                    }
+
+                    @include mixin.smallest {
+                        font-size: 1.5rem;
+                        letter-spacing: 3px;
+                    }
+                }
+            }
+        }
+    }
+
+}

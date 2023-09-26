@@ -1,0 +1,29 @@
+@use"../../assets/styles/mixin" as mixin;
+
+.title {
+    text-align: center;
+    font-size: 3rem;
+    font-weight: 400;
+    color: var(--text-color);
+    margin: 1.5em auto 0 auto;
+
+    @include mixin.md-lt {
+        font-size: 2.5rem;
+    }
+
+    @include mixin.intxs {
+        font-size: 2.1rem;
+    }
+
+    @include mixin.xxxs {
+        font-size: 1.9rem;
+    }
+
+    @include mixin.intxs {
+        font-size: 1.6rem;
+    }
+
+    @include mixin.smallest {
+        font-size: 1.5rem;
+    }
+}

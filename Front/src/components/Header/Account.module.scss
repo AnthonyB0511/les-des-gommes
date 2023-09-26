@@ -1,0 +1,74 @@
+@use"../../assets/styles/mixin" as mixin;
+
+.icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--red);
+    border-radius: 5vh;
+    position: relative;
+    z-index: 4;
+    backdrop-filter: blur(5px);
+    align-items: center;
+    padding-top: 0.2%;
+    height: 4.8em;
+    width: 4.8em;
+    transition: .5s all;
+
+    @include mixin.sm-lt {
+        margin-left: 5%;
+        height: 2.9em;
+        width: 2.9em;
+    }
+
+    @include mixin.xs {
+        margin-left: 10%;
+        height: 2.7em;
+        width: 2.7em;
+    }
+
+    @include mixin.intxs {
+        margin-left: 10%;
+        height: 2.7em;
+        width: 2.7em;
+    }
+
+
+    &:hover {
+        box-shadow: 10px 5px 5px var(--red);
+    }
+
+    i {
+        font-size: 2.8em;
+        transition: .5s ease-in-out;
+        cursor: pointer;
+
+        @include mixin.lg-lt {
+            font-size: 2.2em;
+        }
+
+        @include mixin.xs {
+            font-size: 1.8em;
+        }
+
+        @include mixin.xxs {
+            font-size: 1.5em;
+        }
+
+        @include mixin.xxxs {
+            font-size: 1.3em;
+        }
+
+        @include mixin.xxxxs {
+            font-size: 1.5em;
+        }
+
+        @include mixin.smallest {
+            font-size: 1.5em;
+        }
+
+        &:hover {
+            transform: scale(1.1);
+        }
+    }
+}

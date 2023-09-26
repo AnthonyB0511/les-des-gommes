@@ -1,0 +1,91 @@
+@use"../../assets/styles/mixin" as mixin;
+
+.search {
+    margin-left: 70%;
+
+
+    @include mixin.lg-lt {
+        margin-left: 70%;
+    }
+
+    @include mixin.md-lt {
+        margin-left: 65%;
+    }
+
+    @include mixin.sm-lt {
+        margin-left: 55%;
+    }
+
+    @include mixin.intxxs {
+        margin-left: 45%;
+    }
+
+    @include mixin.smallest {
+        margin-left: 35%
+    }
+
+
+
+    input {
+        padding: 2%;
+        border: none;
+        background-color: var(--primary);
+        font-size: 1.5rem;
+        font-family: var(--font);
+        width: 100%;
+    }
+}
+
+.grid {
+    margin: 8% 0;
+    display: grid;
+    place-content: center;
+    grid-template-columns: repeat(3, 350px);
+    grid-auto-columns: repeat(3, 350px);
+    gap: 100px;
+
+    @include mixin.xl {
+        grid-template-columns: repeat(3, 325px);
+        grid-auto-columns: repeat(3, 325px);
+        gap: 50px;
+    }
+
+    @include mixin.lg-lt {
+        grid-template-columns: repeat(3, 290px);
+        grid-auto-columns: repeat(3, 290px);
+        gap: 35px;
+    }
+
+    @include mixin.md-lt {
+        grid-template-columns: repeat(2, 325px);
+        grid-auto-columns: repeat(2, 325px);
+        gap: 50px;
+    }
+
+    @include mixin.sm-lt {
+        grid-template-columns: repeat(2, 250px);
+        grid-auto-columns: repeat(2, 250px);
+        gap: 40px;
+    }
+
+
+    @include mixin.xs {
+        grid-template-columns: 430px;
+        grid-auto-columns: 430px;
+    }
+
+    @include mixin.intxs {
+        grid-template-columns: 375px;
+        grid-auto-columns: 375px;
+    }
+
+    @include mixin.xxxxs {
+        grid-template-columns: 310px;
+        grid-auto-columns: 310px;
+    }
+
+    @include mixin.smallest {
+        grid-template-columns: 1fr;
+        grid-auto-columns: 1fr;
+    }
+}

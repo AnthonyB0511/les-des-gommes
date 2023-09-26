@@ -1,0 +1,102 @@
+@use"../../assets/styles/mixin" as mixin;
+
+.header {
+    padding: 10px 20px;
+    box-shadow: var(--box-shadow-nav);
+    font-family: var(--font-family);
+    background-color: var(--blue);
+    border-radius: 0 0 10vh 0;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    position: relative;
+    top: 0;
+    left: 0;
+
+    @include mixin.md-lt {
+        border-radius: 0 0 7vh 0;
+    }
+
+    @include mixin.xs {
+        border-radius: 0 0 5vh 0;
+    }
+
+    @include mixin.intxs {
+        border-radius: 0 0 5vh 0;
+    }
+
+    .icone {
+        display: flex;
+        align-items: center;
+        position: fixed;
+        top: clamp (5%, 8%, 10%);
+        right: 15%;
+        z-index: 8;
+
+
+        @include mixin.xs {
+            width: 25%;
+            //     top: 5%;
+        }
+
+        @include mixin.intxs {
+            width: 25%;
+            right: 10%;
+        }
+
+        @include mixin.intxxs {
+            width: 35%;
+            right: 0;
+
+        }
+
+
+
+    }
+
+    img {
+        width: 10%;
+        padding: 1% 0;
+        position: relative;
+        left: 50%;
+        transform: translateX(-50%);
+
+        @include mixin.md-lt {
+            width: 15%;
+        }
+
+        @include mixin.sm-lt {
+            width: 15%;
+        }
+
+        @include mixin.xs {
+            width: 20%;
+        }
+
+        @include mixin.xxs {
+            width: 25%;
+        }
+
+        @include mixin.xxxs {
+            width: 28%;
+        }
+
+        @include mixin.intxs {
+            width: 28%;
+        }
+
+        @include mixin.smallest {
+            width: 28%;
+        }
+
+
+    }
+
+    i {
+        font-size: 30px;
+    }
+
+    .icon {
+        justify-self: flex-end;
+    }
+}

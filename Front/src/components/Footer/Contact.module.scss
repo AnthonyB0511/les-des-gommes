@@ -1,0 +1,49 @@
+@use"../../assets/styles/mixin" as mixin;
+
+.contact {
+    @include mixin.smallest {
+        margin-block: 2%;
+
+    }
+
+    .link {
+        color: var(--text-color);
+        padding: 12px;
+        font-size: 1.2rem;
+        text-decoration: none;
+
+        @include mixin.md-lt {
+            font-size: 16px;
+
+        }
+
+        @include mixin.intxs {
+            font-size: 14px;
+        }
+
+        @include mixin.intxxs {
+            padding: 5px;
+            font-size: 12px;
+        }
+
+        @include mixin.smallest {
+            padding: 3px;
+            font-size: 0.8rem;
+        }
+    }
+
+    p {
+        padding-right: 12px;
+
+    }
+
+    i {
+        color: var(--text-color);
+        font-size: 1.5rem;
+
+        @include mixin.sm-lt {
+            font-size: 1.2rem;
+
+        }
+    }
+}

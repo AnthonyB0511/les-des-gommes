@@ -1,0 +1,15 @@
+@use"../../assets/styles/mixin" as mixin;
+
+.seances {
+    width: 50%;
+    margin-top: 5%;
+
+    @include mixin.md-lt {
+        width: 90%;
+        margin: 1% auto;
+    }
+
+    h2 {
+        text-align: center;
+    }
+}

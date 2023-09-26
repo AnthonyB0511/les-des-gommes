@@ -1,0 +1,358 @@
+@use"../../assets/styles/mixin" as mixin;
+
+.presentation {
+    width: 80%;
+    margin: 0 auto;
+
+    @include mixin.intxs {
+        width: 90%;
+    }
+
+    .container {
+        margin-block: 7%;
+        justify-content: center;
+        align-items: center;
+
+        .content {
+            width: 50%;
+
+            @include mixin.lg-lt {
+                width: 80%;
+            }
+
+            @include mixin.intxs {
+                width: 100%;
+            }
+
+            .title {
+                margin: 0 auto;
+
+                @include mixin.sm-lt {
+                    width: 110%;
+                    margin: 0
+                }
+
+                @include mixin.sm-lt {
+                    width: 120%;
+                    margin: 0
+                }
+
+                @include mixin.intxs {
+                    width: 100%;
+                }
+
+
+                .question1 {
+                    font-size: 2rem;
+                    transform: rotate(-12deg);
+                    padding: 0 1%;
+
+                    @include mixin.md-lt {
+                        font-size: 1.8rem;
+                    }
+
+                    @include mixin.intxs {
+                        font-size: 1.5rem;
+                    }
+                }
+
+                .question2 {
+                    font-size: 2rem;
+                    transform: rotate(12deg);
+                    padding: 0 1%;
+
+                    @include mixin.md-lt {
+                        font-size: 1.8rem;
+                    }
+
+                    @include mixin.intxs {
+                        font-size: 1.5rem;
+                    }
+
+                }
+            }
+
+            p {
+                font-size: 1.6em;
+                width: 75%;
+                margin: 3% auto;
+                text-align: center;
+
+                @include mixin.lg-lt {
+                    font-size: 1.4em;
+                    width: 90%;
+                }
+
+                @include mixin.md-lt {
+                    font-size: 1.3rem;
+                }
+
+                @include mixin.sm-lt {
+                    font-size: 1.2rem;
+                    width: 95%;
+                }
+
+                @include mixin.intxs {
+                    font-size: 1rem;
+                }
+            }
+        }
+
+        .img {
+            width: 50%;
+            margin: 0 auto;
+
+            @include mixin.intxs {
+                display: none;
+            }
+
+            img {
+                width: 50%;
+                margin: 0 auto;
+
+                @include mixin.lg-lt {
+                    width: 80%;
+                }
+            }
+        }
+    }
+
+    .whatElse {
+        margin-block: 7%;
+
+        i {
+            font-size: 2em;
+            padding: 0 2%;
+
+            @include mixin.md-lt {
+                font-size: 1.8rem;
+            }
+
+            @include mixin.intxs {
+                font-size: 1.5rem;
+            }
+        }
+
+        .content {
+            margin-block: 2%;
+
+            .p {
+                font-size: 1.6em;
+                text-align: justify;
+                margin-block: 0.5%;
+
+                @include mixin.lg-lt {
+                    font-size: 1.4em;
+                }
+
+                @include mixin.md-lt {
+                    font-size: 1.3rem;
+                }
+
+                @include mixin.sm-lt {
+                    font-size: 1.2rem;
+                }
+
+                @include mixin.intxs {
+                    font-size: 1rem;
+                }
+
+                span {
+                    font-weight: 800;
+                }
+            }
+
+            ul {
+                list-style: inside;
+
+                .li {
+                    font-size: 1.6em;
+
+                    @include mixin.lg-lt {
+                        font-size: 1.4em;
+                    }
+
+                    @include mixin.md-lt {
+                        font-size: 1.3rem;
+                    }
+
+                    @include mixin.sm-lt {
+                        font-size: 1.2rem;
+                    }
+
+                    @include mixin.intxs {
+                        font-size: 1rem;
+                    }
+
+                }
+            }
+        }
+    }
+
+    .joinUs {
+        margin-block: 10%;
+
+        .title {
+            i {
+                font-size: 2em;
+                padding: 0 2%;
+
+                @include mixin.md-lt {
+                    font-size: 1.8rem;
+                }
+
+                @include mixin.intxs {
+                    font-size: 1.5rem;
+                }
+            }
+
+        }
+
+        p {
+            text-align: center;
+            font-size: 1.6em;
+            margin-block: 3%;
+
+            @include mixin.lg-lt {
+                font-size: 1.4em;
+            }
+
+            @include mixin.md-lt {
+                font-size: 1.3rem;
+            }
+
+            @include mixin.sm-lt {
+                font-size: 1.2rem;
+                width: 95%;
+            }
+
+            @include mixin.intxs {
+                font-size: 1rem;
+            }
+        }
+    }
+
+    .map {
+        display: flex;
+        align-items: center;
+        width: 100%;
+        margin-block: 10%;
+
+        @include mixin.xs {
+            flex-wrap: wrap;
+        }
+
+        @include mixin.intxs {
+            flex-wrap: wrap;
+        }
+
+
+        .content {
+            width: 50%;
+
+            @include mixin.xs {
+                width: 100%;
+            }
+
+            @include mixin.intxs {
+                width: 100%;
+            }
+
+            .title {
+                margin-bottom: 5%;
+
+                i {
+                    font-size: 2em;
+                    padding: 0 2%;
+
+                    @include mixin.md-lt {
+                        font-size: 1.8rem;
+                    }
+
+                    @include mixin.intxs {
+                        font-size: 1.5rem;
+                    }
+                }
+            }
+
+            .adress {
+                p {
+                    text-align: center;
+                    font-size: 1.6em;
+
+                    @include mixin.lg-lt {
+                        font-size: 1.4em;
+                    }
+
+                    @include mixin.md-lt {
+                        font-size: 1.3rem;
+                    }
+
+                    @include mixin.sm-lt {
+                        font-size: 1.2rem;
+                    }
+
+                    @include mixin.intxs {
+                        font-size: 1rem;
+                    }
+                }
+            }
+        }
+
+        .img {
+            width: 50%;
+
+            @include mixin.xs {
+                width: 100%;
+                margin-top: 15px;
+            }
+
+            @include mixin.intxs {
+                width: 100%;
+                margin-top: 15px;
+            }
+
+            @include mixin.intxs {
+                width: 100%;
+                margin-top: 15px
+            }
+
+
+            img {
+                width: 75%;
+                margin: 0 auto;
+            }
+        }
+    }
+
+    .partners {
+        .title {
+            i {
+                font-size: 2em;
+                padding: 0 2%;
+
+                @include mixin.md-lt {
+                    font-size: 1.8rem;
+                }
+
+                @include mixin.intxs {
+                    font-size: 1.5rem;
+                }
+            }
+        }
+
+        .images {
+            margin-block: 5%;
+
+            a {
+                width: 100%;
+
+                img {
+                    width: 75%;
+                    margin: 0 auto;
+                }
+            }
+
+        }
+    }
+}
