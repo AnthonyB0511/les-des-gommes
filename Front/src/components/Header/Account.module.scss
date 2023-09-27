@@ -71,4 +71,69 @@
             transform: scale(1.1);
         }
     }
+
+    .check {
+        i {
+            color: rgb(4, 233, 4);
+            font-size: 1.5em;
+            position: absolute;
+            bottom: 8%;
+            right: 7%;
+        }
+    }
+
+    .profile {
+        position: absolute;
+        bottom: -150%;
+        width: 35vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        color: var(--text-color);
+        font-size: 1.5rem;
+        background-color: transparent;
+        border-radius: 10vh 0 10vh 0;
+        opacity: 0.9;
+
+        .li {
+
+            .btn {
+                text-transform: uppercase;
+                background-color: var(--action);
+                border-radius: 10vh 0 10vh 0;
+                font-weight: 800;
+                padding: 0.8em 2em;
+                font-size: 0.8rem;
+                overflow: hidden;
+                transition: all .3s;
+                z-index: 0;
+                cursor: pointer;
+                margin-bottom: 5%;
+
+                &:before {
+                    content: '';
+                    position: absolute;
+                    bottom: 0;
+                    left: 0;
+                    width: 0%;
+                    height: 100%;
+                    background-color: var(--red);
+                    transition: ease-in-out .3s;
+                    border-radius: 10vh 0 10vh 0;
+                    z-index: -1;
+                }
+
+                &:hover {
+                    color: var(--primary);
+                    transform: scale(1.1);
+
+                    &:before {
+                        width: 100%;
+                    }
+                }
+            }
+
+        }
+    }
 }
