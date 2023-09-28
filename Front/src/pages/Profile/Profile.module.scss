@@ -1,0 +1,108 @@
+.form {
+    width: 66%;
+    margin: 0 auto;
+    margin-block: 3%;
+
+    .container {
+        display: flex;
+        justify-content: space-between;
+
+        .content {
+            display: flex;
+            flex-direction: column;
+            width: 40%;
+
+            label {
+                font-size: 1.5rem;
+            }
+
+            input:-webkit-autofill,
+            input:-webkit-autofill:hover,
+            input:-webkit-autofill:focus,
+            input:-webkit-autofill:active {
+                -webkit-box-shadow: 0 0 0px 1000px var(--primary) inset;
+            }
+
+            input {
+                background-color: var(--primary);
+                padding-block: 2%;
+                border-radius: 10vh;
+            }
+        }
+    }
+
+    label {
+        font-size: 1.5rem;
+    }
+
+    input:-webkit-autofill,
+    input:-webkit-autofill:hover,
+    input:-webkit-autofill:focus,
+    input:-webkit-autofill:active {
+        -webkit-box-shadow: 0 0 0px 1000px #fff inset;
+    }
+
+    input {
+        background-color: var(--action);
+        padding-block: 1%;
+        padding-left: 2%;
+        border-radius: 10vh;
+        font-size: 1.3rem;
+        font-style: italic;
+        color: grey;
+    }
+
+    .button {
+        margin-block: 5%;
+        display: flex;
+        margin-top: 50px;
+        text-transform: uppercase;
+        background-color: var(--action);
+        border-radius: 10vh 0 10vh 0;
+        font-weight: 800;
+        padding: 0.8em 1.5em;
+        font-size: 1rem;
+        overflow: hidden;
+        position: relative;
+        transition: all .3s;
+        z-index: 0;
+        margin: 0 auto;
+        cursor: pointer;
+
+        &:before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0%;
+            height: 100%;
+            background-color: var(--red);
+            transition: ease-in-out .3s;
+            border-radius: 10vh 0 10vh 0;
+            z-index: -1;
+        }
+
+        &:hover {
+            color: var(--primary);
+            transform: scale(1.1);
+
+            &:before {
+                width: 100%;
+            }
+        }
+    }
+
+    .feedback {
+        color: var(--red);
+        text-align: center;
+        margin-top: 3%;
+        font-size: 1.3rem;
+    }
+
+    .feedbackGood {
+        color: green;
+        text-align: center;
+        margin-top: 3%;
+        font-size: 1.3rem;
+    }
+}

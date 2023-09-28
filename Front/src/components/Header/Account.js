@@ -1,12 +1,13 @@
 import styles from "./Account.module.scss";
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import Login from "../Forms/Login";
 import Register from "../Forms/Register";
 import { motion } from "framer-motion";
 export default function Account({ getUser, user, setUser }) {
     const [seeForm, setSeeForm] = useState("");
-    const [openProfile, setOpenProfile] = useState(false);
+    const [isOpen, setIsOpen] = useState(false);
+
     function seeLoginForm() {
         setSeeForm("login");
     }
@@ -14,9 +15,9 @@ export default function Account({ getUser, user, setUser }) {
         setSeeForm("register");
     }
     function closeForm() {
-        setSeeForm("")
+        setSeeForm("");
     }
-    const [isOpen, setIsOpen] = useState(false);
+
 
     return (<>
         {user ? (
@@ -68,9 +69,11 @@ export default function Account({ getUser, user, setUser }) {
                         <Link
                             to="/profile"
                             onClick={() => setIsOpen(!isOpen)}
-                            user={user}>
-                            <button className={`${styles.btn}`}
-                                user={user}> Gestion du profil</button>
+                            state={user}
+                        >
+                            <button className={`${styles.btn}`}>
+                                Gestion du profil
+                            </button>
                         </Link>
                     </motion.li>
                     <motion.li variants={{
@@ -82,10 +85,13 @@ export default function Account({ getUser, user, setUser }) {
                         closed: { opacity: 0, y: 20, transition: { duration: 0.2 } }
                     }}
                         className={`${styles.li}`}>
-                        <button
-                            className={`${styles.btn}`}
-                            onClick={() => setUser(null)}
-                        >Se déconnecter</button>
+                        <Link to="/">
+                            <button
+                                className={`${styles.btn}`}
+                                onClick={() => setUser(null)}>
+                                Se déconnecter
+                            </button>
+                        </Link>
                     </motion.li>
                 </motion.ul>
 
@@ -117,5 +123,5 @@ export default function Account({ getUser, user, setUser }) {
         )}
 
     </>
-    )
+    );
 }

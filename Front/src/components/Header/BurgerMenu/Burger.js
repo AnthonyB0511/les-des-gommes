@@ -1,5 +1,5 @@
 import styles from "./Burger.module.scss";
-import { Contact } from "../../Footer/Contact"
+import { Contact } from "../../Footer/Contact";
 import { LineNav } from "../BurgerMenu/LineNav";
 import { useState } from "react";
 import { Link } from "react-router-dom";
@@ -34,7 +34,7 @@ export default function Burger() {
         >
             <i className="fa-solid fa-bars"></i>
         </div>
-    </>
+    </>;
 
     const CloseIcon =
         <>
@@ -63,12 +63,12 @@ export default function Burger() {
                 onClick={() => setOpen(!open)}>
                 <i className="fa-solid fa-circle-xmark"></i>
             </div>
-        </>
+        </>;
 
     return (
         <div>
             {open ? CloseIcon : HamburgerIcon}
         </div>
 
-    )
+    );
 }

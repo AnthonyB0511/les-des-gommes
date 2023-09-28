@@ -1,6 +1,6 @@
 import styles from "./MustHave.module.scss";
-import { SecondTitle } from "./SecondTitle"
-import { Line } from "./Line"
+import { SecondTitle } from "./SecondTitle";
+import { Line } from "./Line";
 
 export default function MustHave({ must }) {
     return (
@@ -24,5 +24,5 @@ export default function MustHave({ must }) {
 
             ))}
         </div>
-    )
+    );
 }

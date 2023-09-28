@@ -1,7 +1,7 @@
 import styles from "./DernieresSeances.module.scss";
 import { Line } from "./Line";
 import { SecondTitle } from "./SecondTitle";
-import { SimpleSlider } from "../Carrousel/SimpleSlider"
+import { SimpleSlider } from "../Carrousel/SimpleSlider";
 import { carrousel1 } from "../../data/carrousel1";
 import { carrousel2 } from "../../data/carrousel2";
 export function DernieresSeances() {
@@ -15,5 +15,5 @@ export function DernieresSeances() {
             <SimpleSlider
                 nameOfCarrousel={carrousel2} />
         </div>
-    )
+    );
 }

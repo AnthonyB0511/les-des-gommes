@@ -2,13 +2,13 @@ import styles from "./Header.module.scss";
 import Account from "./Account";
 import Burger from "./BurgerMenu/Burger";
 import { useState } from "react";
-import logo from "../../assets/images/logo_Title.webp"
+import logo from "../../assets/images/logo_Title.webp";
 
 
 export default function Header() {
-    const [user, setUser] = useState(null)
+    const [user, setUser] = useState(null);
     function getUser(userLogged) {
-        setUser(userLogged)
+        setUser(userLogged);
     }
 
     return (
@@ -20,5 +20,5 @@ export default function Header() {
             </div>
 
         </header>
-    )
+    );
 }

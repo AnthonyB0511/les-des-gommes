@@ -1,6 +1,6 @@
 import styles from "./CardGame.module.scss";
-export const CardGame=({game})=>{
-    return(
+export const CardGame = ({ game }) => {
+    return (
         <div className={`${styles.container}`}>
             <div className={`${styles.img}`}>
                 <img src={game.img} alt="" />
@@ -9,5 +9,5 @@ export const CardGame=({game})=>{
                 <p>{game.title}</p>
             </div>
         </div>
-    )
-}
+    );
+};

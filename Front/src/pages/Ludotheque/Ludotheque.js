@@ -11,8 +11,8 @@ export default function Ludotheque() {
     const [filter, Setfilter] = useState("");
     const handleInput = (e) => {
         const search = e.target.value;
-        Setfilter(search.trim().toLowerCase())
-    }
+        Setfilter(search.trim().toLowerCase());
+    };
 
     return (
         <>
@@ -38,5 +38,5 @@ export default function Ludotheque() {
             </div>
 
         </>
-    )
+    );
 }

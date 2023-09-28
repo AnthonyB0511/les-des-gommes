@@ -1,9 +1,9 @@
-import { Card } from "../../components/utils/Card"
+import { Card } from "../../components/utils/Card";
 import { DernieresSeances } from "../../components/utils/DernieresSeances";
 import MustHave from "../../components/utils/MustHave";
 import styles from "./Home.module.scss";
 import { actu } from "../../data/actu";
-import { must } from "../../data/must"
+import { must } from "../../data/must";
 
 export default function Home() {
     return (
@@ -23,5 +23,5 @@ export default function Home() {
 
         </>
 
-    )
+    );
 }

@@ -61,9 +61,8 @@ export function Fade({
     if (from.opacity !== undefined) {
       style.opacity = from.opacity;
     }
-    style.transform = `translate3d(${from.x ?? 0}px, ${from.y ?? 0}px, ${
-      from.z ?? 0
-    }px)`;
+    style.transform = `translate3d(${from.x ?? 0}px, ${from.y ?? 0}px, ${from.z ?? 0
+      }px)`;
   }
 
   return <div style={style}>{childRef.current}</div>;

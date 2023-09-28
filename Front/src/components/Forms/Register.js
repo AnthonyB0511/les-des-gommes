@@ -1,5 +1,5 @@
-import styles from "./Register.module.scss"
-import { useEffect, useState } from "react";
+import styles from "./Register.module.scss";
+import { useState } from "react";
 import { useForm, useFieldArray } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -11,7 +11,7 @@ import { AnimatePresence, motion } from "framer-motion";
 export default function Register({ seeLoginForm, closeForm }) {
     const [feedback, setFeedback] = useState("");
     const [feedbackGood, setFeedbackGood] = useState("");
-    const [isVisible, setIsVisible] = useState(true)
+    const [isVisible, setIsVisible] = useState(true);
     const yupSchema = yup.object({
         username: yup
             .string()
@@ -56,7 +56,7 @@ export default function Register({ seeLoginForm, closeForm }) {
         age: "",
         password: "",
         confirmPassword: "",
-    }
+    };
     const {
         register,
         handleSubmit,
@@ -69,29 +69,29 @@ export default function Register({ seeLoginForm, closeForm }) {
     });
 
     async function submit(values) {
-        console.log(values)
+        console.log(values);
         setFeedback("");
         try {
             const response = await fetch("http://localhost:8000/api/users/register", {
                 method: "POST",
                 body: JSON.stringify(values),
                 headers: { "Content-type": "application/json" }
-            })
+            });
             console.log(values);
             if (response.ok) {
                 const userBack = await response.json();
                 if (userBack.message) {
-                    setFeedback(userBack.message)
+                    setFeedback(userBack.message);
                 } else {
                     setFeedbackGood(userBack.messageGood);
                     reset(defaultValues);
                     setTimeout(() => {
                         seeLoginForm();
-                    }, 1500)
+                    }, 1500);
                 }
             }
         } catch (error) {
-            console.error(error)
+            console.error(error);
         }
     }
 
@@ -184,5 +184,5 @@ export default function Register({ seeLoginForm, closeForm }) {
                 </div>
             </motion.div>
         </AnimatePresence>
-    )
+    );
 }

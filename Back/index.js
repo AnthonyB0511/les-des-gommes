@@ -6,7 +6,7 @@ const app = express();
 app.use(bodyParser.json());
 
 const port = 8000;
-require("./database/index")
+require("./database/index");
 const routes = require("./routes");
 
 app.use((req, res, next) => {

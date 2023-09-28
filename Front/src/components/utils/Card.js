@@ -20,5 +20,5 @@ export function Card({ actu }) {
         </div>
 
 
-    )
+    );
 }

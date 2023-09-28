@@ -1,10 +1,10 @@
-import styles from "./Login.module.scss"
+import styles from "./Login.module.scss";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { FormTitle } from "../Header/FormTitle"
-import { LineNav } from "../Header/BurgerMenu/LineNav"
+import { FormTitle } from "../Header/FormTitle";
+import { LineNav } from "../Header/BurgerMenu/LineNav";
 import { Button } from "../utils/Button";
 import { AnimatePresence, motion } from "framer-motion";
 
@@ -18,7 +18,7 @@ export default function Login({ seeRegisterForm, closeForm, getUser, user }) {
     const defaultValues = {
         password: "",
         email: "",
-    }
+    };
     const {
         register,
         handleSubmit,
@@ -30,45 +30,49 @@ export default function Login({ seeRegisterForm, closeForm, getUser, user }) {
         resolver: yupResolver(yupSchema),
     });
 
-    const [feedback, setFeedback] = useState("")
-    const [feedbackGood, setFeedbackGood] = useState("")
+    const [feedback, setFeedback] = useState("");
+    const [feedbackGood, setFeedbackGood] = useState("");
 
 
 
     async function submit(values) {
-        setFeedback("")
+        setFeedback("");
+
 
         try {
             const response = await fetch('http://localhost:8000/api/users/login', {
                 method: "POST",
                 body: JSON.stringify(values),
                 headers: { "Content-type": "application/json" }
-            })
+            });
             if (response.ok) {
                 const userBack = await response.json();
                 if (userBack.message) {
-                    setFeedback(userBack.message)
+                    setFeedback(userBack.message);
                 } else {
                     setFeedbackGood("Félicitations vous allez être connecter");
+
                     reset(defaultValues);
                     let user = {};
                     user.firstname = userBack[0].firstname;
                     user.username = userBack[0].username;
                     user.email = userBack[0].email;
                     user.name = userBack[0].name;
+                    user.password = userBack[0].password;
+                    user.idUser = userBack[0].idUser;
                     getUser(user);
                     setTimeout(() => {
                         closeForm();
-                    }, 1500)
+                    }, 1500);
                 }
             }
         } catch (error) {
-            console.error(error)
+            console.error(error);
         }
 
     }
 
-
+    console.log(user);
 
     return (
         <AnimatePresence>
@@ -100,11 +104,9 @@ export default function Login({ seeRegisterForm, closeForm, getUser, user }) {
                             {...register("password")} />
                         {errors?.password && <p style={{ color: "red" }}>{errors.password.message}</p>}
                     </div>
-                    <div className="d-flex  mb20
-                align-items-center justify-content-center">
-                        <label htmlFor="remember" className={`${styles.labelLogin}`}>Se souvenir de moi</label>
-                        <input type="checkbox" id="remember"
-                        />
+                    <div className={`${styles.remember}`}>
+                        <label htmlFor="remember">Se souvenir de moi</label>
+                        <input type="checkbox" id="remember" className="ml10 mb20" />
 
                     </div>
 
@@ -120,10 +122,6 @@ export default function Login({ seeRegisterForm, closeForm, getUser, user }) {
                 </form>
                 <div className={`${styles.not}`}>
                     <p>Vous n'avez pas encore de compte ?</p>
-                    {/* <Button
-                    onClick={seeRegisterForm}
-                    needButton={true}
-                    txtButton="Cliquer ICI" /> */}
                     <button
                         onClick={seeRegisterForm}
                         className={`${styles.button}`}>CLIQUER ICI</button>
@@ -131,5 +129,5 @@ export default function Login({ seeRegisterForm, closeForm, getUser, user }) {
                 <div className={`${styles.forget}`}>Vous avez oublié votre mot de passe ?</div>
             </motion.div>
         </AnimatePresence>
-    )
+    );
 }

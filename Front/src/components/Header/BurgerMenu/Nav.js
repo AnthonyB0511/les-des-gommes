@@ -1,6 +1,6 @@
 import styles from "./Nav.module.scss";
 import { LineNav } from "./LineNav";
-import { Contact } from "../../Footer/Contact"
+import { Contact } from "../../Footer/Contact";
 export const Nav = () => {
     return (
         <>
@@ -25,5 +25,5 @@ export const Nav = () => {
             </div>
 
         </>
-    )
-}
+    );
+};

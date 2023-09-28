@@ -10,7 +10,7 @@ export function Button({ txtButton, needButton, props }) {
                 null
             )}
         </div>
-    )
+    );
 }
 
 
