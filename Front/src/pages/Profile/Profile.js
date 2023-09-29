@@ -9,38 +9,41 @@ import { Line } from "../../components/utils/Line";
 
 export default function Profile() {
     const location = useLocation();
-    const user = location.state;;
+    const user = location.state;
     const [feedback, setFeedback] = useState("");
     const [feedbackGood, setFeedbackGood] = useState("");
+    const [modifyPassword, setModifyPassword] = useState(false);
     const navigate = useNavigate();
-    const yupSchema = yup.object({
+    const yupSchema = yup.object().shape({
         username: yup
             .string()
-            .required("Ce champ est obligatoire")
             .min(2, "Le champ doit contenir au moins 2 caractères")
-            .max(12),
-        email: yup
-            .string()
-            .required("L'adresse mail est nécessaire pour s'inscrire")
-            .email("Ceci n'est pas une adresse mail valide"),
-        password: yup
-            .string()
-            .required("Le mot de passe est obligatoire")
-            .min(8, "Mot de passe trop court"),
-        confirmPassword: yup
-            .string()
-            .required("Veuillez confirmer votre mot de passe")
-            .oneOf([yup.ref("password", "")],
-                "Les mots de passe ne correspondent pas"),
+            .max(12, "Le champ doit contenir au maximum 12 caractères"),
+        email: yup.string().email("Ceci n'est pas une adresse mail valide"),
+        oldPassword: yup.string(),
+        newPassword: yup.string()
+            .when('oldPassword', {
+                is: (val) => val && val.length > 0,
+                then: () => yup.string({
+                    newPassword: yup.string().min(3, "Le mot de passe doit avoir au moins 8 caractères"),
+                    otherwise: yup.string()
+                })
+            }),
+        confirmNewPassword: yup.string()
+            .oneOf([yup.ref('newPassword'), null], 'Les mots de passe doivent correspondre'),
     });
+
+
+
     const defaultValues = {
         name: user.name,
         firstname: user.firstname,
         username: user.username,
         email: user.email,
-        password: user.password,
-        confirmPassword: user.password,
-        idUser: user.idUser
+        idUser: user.idUser,
+        oldPassword: "",
+        newPassword: "",
+        confirmPassword: "",
     };
     const {
         register,
@@ -68,6 +71,8 @@ export default function Profile() {
                     setFeedback(userBack.message);
                 } else {
                     setFeedbackGood(userBack.messageGood);
+                    user.mail = userBack.mail;
+                    user.username = userBack.username;
                     setTimeout(() => {
                         navigate("/");
                     }, 3000);
@@ -77,7 +82,9 @@ export default function Profile() {
             console.error(error);
         }
     }
-    console.log(user);
+    function viewModifyPassword() {
+        setModifyPassword(!modifyPassword);
+    }
 
     return (
         <>
@@ -86,10 +93,8 @@ export default function Profile() {
             <div className={`${styles.form}`}>
                 <form onSubmit={handleSubmit(submit)}>
                     <div className={`${styles.container}`}>
-                        <div className={`${styles.content} mb20`}>
-                            <label htmlFor="name">Nom</label>
-                            <input {...register("name")}
-                                type="text" id="name" disabled="disabled" />
+                        <div className={`${styles.content} ${styles.picture} mb20`}>
+
 
                         </div>
 
@@ -97,6 +102,9 @@ export default function Profile() {
                             <label htmlFor="firstname">Prénom</label>
                             <input {...register("firstname")}
                                 type="text" id="firstname" disabled="disabled" />
+                            <label htmlFor="name">Nom</label>
+                            <input {...register("name")}
+                                type="text" id="name" disabled="disabled" />
                         </div>
                     </div>
                     <div className="d-flex flex-column mb20">
@@ -113,22 +121,32 @@ export default function Profile() {
                             type="text" id="username" />
                         {errors?.username && <p style={{ color: "red" }}>{errors.username.message}</p>}
                     </div>
-                    <div className="d-flex flex-column mb20">
-                        <label htmlFor="password">Mot de passe</label>
-                        {/* on déconstruit en rajoutant la value qu'on modifie */}
-                        <input {...register("password")}
-                            type="password" id="password" />
-                        {errors?.password && <p style={{ color: "red" }}>{errors.password.message}</p>}
-                    </div>
-                    <div className="d-flex flex-column mb20">
-                        <label htmlFor="confirmPassword">Confirmation du mot de passe</label>
-                        {/* on déconstruit en rajoutant la value qu'on modifie */}
-                        <input {...register("confirmPassword")}
-                            type="password" id="confirmPassword" />
-                        {errors?.confirmPassword && <p style={{ color: "red" }}>{errors.confirmPassword.message}</p>}
-                    </div>
+                    <p onClick={viewModifyPassword}>Souhaitez-vous modifier votre mot de passe ?</p>
+                    {modifyPassword && <>
+                        <div className="d-flex flex-column mb20">
+                            <label htmlFor="oldPassword">Votre ancien mot de passe</label>
+                            {/* on déconstruit en rajoutant la value qu'on modifie */}
+                            <input {...register("oldPassword")}
+                                type="password" id="oldPassword" />
+                            {errors?.oldPassword && <p style={{ color: "red" }}>{errors.oldPassword.message}</p>}
+                        </div>
+                        <div className="d-flex flex-column mb20">
+                            <label htmlFor="newPassword">Votre nouveau mot de passe</label>
+                            {/* on déconstruit en rajoutant la value qu'on modifie */}
+                            <input {...register("newPassword")}
+                                type="password" id="newPassword" />
+                            {errors?.newPassword && <p style={{ color: "red" }}>{errors.newPassword.message}</p>}
+                        </div>
+                        <div className="d-flex flex-column mb20">
+                            <label htmlFor="confirmPassword">Confirm Passwword</label>
+                            {/* on déconstruit en rajoutant la value qu'on modifie */}
+                            <input {...register("confirmPassword")}
+                                type="password" id="confirmPassword" />
+                            {errors?.confirmPassword && <p style={{ color: "red" }}>{errors.confirmPassword.message}</p>}
+                        </div>
+                    </>}
 
-                    <button disabled={isSubmitted} className={`${styles.button}`}>Enregistrer les modifications</button>
+                    <button className={`${styles.button} `}>Enregistrer les modifications</button>
                     {feedback && <p className={`${styles.feedback}`}>{feedback}</p>}
                     {feedbackGood && <p className={`${styles.feedbackGood}`}>{feedbackGood}</p>}
 

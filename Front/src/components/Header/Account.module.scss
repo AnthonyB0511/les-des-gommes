@@ -14,6 +14,7 @@
     height: 4.8em;
     width: 4.8em;
     transition: .5s all;
+    cursor: pointer;
 
     @include mixin.sm-lt {
         margin-left: 5%;
@@ -41,7 +42,6 @@
     i {
         font-size: 2.8em;
         transition: .5s ease-in-out;
-        cursor: pointer;
 
         @include mixin.lg-lt {
             font-size: 2.2em;
@@ -84,7 +84,7 @@
 
     .profile {
         position: absolute;
-        bottom: -150%;
+        bottom: -165%;
         width: 35vh;
         display: flex;
         justify-content: center;
@@ -94,7 +94,12 @@
         font-size: 1.5rem;
         background-color: transparent;
         border-radius: 10vh 0 10vh 0;
-        opacity: 0.9;
+        z-index: 99;
+        opacity: 0.95;
+        transition: all 1s;
+        transform: translateY(0);
+
+
 
         .li {
 
@@ -126,7 +131,7 @@
 
                 &:hover {
                     color: var(--primary);
-                    transform: scale(1.1);
+                    transform: scale(1.05);
 
                     &:before {
                         width: 100%;
@@ -135,5 +140,7 @@
             }
 
         }
+
     }
+
 }

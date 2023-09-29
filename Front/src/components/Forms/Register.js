@@ -40,7 +40,7 @@ export default function Register({ seeLoginForm, closeForm }) {
         password: yup
             .string()
             .required("Le mot de passe est obligatoire")
-            .min(8, "Mot de passe trop court"),
+            .min(3, "Mot de passe trop court"),
         confirmPassword: yup
             .string()
             .required("Veuillez confirmer votre mot de passe")
