@@ -27,8 +27,6 @@ export default function Account({ getUser, user, setUser }) {
 
     }
     const list = useRef();
-    const login = useRef();
-    const register = useRef();
     const [previewImage, setPreviewImage] = useState(null);
     useEffect(() => {
         async function getDefaultImage() {
@@ -120,7 +118,8 @@ export default function Account({ getUser, user, setUser }) {
                     seeForm === "register" ? (<Register
                         seeLoginForm={seeLoginForm}
                         closeForm={closeForm} />
-                    ) : (null)
+                    ) : (
+                        (null))
 
                 )}
 
