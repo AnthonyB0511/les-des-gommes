@@ -3,7 +3,7 @@ import { useState } from "react";
 import { Title } from "../../components/utils/Title";
 import { Line } from "../../components/utils/Line";
 import { games } from "../../data/games";
-import { CardGame } from "../../components/utils/CardGame";
+import CardGame from "./components/CardGame";
 
 
 export default function Ludotheque() {

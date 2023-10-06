@@ -1,10 +1,10 @@
 import styles from "./DernieresSeances.module.scss";
-import { Line } from "./Line";
-import { SecondTitle } from "./SecondTitle";
-import { SimpleSlider } from "../Carrousel/SimpleSlider";
-import { carrousel1 } from "../../data/carrousel1";
-import { carrousel2 } from "../../data/carrousel2";
-export function DernieresSeances() {
+import { Line } from "../../../components/utils/Line";
+import { SecondTitle } from "../../../components/utils/SecondTitle";
+import { SimpleSlider } from "../../../components/Carrousel/SimpleSlider";
+import { carrousel1 } from "../../../data/carrousel1";
+import { carrousel2 } from "../../../data/carrousel2";
+export default function DernieresSeances() {
     return (
         <div className={`${styles.seances}`}>
             <SecondTitle name="Les dernières séances photos" />

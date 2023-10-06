@@ -5,7 +5,7 @@ export const Contact = () => {
             <i className="fa-solid fa-envelope"></i>
             <a href="mailto:lesdesgommes@gmail.com" className={`${styles.link}`}> lesdesgommes@gmail.com</a>
             <p> | </p>
-            <a href=""><i className="fa-brands fa-facebook"></i></a>
+            <a href="https://fr-fr.facebook.com/lesdesgommes/"><i className="fa-brands fa-facebook"></i></a>
         </div>
     );
 };

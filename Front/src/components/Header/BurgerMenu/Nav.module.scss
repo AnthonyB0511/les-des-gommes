@@ -1,40 +1,42 @@
-.burgerMenu {
-    margin: 0;
-    padding: 0;
-    position: fixed;
-    height: 100%;
-    width: 100%;
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-    justify-content: center;
-    background-color: var(--blue);
-    opacity: 0.9;
-    z-index: 4;
-    top: 0;
-    left: 0;
-    transition: all .5s;
+@use"../../../assets/styles/mixin" as mixin;
 
-    .nav {
-        width: 80%;
-        margin-bottom: 2%;
+.nav {
+    width: 75%;
+    margin: 10% auto 2% auto;
 
-        .ul {
-            font-size: 0;
+    .ul {
+        font-size: 0;
 
-            .li {
+        .li {
+            text-align: center;
+            margin-block: 4%;
+
+
+            a {
                 text-align: center;
+                font-size: 2.5rem;
+                padding: 5% 0;
+                letter-spacing: 5px;
+                text-decoration: none;
+                color: var(--text-color);
 
-                a {
-                    text-align: center;
-                    font-size: 3rem;
-                    padding: 5% 0;
-                    letter-spacing: 5px;
-                    text-decoration: none;
-                    color: var(--text-color);
+                @include mixin.intxl {
+                    font-size: 2rem;
+                }
+
+                @include mixin.md-lt {
+                    font-size: 1.7rem;
+                }
+
+                @include mixin.intxxs {
+                    font-size: 1.5rem;
+                }
+
+                @include mixin.smallest {
+                    font-size: 1.5rem;
+                    letter-spacing: 3px;
                 }
             }
         }
     }
-
 }

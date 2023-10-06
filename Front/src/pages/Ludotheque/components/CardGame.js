@@ -1,5 +1,5 @@
 import styles from "./CardGame.module.scss";
-export const CardGame = ({ game }) => {
+export default function CardGame({ game }) {
     return (
         <div className={`${styles.container}`}>
             <div className={`${styles.img}`}>

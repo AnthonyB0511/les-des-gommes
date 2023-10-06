@@ -3,8 +3,7 @@ import { Title } from "../../components/utils/Title";
 import { SecondTitle } from "../../components/utils/SecondTitle";
 import { Line } from "../../components/utils/Line";
 import logo from "../../assets/images/logo_complete.webp";
-import map from "../../assets/images/salle.png";
-import Map from "../../components/utils/Map";
+import Map from "./components/Map";
 import town from "../../assets/images/laventie.jpg";
 import shop1 from "../../assets/images/village.png";
 import shop2 from "../../assets/images/antre.png";
@@ -90,14 +89,14 @@ export default function Presentation() {
                     </div>
                     <div className={`${styles.images} d-flex
                 align-items-center justify-content-around`}>
-                        <a href="">
-                            <img src={town} alt="" />
+                        <a href="https://www.laventie.fr/">
+                            <img src={town} alt="logo de la ville de Laventie" />
                         </a>
-                        <a href="">
-                            <img src={shop1} alt="" />
+                        <a href="https://www.villagedujeu.com/">
+                            <img src={shop1} alt="logo du village du jeu" />
                         </a>
-                        <a href="">
-                            <img src={shop2} alt="" />
+                        <a href="https://lantredudragon.fr/">
+                            <img src={shop2} alt="logo antre du dragon" />
                         </a>
                     </div>
                 </div>

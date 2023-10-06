@@ -1,6 +1,6 @@
 import styles from "./MustHave.module.scss";
-import { SecondTitle } from "./SecondTitle";
-import { Line } from "./Line";
+import { SecondTitle } from "../../../components/utils/SecondTitle";
+import { Line } from "../../../components/utils/Line";
 
 export default function MustHave({ must }) {
     return (

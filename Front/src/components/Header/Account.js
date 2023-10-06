@@ -3,13 +3,15 @@ import { useState, useRef, useEffect } from "react";
 import { Link } from "react-router-dom";
 import Login from "../Forms/Login";
 import Register from "../Forms/Register";
-import { userContext } from "../../context/userContext";
 export default function Account({ getUser, user, setUser }) {
+    // gére quel formulaire sera visible (utiliser dans deux fonctions)
     const [seeForm, setSeeForm] = useState("");
+    // gérer l'état d'ouverture du menu déroulant une fois connecté
     const [isOpen, setIsOpen] = useState(false);
+    // gérer la fermeture d'un formulaire quand on ouvre un
     const [viewForm, setViewForm] = useState(false);
     /**
-     * fonction qui permet de voir le form de login quand 
+     * Function qui permet de gérer l'affichage et/ou la fermeture du form Login
      */
     function seeLoginForm() {
         if (seeForm === "login") {
@@ -21,17 +23,26 @@ export default function Account({ getUser, user, setUser }) {
         }
 
     }
+    /**
+     * Fonction qui permet de gérer l'affichage du form Register
+     */
     function seeRegisterForm() {
         setSeeForm("register");
     }
+    /**
+     * Fonction qui permet de quitter les deux formulaires (register & form)
+     */
     function closeForm() {
         setSeeForm("");
 
     }
+    // utilise la réf list pour gérer l'affichage avec animation de l'élément liste (Gestion de profil et déco)
     const list = useRef();
-    const login = useRef();
-    const register = useRef();
+    // useState pour l'état des images
     const [previewImage, setPreviewImage] = useState(null);
+    /**
+     * récupère l'img de la base de données (celle de base ou celle enregistré par le user)
+     */
     useEffect(() => {
         async function getDefaultImage() {
             let response;
@@ -64,16 +75,17 @@ export default function Account({ getUser, user, setUser }) {
     }, [user]);
 
     return (<>
+        {/* gestion de l'affichage ; un user est-il connecté ? */}
 
         {user ? (
-            <div className={`${styles.icon}`}
+            <section className={`${styles.icon}`}
                 onClick={() => setIsOpen(!isOpen)}>
                 {/* <i className="fa-solid fa-circle-user"></i> */}
                 <img src={previewImage} className={`${styles.image}`} alt="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;avatar" />
                 <div className={`${styles.check}`}>
                     <i className="fa-solid fa-circle-check"></i>
                 </div>
-                {/* {isOpen && */}
+                {/*au clic la liste s'affiche avec animation pour la gestion de profil ou la déconnexion */}
                 <ul className={`${styles.profile}`}
                     ref={list}
                     style={isOpen ? { opacity: 0.95, transform: "translateY(0) ", visibility: "visible" } : { opacity: 0, transform: "translateY(100%)", visibility: "hidden" }}>
@@ -81,7 +93,9 @@ export default function Account({ getUser, user, setUser }) {
                         <li className={`${styles.li}`}>
                             <Link
                                 to="/profile"
+                                // au moment du clic on referme l'élément
                                 onClick={() => setIsOpen(!isOpen)}
+                                // on renvoie les information du user à la page profile
                                 state={user}
                             >
                                 <button className={`${styles.btn}`}>
@@ -90,6 +104,7 @@ export default function Account({ getUser, user, setUser }) {
                             </Link>
                         </li>
                         <li className={`${styles.li}`}>
+                            {/* la déconnexion amène directement à la page d'accueil */}
                             <Link to="/">
                                 <button
                                     className={`${styles.btn}`}
@@ -102,33 +117,35 @@ export default function Account({ getUser, user, setUser }) {
                 </ul>
                 {/* } */}
 
-            </div>
+            </section>
 
 
         ) : (
+            // aucun user n'est connecté
             <>
-                <div className={`${styles.icon}`}
-                    onClick={() => setSeeForm("login")}>
+                <section className={`${styles.icon}`}
+                    onClick={seeLoginForm}>
                     <i className="fa-solid fa-circle-user"></i>
-                </div>
+                </section>
+
                 {seeForm === "login" ? (
                     <Login
+                        // on passe en props la façon de passer de la co à l'inscription
+                        // la gestion de la fermeture du form
                         seeRegisterForm={seeRegisterForm}
                         closeForm={closeForm}
                         getUser={getUser}
+                        // méthode pour stocker les 
                         setUser={setUser}
                         user={user} />
                 ) :
                     seeForm === "register" ? (<Register
+                        // repasser au form de connexion et gestion de la fermeture
                         seeLoginForm={seeLoginForm}
                         closeForm={closeForm} />
                     ) : (null)
 
                 }
-
-
-
-
             </>
         )
         }

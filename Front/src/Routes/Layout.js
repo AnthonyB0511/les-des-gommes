@@ -1,10 +1,10 @@
 import { Routes, Route } from "react-router-dom";
-import Header from "../Header/Header";
-import Footer from "../Footer/Footer";
-import Home from "../../pages/Accueil/Home";
-import Ludotheque from "../../pages/Ludotheque/Ludotheque";
-import Presentation from "../../pages/Presentation/Presentation";
-import Profile from "../../pages/Profile/Profile";
+import Header from "../components/Header/Header";
+import Footer from "../components/Footer/Footer";
+import Home from "../pages/Accueil/Home";
+import Ludotheque from "../pages/Ludotheque/Ludotheque";
+import Presentation from "../pages/Presentation/Presentation";
+import Profile from "../pages/Profile/Profile";
 export default function Layout() {
     return (
         <div>

@@ -1,8 +1,8 @@
 import styles from "./Card.module.scss";
-import { Button } from "./Button";
+import { Button } from "../../../components/utils/Button";
 import { Link } from "react-router-dom";
 
-export function Card({ actu }) {
+export default function Card({ actu }) {
     return (
         <div className={`${styles.card} m20`}>
             <div className={`${styles.img}`}>

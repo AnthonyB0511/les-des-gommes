@@ -1,32 +1,15 @@
 import styles from "./Burger.module.scss";
-import { Contact } from "../../Footer/Contact";
-import { LineNav } from "../BurgerMenu/LineNav";
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import Nav from "./Nav";
 
 
 export default function Burger() {
+    // useState permettant de gérer l'ouverture du menu burger
     const [open, setOpen] = useState(false);
-
+    // constante qui n'affiche pas le menu burger (style noShow)
     const HamburgerIcon = <>
         <div className={`${styles.burgerMenu} ${styles.noShow} `}>
-            <nav className={`${styles.nav}`}>
-                <ul className={`${styles.ul}`}>
-                    <li className={`${styles.li}`}><Link to="/" onClick={() => setOpen(!open)}>ACCUEIL</Link></li>
-                    <LineNav />
-                    <li className={`${styles.li}`} ><Link to="/presentation" onClick={() => setOpen(!open)}> L'ASSO</Link></li>
-                    <LineNav />
-                    <li className={`${styles.li}`}><Link to="/ludotheque" onClick={() => setOpen(!open)}>LA LUDOTHEQUE</Link></li>
-                    <LineNav />
-                    <li className={`${styles.li}`}><Link onClick={() => setOpen(!open)}>CONTACT</Link></li>
-                    <LineNav />
-                    <li className={`${styles.li}`}><Link onClick={() => setOpen(!open)}>FORUM</Link></li>
-                    <LineNav />
-                    <li className={`${styles.li}`}><Link onClick={() => setOpen(!open)}>MON COMPTE</Link></li>
-                </ul>
-            </nav>
-
-            <Contact />
+            <Nav open={open} setOpen={setOpen} />
         </div>
         <div
             className={`${styles.icon}`}
@@ -35,35 +18,18 @@ export default function Burger() {
             <i className="fa-solid fa-bars"></i>
         </div>
     </>;
+    // constante qui permet le translate du menu
+    const CloseIcon = <>
 
-    const CloseIcon =
-        <>
-
-            <div className={`${styles.burgerMenu} `}>
-                <nav className={`${styles.nav}`}>
-                    <ul className={`${styles.ul}`}>
-                        <li className={`${styles.li}`}><Link to="/" onClick={() => setOpen(!open)}>ACCUEIL</Link></li>
-                        <LineNav />
-                        <li className={`${styles.li}`} ><Link to="/presentation" onClick={() => setOpen(!open)}> L'ASSO</Link></li>
-                        <LineNav />
-                        <li className={`${styles.li}`}><Link to="/ludotheque" onClick={() => setOpen(!open)}>LA LUDOTHEQUE</Link></li>
-                        <LineNav />
-                        <li className={`${styles.li}`}><Link onClick={() => setOpen(!open)}>CONTACT</Link></li>
-                        <LineNav />
-                        <li className={`${styles.li}`}><Link onClick={() => setOpen(!open)}>FORUM</Link></li>
-                        <LineNav />
-                        <li className={`${styles.li}`}><Link onClick={() => setOpen(!open)}>MON COMPTE</Link></li>
-                    </ul>
-                </nav>
-
-                <Contact />
-            </div>
-            <div
-                className={`${styles.icon}`}
-                onClick={() => setOpen(!open)}>
-                <i className="fa-solid fa-circle-xmark"></i>
-            </div>
-        </>;
+        <div className={`${styles.burgerMenu} `}>
+            <Nav open={open} setOpen={setOpen} />
+        </div>
+        <div
+            className={`${styles.icon}`}
+            onClick={() => setOpen(!open)}>
+            <i className="fa-solid fa-circle-xmark"></i>
+        </div>
+    </>;
 
     return (
         <div>

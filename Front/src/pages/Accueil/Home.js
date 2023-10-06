@@ -1,6 +1,6 @@
-import { Card } from "../../components/utils/Card";
-import { DernieresSeances } from "../../components/utils/DernieresSeances";
-import MustHave from "../../components/utils/MustHave";
+import Card from "../Accueil/components/Card";
+import DernieresSeances from "../Accueil/components/DernieresSeances";
+import MustHave from "../Accueil/components/MustHave";
 import styles from "./Home.module.scss";
 import { actu } from "../../data/actu";
 import { must } from "../../data/must";

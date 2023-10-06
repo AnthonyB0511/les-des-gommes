@@ -1,12 +1,12 @@
 import styles from "./Login.module.scss";
-import { useState, useContext } from "react";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { FormTitle } from "../Header/FormTitle";
+import { FormTitle } from "../Header/components/FormTitle";
 import { LineNav } from "../Header/BurgerMenu/LineNav";
-import { Button } from "../utils/Button";
-import { AnimatePresence, motion } from "framer-motion";
+
+
 
 
 
@@ -76,13 +76,8 @@ export default function Login({ seeRegisterForm, closeForm, getUser, user }) {
     console.log(user);
 
     return (
-        // <AnimatePresence>
-        <div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.5, ease: "easeOut" }}
-            exit={{ opacity: 0 }}
-            className={`d-flex flex-column justify-content-center align-items-center mb20 ${styles.form}`}>
+
+        <div className={`d-flex flex-column justify-content-center align-items-center mb20 ${styles.form}`}>
             <div
                 className={`${styles.icon}`}
                 onClick={closeForm}

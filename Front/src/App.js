@@ -1,6 +1,6 @@
 import styles from "./App.module.scss";
 
-import Layout from "./components/Routes/Layout";
+import Layout from "./Routes/Layout";
 
 function App() {
 

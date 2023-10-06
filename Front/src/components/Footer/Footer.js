@@ -1,5 +1,6 @@
 import styles from "./Footer.module.scss";
-import { Contact } from "./Contact";
+import { Contact } from "./components/Contact";
+import { Link } from "react-router-dom";
 export default function Footer() {
     return (
         <footer className={`${styles.footer}`}>
@@ -8,11 +9,11 @@ export default function Footer() {
             </div>
             <Contact />
             <div className={`${styles.mention} d-flex justify-content-center align-items-center`}>
-                <a href="">Mentions légales</a>
+                <Link>Mentions légales</Link>
                 <p className="space"> | </p>
-                <a href="">Politiques de confidentialités</a>
+                <Link>Politiques de confidentialités</Link>
                 <p className="space"> | </p>
-                <a href="">Conditions d'utilisations</a>
+                <Link>Conditions d'utilisations</Link>
             </div>
         </footer>
     );
