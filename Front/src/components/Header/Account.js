@@ -9,16 +9,13 @@ export default function Account({ getUser, user, setUser }) {
     const [isOpen, setIsOpen] = useState(false);
     const [viewForm, setViewForm] = useState(false);
     /**
-     * 
-     * @param {*} event 
+     * fonction qui permet de voir le form de login quand 
      */
     function seeLoginForm() {
         if (seeForm === "login") {
             setSeeForm("");
-            // setViewForm(!viewForm);
         } else {
             setSeeForm("login");
-            // setViewForm(!viewForm);
         }
 
     }
@@ -27,7 +24,7 @@ export default function Account({ getUser, user, setUser }) {
     }
     function closeForm() {
         setSeeForm("");
-        setViewForm(!viewForm);
+
     }
     const list = useRef();
     const login = useRef();
