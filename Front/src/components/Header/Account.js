@@ -108,7 +108,7 @@ export default function Account({ getUser, user, setUser }) {
         ) : (
             <>
                 <div className={`${styles.icon}`}
-                    onClick={setSeeForm("login")}>
+                    onClick={() => setSeeForm("login")}>
                     <i className="fa-solid fa-circle-user"></i>
                 </div>
                 {seeForm === "login" ? (
