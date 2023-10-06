@@ -108,25 +108,25 @@ export default function Account({ getUser, user, setUser }) {
         ) : (
             <>
                 <div className={`${styles.icon}`}
-                    onClick={seeLoginForm}>
+                    onClick={() => seeLoginForm()}>
                     <i className="fa-solid fa-circle-user"></i>
-
-                    {seeForm === "login" ? (
-                        <Login
-                            seeRegisterForm={seeRegisterForm}
-                            closeForm={closeForm}
-                            getUser={getUser}
-                            setUser={setUser}
-                            user={user} />
-                    ) :
-                        seeForm === "register" ? (<Register
-                            seeLoginForm={seeLoginForm}
-                            closeForm={closeForm} />
-                        ) : (null)
-
-                    }
-
                 </div>
+                {seeForm === "login" ? (
+                    <Login
+                        seeRegisterForm={seeRegisterForm}
+                        closeForm={closeForm}
+                        getUser={getUser}
+                        setUser={setUser}
+                        user={user} />
+                ) :
+                    seeForm === "register" ? (<Register
+                        seeLoginForm={seeLoginForm}
+                        closeForm={closeForm} />
+                    ) : (null)
+
+                }
+
+
 
 
             </>
