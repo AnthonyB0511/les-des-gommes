@@ -1,5 +1,5 @@
 import styles from "./Profile.module.scss";
-import { useState } from "react";
+import { useRef, useState, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
@@ -13,6 +13,10 @@ export default function Profile() {
     const [feedback, setFeedback] = useState("");
     const [feedbackGood, setFeedbackGood] = useState("");
     const [modifyPassword, setModifyPassword] = useState(false);
+    // useState pour l'input de type file
+    const [selectedFile, setSelectedFile] = useState(null);
+    // useState pour l'attribut src de notre balise img
+    const [previewImage, setPreviewImage] = useState(null);
     const navigate = useNavigate();
     const yupSchema = yup.object().shape({
         username: yup
@@ -32,7 +36,7 @@ export default function Profile() {
         confirmNewPassword: yup.string()
             .oneOf([yup.ref('newPassword'), null], 'Les mots de passe doivent correspondre'),
     });
-
+    const password = useRef();
 
 
     const defaultValues = {
@@ -85,18 +89,129 @@ export default function Profile() {
     function viewModifyPassword() {
         setModifyPassword(!modifyPassword);
     }
+    useEffect(() => {
+        async function getDefaultImage() {
+            let response;
+            if (user.blobby) {
+                response = await fetch(
+                    `http://localhost:8000/api/profile/getAvatarFromUser?id=${user.idUser}`
+                );
+            } else {
+                response = await fetch(
+                    `http://localhost:8000/api/profile/getDefaultImage`
+                );
+            }
+            const imgDefaultFromBack = await response.json();
+
+            console.log({ imgDefaultFromBack });
+            const uint8Array = new Uint8Array(imgDefaultFromBack.blobby.data);
+            console.log({ uint8Array });
+            const blob = new Blob([uint8Array]);
+            console.log({ blob });
+            const urlImage = URL.createObjectURL(blob);
+            console.log({ urlImage });
+            fetch(urlImage)
+                .then((response) => response.text())
+                .then((text) => {
+                    console.log({ text });
+                    setPreviewImage(text);
+                });
+        }
+        getDefaultImage();
+    }, [user]);
+    // déclaration de la fonction lors d'un changement de fichier dans l'input avant validation
+    function handleChange(event) {
+        // récupération du fichier
+        const file = event.target.files[0];
+        setSelectedFile(file);
+        // on place une condition pour l'attribuer à l'attribut src de la balise img ou non
+        if (file) {
+            const fileReader = new FileReader();
+            fileReader.readAsDataURL(file);
+            fileReader.onload = () => {
+                setPreviewImage(fileReader.result);
+            };
+        } else {
+            setPreviewImage(null);
+        }
+    }
+    const convertBlobTobase64 = (blob) => {
+        return new Promise((resolve, reject) => {
+            const fileReader = new FileReader();
+            fileReader.readAsDataURL(blob);
+            fileReader.onload = () => {
+                resolve(fileReader.result);
+            };
+            fileReader.onerror = (error) => {
+                reject(error);
+            };
+        });
+    };
+
+
+    function modifyAvatar() {
+        if (!selectedFile) {
+            alert("Veuillez sélectionner un fichier");
+            return;
+        }
+        // FileReader permet de lire les fichiers de type File ou Blob
+        const fileReader = new FileReader();
+        fileReader.readAsArrayBuffer(selectedFile);
+        fileReader.onload = async () => {
+            // récupération du fichier lu
+            const buffer = fileReader.result;
+            console.log({ buffer });
+            // création un objet blob à partir du fichier lu et du type de fichier
+            const blob = new Blob([buffer], { type: selectedFile.type });
+            console.log(selectedFile);
+
+            // invocation de la fonction en passant en paramètre l'objet blob
+            const base64 = await convertBlobTobase64(blob);
+            console.log({ base64 });
+
+            // création d'un objet avec blob et idUser
+            const obj = { value: base64, idUser: user.idUser };
+
+            // fetch
+            const response = await fetch(
+                "http://localhost:8000/api/profile/insertImage",
+                {
+                    method: "PATCH",
+                    body: JSON.stringify(obj),
+
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                }
+            );
+            const userModified = await response.json();
+            console.log(userModified);
+            const uint8Array = new Uint8Array(userModified.blobby.data);
+            const blob2 = new Blob([uint8Array]);
+            const urlImage = URL.createObjectURL(blob2);
+            fetch(urlImage)
+                .then((response) => response.text())
+                .then((text) => {
+                    setPreviewImage(text);
+                })
+                .catch((err) => console.error(err));
+        };
+    }
+
+
 
     return (
         <>
             <Title title="Votre Profil" />
             <Line />
-            <div className={`${styles.form}`}>
-                <form onSubmit={handleSubmit(submit)}>
+            <div className={`${styles.form}`} >
+                <form onSubmit={handleSubmit(submit)}
+                >
                     <div className={`${styles.container}`}>
-                        <div className={`${styles.content} ${styles.picture} mb20`}>
-
-
+                        <div className={`${styles.content}  mb20`}>
+                            <img src={previewImage} className={`${styles.picture}`} alt="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;avatar" />
                         </div>
+
 
                         <div className={`${styles.content} mb20`}>
                             <label htmlFor="firstname">Prénom</label>
@@ -106,6 +221,11 @@ export default function Profile() {
                             <input {...register("name")}
                                 type="text" id="name" disabled="disabled" />
                         </div>
+                    </div>
+                    <div className={`${styles.containerInput}`}>
+                        <input type="file" className={`${styles.inputFile}`} onChange={handleChange} />
+                        <button onClick={() => modifyAvatar()} type="button"
+                            className={`${styles.button2}`}>Sauvegarder votre  nouvel avatar</button>
                     </div>
                     <div className="d-flex flex-column mb20">
                         <label htmlFor="mail">E-mail</label>
@@ -122,7 +242,9 @@ export default function Profile() {
                         {errors?.username && <p style={{ color: "red" }}>{errors.username.message}</p>}
                     </div>
                     <p onClick={viewModifyPassword}>Souhaitez-vous modifier votre mot de passe ?</p>
-                    {modifyPassword && <>
+                    {/* {modifyPassword && <> */}
+                    <div ref={password} className={`${styles.password}`}
+                        style={modifyPassword ? { height: password.current.scrollHeight + "px", opacity: "1" } : { height: "0", opacity: "0" }}>
                         <div className="d-flex flex-column mb20">
                             <label htmlFor="oldPassword">Votre ancien mot de passe</label>
                             {/* on déconstruit en rajoutant la value qu'on modifie */}
@@ -144,7 +266,8 @@ export default function Profile() {
                                 type="password" id="confirmPassword" />
                             {errors?.confirmPassword && <p style={{ color: "red" }}>{errors.confirmPassword.message}</p>}
                         </div>
-                    </>}
+                    </div>
+                    {/* </>} */}
 
                     <button className={`${styles.button} `}>Enregistrer les modifications</button>
                     {feedback && <p className={`${styles.feedback}`}>{feedback}</p>}

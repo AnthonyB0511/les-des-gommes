@@ -1,5 +1,6 @@
 @use"../../assets/styles/mixin" as mixin;
 
+
 .icon {
     display: flex;
     align-items: center;
@@ -15,6 +16,9 @@
     width: 4.8em;
     transition: .5s all;
     cursor: pointer;
+    border: red;
+
+
 
     @include mixin.sm-lt {
         margin-left: 5%;
@@ -96,8 +100,8 @@
         border-radius: 10vh 0 10vh 0;
         z-index: 99;
         opacity: 0.95;
-        transition: all 1s;
-        transform: translateY(0);
+
+        transition: opacity ease 0.3s, transform ease 0.3s;
 
 
 
@@ -143,4 +147,15 @@
 
     }
 
+}
+
+.login {
+    position: absolute;
+    // border: solid red 2px;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    left: 0;
+    // transform: scale(0);
+    transition: opacity 0.3s, transform 0.3s, display 0.1s, visibility 0.1s;
 }

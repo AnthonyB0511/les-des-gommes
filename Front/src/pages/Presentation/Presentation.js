@@ -4,6 +4,7 @@ import { SecondTitle } from "../../components/utils/SecondTitle";
 import { Line } from "../../components/utils/Line";
 import logo from "../../assets/images/logo_complete.webp";
 import map from "../../assets/images/salle.png";
+import Map from "../../components/utils/Map";
 import town from "../../assets/images/laventie.jpg";
 import shop1 from "../../assets/images/village.png";
 import shop2 from "../../assets/images/antre.png";
@@ -78,7 +79,8 @@ export default function Presentation() {
                         </div>
                     </div>
                     <div className={`${styles.img}`}>
-                        <img src={map} alt="localisation de la salle ou se déroule les séances" />
+                        {/* <img src={map} alt="localisation de la salle ou se déroule les séances" /> */}
+                        <Map />
                     </div>
                 </div>
                 <div className={`${styles.partners}`}>

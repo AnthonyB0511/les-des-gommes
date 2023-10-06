@@ -60,6 +60,7 @@ export default function Login({ seeRegisterForm, closeForm, getUser, user }) {
                     user.name = userBack[0].name;
                     user.password = userBack[0].password;
                     user.idUser = userBack[0].idUser;
+                    user.blobby = userBack[0].blobby;
                     getUser(user);
                     setTimeout(() => {
                         closeForm();
@@ -75,59 +76,59 @@ export default function Login({ seeRegisterForm, closeForm, getUser, user }) {
     console.log(user);
 
     return (
-        <AnimatePresence>
-            <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ duration: 0.5, ease: "easeOut" }}
-                exit={{ opacity: 0 }}
-                className={`d-flex flex-column justify-content-center align-items-center mb20 ${styles.form}`}>
-                <div
-                    className={`${styles.icon}`}
-                    onClick={closeForm}
-                >
-                    <i className="fa-solid fa-circle-xmark"></i>
+        // <AnimatePresence>
+        <div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.5, ease: "easeOut" }}
+            exit={{ opacity: 0 }}
+            className={`d-flex flex-column justify-content-center align-items-center mb20 ${styles.form}`}>
+            <div
+                className={`${styles.icon}`}
+                onClick={closeForm}
+            >
+                <i className="fa-solid fa-circle-xmark"></i>
+            </div>
+            <FormTitle textTitle="Se connecter" />
+            <LineNav />
+            <form onSubmit={handleSubmit(submit)} className="d-flex flex-column card p20 mb20">
+
+                <div className="d-flex flex-column mb20">
+                    <label htmlFor="email"> Votre mail</label>
+                    <input type="email" id="email"
+                        {...register("email")} />
+                    {errors?.email && <p style={{ color: "red" }}>{errors.email.message}</p>}
                 </div>
-                <FormTitle textTitle="Se connecter" />
-                <LineNav />
-                <form onSubmit={handleSubmit(submit)} className="d-flex flex-column card p20 mb20">
+                <div className="d-flex flex-column mb20">
+                    <label htmlFor="password">Mot de passe</label>
+                    <input type="password" id="Password"
+                        {...register("password")} />
+                    {errors?.password && <p style={{ color: "red" }}>{errors.password.message}</p>}
+                </div>
+                <div className={`${styles.remember}`}>
+                    <label htmlFor="remember">Se souvenir de moi</label>
+                    <input type="checkbox" id="remember" className="ml10 mb20" />
 
-                    <div className="d-flex flex-column mb20">
-                        <label htmlFor="email"> Votre mail</label>
-                        <input type="email" id="email"
-                            {...register("email")} />
-                        {errors?.email && <p style={{ color: "red" }}>{errors.email.message}</p>}
-                    </div>
-                    <div className="d-flex flex-column mb20">
-                        <label htmlFor="password">Mot de passe</label>
-                        <input type="password" id="Password"
-                            {...register("password")} />
-                        {errors?.password && <p style={{ color: "red" }}>{errors.password.message}</p>}
-                    </div>
-                    <div className={`${styles.remember}`}>
-                        <label htmlFor="remember">Se souvenir de moi</label>
-                        <input type="checkbox" id="remember" className="ml10 mb20" />
-
-                    </div>
+                </div>
 
 
-                    {feedback && <p className={`${styles.feedback}`}>{feedback}</p>}
-                    {feedbackGood && <p className={`${styles.feedbackGood}`}>{feedbackGood}</p>}
-                    <div>
-                        <button
-                            className={`${styles.button}`}
-                        >Connexion
-                        </button>
-                    </div>
-                </form>
-                <div className={`${styles.not}`}>
-                    <p>Vous n'avez pas encore de compte ?</p>
+                {feedback && <p className={`${styles.feedback}`}>{feedback}</p>}
+                {feedbackGood && <p className={`${styles.feedbackGood}`}>{feedbackGood}</p>}
+                <div>
                     <button
-                        onClick={seeRegisterForm}
-                        className={`${styles.button}`}>CLIQUER ICI</button>
+                        className={`${styles.button}`}
+                    >Connexion
+                    </button>
                 </div>
-                <div className={`${styles.forget}`}>Vous avez oublié votre mot de passe ?</div>
-            </motion.div>
-        </AnimatePresence>
+            </form>
+            <div className={`${styles.not}`}>
+                <p>Vous n'avez pas encore de compte ?</p>
+                <button
+                    onClick={seeRegisterForm}
+                    className={`${styles.button}`}>CLIQUER ICI</button>
+            </div>
+            <div className={`${styles.forget}`}>Vous avez oublié votre mot de passe ?</div>
+        </div>
+
     );
 }
