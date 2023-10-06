@@ -14,8 +14,10 @@ export default function Account({ getUser, user, setUser }) {
     function seeLoginForm() {
         if (seeForm === "login") {
             setSeeForm("");
+            setViewForm(!viewForm);
         } else {
             setSeeForm("login");
+            setViewForm(!viewForm);
         }
 
     }
@@ -27,6 +29,8 @@ export default function Account({ getUser, user, setUser }) {
 
     }
     const list = useRef();
+    const login = useRef();
+    const register = useRef();
     const [previewImage, setPreviewImage] = useState(null);
     useEffect(() => {
         async function getDefaultImage() {
@@ -106,26 +110,23 @@ export default function Account({ getUser, user, setUser }) {
                 <div className={`${styles.icon}`}
                     onClick={seeLoginForm}>
                     <i className="fa-solid fa-circle-user"></i>
-                </div>
 
-                {seeForm === "login" ? (
-                    <Login
-                        seeRegisterForm={seeRegisterForm}
-                        closeForm={closeForm}
-                        getUser={getUser}
-                        setUser={setUser}
-                        user={user} />
-                ) :
-                    seeForm === "register" ? (
-                        <Register
+                    {seeForm === "login" ? (
+                        <Login
+                            seeRegisterForm={seeRegisterForm}
+                            closeForm={closeForm}
+                            getUser={getUser}
+                            setUser={setUser}
+                            user={user} />
+                    ) :
+                        seeForm === "register" ? (<Register
                             seeLoginForm={seeLoginForm}
                             closeForm={closeForm} />
-                    ) : (
-                        (null))
+                        ) : (null)
 
-                }
+                    }
 
-
+                </div>
 
 
             </>
