@@ -107,6 +107,7 @@ export default function Account({ getUser, user, setUser }) {
                     onClick={seeLoginForm}>
                     <i className="fa-solid fa-circle-user"></i>
                 </div>
+
                 {seeForm === "login" ? (
                     <Login
                         seeRegisterForm={seeRegisterForm}
@@ -114,14 +115,15 @@ export default function Account({ getUser, user, setUser }) {
                         getUser={getUser}
                         setUser={setUser}
                         user={user} />
-                ) : (
-                    seeForm === "register" ? (<Register
-                        seeLoginForm={seeLoginForm}
-                        closeForm={closeForm} />
+                ) :
+                    seeForm === "register" ? (
+                        <Register
+                            seeLoginForm={seeLoginForm}
+                            closeForm={closeForm} />
                     ) : (
                         (null))
 
-                )}
+                }
 
 
 
