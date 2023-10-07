@@ -1,4 +1,4 @@
-import arrow from "../../assets/images/bouton2.png";
+import arrow from "../../../../assets/images/bouton2.png";
 import styles from "./SampleNextArrow.module.scss";
 export function SampleNextArrow(props) {
   const { onClick } = props;
@@ -6,7 +6,7 @@ export function SampleNextArrow(props) {
     <div
       className={`${styles.container}`}
       onClick={onClick}>
-      <img src={arrow} className={`${styles.arrow}`} alt="" />
+      <img src={arrow} className={`${styles.arrow}`} alt="fleche vers la droite" />
     </div>
   );
 }

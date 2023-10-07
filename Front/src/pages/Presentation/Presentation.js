@@ -15,13 +15,13 @@ export default function Presentation() {
 
             <Title title="L'association" />
             <Line />
-            <div className={`${styles.presentation}`}>
-                <div className={`${styles.container} d-flex justify-content-center`}>
+            <main className={`${styles.presentation}`}>
+                <section className={`${styles.container} d-flex justify-content-center`}>
                     <div className={`${styles.img}`}>
                         <img src={logo} alt="logo complet de l'association" />
                     </div>
-                    <div className={`${styles.content}`}>
-                        <div className={`${styles.title} d-flex justify-content-center align-items-center`}>
+                    <article className={`${styles.content}`}>
+                        <section className={`${styles.title} d-flex justify-content-center align-items-center`}>
                             <div className={`${styles.question1}`}>
                                 <i className="fa-solid fa-circle-question"></i>
                             </div>
@@ -30,18 +30,18 @@ export default function Presentation() {
                             </div>
                             <SecondTitle name="Qui sommes Nous ?" />
 
-                        </div>
+                        </section>
                         <p>
                             Les Dés Gommés est une association loi 1901 qui réunit des passionnés de jeux de société pour promouvoir cette passion entre personnes de tout horizon.
                         </p>
-                    </div>
-                </div>
-                <div className={`${styles.whatElse}`}>
-                    <div className={`${styles.title} d-flex align-items-center justify-content-center`}>
+                    </article>
+                </section>
+                <section className={`${styles.whatElse}`}>
+                    <section className={`${styles.title} d-flex align-items-center justify-content-center`}>
                         <i className="fa-solid fa-comment"></i>
                         <SecondTitle name="Et sinon" />
-                    </div>
-                    <div className={`${styles.content}`}>
+                    </section>
+                    <article className={`${styles.content}`}>
                         <p className={`${styles.p}`}>
                             Concrètement nous nous réuinissons tous les lundi soirs à Laventie à partir de 19h autour des jeux de l'association ou de ses membres. d'accord mais quels types de jeux ?
                         </p>
@@ -53,41 +53,40 @@ export default function Presentation() {
                         </ul>
                         <p className={`${styles.p}`}>Vous l'aurez compris il y a de <span>tout et pour tout le monde</span> et avec tout un tas de bénévoles pour expliquer les règles !</p>
                         <p className={`${styles.p}`}>Nous sommes aussi présents sur diverses manifestations (festival/ salon de jeu ...)</p>
-                    </div>
-                </div>
-                <div className={`${styles.joinUs}`}>
-                    <div className={`${styles.title} d-flex align-items-center justify-content-center`}>
+                    </article>
+                </section>
+                <section className={`${styles.joinUs}`}>
+                    <article className={`${styles.title} d-flex align-items-center justify-content-center`}>
                         <i class="fa-solid fa-dice-d6"></i>
                         <SecondTitle name="Comment adhérer ?" />
-                    </div>
+                    </article>
                     <p>
                         Rien de plus simple ! Veneze tester. Vous avez aimé l'ambiance, le concept nous vous expliquerons comment vous pouvez, si vous le souhaitez, adhérer.
                     </p>
-                </div>
+                </section>
 
-                <div className={`${styles.map}`}>
-                    <div className={`${styles.content}`}>
-                        <div className={`${styles.title} d-flex  justify-content-center align-items-center`}>
+                <section className={`${styles.map}`}>
+                    <section className={`${styles.content}`}>
+                        <aside className={`${styles.title} d-flex  justify-content-center align-items-center`}>
                             <i className="fa-solid fa-location-pin"></i>
                             <SecondTitle name="Où nous trouver ?" />
-                        </div>
-                        <div className={`${styles.adress}`}>
+                        </aside>
+                        <article className={`${styles.adress}`}>
                             <p>Le salon Montmorency attenant à la des fêtes :</p>
                             <p>Rue Delphin</p>
                             <p>62840 Laventie</p>
-                        </div>
-                    </div>
-                    <div className={`${styles.img}`}>
-                        {/* <img src={map} alt="localisation de la salle ou se déroule les séances" /> */}
-                        <Map />
-                    </div>
-                </div>
-                <div className={`${styles.partners}`}>
-                    <div className={`${styles.title} d-flex  justify-content-center align-items-center`}>
+                        </article>
+                    </section>
+
+                    <Map />
+
+                </section>
+                <section className={`${styles.partners}`}>
+                    <article className={`${styles.title} d-flex  justify-content-center align-items-center`}>
                         <i class="fa-solid fa-handshake-simple"></i>
                         <SecondTitle name="Nos Partenaires" />
-                    </div>
-                    <div className={`${styles.images} d-flex
+                    </article>
+                    <article className={`${styles.images} d-flex
                 align-items-center justify-content-around`}>
                         <a href="https://www.laventie.fr/">
                             <img src={town} alt="logo de la ville de Laventie" />
@@ -98,9 +97,9 @@ export default function Presentation() {
                         <a href="https://lantredudragon.fr/">
                             <img src={shop2} alt="logo antre du dragon" />
                         </a>
-                    </div>
-                </div>
-            </div>
+                    </article>
+                </section>
+            </main>
 
         </>
     );

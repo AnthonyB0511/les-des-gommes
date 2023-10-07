@@ -8,16 +8,15 @@ import { must } from "../../data/must";
 export default function Home() {
     return (
         <>
-
-            <div className={`${styles.flex}`}>
-                <div className={`${styles.container}`}>
+            <main className={`${styles.flex}`}>
+                <article className={`${styles.container}`}>
                     {actu.map((oneActu) => (
                         <Card
                             actu={oneActu} />
                     ))}
-                </div>
+                </article>
                 <DernieresSeances />
-            </div>
+            </main>
             <MustHave
                 must={must} />
 

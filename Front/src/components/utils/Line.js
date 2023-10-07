@@ -1,4 +1,9 @@
 import styles from "./Line.module.scss";
+/**
+ * 
+ * @param {Boolean} reverse
+ * @returns 
+ */
 export function Line({ reverse }) {
     return (
         <div>

@@ -1,13 +1,17 @@
 import styles from "./CardGame.module.scss";
+/**
+ * 
+ * @param {object} param0 
+ * @returns section with one picture Game and his name
+ */
 export default function CardGame({ game }) {
     return (
-        <div className={`${styles.container}`}>
-            <div className={`${styles.img}`}>
+        <section className={`${styles.container}`}>
+            <article className={`${styles.img}`}>
                 <img src={game.img} alt="" />
-            </div>
-            <div className={`${styles.title}`}>
-                <p>{game.title}</p>
-            </div>
-        </div>
+            </article>
+            <p className={`${styles.title}`}>{game.title}</p>
+
+        </section>
     );
 };

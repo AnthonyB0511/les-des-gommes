@@ -1,6 +1,7 @@
-import arrow from "../../assets/images/bouton2.png";
+import arrow from "../../../../assets/images/bouton2.png";
 import styles from "./SamplePrevArrow.module.scss";
 export function SamplePrevArrow(props) {
+
   const { onClick } = props;
   return (
     <div

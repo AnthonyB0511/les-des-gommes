@@ -6,8 +6,13 @@ import styles from "./Carrousel.module.scss";
 import { SampleNextArrow } from "./SampleNextArrow";
 import { SamplePrevArrow } from "./SamplePrevArrow";
 
-
+/**
+ * 
+ * @param {object} param0 links images
+ * @returns slider with settings with maps on Image
+ */
 export const SimpleSlider = ({ nameOfCarrousel }) => {
+
   const settings = {
     dots: true,
     fade: true,
@@ -17,12 +22,11 @@ export const SimpleSlider = ({ nameOfCarrousel }) => {
     slidesToScroll: 1,
     nextArrow: <SampleNextArrow />,
     prevArrow: <SamplePrevArrow />,
-
   };
 
   return (
     <>
-      <div className={`${styles.carrousel}`}>
+      <section className={`${styles.carrousel}`}>
         <Slider {...settings}>
           {nameOfCarrousel.map((image) =>
             <div className={`${styles.div}`}>
@@ -30,7 +34,7 @@ export const SimpleSlider = ({ nameOfCarrousel }) => {
             </div>
           )}
         </Slider>
-      </div>
+      </section>
     </>
   );
 

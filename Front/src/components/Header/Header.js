@@ -9,7 +9,7 @@ export default function Header() {
 
     const [user, setUser] = useState(null);
     /**
-     * fonction qui permet de récupéré les infos nécessaires à l'affichage du user
+     * function recovers the non-sensitives datas
      * @param {object} userLogged 
      */
     function getUser(userLogged) {

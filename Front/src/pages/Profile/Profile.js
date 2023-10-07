@@ -6,18 +6,30 @@ import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { Title } from "../../components/utils/Title";
 import { Line } from "../../components/utils/Line";
-
+/**
+ * 
+ * @returns change profile
+ */
 export default function Profile() {
     const location = useLocation();
-    const user = location.state;
+    const [user, setUser] = useState(location.state);
+    // need to shows of the user the return
     const [feedback, setFeedback] = useState("");
     const [feedbackGood, setFeedbackGood] = useState("");
+    // shows the section of password and the ref for the aniamtion
     const [modifyPassword, setModifyPassword] = useState(false);
-    // useState pour l'input de type file
+    const password = useRef();
+    // useState of inputFile
     const [selectedFile, setSelectedFile] = useState(null);
-    // useState pour l'attribut src de notre balise img
+    // to keep the avatar
     const [previewImage, setPreviewImage] = useState(null);
+    // necessary to control the submit of the form
+    const [isSubmitted, setIsSubmitted] = useState(false);
+    //
     const navigate = useNavigate();
+
+
+    // schema to validate the new form with default values
     const yupSchema = yup.object().shape({
         username: yup
             .string()
@@ -36,8 +48,6 @@ export default function Profile() {
         confirmNewPassword: yup.string()
             .oneOf([yup.ref('newPassword'), null], 'Les mots de passe doivent correspondre'),
     });
-    const password = useRef();
-
 
     const defaultValues = {
         name: user.name,
@@ -52,16 +62,20 @@ export default function Profile() {
     const {
         register,
         handleSubmit,
-        // reset,
-        formState: { errors, isSubmitted }
+        formState: { errors }
     } = useForm({
         defaultValues,
         mode: "onChange",
         resolver: yupResolver(yupSchema),
     });
+    /**
+     * function send the new datas in the server
+     * @param {object} values 
+     */
     async function submit(values) {
         console.log(values);
         setFeedback("");
+        setIsSubmitted(true);
         try {
             const response = await fetch("http://localhost:8000/api/users/modifyUser", {
                 method: "PATCH",
@@ -84,12 +98,19 @@ export default function Profile() {
             }
         } catch (error) {
             console.error(error);
-        }
+        } finally { setIsSubmitted(false); }
     }
+    /**
+     * function modifies the useState. Show or not the section of password
+     */
     function viewModifyPassword() {
         setModifyPassword(!modifyPassword);
     }
+
     useEffect(() => {
+        /**
+         * function recovers the avatar
+         */
         async function getDefaultImage() {
             let response;
             if (user.blobby) {
@@ -119,12 +140,20 @@ export default function Profile() {
         }
         getDefaultImage();
     }, [user]);
-    // déclaration de la fonction lors d'un changement de fichier dans l'input avant validation
+    /**
+     * function does nothing <div styleName=""></div>
+     */
+    useEffect(() => {
+        const userUpdate = () => {
+            setUser(user);
+        };
+        userUpdate();
+    }, [user]);
+    // function shows the avatar befor validation
     function handleChange(event) {
-        // récupération du fichier
+        // file
         const file = event.target.files[0];
         setSelectedFile(file);
-        // on place une condition pour l'attribuer à l'attribut src de la balise img ou non
         if (file) {
             const fileReader = new FileReader();
             fileReader.readAsDataURL(file);
@@ -148,7 +177,10 @@ export default function Profile() {
         });
     };
 
-
+    /**
+     * 
+     * @returns modify the avatar iin BDD
+     */
     function modifyAvatar() {
         if (!selectedFile) {
             alert("Veuillez sélectionner un fichier");
@@ -198,83 +230,81 @@ export default function Profile() {
         };
     }
 
-
-
     return (
         <>
             <Title title="Votre Profil" />
             <Line />
-            <div className={`${styles.form}`} >
+            <main className={`${styles.form}`} >
                 <form onSubmit={handleSubmit(submit)}
                 >
-                    <div className={`${styles.container}`}>
+                    <section className={`${styles.container}`}>
                         <div className={`${styles.content}  mb20`}>
                             <img src={previewImage} className={`${styles.picture}`} alt="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;avatar" />
                         </div>
 
 
-                        <div className={`${styles.content} mb20`}>
+                        <section className={`${styles.content} mb20`}>
                             <label htmlFor="firstname">Prénom</label>
                             <input {...register("firstname")}
                                 type="text" id="firstname" disabled="disabled" />
                             <label htmlFor="name">Nom</label>
                             <input {...register("name")}
                                 type="text" id="name" disabled="disabled" />
-                        </div>
-                    </div>
-                    <div className={`${styles.containerInput}`}>
+                        </section>
+                    </section>
+                    <section className={`${styles.containerInput}`}>
                         <input type="file" className={`${styles.inputFile}`} onChange={handleChange} />
                         <button onClick={() => modifyAvatar()} type="button"
                             className={`${styles.button2}`}>Sauvegarder votre  nouvel avatar</button>
-                    </div>
-                    <div className="d-flex flex-column mb20">
+                    </section>
+                    <section className="d-flex flex-column mb20">
                         <label htmlFor="mail">E-mail</label>
                         <input {...register("email")}
                             type="email" id="email" />
                         {errors?.email && <p style={{ color: "red" }}>{errors.email.message}</p>}
-                    </div>
+                    </section>
 
 
-                    <div className="d-flex flex-column mb20">
+                    <section className="d-flex flex-column mb20">
                         <label htmlFor="username">Nom du profil</label>
                         <input {...register("username")}
                             type="text" id="username" />
                         {errors?.username && <p style={{ color: "red" }}>{errors.username.message}</p>}
-                    </div>
+                    </section>
                     <p onClick={viewModifyPassword}>Souhaitez-vous modifier votre mot de passe ?</p>
-                    {/* {modifyPassword && <> */}
-                    <div ref={password} className={`${styles.password}`}
+                    <section ref={password} className={`${styles.password}`}
                         style={modifyPassword ? { height: password.current.scrollHeight + "px", opacity: "1" } : { height: "0", opacity: "0" }}>
-                        <div className="d-flex flex-column mb20">
+                        <article className="d-flex flex-column mb20">
                             <label htmlFor="oldPassword">Votre ancien mot de passe</label>
                             {/* on déconstruit en rajoutant la value qu'on modifie */}
                             <input {...register("oldPassword")}
                                 type="password" id="oldPassword" />
                             {errors?.oldPassword && <p style={{ color: "red" }}>{errors.oldPassword.message}</p>}
-                        </div>
-                        <div className="d-flex flex-column mb20">
+                        </article>
+                        <article className="d-flex flex-column mb20">
                             <label htmlFor="newPassword">Votre nouveau mot de passe</label>
                             {/* on déconstruit en rajoutant la value qu'on modifie */}
                             <input {...register("newPassword")}
                                 type="password" id="newPassword" />
                             {errors?.newPassword && <p style={{ color: "red" }}>{errors.newPassword.message}</p>}
-                        </div>
-                        <div className="d-flex flex-column mb20">
+                        </article>
+                        <article className="d-flex flex-column mb20">
                             <label htmlFor="confirmPassword">Confirm Passwword</label>
                             {/* on déconstruit en rajoutant la value qu'on modifie */}
                             <input {...register("confirmPassword")}
                                 type="password" id="confirmPassword" />
                             {errors?.confirmPassword && <p style={{ color: "red" }}>{errors.confirmPassword.message}</p>}
-                        </div>
-                    </div>
+                        </article>
+                    </section>
                     {/* </>} */}
 
-                    <button className={`${styles.button} `}>Enregistrer les modifications</button>
+                    <button className={`${styles.button} `}
+                        disabled={isSubmitted}>Enregistrer les modifications</button>
                     {feedback && <p className={`${styles.feedback}`}>{feedback}</p>}
                     {feedbackGood && <p className={`${styles.feedbackGood}`}>{feedbackGood}</p>}
 
                 </form>
-            </div>
+            </main>
         </>
     );
 }

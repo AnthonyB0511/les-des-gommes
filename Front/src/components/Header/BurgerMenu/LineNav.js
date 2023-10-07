@@ -1,5 +1,8 @@
 import styles from "./LineNav.module.scss";
-// composant servant à afficher une ligne
+/**
+ * 
+ * @returns a div Line
+ */
 export const LineNav = () => {
     return (
         <div className={`${styles.lineNav}`}></div>

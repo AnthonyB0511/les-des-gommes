@@ -3,7 +3,7 @@ import { LineNav } from "./LineNav";
 import { Contact } from "../../Footer/components/Contact";
 import { Link } from "react-router-dom";
 /**
- * Navigation, useState permettant de gérer les "fermetures" du menu
+ * Navigation, useState closes the menu with a click on the Link
  * @param {boolean} open,setopen
  * @returns navigation
  */

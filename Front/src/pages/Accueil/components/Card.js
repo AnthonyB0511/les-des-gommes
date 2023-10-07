@@ -1,14 +1,18 @@
 import styles from "./Card.module.scss";
 import { Button } from "../../../components/utils/Button";
 import { Link } from "react-router-dom";
-
+/**
+ * 
+ * @param {object} param0 (object with 1 string 1 link of image) 
+ * @returns section 1  text, 1 picture for illustration and maybe a button{needButtton}
+ */
 export default function Card({ actu }) {
     return (
-        <div className={`${styles.card} m20`}>
+        <section className={`${styles.card} m20`}>
             <div className={`${styles.img}`}>
                 <img src={actu.image} alt="" />
             </div>
-            <div className={`${styles.content}`}>
+            <article className={`${styles.content}`}>
                 <p>{actu.text}</p>
                 <Link to="/presentation" >
                     <Button
@@ -16,8 +20,8 @@ export default function Card({ actu }) {
                         txtButton="Cliquer ICI" />
                 </Link>
 
-            </div>
-        </div>
+            </article>
+        </section>
 
 
     );

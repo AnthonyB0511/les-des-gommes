@@ -4,9 +4,9 @@ import Nav from "./Nav";
 
 
 export default function Burger() {
-    // useState permettant de gérer l'ouverture du menu burger
+    // useState runs the opening of menu
     const [open, setOpen] = useState(false);
-    // constante qui n'affiche pas le menu burger (style noShow)
+    // const hiddes the menu (style noShow)
     const HamburgerIcon = <>
         <div className={`${styles.burgerMenu} ${styles.noShow} `}>
             <Nav open={open} setOpen={setOpen} />
@@ -18,7 +18,7 @@ export default function Burger() {
             <i className="fa-solid fa-bars"></i>
         </div>
     </>;
-    // constante qui permet le translate du menu
+    // const shows the menu
     const CloseIcon = <>
 
         <div className={`${styles.burgerMenu} `}>
