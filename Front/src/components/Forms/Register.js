@@ -5,10 +5,17 @@ import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { LineNav } from "../Header/BurgerMenu/LineNav";
 import { FormTitle } from "../Header/components/FormTitle";
-
+/**
+ * 
+ * @param {boolean} seeLoginForm 
+ * @param {boolean} closeForm
+ * @returns 
+ */
 export default function Register({ seeLoginForm, closeForm }) {
+    //useState shows return of the server
     const [feedback, setFeedback] = useState("");
     const [feedbackGood, setFeedbackGood] = useState("");
+    //yupschema with params for the form
     const yupSchema = yup.object({
         username: yup
             .string()
@@ -56,7 +63,7 @@ export default function Register({ seeLoginForm, closeForm }) {
         mode: "onChange",
         resolver: yupResolver(yupSchema),
     });
-
+    //function send the datas in database
     async function submit(values) {
         console.log(values);
         setFeedback("");
@@ -85,8 +92,7 @@ export default function Register({ seeLoginForm, closeForm }) {
     }
 
     return (
-
-        <div className={`${styles.form}`}>
+        <main className={`${styles.form}`}>
             <FormTitle textTitle="S'inscrire" />
             <div
                 className={`${styles.icon}`}
@@ -96,66 +102,73 @@ export default function Register({ seeLoginForm, closeForm }) {
             </div>
             <LineNav />
             <form onSubmit={handleSubmit(submit)}>
-                <div className="d-flex justify-content-between">
-                    <div className={`${styles.container}`}>
-                        <div className="d-flex flex-column mb20">
+                <section className="d-flex justify-content-between">
+                    <article className={`${styles.container}`}>
+                        {/* name user */}
+                        <section className="d-flex flex-column mb20">
                             <label htmlFor="name">Nom</label>
                             <input {...register("name")}
                                 type="text" id="name" />
                             {errors?.name && <p style={{ color: "red" }}>{errors.name.message}</p>}
-                        </div>
-
-                        <div className="d-flex flex-column mb20">
+                        </section>
+                        {/* firstname */}
+                        <section className="d-flex flex-column mb20">
                             <label htmlFor="firstname">Prénom</label>
                             <input {...register("firstname")}
                                 type="text" id="firstname" />
                             {errors?.firstname && <p style={{ color: "red" }}>{errors.firstname.message}</p>}
-                        </div>
-                        <div className="d-flex flex-column mb20">
+                        </section>
+                        {/* email */}
+                        <section className="d-flex flex-column mb20">
                             <label htmlFor="age">E-mail</label>
 
                             <input {...register("email")}
                                 type="email" id="email" />
                             {errors?.email && <p style={{ color: "red" }}>{errors.email.message}</p>}
-                        </div>
-                    </div>
-                    <div className={`${styles.container}`}>
-                        <div className="d-flex flex-column mb20">
+                        </section>
+                    </article>
+                    <article className={`${styles.container}`}>
+                        <section className="d-flex flex-column mb20">
+                            {/* username */}
                             <label htmlFor="username">Nom du profil</label>
                             <input {...register("username")}
                                 type="text" id="username" />
                             {errors?.username && <p style={{ color: "red" }}>{errors.username.message}</p>}
-                        </div>
-                        <div className="d-flex flex-column mb20">
+                        </section>
+                        {/* password */}
+                        <section className="d-flex flex-column mb20">
                             <label htmlFor="password">Mot de passe</label>
 
                             <input {...register("password")}
                                 type="password" id="password" />
                             {errors?.password && <p style={{ color: "red" }}>{errors.password.message}</p>}
-                        </div>
-                        <div className="d-flex flex-column mb20">
+                        </section>
+                        {/* confirm password */}
+                        <section className="d-flex flex-column mb20">
                             <label htmlFor="confirmPassword">Confirmation du mot de passe</label>
                             {/* on déconstruit en rajoutant la value qu'on modifie */}
                             <input {...register("confirmPassword")}
                                 type="password" id="confirmPassword" />
                             {errors?.confirmPassword && <p style={{ color: "red" }}>{errors.confirmPassword.message}</p>}
-                        </div>
-                    </div>
-                </div>
+                        </section>
+                    </article>
+                </section>
+                {/* button validates the form */}
                 <button disabled={isSubmitted} className={`${styles.button}`}>S'inscrire'</button>
+                {/* feedabck for the user */}
                 {feedback && <p className={`${styles.feedback}`}>{feedback}</p>}
                 {feedbackGood && <p className={`${styles.feedbackGood}`}>{feedbackGood}</p>}
 
             </form>
-            <div className={`${styles.not}`}>
+            {/* see login form */}
+            <section className={`${styles.not}`}>
                 <p>Vous avez déjà un compte ?</p>
-
                 <button
                     className={`${styles.button}`}
                     onClick={seeLoginForm}> CLIQUER ICI</button>
 
-            </div>
-        </div>
+            </section>
+        </main>
 
     );
 }

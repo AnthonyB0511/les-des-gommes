@@ -9,8 +9,18 @@ import { LineNav } from "../Header/BurgerMenu/LineNav";
 
 
 
-
+/**
+ * 
+ * @param {Boolean} seeRegisterForm
+ * @param {Boolean} closeForm
+ * @param {getUser} function 
+ * @param {Object} user
+ * @returns 
+ */
 export default function Login({ seeRegisterForm, closeForm, getUser, user }) {
+    /**
+     * yupscheam to validate the form Login with params
+     */
     const yupSchema = yup.object({
         email: yup.string().email("Ceci n'est pas une adresse mail valide"),
         password: yup.string().required("Le mot de passe est obligatoire"),
@@ -29,16 +39,19 @@ export default function Login({ seeRegisterForm, closeForm, getUser, user }) {
         // mode: "onChange",
         resolver: yupResolver(yupSchema),
     });
-
+    /**
+     * useState shows the response of server at user
+     */
     const [feedback, setFeedback] = useState("");
     const [feedbackGood, setFeedbackGood] = useState("");
 
 
-
+    /**
+     * function send to the server the datas of the user
+     * @param {Object} values 
+     */
     async function submit(values) {
         setFeedback("");
-
-
         try {
             const response = await fetch('http://localhost:8000/api/users/login', {
                 method: "POST",
@@ -73,11 +86,9 @@ export default function Login({ seeRegisterForm, closeForm, getUser, user }) {
 
     }
 
-    console.log(user);
-
     return (
 
-        <div className={`d-flex flex-column justify-content-center align-items-center mb20 ${styles.form}`}>
+        <main className={`d-flex flex-column justify-content-center align-items-center mb20 ${styles.form}`}>
             <div
                 className={`${styles.icon}`}
                 onClick={closeForm}
@@ -87,43 +98,46 @@ export default function Login({ seeRegisterForm, closeForm, getUser, user }) {
             <FormTitle textTitle="Se connecter" />
             <LineNav />
             <form onSubmit={handleSubmit(submit)} className="d-flex flex-column card p20 mb20">
-
-                <div className="d-flex flex-column mb20">
+                {/* mail user */}
+                <section className="d-flex flex-column mb20">
                     <label htmlFor="email"> Votre mail</label>
                     <input type="email" id="email"
                         {...register("email")} />
                     {errors?.email && <p style={{ color: "red" }}>{errors.email.message}</p>}
-                </div>
-                <div className="d-flex flex-column mb20">
+                </section>
+                //password user
+                <section className="d-flex flex-column mb20">
                     <label htmlFor="password">Mot de passe</label>
                     <input type="password" id="Password"
                         {...register("password")} />
                     {errors?.password && <p style={{ color: "red" }}>{errors.password.message}</p>}
-                </div>
-                <div className={`${styles.remember}`}>
+                </section>
+                <section className={`${styles.remember}`}>
                     <label htmlFor="remember">Se souvenir de moi</label>
                     <input type="checkbox" id="remember" className="ml10 mb20" />
 
-                </div>
+                </section>
 
-
+//feedback for user
                 {feedback && <p className={`${styles.feedback}`}>{feedback}</p>}
                 {feedbackGood && <p className={`${styles.feedbackGood}`}>{feedbackGood}</p>}
-                <div>
+                //button Connexion
+                <section>
                     <button
                         className={`${styles.button}`}
                     >Connexion
                     </button>
-                </div>
+                </section>
             </form>
-            <div className={`${styles.not}`}>
+            //to go at register form
+            <section className={`${styles.not}`}>
                 <p>Vous n'avez pas encore de compte ?</p>
                 <button
                     onClick={seeRegisterForm}
                     className={`${styles.button}`}>CLIQUER ICI</button>
-            </div>
-            <div className={`${styles.forget}`}>Vous avez oublié votre mot de passe ?</div>
-        </div>
+            </section>
+            <article className={`${styles.forget}`}>Vous avez oublié votre mot de passe ?</article>
+        </main>
 
     );
 }

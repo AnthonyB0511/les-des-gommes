@@ -1,7 +1,14 @@
 import styles from "./Button.module.scss";
+/**
+ * 
+ * @param {String} txtButton 
+ * @param {Boolean} needButton
+ * @param {function} props
+ * @returns 
+ */
 export function Button({ txtButton, needButton, props }) {
     return (
-        <div>
+        <article>
             {needButton ? (
                 <button
                     className={`${styles.button}`}
@@ -9,7 +16,7 @@ export function Button({ txtButton, needButton, props }) {
             ) : (
                 null
             )}
-        </div>
+        </article>
     );
 }
 
