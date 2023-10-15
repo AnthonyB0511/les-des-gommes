@@ -134,10 +134,14 @@
     }
 
     .feedbackGood {
-        color: var(--txtcolor);
+        color: var(--text-color);
         text-align: center;
         margin-bottom: 2%;
         font-size: 1.2rem;
+        font-weight: 500;
+        background-color: var(--action);
+        border-radius: 10vh 0 10vh 0;
+        border: inset 2px var(--red);
     }
 
     .feedback {
@@ -145,6 +149,7 @@
         text-align: center;
         margin-bottom: 2%;
         font-size: 1.2rem;
+        font-weight: 500;
     }
 
     .not {

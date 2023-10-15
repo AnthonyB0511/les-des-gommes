@@ -10,7 +10,7 @@ export default function Account({ getUser, user, setUser }) {
     const [isOpen, setIsOpen] = useState(false);
     // gérer la fermeture d'un formulaire quand on ouvre un
     const [viewForm, setViewForm] = useState(false);
-    const [noLog, setNoLog] = useState(true);
+    const [noLog, setNoLog] = useState(false);
     const log = useRef();
     /**
      * Function shows or hiddes the login form

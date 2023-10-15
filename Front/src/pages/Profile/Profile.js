@@ -289,7 +289,7 @@ export default function Profile() {
                             {errors?.newPassword && <p style={{ color: "red" }}>{errors.newPassword.message}</p>}
                         </article>
                         <article className="d-flex flex-column mb20">
-                            <label htmlFor="confirmPassword">Confirm Passwword</label>
+                            <label htmlFor="confirmPassword">Confirmer le nouveau mot de passe</label>
                             {/* on déconstruit en rajoutant la value qu'on modifie */}
                             <input {...register("confirmPassword")}
                                 type="password" id="confirmPassword" />
