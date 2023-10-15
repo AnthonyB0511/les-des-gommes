@@ -1,10 +1,11 @@
 import styles from "./Login.module.scss";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { FormTitle } from "../Header/components/FormTitle";
 import { LineNav } from "../Header/BurgerMenu/LineNav";
+import { userContext } from "../../context/userContext";
 
 
 
@@ -66,18 +67,19 @@ export default function Login({ seeRegisterForm, closeForm, getUser, user }) {
                     setFeedbackGood("Félicitations vous allez être connecter");
 
                     reset(defaultValues);
-                    let user = {};
-                    user.firstname = userBack[0].firstname;
-                    user.username = userBack[0].username;
-                    user.email = userBack[0].email;
-                    user.name = userBack[0].name;
-                    user.password = userBack[0].password;
-                    user.idUser = userBack[0].idUser;
-                    user.blobby = userBack[0].blobby;
-                    getUser(user);
+                    ;
                     setTimeout(() => {
+                        let user = {};
+                        user.firstname = userBack[0].firstname;
+                        user.username = userBack[0].username;
+                        user.email = userBack[0].email;
+                        user.name = userBack[0].name;
+                        user.password = userBack[0].password;
+                        user.idUser = userBack[0].idUser;
+                        user.blobby = userBack[0].blobby;
+                        getUser(user);
                         closeForm();
-                    }, 1500);
+                    }, 2000);
                 }
             }
         } catch (error) {
@@ -105,7 +107,7 @@ export default function Login({ seeRegisterForm, closeForm, getUser, user }) {
                         {...register("email")} />
                     {errors?.email && <p style={{ color: "red" }}>{errors.email.message}</p>}
                 </section>
-                //password user
+                {/* password user */}
                 <section className="d-flex flex-column mb20">
                     <label htmlFor="password">Mot de passe</label>
                     <input type="password" id="Password"
@@ -118,10 +120,10 @@ export default function Login({ seeRegisterForm, closeForm, getUser, user }) {
 
                 </section>
 
-//feedback for user
+                {/* //feedback for user */}
                 {feedback && <p className={`${styles.feedback}`}>{feedback}</p>}
                 {feedbackGood && <p className={`${styles.feedbackGood}`}>{feedbackGood}</p>}
-                //button Connexion
+                {/* //button Connexion */}
                 <section>
                     <button
                         className={`${styles.button}`}
@@ -129,7 +131,7 @@ export default function Login({ seeRegisterForm, closeForm, getUser, user }) {
                     </button>
                 </section>
             </form>
-            //to go at register form
+            {/* //to go at register form */}
             <section className={`${styles.not}`}>
                 <p>Vous n'avez pas encore de compte ?</p>
                 <button

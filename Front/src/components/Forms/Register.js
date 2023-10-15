@@ -83,7 +83,7 @@ export default function Register({ seeLoginForm, closeForm }) {
                     reset(defaultValues);
                     setTimeout(() => {
                         seeLoginForm();
-                    }, 1500);
+                    }, 2000);
                 }
             }
         } catch (error) {

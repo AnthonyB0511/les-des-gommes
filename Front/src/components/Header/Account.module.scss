@@ -169,3 +169,27 @@
     // transform: scale(0);
     transition: opacity 0.3s, transform 0.3s, display 0.1s, visibility 0.1s;
 }
+
+.nolog {
+    display: flex;
+    justify-content: center;
+
+
+    p {
+        transition: opacity ease 0.3s, transform ease 0.3s;
+        border: var(--red) solid 2px;
+        width: 150%;
+        position: absolute;
+        top: 110%;
+        transform: translate(-50%);
+        text-transform: uppercase;
+        background-color: var(--action);
+        border-radius: 10vh 0 10vh 0;
+        font-weight: 800;
+        padding-block: 10px;
+        text-align: center;
+        font-size: 0.8rem;
+    }
+
+
+}

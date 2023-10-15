@@ -1,7 +1,7 @@
 import styles from "./Nav.module.scss";
 import { LineNav } from "./LineNav";
 import { Contact } from "../../Footer/components/Contact";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 /**
  * Navigation, useState closes the menu with a click on the Link
  * @param {boolean} open,setopen
@@ -12,17 +12,17 @@ export default function Nav({ open, setOpen }) {
         <>
             <nav className={`${styles.nav}`}>
                 <ul className={`${styles.ul}`}>
-                    <li className={`${styles.li}`}><Link to="/" onClick={() => setOpen(!open)}>ACCUEIL</Link></li>
+                    <li className={`${styles.li}`}><NavLink to="/" onClick={() => setOpen(!open)}>ACCUEIL</NavLink></li>
                     <LineNav />
-                    <li className={`${styles.li}`} ><Link to="/presentation" onClick={() => setOpen(!open)}> L'ASSO</Link></li>
+                    <li className={`${styles.li}`} ><NavLink to="/presentation" onClick={() => setOpen(!open)}> L'ASSO</NavLink></li>
                     <LineNav />
-                    <li className={`${styles.li}`}><Link to="/ludotheque" onClick={() => setOpen(!open)}>LA LUDOTHEQUE</Link></li>
+                    <li className={`${styles.li}`}><NavLink to="/ludotheque" onClick={() => setOpen(!open)}>LA LUDOTHEQUE</NavLink></li>
                     <LineNav />
-                    <li className={`${styles.li}`}><Link onClick={() => setOpen(!open)}>CONTACT</Link></li>
+                    <li className={`${styles.li}`}><NavLink to="/contact" onClick={() => setOpen(!open)}>CONTACT</NavLink></li>
                     <LineNav />
-                    <li className={`${styles.li}`}><Link onClick={() => setOpen(!open)}>FORUM</Link></li>
+                    <li className={`${styles.li}`}><NavLink onClick={() => setOpen(!open)}>FORUM</NavLink></li>
                     <LineNav />
-                    <li className={`${styles.li}`}><Link onClick={() => setOpen(!open)}>MON COMPTE</Link></li>
+                    <li className={`${styles.li}`}><NavLink onClick={() => setOpen(!open)}>MON COMPTE</NavLink></li>
                 </ul>
             </nav>
             <Contact />

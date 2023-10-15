@@ -1,6 +1,6 @@
 import styles from "./Account.module.scss";
 import { useState, useRef, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import Login from "../Forms/Login";
 import Register from "../Forms/Register";
 export default function Account({ getUser, user, setUser }) {
@@ -10,6 +10,8 @@ export default function Account({ getUser, user, setUser }) {
     const [isOpen, setIsOpen] = useState(false);
     // gérer la fermeture d'un formulaire quand on ouvre un
     const [viewForm, setViewForm] = useState(false);
+    const [noLog, setNoLog] = useState(true);
+    const log = useRef();
     /**
      * Function shows or hiddes the login form
      */
@@ -34,7 +36,16 @@ export default function Account({ getUser, user, setUser }) {
      */
     function closeForm() {
         setSeeForm("");
+    }
+    function unLogged() {
+        setNoLog(true);
+        setTimeout(() => {
+            setUser(null);
+            setNoLog(false);
+            closeForm();
 
+        }, 2000);
+        console.log(noLog);
     }
     // useRef allows the animation of the list
     const list = useRef();
@@ -80,46 +91,53 @@ export default function Account({ getUser, user, setUser }) {
         //user is logged
         <>
             {user ? (
-                <section className={`${styles.icon}`}
-                    onClick={() => setIsOpen(!isOpen)}>
-                    {/* <i className="fa-solid fa-circle-user"></i> */}
-                    <img src={previewImage} className={`${styles.image}`} alt="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;avatar" />
-                    <div className={`${styles.check}`}>
-                        <i className="fa-solid fa-circle-check"></i>
-                    </div>
-                    {/*au clic la liste s'affiche avec animation pour la gestion de profil ou la déconnexion */}
-                    <ul className={`${styles.profile}`}
-                        ref={list}
-                        style={isOpen ? { opacity: 0.95, transform: "translateY(0) ", visibility: "visible" } : { opacity: 0, transform: "translateY(100%)", visibility: "hidden" }}>
-                        <>
-                            <li className={`${styles.li}`}>
-                                <Link
-                                    to="/profile"
-                                    // au moment du clic on referme l'élément
-                                    onClick={() => setIsOpen(!isOpen)}
-                                    // on renvoie les information du user à la page profile
-                                    state={user} image={previewImage}
-                                >
-                                    <button className={`${styles.btn}`}>
-                                        Gestion du profil
-                                    </button>
-                                </Link>
-                            </li>
-                            <li className={`${styles.li}`}>
-                                {/* la déconnexion amène directement à la page d'accueil */}
-                                <Link to="/">
-                                    <button
-                                        className={`${styles.btn}`}
-                                        onClick={() => setUser(null)}>
-                                        Se déconnecter
-                                    </button>
-                                </Link>
-                            </li>
-                        </>
-                    </ul>
-                    {/* } */}
+                <>
+                    <section className={`${styles.icon}`}
+                        onClick={() => setIsOpen(!isOpen)}>
+                        {/* <i className="fa-solid fa-circle-user"></i> */}
+                        <img src={previewImage} className={`${styles.image}`} alt="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;avatar" />
+                        <div className={`${styles.check}`}>
+                            <i className="fa-solid fa-circle-check"></i>
+                        </div>
+                        {/*au clic la liste s'affiche avec animation pour la gestion de profil ou la déconnexion */}
+                        <ul className={`${styles.profile}`}
+                            ref={list}
+                            style={isOpen ? { opacity: 0.95, transform: "translateY(0) ", visibility: "visible" } : { opacity: 0, transform: "translateY(100%)", visibility: "hidden" }}>
+                            <>
+                                <li className={`${styles.li}`}>
+                                    <NavLink
+                                        to="/profile"
+                                        // au moment du clic on referme l'élément
+                                        onClick={() => setIsOpen(!isOpen)}
+                                        // on renvoie les information du user à la page profile
+                                        state={user} image={previewImage}
+                                    >
+                                        <button className={`${styles.btn}`}>
+                                            Gestion du profil
+                                        </button>
+                                    </NavLink>
+                                </li>
+                                <li className={`${styles.li}`}>
+                                    {/* la déconnexion amène directement à la page d'accueil */}
+                                    <NavLink to="/">
+                                        <button
+                                            className={`${styles.btn}`}
+                                            onClick={unLogged}>
+                                            Se déconnecter
+                                        </button>
+                                    </NavLink>
 
-                </section>
+                                </li>
+
+                            </>
+                        </ul>
+                        {/* } */}
+
+                    </section>
+                    <section className={`${styles.nolog}`}
+                    > <p ref={log}
+                        style={noLog ? { opacity: 0.95, transform: "translateY(0) ", visibility: "visible" } : { opacity: 0, transform: "translateY(100%)", visibility: "hidden" }}>Vous allez être déconnecté</p></section>
+                </>
 
 
             ) : (
