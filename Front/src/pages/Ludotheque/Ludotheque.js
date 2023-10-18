@@ -39,9 +39,9 @@ export default function Ludotheque() {
             <main className={`${styles.grid}`}>
                 {games
                     .filter((g) => g.title.toLowerCase().includes(filter))
-                    .map((game) => (
+                    .map((game, i) => (
                         <CardGame
-                            game={game} />
+                            game={game} key={i} />
                     ))}
             </main>
 

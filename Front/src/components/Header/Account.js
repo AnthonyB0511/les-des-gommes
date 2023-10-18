@@ -37,6 +37,10 @@ export default function Account({ getUser, user, setUser }) {
     function closeForm() {
         setSeeForm("");
     }
+    /**
+     * function shows the p with "vous allez être déconnecté"
+     * With the Timeout the user becomes null, the form close and the P don't show
+     */
     function unLogged() {
         setNoLog(true);
         setTimeout(() => {
@@ -45,7 +49,6 @@ export default function Account({ getUser, user, setUser }) {
             closeForm();
 
         }, 2000);
-        console.log(noLog);
     }
     // useRef allows the animation of the list
     const list = useRef();
@@ -68,18 +71,13 @@ export default function Account({ getUser, user, setUser }) {
                     );
                 }
                 const imgDefaultFromBack = await response.json();
-
-                console.log({ imgDefaultFromBack });
                 const uint8Array = new Uint8Array(imgDefaultFromBack.blobby.data);
-                console.log({ uint8Array });
                 const blob = new Blob([uint8Array]);
-                console.log({ blob });
+
                 const urlImage = URL.createObjectURL(blob);
-                console.log({ urlImage });
                 fetch(urlImage)
                     .then((response) => response.text())
                     .then((text) => {
-                        console.log({ text });
                         setPreviewImage(text);
                     });
             }
@@ -102,7 +100,7 @@ export default function Account({ getUser, user, setUser }) {
                         {/*au clic la liste s'affiche avec animation pour la gestion de profil ou la déconnexion */}
                         <ul className={`${styles.profile}`}
                             ref={list}
-                            style={isOpen ? { opacity: 0.95, transform: "translateY(0) ", visibility: "visible" } : { opacity: 0, transform: "translateY(100%)", visibility: "hidden" }}>
+                            style={isOpen ? { opacity: 1, transform: "translateY(0) ", visibility: "visible" } : { opacity: 0, transform: "translateY(100%)", visibility: "hidden" }}>
                             <>
                                 <li className={`${styles.li}`}>
                                     <NavLink
@@ -136,7 +134,7 @@ export default function Account({ getUser, user, setUser }) {
                     </section>
                     <section className={`${styles.nolog}`}
                     > <p ref={log}
-                        style={noLog ? { opacity: 0.95, transform: "translateY(0) ", visibility: "visible" } : { opacity: 0, transform: "translateY(100%)", visibility: "hidden" }}>Vous allez être déconnecté</p></section>
+                        style={noLog ? { opacity: 1, transform: "translateY(0) ", visibility: "visible" } : { opacity: 0, transform: "translateY(100%)", visibility: "hidden" }}>Déconnexion ...</p></section>
                 </>
 
 

@@ -28,8 +28,8 @@ export const SimpleSlider = ({ nameOfCarrousel }) => {
     <>
       <section className={`${styles.carrousel}`}>
         <Slider {...settings}>
-          {nameOfCarrousel.map((image) =>
-            <div className={`${styles.div}`}>
+          {nameOfCarrousel.map((image, i) =>
+            <div key={i} className={`${styles.div}`}>
               <img src={image.image} className={`${styles.border}`} alt="" />
             </div>
           )}

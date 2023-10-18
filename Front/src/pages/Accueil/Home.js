@@ -10,9 +10,9 @@ export default function Home() {
         <>
             <main className={`${styles.flex}`}>
                 <article className={`${styles.container}`}>
-                    {actu.map((oneActu) => (
+                    {actu.map((oneActu, i) => (
                         <Card
-                            actu={oneActu} />
+                            actu={oneActu} key={i} />
                     ))}
                 </article>
                 <DernieresSeances />

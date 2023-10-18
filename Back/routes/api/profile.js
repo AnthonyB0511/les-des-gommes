@@ -5,10 +5,12 @@ const connection = require("../../database/index");
 
 // à l'inscription l'utilisateur a une image par défaut
 router.get("/getDefaultImage", (req, res) => {
-    const sql = "SELECT blobby FROM image LIMIT 1";
+    console.log("Ok");
+    const sql = "SELECT blobby FROM image ";
     connection.query(sql, (err, result) => {
         if (err) throw err;
         res.send(result[0]);
+        console.log(result);
     });
 });
 
@@ -32,6 +34,7 @@ router.patch("/insertImage", (req, res) => {
 
 // récupère l'image au log
 router.get("/getAvatarFromUser", (req, res) => {
+    console.log("Ok");
     const id = req.query.id;
     const sql = "SELECT blobby FROM user WHERE idUser = ?";
     connection.query(sql, [id], (err, result) => {

@@ -13,8 +13,8 @@ export default function MustHave({ must }) {
             <Line />
 
 
-            {must.map((oneGame) => (
-                <article className={`${styles.container} ${oneGame.reverse && styles.reverse} d-flex p20 mb20`}>
+            {must.map((oneGame, i) => (
+                <article key={i} className={`${styles.container} ${oneGame.reverse && styles.reverse} d-flex p20 mb20`}>
                     <aside className={`${styles.img}`}>
                         <img src={oneGame.image} alt="" />
                     </aside>

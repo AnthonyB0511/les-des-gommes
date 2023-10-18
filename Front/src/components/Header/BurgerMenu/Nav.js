@@ -22,7 +22,7 @@ export default function Nav({ open, setOpen }) {
                     <LineNav />
                     <li className={`${styles.li}`}><NavLink onClick={() => setOpen(!open)}>FORUM</NavLink></li>
                     <LineNav />
-                    <li className={`${styles.li}`}><NavLink onClick={() => setOpen(!open)}>MON COMPTE</NavLink></li>
+                    <li className={`${styles.li}`}><NavLink to="/admin" onClick={() => setOpen(!open)}>MON COMPTE</NavLink></li>
                 </ul>
             </nav>
             <Contact />

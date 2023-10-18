@@ -5,6 +5,7 @@ import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { LineNav } from "../Header/BurgerMenu/LineNav";
 import { FormTitle } from "../Header/components/FormTitle";
+import { createUser } from "../../apis/users";
 /**
  * 
  * @param {boolean} seeLoginForm 
@@ -57,7 +58,9 @@ export default function Register({ seeLoginForm, closeForm }) {
         register,
         handleSubmit,
         reset,
-        formState: { errors, isSubmitted }
+        formState: { errors, isSubmitting },
+        setError,
+        clearErrors
     } = useForm({
         defaultValues,
         mode: "onChange",
@@ -65,6 +68,17 @@ export default function Register({ seeLoginForm, closeForm }) {
     });
     //function send the datas in database
     async function submit(values) {
+        // try {
+        //     clearErrors();
+        //     await createUser(values);
+        //     reset(defaultValues);
+        //     setTimeout(() => {
+        //         seeLoginForm();
+        //     }, 2000);
+
+        // } catch (error) {
+        //     setError("generic", { type: "generic", message: error });
+        // }
         console.log(values);
         setFeedback("");
         try {
@@ -75,11 +89,12 @@ export default function Register({ seeLoginForm, closeForm }) {
             });
             console.log(values);
             if (response.ok) {
-                const userBack = await response.json();
-                if (userBack.message) {
-                    setFeedback(userBack.message);
+                const backResponse = await response.json();
+                console.log(backResponse);
+                if (backResponse === "Cet email est déjà utilisé") {
+                    setFeedback(backResponse);
                 } else {
-                    setFeedbackGood(userBack.messageGood);
+                    setFeedbackGood(backResponse);
                     reset(defaultValues);
                     setTimeout(() => {
                         seeLoginForm();
@@ -154,11 +169,10 @@ export default function Register({ seeLoginForm, closeForm }) {
                     </article>
                 </section>
                 {/* button validates the form */}
-                <button disabled={isSubmitted} className={`${styles.button}`}>S'inscrire'</button>
+                <button disabled={isSubmitting} className={`${styles.button}`}>S'inscrire'</button>
                 {/* feedabck for the user */}
                 {feedback && <p className={`${styles.feedback}`}>{feedback}</p>}
                 {feedbackGood && <p className={`${styles.feedbackGood}`}>{feedbackGood}</p>}
-
             </form>
             {/* see login form */}
             <section className={`${styles.not}`}>

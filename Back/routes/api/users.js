@@ -1,57 +1,53 @@
 const router = require("express").Router();
-
 const connection = require("../../database");
 const bcrypt = require("bcrypt");
+const jsonwebtoken = require("jsonwebtoken");
+const { key, keyPub } = require("../../keys/index");
 
 router.post("/register", async (req, res) => {
     const { name, firstname, username, email, password } = req.body;
-    const hashedPassword = await bcrypt.hash(password, 10);
     const sql = `SELECT * FROM user WHERE email=?`;
-    connection.query(sql, [email], (err, result) => {
-        if (err) throw err;
-        if (result.length) {
-            let isEmail = { message: "Cet e-mail est déjà utilisé pour ce site" };
-            res.send(isEmail);
-        } else {
-            const sqlInsert = "INSERT INTO user (name,firstname,username, email, password)VALUES(?,?,?,?,?)";
-            const values = [name, firstname, username, email, hashedPassword];
-            connection.query(sqlInsert, values, (err, result) => {
-                if (err) throw err;
-                let resultBack = req.body;
-                resultBack.id = result.insertId;
-                req.body.password = "";
-                req.body.confirmPassword = "";
-                let isEmail = { messageGood: "Inscription réussie ! Vous allez être rediriger" };
-                res.send(isEmail);
-            });
+    connection.query(sql, [email], async (err, result) => {
+        try {
+            if (result.length === 0) {
+                const hashedPassword = await bcrypt.hash(password, 10);
+                const insertSql = "INSERT INTO user(name,firstname,username, email, password) VALUES(?,?,?,?,?)";
+                const values = [name, firstname, username, email, hashedPassword];
+                connection.query(insertSql, values, (err, result) => {
+                    if (err) throw err;
+                    res.status(200).json("Félicitation, votre inscription est validée");
+                });
+            } else {
+                res.status(200).json("Cet email est déjà utilisé");
+            }
+        } catch {
+            res.status(400).json("Un problème est survenu...");
         }
     });
 });
 
 router.post("/login", (req, res) => {
     const { email, password } = req.body;
-    const sql = `SELECT idUser, username, email,password FROM user WHERE email=?`;
+    const sql = `SELECT * FROM user WHERE email=?`;
     connection.query(sql, [email], async (err, result) => {
-        if (err) throw err;
-        if (!result.length) {
-            let wrong = { message: "La combinaison email/mot de passe ne correspond à aucun compte" };
-            res.send(wrong);
-        } else {
-            const dbPassword = result[0].password;
-            const passwordMatch = await bcrypt.compare(password, dbPassword);
-            if (!passwordMatch) {
-                let wrong = { message: "La combinaison email/mot de passe ne correspond à aucun compte" };
-                res.send(wrong);
+        try {
+            if (result.length > 0) {
+                if (bcrypt.compareSync(password, result[0].password)) {
+                    const token = jsonwebtoken.sign({}, key, {
+                        subject: result[0].idUser.toString(),
+                        expiresIn: 3600 * 24 * 30,
+                        algorithm: "RS256"
+                    });
+                    res.cookie("token", token, { maxAge: 30 * 24 * 60 * 60 * 1000 });
+                    console.log(res.cookie);
+                    res.json(result[0]);
+                    console.log("token : " + token);
+                }
             } else {
-                let idUser = result[0].idUser;
-                const sqlData = `SELECT *
-        FROM user
-        WHERE  user.idUser = ?`;
-                connection.query(sqlData, [idUser], (err, result) => {
-                    if (err) throw err;
-                    res.send(JSON.stringify(result));
-                });
+                res.status(400).json("Email et/ou mot de passe incorrect");
             }
+        } catch (error) {
+            console.log(error);
         }
     });
 });
@@ -70,9 +66,7 @@ router.patch("/modifyUser", (req, res) => {
                 const sqlSelect = "SELECT * FROM user WHERE idUser = ?";
                 connection.query(sqlSelect, [idUser], async (err, result) => {
                     const dbPassword = result[0].password;
-                    console.log(dbPassword);
                     const passwordMatch = await bcrypt.compare(oldPassword, dbPassword);
-                    console.log(passwordMatch);
                     if (!passwordMatch) {
                         let wrong = { message: "L'ancien mot de passe n'est pas correct !" };
                         res.send(wrong);
@@ -101,6 +95,33 @@ router.patch("/modifyUser", (req, res) => {
             }
         }
     });
+});
+
+router.get('/userConnected', (req, res) => {
+    const { token } = req.cookies;
+    console.log(req.cookies);
+    if (token) {
+        try {
+            const decodedToken = jsonwebtoken.verify(token, keyPub, {
+                algorithms: "RS256",
+            });
+            const sql = "SELECT idUser,firstname, name,password, email FROM user WHERE idUser = ?";
+            connection.query(sql, [decodedToken.sub], (err, result) => {
+                if (err) throw err;
+                const connectedUser = result[0];
+                connectedUser.password = "";
+                if (connectedUser) {
+                    res.json(connectedUser);
+                } else {
+                    res.json(null);
+                }
+            });
+        } catch (error) {
+            console.log(error);
+        }
+    } else {
+        res.json(null);
+    }
 });
 
 module.exports = router;

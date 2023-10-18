@@ -1,11 +1,12 @@
 import styles from "./Login.module.scss";
-import { useContext, useState } from "react";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { FormTitle } from "../Header/components/FormTitle";
 import { LineNav } from "../Header/BurgerMenu/LineNav";
-import { userContext } from "../../context/userContext";
+import { signIn } from "../../apis/users";
+
 
 
 
@@ -18,9 +19,9 @@ import { userContext } from "../../context/userContext";
  * @param {Object} user
  * @returns 
  */
-export default function Login({ seeRegisterForm, closeForm, getUser, user }) {
+export default function Login({ seeRegisterForm, closeForm, getUser, user, setUser }) {
     /**
-     * yupscheam to validate the form Login with params
+     * yupschema to validate the form Login with params
      */
     const yupSchema = yup.object({
         email: yup.string().email("Ceci n'est pas une adresse mail valide"),
@@ -34,7 +35,9 @@ export default function Login({ seeRegisterForm, closeForm, getUser, user }) {
         register,
         handleSubmit,
         reset,
-        formState: { errors }
+        formState: { errors },
+        clearErrors,
+        setError
     } = useForm({
         defaultValues,
         // mode: "onChange",
@@ -52,41 +55,70 @@ export default function Login({ seeRegisterForm, closeForm, getUser, user }) {
      * @param {Object} values 
      */
     async function submit(values) {
-        setFeedback("");
         try {
-            const response = await fetch('http://localhost:8000/api/users/login', {
-                method: "POST",
-                body: JSON.stringify(values),
-                headers: { "Content-type": "application/json" }
-            });
-            if (response.ok) {
-                const userBack = await response.json();
-                if (userBack.message) {
-                    setFeedback(userBack.message);
-                } else {
-                    setFeedbackGood("Félicitations vous allez être connecter");
+            clearErrors();
+            setUser(await signIn(values));
+            console.log(user);
 
-                    reset(defaultValues);
-                    ;
-                    setTimeout(() => {
-                        let user = {};
-                        user.firstname = userBack[0].firstname;
-                        user.username = userBack[0].username;
-                        user.email = userBack[0].email;
-                        user.name = userBack[0].name;
-                        user.password = userBack[0].password;
-                        user.idUser = userBack[0].idUser;
-                        user.blobby = userBack[0].blobby;
-                        getUser(user);
-                        closeForm();
-                    }, 2000);
-                }
-            }
         } catch (error) {
-            console.error(error);
+            setError("generic", { type: "generic", message: error });
         }
+        //     setFeedback("");
+        //     try {
+        //         const response = await fetch('http://localhost:8000/api/users/login', {
+        //             method: "POST",
+        //             body: JSON.stringify(values),
+        //             headers: { "Content-type": "application/json" }
+        //         });
+        //         const userBack = await response.json();
+        //         if (response.ok) {
+        //             setFeedbackGood("Vous allez être connecté");
+        //             setTimeout(() => {
+        //                 let user = {};
+        //                 user.firstname = userBack.firstname;
+        //                 user.username = userBack.username;
+        //                 user.email = userBack.email;
+        //                 user.name = userBack.name;
+        //                 user.password = userBack.password;
+        //                 user.idUser = userBack.idUser;
+        //                 user.blobby = userBack.blobby;
+        //                 getUser(user);
+        //                 closeForm();
+        //             }, 2000);
+        //         } else {
+        //             setFeedback("La combinaison email/mot de passe ne correspond pas");
+        //         }
+        //         // if (response.ok) {
+        //         //     const backResponse = await response.json();
+        //         //     if (userBack.message) {
+        //         //         setFeedback(userBack.message);
+        //         //     } else {
+        //         //         setFeedbackGood("Vous allez être connecter");
 
+        //         //         reset(defaultValues);
+        //         //         ;
+        //         //         setTimeout(() => {
+        //         //             let user = {};
+        //         //             user.firstname = userBack[0].firstname;
+        //         //             user.username = userBack[0].username;
+        //         //             user.email = userBack[0].email;
+        //         //             user.name = userBack[0].name;
+        //         //             user.password = userBack[0].password;
+        //         //             user.idUser = userBack[0].idUser;
+        //         //             user.blobby = userBack[0].blobby;
+        //         //             getUser(user);
+        //         //             closeForm();
+        //         //         }, 2000);
+        //         //     }
+        //         // }
+        //     } catch (error) {
+        //         console.error(error);
+        //     }
+
+        // }
+        // console.log(user);
     }
+
 
     return (
 
@@ -126,7 +158,7 @@ export default function Login({ seeRegisterForm, closeForm, getUser, user }) {
                 {/* //button Connexion */}
                 <section>
                     <button
-                        className={`${styles.button}`}
+                        className="btn"
                     >Connexion
                     </button>
                 </section>
@@ -136,7 +168,7 @@ export default function Login({ seeRegisterForm, closeForm, getUser, user }) {
                 <p>Vous n'avez pas encore de compte ?</p>
                 <button
                     onClick={seeRegisterForm}
-                    className={`${styles.button}`}>CLIQUER ICI</button>
+                    className="btn">CLIQUER ICI</button>
             </section>
             <article className={`${styles.forget}`}>Vous avez oublié votre mot de passe ?</article>
         </main>

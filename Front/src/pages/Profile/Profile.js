@@ -73,7 +73,6 @@ export default function Profile() {
      * @param {object} values 
      */
     async function submit(values) {
-        console.log(values);
         setFeedback("");
         setIsSubmitted(true);
         try {
@@ -123,18 +122,13 @@ export default function Profile() {
                 );
             }
             const imgDefaultFromBack = await response.json();
-
-            console.log({ imgDefaultFromBack });
             const uint8Array = new Uint8Array(imgDefaultFromBack.blobby.data);
-            console.log({ uint8Array });
             const blob = new Blob([uint8Array]);
-            console.log({ blob });
             const urlImage = URL.createObjectURL(blob);
-            console.log({ urlImage });
             fetch(urlImage)
                 .then((response) => response.text())
                 .then((text) => {
-                    console.log({ text });
+
                     setPreviewImage(text);
                 });
         }
@@ -192,15 +186,10 @@ export default function Profile() {
         fileReader.onload = async () => {
             // récupération du fichier lu
             const buffer = fileReader.result;
-            console.log({ buffer });
             // création un objet blob à partir du fichier lu et du type de fichier
             const blob = new Blob([buffer], { type: selectedFile.type });
-            console.log(selectedFile);
-
             // invocation de la fonction en passant en paramètre l'objet blob
             const base64 = await convertBlobTobase64(blob);
-            console.log({ base64 });
-
             // création d'un objet avec blob et idUser
             const obj = { value: base64, idUser: user.idUser };
 
@@ -217,7 +206,6 @@ export default function Profile() {
                 }
             );
             const userModified = await response.json();
-            console.log(userModified);
             const uint8Array = new Uint8Array(userModified.blobby.data);
             const blob2 = new Blob([uint8Array]);
             const urlImage = URL.createObjectURL(blob2);

@@ -5,7 +5,6 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    opacity: 0.95;
     padding: 3%;
     border-radius: 10vh 0 10vh 0;
     transition: ease-out 0.3s;
@@ -132,11 +131,13 @@
         width: 48%;
     }
 
-    .feedbackGood {
-        color: var(--txtcolor);
+    .feedback {
+        color: var(--red);
         text-align: center;
         margin-bottom: 2%;
         font-size: 1.2rem;
+        margin-top: 10px;
+        font-weight: 600;
     }
 
     .feedbackGood {

@@ -1,21 +1,24 @@
 import { createBrowserRouter } from "react-router-dom";
 import App from "./App";
-import Home from "./pages/Accueil/Home";
-import Presentation from "./pages/Presentation/Presentation";
-import Ludotheque from "./pages/Ludotheque/Ludotheque";
-import Contact from "./pages/Contact/Contact";
-import Discussion from "./pages/Discussion/Discussion";
-import Profile from "./pages/Profile/Profile";
-import ErrorPage from "./pages/Error/ErrorPage";
+import { lazy } from "react";
+import { userLoader } from "./loaders/userLoader";
+const Home = lazy(() => import("./pages/Accueil/Home"));
+const Presentation = lazy(() => import("./pages/Presentation/Presentation"));
+const Ludotheque = lazy(() => import("./pages/Ludotheque/Ludotheque"));
+const Contact = lazy(() => import("./pages/Contact/Contact"));
+const Profile = lazy(() => import("./pages/Profile/Profile"));
+const ErrorPage = lazy(() => import("./pages/Error/ErrorPage"));
+const Admin = lazy(() => import("./pages/Admin/Admin"));
 
 export const router = createBrowserRouter([
     {
         path: "/",
         element: <App />,
+        loader: userLoader,
         errorElement: <ErrorPage />,
         children: [
             {
-                path: "/",
+                index: true,
                 element: <Home />
             },
             {
@@ -33,6 +36,10 @@ export const router = createBrowserRouter([
             {
                 path: "/profile",
                 element: <Profile />
+            },
+            {
+                path: "/admin",
+                element: <Admin />
             }
         ]
     }
