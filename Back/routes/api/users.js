@@ -18,7 +18,7 @@ router.post("/register", async (req, res) => {
                     res.status(200).json("Félicitation, votre inscription est validée");
                 });
             } else {
-                res.status(200).json("Cet email est déjà utilisé");
+                res.status(400).json("Cet email est déjà utilisé pour ce site");
             }
         } catch {
             res.status(400).json("Un problème est survenu...");
@@ -35,13 +35,15 @@ router.post("/login", (req, res) => {
                 if (bcrypt.compareSync(password, result[0].password)) {
                     const token = jsonwebtoken.sign({}, key, {
                         subject: result[0].idUser.toString(),
-                        expiresIn: 3600 * 24 * 30,
+                        expiresIn: 3600 * 24,
                         algorithm: "RS256"
                     });
-                    res.cookie("token", token, { maxAge: 30 * 24 * 60 * 60 * 1000 });
+                    res.cookie("token", token, { maxAge: 24 * 60 * 60 * 1000 });
                     console.log(res.cookie);
                     res.json(result[0]);
                     console.log("token : " + token);
+                } else {
+                    res.status(400).json("Email et/ou mot de passe incorrect");
                 }
             } else {
                 res.status(400).json("Email et/ou mot de passe incorrect");
@@ -105,7 +107,7 @@ router.get('/userConnected', (req, res) => {
             const decodedToken = jsonwebtoken.verify(token, keyPub, {
                 algorithms: "RS256",
             });
-            const sql = "SELECT idUser,firstname, name,password, email FROM user WHERE idUser = ?";
+            const sql = "SELECT username, idUser,firstname, name,password, email,blobby FROM user WHERE idUser = ?";
             connection.query(sql, [decodedToken.sub], (err, result) => {
                 if (err) throw err;
                 const connectedUser = result[0];
@@ -122,6 +124,12 @@ router.get('/userConnected', (req, res) => {
     } else {
         res.json(null);
     }
+});
+
+router.delete('/logout', (req, res) => {
+    console.log("Déconnexion en cours");
+    res.clearCookie('token');
+    res.end();
 });
 
 module.exports = router;

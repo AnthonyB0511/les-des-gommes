@@ -36,3 +36,24 @@
     }
   }
 }
+
+.active {
+  border-bottom: 2px solid var(--red)
+}
+
+input {
+  padding-block: 2%;
+  border-radius: 10vh;
+  padding-left: 3%;
+  font-size: 1rem;
+  font-style: italic;
+
+
+
+}
+
+label {
+  font-size: 1.2rem;
+  width: 100%;
+  margin: 0 auto;
+}

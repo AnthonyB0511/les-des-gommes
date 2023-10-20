@@ -8,7 +8,12 @@ const Ludotheque = lazy(() => import("./pages/Ludotheque/Ludotheque"));
 const Contact = lazy(() => import("./pages/Contact/Contact"));
 const Profile = lazy(() => import("./pages/Profile/Profile"));
 const ErrorPage = lazy(() => import("./pages/Error/ErrorPage"));
-const Admin = lazy(() => import("./pages/Admin/Admin"));
+const Login = lazy(() => import("./pages/Login/Login"));
+const LoginView = lazy(() => import("./pages/LoginView/LoginView"));
+const Register = lazy(() => import("./pages/Register/Register"));
+
+// const Admin = lazy(() => import("./pages/Admin/Admin"));
+
 
 export const router = createBrowserRouter([
     {
@@ -18,8 +23,9 @@ export const router = createBrowserRouter([
         errorElement: <ErrorPage />,
         children: [
             {
-                index: true,
-                element: <Home />
+                path: "/",
+                element: <Home />,
+
             },
             {
                 path: "/presentation",
@@ -38,8 +44,18 @@ export const router = createBrowserRouter([
                 element: <Profile />
             },
             {
-                path: "/admin",
-                element: <Admin />
+                path: "/login",
+                element: <Login />,
+                children: [
+                    {
+                        path: "",
+                        element: <LoginView />
+                    },
+                    {
+                        path: "register",
+                        element: <Register />
+                    }
+                ]
             }
         ]
     }

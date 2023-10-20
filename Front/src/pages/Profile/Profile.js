@@ -1,18 +1,18 @@
 import styles from "./Profile.module.scss";
-import { useRef, useState, useEffect } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useRef, useState, useEffect, useContext } from "react";
+import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { Title } from "../../components/utils/Title";
 import { Line } from "../../components/utils/Line";
+import { AuthContext } from "../../context/AuthContext";
 /**
  * 
  * @returns change profile
  */
 export default function Profile() {
-    const location = useLocation();
-    const [user, setUser] = useState(location.state);
+    const { user } = useContext(AuthContext);
     // need to shows of the user the return
     const [feedback, setFeedback] = useState("");
     const [feedbackGood, setFeedbackGood] = useState("");
@@ -137,12 +137,7 @@ export default function Profile() {
     /**
      * function does nothing <div styleName=""></div>
      */
-    useEffect(() => {
-        const userUpdate = () => {
-            setUser(user);
-        };
-        userUpdate();
-    }, [user]);
+
     // function shows the avatar befor validation
     function handleChange(event) {
         // file

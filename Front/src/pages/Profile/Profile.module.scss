@@ -33,7 +33,6 @@
             }
 
             input {
-                background-color: var(--primary);
                 padding-block: 2%;
                 border-radius: 10vh;
                 width: 100%;
@@ -69,13 +68,13 @@
     }
 
     input {
-        background-color: var(--action);
+
         padding-block: 1%;
         padding-left: 2%;
         border-radius: 10vh;
         font-size: 1.3rem;
         font-style: italic;
-        color: grey;
+        color: #000;
     }
 
     .button,

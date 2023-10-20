@@ -1,55 +1,21 @@
 import styles from "./Account.module.scss";
-import { useState, useRef, useEffect } from "react";
-import { NavLink } from "react-router-dom";
-import Login from "../Forms/Login";
-import Register from "../Forms/Register";
-export default function Account({ getUser, user, setUser }) {
-    // gére quel formulaire sera visible (utiliser dans deux fonctions)
-    const [seeForm, setSeeForm] = useState("");
+import { useState, useRef, useEffect, useContext } from "react";
+import { Link } from "react-router-dom";
+import { AuthContext } from "../../context/AuthContext";
+export default function Account() {
+
     // gérer l'état d'ouverture du menu déroulant une fois connecté
     const [isOpen, setIsOpen] = useState(false);
-    // gérer la fermeture d'un formulaire quand on ouvre un
-    const [viewForm, setViewForm] = useState(false);
-    const [noLog, setNoLog] = useState(false);
-    const log = useRef();
-    /**
-     * Function shows or hiddes the login form
-     */
-    function seeLoginForm() {
-        if (seeForm === "login") {
-            setSeeForm("");
-            setViewForm(!viewForm);
-        } else {
-            setSeeForm("login");
-            setViewForm(!viewForm);
-        }
 
-    }
-    /**
-     * Function shows the register form
-     */
-    function seeRegisterForm() {
-        setSeeForm("register");
-    }
-    /**
-     * Functions closes the forms
-     */
-    function closeForm() {
-        setSeeForm("");
-    }
+    // const [noLog, setNoLog] = useState(false);
+    // const log = useRef();
+
     /**
      * function shows the p with "vous allez être déconnecté"
      * With the Timeout the user becomes null, the form close and the P don't show
      */
-    function unLogged() {
-        setNoLog(true);
-        setTimeout(() => {
-            setUser(null);
-            setNoLog(false);
-            closeForm();
+    const { user, logout } = useContext(AuthContext);
 
-        }, 2000);
-    }
     // useRef allows the animation of the list
     const list = useRef();
     // useState keeps the picture in memory
@@ -103,27 +69,25 @@ export default function Account({ getUser, user, setUser }) {
                             style={isOpen ? { opacity: 1, transform: "translateY(0) ", visibility: "visible" } : { opacity: 0, transform: "translateY(100%)", visibility: "hidden" }}>
                             <>
                                 <li className={`${styles.li}`}>
-                                    <NavLink
+                                    <Link
                                         to="/profile"
                                         // au moment du clic on referme l'élément
                                         onClick={() => setIsOpen(!isOpen)}
-                                        // on renvoie les information du user à la page profile
-                                        state={user} image={previewImage}
                                     >
                                         <button className={`${styles.btn}`}>
                                             Gestion du profil
                                         </button>
-                                    </NavLink>
+                                    </Link>
                                 </li>
                                 <li className={`${styles.li}`}>
                                     {/* la déconnexion amène directement à la page d'accueil */}
-                                    <NavLink to="/">
+                                    <Link to="/">
                                         <button
                                             className={`${styles.btn}`}
-                                            onClick={unLogged}>
+                                            onClick={logout}>
                                             Se déconnecter
                                         </button>
-                                    </NavLink>
+                                    </Link>
 
                                 </li>
 
@@ -132,38 +96,34 @@ export default function Account({ getUser, user, setUser }) {
                         {/* } */}
 
                     </section>
-                    <section className={`${styles.nolog}`}
-                    > <p ref={log}
-                        style={noLog ? { opacity: 1, transform: "translateY(0) ", visibility: "visible" } : { opacity: 0, transform: "translateY(100%)", visibility: "hidden" }}>Déconnexion ...</p></section>
+                    {/* <section className={`${styles.nolog}`}>  */}
+                    {/* <p ref={log} */}
+                    {/* style={noLog ? { opacity: 1, transform: "translateY(0) ", visibility: "visible" } : { opacity: 0, transform: "translateY(100%)", visibility: "hidden" }}>Déconnexion ...</p></section> */}
                 </>
 
 
             ) : (
                 // no user
                 <>
-                    <section className={`${styles.icon}`}
-                        onClick={seeLoginForm}>
-                        <i className="fa-solid fa-circle-user"></i>
+                    <section className={`${styles.icon}`}>
+                        <Link to="/login">
+                            <i className="fa-solid fa-circle-user"></i></Link>
                     </section>
 
-                    {seeForm === "login" ? (
+                    {/* {seeForm === "login" ? (
                         <Login
                             // on passe en props la façon de passer de la co à l'inscription
                             // la gestion de la fermeture du form
                             seeRegisterForm={seeRegisterForm}
-                            closeForm={closeForm}
-                            getUser={getUser}
-                            // méthode pour stocker les 
-                            setUser={setUser}
-                            user={user} />
+                            closeForm={closeForm} />
                     ) :
                         seeForm === "register" ? (<Register
                             // repasser au form de connexion et gestion de la fermeture
                             seeLoginForm={seeLoginForm}
                             closeForm={closeForm} />
-                        ) : (null)
-
-                    }
+                        ) : (null) */}
+                    {/* 
+                    } */}
                 </>
             )
             }
