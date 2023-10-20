@@ -2,12 +2,15 @@ import styles from "./Nav.module.scss";
 import { LineNav } from "./LineNav";
 import { Contact } from "../../Footer/components/Contact";
 import { Link } from "react-router-dom";
+import { AuthContext } from "../../../context/AuthContext";
+import { useContext } from "react";
 /**
  * Navigation, useState closes the menu with a click on the Link
  * @param {boolean} open,setopen
  * @returns navigation
  */
 export default function Nav({ open, setOpen }) {
+    const { user } = useContext(AuthContext);
     return (
         <>
             <nav className={`${styles.nav}`}>
@@ -20,9 +23,15 @@ export default function Nav({ open, setOpen }) {
                     <LineNav />
                     <li className={`${styles.li}`}><Link to="/contact" onClick={() => setOpen(!open)}>CONTACT</Link></li>
                     <LineNav />
-                    <li className={`${styles.li}`}><Link onClick={() => setOpen(!open)}>DISCUSSION</Link></li>
+                    <li className={`${styles.li}`}><Link to="/discussion" onClick={() => setOpen(!open)}>DISCUSSION</Link></li>
                     <LineNav />
-                    <li className={`${styles.li}`}><Link to="/login" onClick={() => setOpen(!open)}>MON COMPTE</Link></li>
+                    <li className={`${styles.li}`}>
+                        {user ? (
+                            <Link to="/profile" onClick={() => setOpen(!open)}>MON COMPTE</Link>
+                        ) : (
+                            <Link to="/login" onClick={() => setOpen(!open)}>MON COMPTE</Link>)}
+                    </li>
+
                 </ul>
             </nav>
             <Contact />

@@ -2,6 +2,7 @@ import { createBrowserRouter } from "react-router-dom";
 import App from "./App";
 import { lazy } from "react";
 import { userLoader } from "./loaders/userLoader";
+import ProtectedRoute from "./components/ProtectedRoute/ProtectedRoute";
 const Home = lazy(() => import("./pages/Accueil/Home"));
 const Presentation = lazy(() => import("./pages/Presentation/Presentation"));
 const Ludotheque = lazy(() => import("./pages/Ludotheque/Ludotheque"));
@@ -11,6 +12,7 @@ const ErrorPage = lazy(() => import("./pages/Error/ErrorPage"));
 const Login = lazy(() => import("./pages/Login/Login"));
 const LoginView = lazy(() => import("./pages/LoginView/LoginView"));
 const Register = lazy(() => import("./pages/Register/Register"));
+const Discussion = lazy(() => import("./pages/Discussion/Discussion"));
 
 // const Admin = lazy(() => import("./pages/Admin/Admin"));
 
@@ -41,7 +43,17 @@ export const router = createBrowserRouter([
             },
             {
                 path: "/profile",
-                element: <Profile />
+                element: (
+                    <ProtectedRoute>
+                        <Profile />
+                    </ProtectedRoute>)
+            },
+            {
+                path: "/discussion",
+                element: (
+                    <ProtectedRoute>
+                        <Discussion />
+                    </ProtectedRoute>)
             },
             {
                 path: "/login",

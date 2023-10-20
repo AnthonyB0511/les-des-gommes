@@ -42,7 +42,7 @@ export default function Login() {
         try {
             clearErrors();
             await login(values);
-            setFeedbackGood("Connexion en cours...");
+            setFeedbackGood("Connexion réussie. Vous allez être redirigé.");
             reset(defaultValues);
             setTimeout(() => {
                 navigate("/");
