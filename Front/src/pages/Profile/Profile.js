@@ -30,6 +30,7 @@ export default function Profile() {
 
 
     // schema to validate the new form with default values
+    const MAX_FILE_SIZE = 5000000;
     const yupSchema = yup.object().shape({
         username: yup
             .string()
@@ -47,6 +48,23 @@ export default function Profile() {
             }),
         confirmNewPassword: yup.string()
             .oneOf([yup.ref('newPassword'), null], 'Les mots de passe doivent correspondre'),
+        blobby: yup.mixed()
+            .test("is-valid-type", "Ce doit être un format d'image", (value) => {
+                if (value && value[0] && value[0].name) {
+                    return (
+                        ["jpg", "png", "jpeg", "webp"].indexOf(
+                            value[0].name.toLowerCase().split(".").pop()
+                        ) > -1
+                    );
+                }
+                return true; // Champ valide s'il est vide (nullable).
+            })
+            .test("is-valid-size", "Max allowed size is 5MO", (value) => {
+                if (value && value[0] && value[0].size) {
+                    return value[0].size <= MAX_FILE_SIZE;
+                }
+                return true; // Champ valide s'il est vide (nullable).
+            }),
     });
 
     const defaultValues = {
@@ -55,6 +73,7 @@ export default function Profile() {
         username: user.username,
         email: user.email,
         idUser: user.idUser,
+        blobby: user.blobby,
         oldPassword: "",
         newPassword: "",
         confirmPassword: "",
@@ -62,7 +81,7 @@ export default function Profile() {
     const {
         register,
         handleSubmit,
-        formState: { errors }
+        formState: { errors, isSubmitting }
     } = useForm({
         defaultValues,
         mode: "onChange",
@@ -236,15 +255,16 @@ export default function Profile() {
                         </section>
                     </section>
                     <section className={`${styles.containerInput}`}>
-                        <input type="file" className={`${styles.inputFile}`} onChange={handleChange} />
-                        <button onClick={() => modifyAvatar()} type="button"
-                            className={`${styles.button2}`}>Sauvegarder votre  nouvel avatar</button>
+                        <input {...register("blobby")} type="file" className={`${styles.inputFile}`} onChange={handleChange} />
+                        {/* <button type="button"
+                            className={`${styles.button2}`}>Sauvegarder votre  nouvel avatar</button> */}
+                        {errors?.blobby && <p className={`${styles.feedback}`}>{errors.blobby.message}</p>}
                     </section>
                     <section className="d-flex flex-column mb20">
                         <label htmlFor="mail">E-mail</label>
                         <input {...register("email")}
                             type="email" id="email" />
-                        {errors?.email && <p style={{ color: "red" }}>{errors.email.message}</p>}
+                        {errors?.email && <p className={`${styles.feedback}`}>{errors.email.message}</p>}
                     </section>
 
 
@@ -252,7 +272,7 @@ export default function Profile() {
                         <label htmlFor="username">Nom du profil</label>
                         <input {...register("username")}
                             type="text" id="username" />
-                        {errors?.username && <p style={{ color: "red" }}>{errors.username.message}</p>}
+                        {errors?.username && <p className={`${styles.feedback}`}>{errors.username.message}</p>}
                     </section>
                     <p onClick={viewModifyPassword}>Souhaitez-vous modifier votre mot de passe ?</p>
                     <section ref={password} className={`${styles.password}`}
@@ -262,27 +282,26 @@ export default function Profile() {
                             {/* on déconstruit en rajoutant la value qu'on modifie */}
                             <input {...register("oldPassword")}
                                 type="password" id="oldPassword" />
-                            {errors?.oldPassword && <p style={{ color: "red" }}>{errors.oldPassword.message}</p>}
+                            {errors?.oldPassword && <p className={`${styles.feedback}`}>{errors.oldPassword.message}</p>}
                         </article>
                         <article className="d-flex flex-column mb20">
                             <label htmlFor="newPassword">Votre nouveau mot de passe</label>
                             {/* on déconstruit en rajoutant la value qu'on modifie */}
                             <input {...register("newPassword")}
                                 type="password" id="newPassword" />
-                            {errors?.newPassword && <p style={{ color: "red" }}>{errors.newPassword.message}</p>}
+                            {errors?.newPassword && <p className={`${styles.feedback}`}>{errors.newPassword.message}</p>}
                         </article>
                         <article className="d-flex flex-column mb20">
                             <label htmlFor="confirmPassword">Confirmer le nouveau mot de passe</label>
                             {/* on déconstruit en rajoutant la value qu'on modifie */}
                             <input {...register("confirmPassword")}
                                 type="password" id="confirmPassword" />
-                            {errors?.confirmPassword && <p style={{ color: "red" }}>{errors.confirmPassword.message}</p>}
+                            {errors?.confirmPassword && <p className={`${styles.feedback}`}>{errors.confirmPassword.message}</p>}
                         </article>
                     </section>
                     {/* </>} */}
 
-                    <button className={`${styles.button} `}
-                        disabled={isSubmitted}>Enregistrer les modifications</button>
+                    <button className="btn" disabled={isSubmitting}>Enregistrer les modifications</button>
                     {feedback && <p className={`${styles.feedback}`}>{feedback}</p>}
                     {feedbackGood && <p className={`${styles.feedbackGood}`}>{feedbackGood}</p>}
 

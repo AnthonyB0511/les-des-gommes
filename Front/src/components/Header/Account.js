@@ -8,13 +8,13 @@ export default function Account() {
     const [isOpen, setIsOpen] = useState(false);
 
     // const [noLog, setNoLog] = useState(false);
-    // const log = useRef();
+    const log = useRef();
 
     /**
      * function shows the p with "vous allez être déconnecté"
      * With the Timeout the user becomes null, the form close and the P don't show
      */
-    const { user, logout } = useContext(AuthContext);
+    const { user, logout, unlogged } = useContext(AuthContext);
 
     // useRef allows the animation of the list
     const list = useRef();
@@ -50,6 +50,7 @@ export default function Account() {
         }
         getDefaultImage();
     }, [user]);
+
 
     return (
         //user is logged
@@ -96,9 +97,9 @@ export default function Account() {
                         {/* } */}
 
                     </section>
-                    {/* <section className={`${styles.nolog}`}>  */}
-                    {/* <p ref={log} */}
-                    {/* style={noLog ? { opacity: 1, transform: "translateY(0) ", visibility: "visible" } : { opacity: 0, transform: "translateY(100%)", visibility: "hidden" }}>Déconnexion ...</p></section> */}
+                    <section className={`${styles.nolog}`}>
+                        <p ref={log}
+                            style={unlogged ? { opacity: 1, transform: "translateY(0) ", visibility: "visible" } : { opacity: 0, transform: "translateY(100%)", visibility: "hidden" }}>Déconnexion ...</p></section>
                 </>
 
 

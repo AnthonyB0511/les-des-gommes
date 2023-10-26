@@ -60,39 +60,37 @@
         left: 50%;
         width: 10%;
 
+        @include mixin.md-lt {
+            width: 17%;
+        }
+
+        @include mixin.sm-lt {
+            width: 18%;
+        }
+
+        @include mixin.xs {
+            width: 18%;
+        }
+
+        @include mixin.xxs {
+            width: 20%;
+        }
+
+        @include mixin.xxxs {
+            width: 25%;
+        }
+
+        @include mixin.intxs {
+            width: 27%;
+        }
+
+        @include mixin.smallest {
+            width: 28%;
+        }
+
         img {
             width: 80%;
             transform: translateX(-50%);
-
-            @include mixin.md-lt {
-                width: 95%;
-            }
-
-            @include mixin.sm-lt {
-                width: 100%;
-            }
-
-            @include mixin.xs {
-                width: 100%;
-            }
-
-            @include mixin.xxs {
-                width: 100%;
-            }
-
-            @include mixin.xxxs {
-                width: 150%;
-            }
-
-            @include mixin.intxs {
-                width: 150%;
-            }
-
-            @include mixin.smallest {
-                width: 150%;
-            }
-
-
         }
     }
 
