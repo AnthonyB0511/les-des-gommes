@@ -1,37 +1,20 @@
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { useContext, useState, useEffect } from "react";
-import { ApiContext } from "../../context/ApiContext";
+import { useState, useEffect, useContext } from "react";
 import styles from "./Admin.module.scss";
 import { Title } from "../../components/utils/Title";
 import { Line } from "../../components/utils/Line";
+import { ApiContext } from "../../context/ApiContext";
+import { useFetchData } from "../../Hooks/useFetchData";
 
 
 
 
 export default function Admin() {
     const BASE_API_URL = useContext(ApiContext);
-    const [genre, setGenre] = useState([]);
-    const [feedback, setFeedback] = useState("");
     const [feedbackGood, setFeedbackGood] = useState("");
-    useEffect(() => {
-        const getGenre = async () => {
-            try {
-                const response = await fetch(`${BASE_API_URL}/genre/getGenre`);
-                if (response.ok) {
-                    const genreBack = await response.json();
-                    setGenre(genreBack);
-                    console.log(genre);
-                }
-
-            } catch (error) {
-                console.error(error);
-            }
-        };
-        getGenre();
-    }, []);
-    console.log({ genre });
+    const [[genre, setGenre], isLoading] = useFetchData(BASE_API_URL, "genre/getGenre");
 
     /**
      * Yup schema to add a game with defaults values and the function submit.
@@ -65,6 +48,8 @@ export default function Admin() {
         register,
         handleSubmit,
         reset,
+        clearErrors,
+        setError
     } = useForm({
         defaultValues,
         mode: "onChange",
@@ -72,23 +57,20 @@ export default function Admin() {
     });
     const submitGames = async (values) => {
         console.log(values);
+        clearErrors();
         try {
-            const response = await fetch(`${BASE_API_URL}/games/addGame`, {
+
+            const response = await fetch(`http://localhost:8000/api/games/addGame`, {
                 method: "POST",
                 body: JSON.stringify(values),
                 headers: { "Content-type": "application/json" }
             });
             if (response.ok) {
-                // if (returnBack.message) {
-                //     setFeedback(returnBack.message);
-                // } else {
                 setFeedbackGood("Le jeu a bien été ajouté.");
                 reset(defaultValues);
-                // }
             }
-
         } catch (error) {
-            console.error(error);
+            setError("generic", { type: "generic", message: error });
         }
     };
 
@@ -117,6 +99,8 @@ export default function Admin() {
                             <option key={g.idGenre} value={g.idGenre}>{g.genre}</option>
                         ))}
                     </select>
+                    {feedbackGood && <p className={`${styles.feedbackGood}`}>{feedbackGood}</p>}
+                    {errors.generic && (<p>{errors.generic.message}</p>)}
                     <button className="btn">Ajouter le jeu</button>
                 </form>
             </main>

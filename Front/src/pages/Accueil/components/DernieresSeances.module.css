@@ -1,0 +1,13 @@
+.seances {
+  width: 50%;
+  margin-top: 5%;
+}
+@media (max-width: 992px) {
+  .seances {
+    width: 90%;
+    margin: 1% auto;
+  }
+}
+.seances h2 {
+  text-align: center;
+}/*# sourceMappingURL=DernieresSeances.module.css.map */

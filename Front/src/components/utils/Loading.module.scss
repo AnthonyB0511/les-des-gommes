@@ -1,0 +1,24 @@
+.loading {
+    display: flex;
+    justify-content: center;
+    flex: 1 1 auto;
+    min-height: 60vh;
+
+    .spinner {
+        font-size: 40px;
+        color: var(--blue);
+        animation: rotate 2s infinite
+    }
+}
+
+
+
+@keyframes rotate {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg)
+    }
+}

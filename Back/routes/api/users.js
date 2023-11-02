@@ -75,7 +75,6 @@ router.patch("/modifyUser", (req, res) => {
                     } else {
                         const hashedPassword = await bcrypt.hash(newPassword, 10);
                         const sqlModifyPassword = "UPDATE user SET username =?, email =?, password =? WHERE idUser =?";
-
                         connection.query(sqlModifyPassword, [username, email, hashedPassword, idUser], (err, result) => {
                             if (err) throw err;
                             req.body.oldPassword = "";
@@ -107,7 +106,7 @@ router.get('/userConnected', (req, res) => {
             const decodedToken = jsonwebtoken.verify(token, keyPub, {
                 algorithms: "RS256",
             });
-            const sql = "SELECT username, idUser,firstname, name,password, email,blobby FROM user WHERE idUser = ?";
+            const sql = "SELECT username, idUser,firstname, name,password, email,blobby,role FROM user WHERE idUser = ?";
             connection.query(sql, [decodedToken.sub], (err, result) => {
                 if (err) throw err;
                 const connectedUser = result[0];

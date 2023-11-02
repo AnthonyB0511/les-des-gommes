@@ -1,0 +1,359 @@
+.presentation {
+  width: 80%;
+  margin: 0 auto;
+}
+@media (max-width: 480px) {
+  .presentation {
+    width: 90%;
+  }
+}
+.presentation .container {
+  margin-block: 7%;
+  justify-content: center;
+  align-items: center;
+}
+.presentation .container .content {
+  width: 50%;
+}
+@media (max-width: 1200px) {
+  .presentation .container .content {
+    width: 80%;
+  }
+}
+@media (max-width: 480px) {
+  .presentation .container .content {
+    width: 100%;
+  }
+}
+.presentation .container .content .title {
+  margin: 0 auto;
+}
+@media (max-width: 769px) {
+  .presentation .container .content .title {
+    width: 110%;
+    margin: 0;
+  }
+}
+@media (max-width: 769px) {
+  .presentation .container .content .title {
+    width: 120%;
+    margin: 0;
+  }
+}
+@media (max-width: 480px) {
+  .presentation .container .content .title {
+    width: 100%;
+  }
+}
+.presentation .container .content .title .question1 {
+  font-size: 2rem;
+  transform: rotate(-12deg);
+  padding: 0 1%;
+}
+@media (max-width: 992px) {
+  .presentation .container .content .title .question1 {
+    font-size: 1.8rem;
+  }
+}
+@media (max-width: 480px) {
+  .presentation .container .content .title .question1 {
+    font-size: 1.5rem;
+  }
+}
+.presentation .container .content .title .question2 {
+  font-size: 2rem;
+  transform: rotate(12deg);
+  padding: 0 1%;
+}
+@media (max-width: 992px) {
+  .presentation .container .content .title .question2 {
+    font-size: 1.8rem;
+  }
+}
+@media (max-width: 480px) {
+  .presentation .container .content .title .question2 {
+    font-size: 1.5rem;
+  }
+}
+.presentation .container .content p {
+  font-size: 1.6em;
+  width: 75%;
+  margin: 3% auto;
+  text-align: center;
+}
+@media (max-width: 1200px) {
+  .presentation .container .content p {
+    font-size: 1.4em;
+    width: 90%;
+  }
+}
+@media (max-width: 992px) {
+  .presentation .container .content p {
+    font-size: 1.3rem;
+  }
+}
+@media (max-width: 769px) {
+  .presentation .container .content p {
+    font-size: 1.2rem;
+    width: 95%;
+  }
+}
+@media (max-width: 480px) {
+  .presentation .container .content p {
+    font-size: 1rem;
+  }
+}
+.presentation .container .img {
+  width: 50%;
+  margin: 0 auto;
+}
+@media (max-width: 480px) {
+  .presentation .container .img {
+    display: none;
+  }
+}
+.presentation .container .img img {
+  width: 50%;
+  margin: 0 auto;
+}
+@media (max-width: 1200px) {
+  .presentation .container .img img {
+    width: 80%;
+  }
+}
+.presentation .whatElse {
+  margin-block: 7%;
+}
+.presentation .whatElse i {
+  font-size: 2em;
+  padding: 0 2%;
+}
+@media (max-width: 992px) {
+  .presentation .whatElse i {
+    font-size: 1.8rem;
+  }
+}
+@media (max-width: 480px) {
+  .presentation .whatElse i {
+    font-size: 1.5rem;
+  }
+}
+.presentation .whatElse .content {
+  margin-block: 2%;
+}
+.presentation .whatElse .content .p {
+  font-size: 1.6em;
+  text-align: justify;
+  margin-block: 0.5%;
+}
+@media (max-width: 1200px) {
+  .presentation .whatElse .content .p {
+    font-size: 1.4em;
+  }
+}
+@media (max-width: 992px) {
+  .presentation .whatElse .content .p {
+    font-size: 1.3rem;
+  }
+}
+@media (max-width: 769px) {
+  .presentation .whatElse .content .p {
+    font-size: 1.2rem;
+  }
+}
+@media (max-width: 480px) {
+  .presentation .whatElse .content .p {
+    font-size: 1rem;
+  }
+}
+.presentation .whatElse .content .p span {
+  font-weight: 800;
+}
+.presentation .whatElse .content ul {
+  list-style: inside;
+}
+.presentation .whatElse .content ul .li {
+  font-size: 1.6em;
+}
+@media (max-width: 1200px) {
+  .presentation .whatElse .content ul .li {
+    font-size: 1.4em;
+  }
+}
+@media (max-width: 992px) {
+  .presentation .whatElse .content ul .li {
+    font-size: 1.3rem;
+  }
+}
+@media (max-width: 769px) {
+  .presentation .whatElse .content ul .li {
+    font-size: 1.2rem;
+  }
+}
+@media (max-width: 480px) {
+  .presentation .whatElse .content ul .li {
+    font-size: 1rem;
+  }
+}
+.presentation .joinUs {
+  margin-block: 10%;
+}
+.presentation .joinUs .title i {
+  font-size: 2em;
+  padding: 0 2%;
+}
+@media (max-width: 992px) {
+  .presentation .joinUs .title i {
+    font-size: 1.8rem;
+  }
+}
+@media (max-width: 480px) {
+  .presentation .joinUs .title i {
+    font-size: 1.5rem;
+  }
+}
+.presentation .joinUs p {
+  text-align: center;
+  font-size: 1.6em;
+  margin-block: 3%;
+}
+@media (max-width: 1200px) {
+  .presentation .joinUs p {
+    font-size: 1.4em;
+  }
+}
+@media (max-width: 992px) {
+  .presentation .joinUs p {
+    font-size: 1.3rem;
+  }
+}
+@media (max-width: 769px) {
+  .presentation .joinUs p {
+    font-size: 1.2rem;
+    width: 95%;
+  }
+}
+@media (max-width: 480px) {
+  .presentation .joinUs p {
+    font-size: 1rem;
+  }
+}
+.presentation .map {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  margin-block: 10%;
+}
+@media (min-width: 481px) and (max-width: 576px) {
+  .presentation .map {
+    flex-wrap: wrap;
+  }
+}
+@media (max-width: 480px) {
+  .presentation .map {
+    flex-wrap: wrap;
+  }
+}
+.presentation .map .content {
+  width: 50%;
+}
+@media (min-width: 481px) and (max-width: 576px) {
+  .presentation .map .content {
+    width: 100%;
+  }
+}
+@media (max-width: 480px) {
+  .presentation .map .content {
+    width: 100%;
+  }
+}
+.presentation .map .content .title {
+  margin-bottom: 5%;
+}
+.presentation .map .content .title i {
+  font-size: 2em;
+  padding: 0 2%;
+}
+@media (max-width: 992px) {
+  .presentation .map .content .title i {
+    font-size: 1.8rem;
+  }
+}
+@media (max-width: 480px) {
+  .presentation .map .content .title i {
+    font-size: 1.5rem;
+  }
+}
+.presentation .map .content .adress p {
+  text-align: center;
+  font-size: 1.6em;
+}
+@media (max-width: 1200px) {
+  .presentation .map .content .adress p {
+    font-size: 1.4em;
+  }
+}
+@media (max-width: 992px) {
+  .presentation .map .content .adress p {
+    font-size: 1.3rem;
+  }
+}
+@media (max-width: 769px) {
+  .presentation .map .content .adress p {
+    font-size: 1.2rem;
+  }
+}
+@media (max-width: 480px) {
+  .presentation .map .content .adress p {
+    font-size: 1rem;
+  }
+}
+.presentation .map .img {
+  width: 50%;
+}
+@media (min-width: 481px) and (max-width: 576px) {
+  .presentation .map .img {
+    width: 100%;
+    margin-top: 15px;
+  }
+}
+@media (max-width: 480px) {
+  .presentation .map .img {
+    width: 100%;
+    margin-top: 15px;
+  }
+}
+@media (max-width: 480px) {
+  .presentation .map .img {
+    width: 100%;
+    margin-top: 15px;
+  }
+}
+.presentation .map .img img {
+  width: 75%;
+  margin: 0 auto;
+}
+.presentation .partners .title i {
+  font-size: 2em;
+  padding: 0 2%;
+}
+@media (max-width: 992px) {
+  .presentation .partners .title i {
+    font-size: 1.8rem;
+  }
+}
+@media (max-width: 480px) {
+  .presentation .partners .title i {
+    font-size: 1.5rem;
+  }
+}
+.presentation .partners .images {
+  margin-block: 5%;
+}
+.presentation .partners .images a {
+  width: 100%;
+}
+.presentation .partners .images a img {
+  width: 75%;
+  margin: 0 auto;
+}/*# sourceMappingURL=Presentation.module.css.map */

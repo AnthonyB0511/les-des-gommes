@@ -1,7 +1,23 @@
 .container {
+    position: relative;
+
     .img {
         overflow: hidden;
         border-radius: 10vh 0 0 0;
+
+        i {
+            position: absolute;
+            top: 5%;
+            right: 5%;
+            color: var(--red);
+            font-size: 2rem;
+            transition: ease-in-out .5s;
+
+            &:hover {
+                transform: scale(1.2);
+            }
+
+        }
 
         img {
             border-radius: 10vh 0 0 0;

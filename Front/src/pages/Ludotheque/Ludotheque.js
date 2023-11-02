@@ -1,17 +1,23 @@
 import styles from "./Ludotheque.module.scss";
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { Title } from "../../components/utils/Title";
 import { Line } from "../../components/utils/Line";
-import { games } from "../../data/games";
+// import { games } from "../../data/games";
 import CardGame from "./components/CardGame";
+import { ApiContext } from "../../context/ApiContext";
+import { useFetchData } from "../../Hooks/useFetchData";
+import Loading from "../../components/utils/Loading";
 
 /**
  * 
  * @returns the games of the association
  */
 export default function Ludotheque() {
+    const BASE_API_URL = useContext(ApiContext);
     //useState modifies the statut f search
     const [filter, Setfilter] = useState("");
+
+
     /**
      * 
      * @param {event} e 
@@ -20,6 +26,13 @@ export default function Ludotheque() {
     const handleInput = (e) => {
         const search = e.target.value;
         Setfilter(search.trim().toLowerCase());
+    };
+    const [[games, setGames], isLoading] = useFetchData(BASE_API_URL, "games/getGames");
+    console.log({ games });
+    const deleteGameFront = (index) => {
+        console.log(index);
+        setGames(games.filter((game) => game.idGame !== index));
+
     };
 
     return (
@@ -36,14 +49,20 @@ export default function Ludotheque() {
                     onInput={handleInput} />
             </section>
 
-            <main className={`${styles.grid}`}>
-                {games
-                    .filter((g) => g.title.toLowerCase().includes(filter))
-                    .map((game, i) => (
-                        <CardGame
-                            game={game} key={i} />
-                    ))}
-            </main>
+            {isLoading ? (
+                <Loading />
+            ) : (
+                <main className={`${styles.grid}`}>
+                    {games
+                        .filter((g) => g.nameGame.toLowerCase().includes(filter))
+                        .map((game, i) => (
+                            <CardGame
+                                game={game} key={i} deleteGameFront={deleteGameFront} />
+                        ))}
+                </main>
+            )}
+
+
 
         </>
     );

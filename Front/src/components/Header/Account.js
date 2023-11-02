@@ -39,7 +39,6 @@ export default function Account() {
                 const imgDefaultFromBack = await response.json();
                 const uint8Array = new Uint8Array(imgDefaultFromBack.blobby.data);
                 const blob = new Blob([uint8Array]);
-
                 const urlImage = URL.createObjectURL(blob);
                 fetch(urlImage)
                     .then((response) => response.text())

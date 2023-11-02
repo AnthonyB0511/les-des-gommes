@@ -94,6 +94,8 @@ export default function Profile() {
     async function submit(values) {
         setFeedback("");
         setIsSubmitted(true);
+        console.log(values);
+
         try {
             const response = await fetch("http://localhost:8000/api/users/modifyUser", {
                 method: "PATCH",

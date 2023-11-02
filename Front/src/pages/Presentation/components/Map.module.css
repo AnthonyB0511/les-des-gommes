@@ -1,0 +1,9 @@
+.map {
+  height: 40vh;
+  width: 30vw;
+  margin: 0 auto;
+  border-radius: 10vh 0 10vh 0;
+  overflow: hidden;
+  border: var(--red) solid 2px;
+  box-shadow: var(--box-shadow);
+}/*# sourceMappingURL=Map.module.css.map */

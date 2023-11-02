@@ -13,6 +13,7 @@ const Login = lazy(() => import("./pages/Login/Login"));
 const LoginView = lazy(() => import("./pages/LoginView/LoginView"));
 const Register = lazy(() => import("./pages/Register/Register"));
 const Discussion = lazy(() => import("./pages/Discussion/Discussion"));
+const Admin = lazy(() => import("./pages/Admin/Admin"));
 
 // const Admin = lazy(() => import("./pages/Admin/Admin"));
 
@@ -28,6 +29,10 @@ export const router = createBrowserRouter([
                 path: "/",
                 element: <Home />,
 
+            },
+            {
+                path: "/admin",
+                element: <Admin />
             },
             {
                 path: "/presentation",

@@ -16,9 +16,9 @@ router.get("/getDefaultImage", (req, res) => {
 
 //insérer une image
 router.patch("/insertImage", (req, res) => {
-    console.log(req.body);
     const idUser = req.body.idUser;
     const blobby = req.body.value;
+    console.log({ blobby });
     const updateSQL = "UPDATE user SET blobby = ? WHERE idUser = ?";
     connection.query(updateSQL, [blobby, idUser], (err, result) => {
         if (err) throw err;
