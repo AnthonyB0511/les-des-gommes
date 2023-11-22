@@ -10,10 +10,10 @@ export default function Card({ actu }) {
     return (
         <section className={`${styles.card} m20`}>
             <div className={`${styles.img}`}>
-                <img src={actu.image} alt="" />
+                <img src={`http://localhost:8000/imgArticles/${actu.photo}`} alt={actu.descriptionPhoto} />
             </div>
             <article className={`${styles.content}`}>
-                <p>{actu.text}</p>
+                <p>{actu.content}</p>
                 <Link to="/presentation" >
                     <Button
                         needButton={actu.needButton}
