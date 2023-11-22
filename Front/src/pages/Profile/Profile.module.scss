@@ -77,56 +77,6 @@
         color: #000;
     }
 
-    .button,
-    .button2 {
-
-        display: flex;
-        text-transform: uppercase;
-        background-color: var(--action);
-        border-radius: 10vh 0 10vh 0;
-        font-weight: 800;
-        padding: 0.8em 1.5em;
-        font-size: 1rem;
-        overflow: hidden;
-        position: relative;
-        transition: all .3s;
-        z-index: 0;
-        margin: 0 auto;
-        margin-top: 5%;
-        cursor: pointer;
-
-        &:before {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 0%;
-            height: 100%;
-            background-color: var(--red);
-            transition: ease-in-out .3s;
-            border-radius: 10vh 0 10vh 0;
-            z-index: -1;
-        }
-
-        &:hover {
-            color: var(--primary);
-            transform: scale(1.1);
-
-            &:before {
-                width: 100%;
-            }
-        }
-    }
-
-    .button2 {
-        font-size: 0.8rem;
-
-        &:hover {
-            transform: scale(1.05);
-        }
-
-    }
-
     .feedback {
         color: var(--red);
         text-align: center;

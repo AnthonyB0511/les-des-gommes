@@ -1,11 +1,13 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const cookie = require("cookie-parser");
+const path = require("path");
 
 const app = express();
 app.use(cookie());
 app.use(bodyParser.json({ limit: "50mb" }));
 app.use(bodyParser.urlencoded({ limit: "50mb", extended: true }));
+app.use(express.static(path.join(__dirname, "uploads")));
 
 const port = 8000;
 require("./database/index");

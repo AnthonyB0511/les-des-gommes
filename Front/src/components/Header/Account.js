@@ -6,7 +6,7 @@ export default function Account() {
 
     // gérer l'état d'ouverture du menu déroulant une fois connecté
     const [isOpen, setIsOpen] = useState(false);
-
+    const [avatar, setAvatar] = useState(null);
     // const [noLog, setNoLog] = useState(false);
     const log = useRef();
 
@@ -23,32 +23,7 @@ export default function Account() {
     /**
      * recover the avatar (on default or not) from user
      */
-    useEffect(() => {
-        async function getDefaultImage() {
-            if (user) {
-                let response;
-                if (user.blobby) {
-                    response = await fetch(
-                        `http://localhost:8000/api/profile/getAvatarFromUser?id=${user.idUser}`
-                    );
-                } else {
-                    response = await fetch(
-                        `http://localhost:8000/api/profile/getDefaultImage`
-                    );
-                }
-                const imgDefaultFromBack = await response.json();
-                const uint8Array = new Uint8Array(imgDefaultFromBack.blobby.data);
-                const blob = new Blob([uint8Array]);
-                const urlImage = URL.createObjectURL(blob);
-                fetch(urlImage)
-                    .then((response) => response.text())
-                    .then((text) => {
-                        setPreviewImage(text);
-                    });
-            }
-        }
-        getDefaultImage();
-    }, [user]);
+
 
 
     return (
@@ -58,8 +33,7 @@ export default function Account() {
                 <>
                     <section className={`${styles.icon}`}
                         onClick={() => setIsOpen(!isOpen)}>
-                        {/* <i className="fa-solid fa-circle-user"></i> */}
-                        <img src={previewImage} className={`${styles.image}`} alt="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;avatar" />
+                        {user.avatar ? (<img src={`http://localhost:8000/avatar/${user.avatar}`} className={`${styles.image}`} alt="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;avatar" />) : (<i className="fa-solid fa-circle-user"></i>)}
                         <div className={`${styles.check}`}>
                             <i className="fa-solid fa-circle-check"></i>
                         </div>

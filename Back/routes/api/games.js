@@ -16,7 +16,6 @@ router.post("/addGame", (req, res) => {
                     res.status(200).json("Le jeu a bien été ajouté");
                 });
             } else {
-                console.log("il n'est pas passé");
                 res.status(400).json("Le jeu est déjà dans la base de données.");
             }
         });

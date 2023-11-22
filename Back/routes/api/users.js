@@ -3,6 +3,24 @@ const connection = require("../../database");
 const bcrypt = require("bcrypt");
 const jsonwebtoken = require("jsonwebtoken");
 const { key, keyPub } = require("../../keys/index");
+const multer = require("multer");
+const path = require("path");
+const fs = require("fs");
+const { log } = require("console");
+const upload = multer({
+    storage: multer.diskStorage({
+        destination: (req, file, cb) => {
+            cb(null, path.join(__dirname, "../../uploads/avatar"));
+        },
+        filename: (req, file, cb) => {
+            cb(null, Date.now() + "-" + file.originalname);
+        }
+    }),
+    fileFilter: (req, file, cb) => {
+        console.log(file);
+        cb(null, true);
+    }
+});
 
 router.post("/register", async (req, res) => {
     const { name, firstname, username, email, password } = req.body;
@@ -11,8 +29,8 @@ router.post("/register", async (req, res) => {
         try {
             if (result.length === 0) {
                 const hashedPassword = await bcrypt.hash(password, 10);
-                const insertSql = "INSERT INTO user(name,firstname,username, email, password) VALUES(?,?,?,?,?)";
-                const values = [name, firstname, username, email, hashedPassword];
+                const insertSql = "INSERT INTO user(name,firstname,username, email, password,verify) VALUES(?,?,?,?,?)";
+                const values = [name, firstname, username, email, hashedPassword, 0];
                 connection.query(insertSql, values, (err, result) => {
                     if (err) throw err;
                     res.status(200).json("Félicitation, votre inscription est validée");
@@ -39,9 +57,7 @@ router.post("/login", (req, res) => {
                         algorithm: "RS256"
                     });
                     res.cookie("token", token, { maxAge: 24 * 60 * 60 * 1000 });
-                    console.log(res.cookie);
                     res.json(result[0]);
-                    console.log("token : " + token);
                 } else {
                     res.status(400).json("Email et/ou mot de passe incorrect");
                 }
@@ -49,64 +65,92 @@ router.post("/login", (req, res) => {
                 res.status(400).json("Email et/ou mot de passe incorrect");
             }
         } catch (error) {
-            console.log(error);
+            console.error(error);
         }
     });
 });
 
-router.patch("/modifyUser", (req, res) => {
-    const { username, email, idUser, oldPassword, newPassword } = req.body;
-    const sql = `SELECT idUser, username, email FROM user WHERE email= ? AND idUser != ?`;
+router.patch('/modifyUser', upload.single("avatar"), async (req, res) => {
+    const { username, email, idUser } = req.body;
+    const sqlVerifyMail = `SELECT idUser, username, email FROM user WHERE email = ? AND idUser != ?`;
     const valuesVerifyMail = [email, idUser];
-    connection.query(sql, valuesVerifyMail, (err, result) => {
+    let avatar;
+    if (req.file && req.file.filename) {
+        avatar = req.file.filename;
+    }
+    connection.query(sqlVerifyMail, valuesVerifyMail, (err, result) => {
         if (err) throw err;
+
         if (result.length) {
-            let wrong = { message: "Cette adresse email est déjà utilisée" };
-            res.send(wrong);
-        } else {
-            if (req.body.oldPassword && req.body.newPassword) {
-                const sqlSelect = "SELECT * FROM user WHERE idUser = ?";
-                connection.query(sqlSelect, [idUser], async (err, result) => {
-                    const dbPassword = result[0].password;
-                    const passwordMatch = await bcrypt.compare(oldPassword, dbPassword);
-                    if (!passwordMatch) {
-                        let wrong = { message: "L'ancien mot de passe n'est pas correct !" };
-                        res.send(wrong);
-                    } else {
-                        const hashedPassword = await bcrypt.hash(newPassword, 10);
-                        const sqlModifyPassword = "UPDATE user SET username =?, email =?, password =? WHERE idUser =?";
-                        connection.query(sqlModifyPassword, [username, email, hashedPassword, idUser], (err, result) => {
-                            if (err) throw err;
-                            req.body.oldPassword = "";
-                            req.body.confirmPassword = "";
-                            let changeOk = { messageGood: "Vos modifications ont bien été prises en compte" };
-                            res.send(changeOk);
-                        });
-                    }
-                });
-            } else {
-                const { email, username, idUser } = req.body;
-                const sqlUpdate = `UPDATE user SET email=?, username=? WHERE idUser=?`;
-                // const valuesUpdate = [email, username, idUser];
-                connection.query(sqlUpdate, [email, username, idUser], (err, result) => {
-                    if (err) throw err;
-                    let modificationOk = { messageGood: "Vos modifications ont bien été prises en compte" };
-                    res.send(modificationOk);
-                });
-            }
+            let isEmail = { message: "Cette adresse mail est déjà utilisée" };
+            const filePath = path.join(__dirname, "../../uploads/avatar", avatar);
+
+            fs.unlink(filePath, (err) => {
+                if (err) {
+                    console.error("Erreur suppression d'avatar");
+                }
+                console.log("Avatar supprimé");
+            });
+
+            res.send(isEmail);
         }
     });
+
+    if (req.file) {
+        const sqlGetAvatar = "SELECT avatar FROM user WHERE idUser = ?";
+        connection.query(sqlGetAvatar, [idUser], (err, result) => {
+            if (err) throw err;
+
+            if (result != null) {
+                console.log({ "Result": result[0].avatar });
+                const filePathAvatarDB = path.join(__dirname, "../../uploads/avatar", result[0].avatar);
+                fs.unlink(filePathAvatarDB, (err) => {
+                    if (err) {
+                        console.error("Erreur suppression d'avatar");
+                    }
+                    console.log("Avatar remplacé");
+                });
+            }
+            const sqlUpdateWithAvatar = "UPDATE user SET username = ?, email = ?, avatar = ? WHERE idUser = ?";
+            connection.query(sqlUpdateWithAvatar, [username, email, avatar, idUser], (err, result) => {
+                if (err) throw err;
+                const sqlSelectUpdatedData = "SELECT idUser,username,email,avatar FROM user WHERE idUser = ?";
+                connection.query(sqlSelectUpdatedData, [idUser], (err, result) => {
+                    if (err) throw err;
+                    console.log(result[0]);
+                    const updatedData = result[0];
+                    const modifOk = { messageGood: "Votre profil a été mis à jour", updatedData };
+                    res.send(modifOk);
+                });
+            });
+        });
+    } else {
+        const sqlUpdate = "UPDATE user SET username = ?, email = ? WHERE idUser = ?";
+        connection.query(sqlUpdate, [username, email, idUser], (err, result) => {
+            if (err) throw err;
+            const sqlSelectUpdatedData = "SELECT idUser,username,email,avatar FROM user WHERE idUser = ?";
+            connection.query(sqlSelectUpdatedData, [idUser], (err, result) => {
+                if (err) throw err;
+                console.log(result[0]);
+                const updatedData = result[0];
+                const modifOk = { messageGood: "Votre profil a été mis à jour", updatedData };
+                res.send(modifOk);
+            });
+        });
+    }
+
+
 });
+;
 
 router.get('/userConnected', (req, res) => {
     const { token } = req.cookies;
-    console.log(req.cookies);
     if (token) {
         try {
             const decodedToken = jsonwebtoken.verify(token, keyPub, {
                 algorithms: "RS256",
             });
-            const sql = "SELECT username, idUser,firstname, name,password, email,blobby,role FROM user WHERE idUser = ?";
+            const sql = "SELECT username, idUser,firstname, name,password, email,avatar,role FROM user WHERE idUser = ?";
             connection.query(sql, [decodedToken.sub], (err, result) => {
                 if (err) throw err;
                 const connectedUser = result[0];
@@ -118,7 +162,7 @@ router.get('/userConnected', (req, res) => {
                 }
             });
         } catch (error) {
-            console.log(error);
+            console.error(error);
         }
     } else {
         res.json(null);
@@ -126,7 +170,6 @@ router.get('/userConnected', (req, res) => {
 });
 
 router.delete('/logout', (req, res) => {
-    console.log("Déconnexion en cours");
     res.clearCookie('token');
     res.end();
 });
