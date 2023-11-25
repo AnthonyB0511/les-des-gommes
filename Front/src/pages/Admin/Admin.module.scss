@@ -5,6 +5,11 @@
     form {
         display: flex;
         flex-direction: column;
+    }
+
+    .form {
+        display: flex;
+        flex-direction: column;
         border-radius: 10vh 0 10vh 0;
         background-color: var(--blue);
         padding: 20px;
@@ -23,8 +28,6 @@
             border-radius: 10vh;
             margin-bottom: 20px;
         }
-
-
     }
 }
 

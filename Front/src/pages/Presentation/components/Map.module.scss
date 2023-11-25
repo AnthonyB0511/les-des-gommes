@@ -1,3 +1,5 @@
+@use"../../../assets/styles/mixin" as mixin;
+
 .map {
     height: 40vh;
     width: 30vw;
@@ -6,4 +8,25 @@
     overflow: hidden;
     border: var(--red) solid 2px;
     box-shadow: var(--box-shadow);
+
+    @include mixin.lg-lt {
+        width: 45vw;
+    }
+
+    @include mixin.md-lt {
+        width: 45vw;
+        height: 25vh;
+    }
+
+    @include mixin.intxs {
+        width: 75vw;
+        height: 25vh;
+        margin-top: 10px;
+    }
+
+    @include mixin.xs {
+        width: 75vw;
+        margin-top: 10px;
+        height: 25vh;
+    }
 }

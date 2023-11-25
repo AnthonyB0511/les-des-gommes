@@ -6,7 +6,6 @@ const { key, keyPub } = require("../../keys/index");
 const multer = require("multer");
 const path = require("path");
 const fs = require("fs");
-const { log } = require("console");
 const upload = multer({
     storage: multer.diskStorage({
         destination: (req, file, cb) => {
@@ -95,13 +94,12 @@ router.patch('/modifyUser', upload.single("avatar"), async (req, res) => {
             res.send(isEmail);
         }
     });
-
     if (req.file) {
         const sqlGetAvatar = "SELECT avatar FROM user WHERE idUser = ?";
         connection.query(sqlGetAvatar, [idUser], (err, result) => {
             if (err) throw err;
 
-            if (result != null) {
+            if (result[0].avatar !== null) {
                 console.log({ "Result": result[0].avatar });
                 const filePathAvatarDB = path.join(__dirname, "../../uploads/avatar", result[0].avatar);
                 fs.unlink(filePathAvatarDB, (err) => {
@@ -131,7 +129,7 @@ router.patch('/modifyUser', upload.single("avatar"), async (req, res) => {
             const sqlSelectUpdatedData = "SELECT idUser,username,email,avatar FROM user WHERE idUser = ?";
             connection.query(sqlSelectUpdatedData, [idUser], (err, result) => {
                 if (err) throw err;
-                console.log(result[0]);
+                console.log(result);
                 const updatedData = result[0];
                 const modifOk = { messageGood: "Votre profil a été mis à jour", updatedData };
                 res.send(modifOk);

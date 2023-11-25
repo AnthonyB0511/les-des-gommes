@@ -1,12 +1,14 @@
 import { useForm } from "react-hook-form";
-import * as yup from "yup";
+import * as yup from 'yup';
 import { yupResolver } from "@hookform/resolvers/yup";
-import { useState, useEffect, useContext } from "react";
+import { useState, useRef, useContext } from "react";
 import styles from "./Admin.module.scss";
 import { Title } from "../../components/utils/Title";
 import { Line } from "../../components/utils/Line";
 import { ApiContext } from "../../context/ApiContext";
-import { useFetchData } from "../../Hooks/useFetchData";
+import { useFetchAdmin } from "../../Hooks/UseFetchAdmin";
+import ModifArticles from "./component/ModifArticles";
+import ModifCarrousel from "./component/ModifCarrousel";
 
 
 
@@ -14,8 +16,9 @@ import { useFetchData } from "../../Hooks/useFetchData";
 export default function Admin() {
     const BASE_API_URL = useContext(ApiContext);
     const [feedbackGood, setFeedbackGood] = useState("");
-    const [[genre, setGenre], isLoading] = useFetchData(BASE_API_URL, "genre/getGenre");
-
+    const genre = useFetchAdmin(BASE_API_URL, "genre/getGenre");
+    const articles = useFetchAdmin(BASE_API_URL, "articles/readArticle");
+    const photosCarrousel = useFetchAdmin(BASE_API_URL, "photos/getPhotosCarrousel");
     /**
      * Yup schema to add a game with defaults values and the function submit.
      */
@@ -73,7 +76,7 @@ export default function Admin() {
             setError("generic", { type: "generic", message: error });
         }
     };
-
+    console.log(photosCarrousel);
 
 
     return (
@@ -103,6 +106,19 @@ export default function Admin() {
                     {errors.generic && (<p>{errors.generic.message}</p>)}
                     <button className="btn">Ajouter le jeu</button>
                 </form>
+                <section className={`${styles.form}`}>
+                    {articles.map((article, i) => (
+                        <ModifArticles key={i} article={article} index={i} />
+                    ))}
+                </section>
+                <h3>Modification des images du slider</h3>
+                <section className={`${styles.form}`}>
+                    {/* {photosCarrousel.map((photo, i) => (
+                        <ModifCarrousel key={i} photo={photo} index={i} />
+                    ))} */}
+                    <ModifCarrousel />
+                </section>
+
             </main>
         </>
     );

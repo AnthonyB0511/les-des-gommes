@@ -23,6 +23,11 @@
 
         }
 
+        @include mixin.xs {
+            border-radius: 5vh 0 5vh 0;
+
+        }
+
         @include mixin.xxxs {
             width: 100%;
 

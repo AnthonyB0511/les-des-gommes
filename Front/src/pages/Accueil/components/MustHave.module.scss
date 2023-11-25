@@ -163,6 +163,7 @@
                 padding: 5%;
                 text-align: center;
                 font-size: 1.3em;
+                margin-top: 5px;
 
                 @include mixin.md-lt {
                     font-size: 1rem;

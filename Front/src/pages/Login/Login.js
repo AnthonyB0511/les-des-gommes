@@ -7,8 +7,8 @@ export default function Login() {
         <main className={`${styles.log} flex-fill`}>
             <section className={`${styles.section}`}>
                 <NavLink end to="">
-                    <i class="fa-solid fa-right-to-bracket"></i>Connexion</NavLink>
-                <NavLink to="register"><i class="fa-solid fa-user-plus"></i>Inscription</NavLink>
+                    <i className="fa-solid fa-right-to-bracket"></i>Connexion</NavLink>
+                <NavLink to="register"><i className="fa-solid fa-user-plus"></i>Inscription</NavLink>
             </section>
             <Outlet />
         </main>

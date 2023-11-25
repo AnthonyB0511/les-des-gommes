@@ -1,5 +1,4 @@
 import styles from "./MustHave.module.scss";
-import { SecondTitle } from "../../../components/utils/SecondTitle";
 import { Line } from "../../../components/utils/Line";
 /**
  * 
@@ -10,9 +9,12 @@ export default function MustHave({ must }) {
     return (
         <section className={`${styles.div}`}>
             <article className={`${styles.container} ${must.reverse && styles.reverse} d-flex p20 mb20`}>
-                <aside className={`${styles.img}`}>
-                    <img src={`http://localhost:8000/imgArticles/${must.photo}`} alt="" />
-                </aside>
+                {must.photo &&
+                    <aside className={`${styles.img}`}>
+                        <img src={`http://localhost:8000/imgArticles/${must.photo}`} alt="" />
+                    </aside>
+                }
+
                 <div className={`${styles.content}`}>
                     <h3 className="p">{must.title}</h3>
                     <Line

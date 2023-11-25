@@ -16,7 +16,7 @@ export function useFetchAdmin(url, way) {
             }
         }
         fetchDatas();
-    }, [url]);
+    }, []);
     return datas;
 
 }

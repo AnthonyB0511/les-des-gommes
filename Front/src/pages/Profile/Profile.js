@@ -67,14 +67,13 @@ export default function Profile() {
         formData.append("email", values.email);
         formData.append("username", values.username);
         formData.append("idUser", user.idUser);
-        console.log(formData);
         if (avatarRef.current && avatarRef.current.files[0]) {
             const maxFileSize = 2000000;
             if (avatarRef.current.files[0].size > maxFileSize) {
                 setErrorAvatar("Le fichier est trop lourd");
                 return;
             }
-            const supportedExtensions = ['jpg', 'webp', 'png', 'jpeg'];
+            const supportedExtensions = ['jpg', 'webp', 'png', 'jpeg', 'svg'];
             const fileExtension = avatarRef.current.files[0].name.split('.').pop().toLowerCase();
             if (!supportedExtensions.includes(fileExtension)) {
                 setErrorAvatar("Format de fichier non supporté");
@@ -82,7 +81,6 @@ export default function Profile() {
             }
             formData.append("avatar", avatarRef.current.files[0]);
         }
-        console.log(values);
         try {
             const response = await fetch(`http://localhost:8000/api/users/modifyUser`, {
                 method: "PATCH",
@@ -112,21 +110,21 @@ export default function Profile() {
 
 
 
-    // function shows the avatar befor validation
-    // function handleChange(event) {
-    //     // file
-    //     const file = event.target.files[0];
-    //     setSelectedFile(file);
-    //     if (file) {
-    //         const fileReader = new FileReader();
-    //         fileReader.readAsDataURL(file);
-    //         fileReader.onload = () => {
-    //             setPreviewImage(fileReader.result);
-    //         };
-    //     } else {
-    //         setPreviewImage(null);
-    //     }
-    // }
+    // function shows the avatar befor validation;
+    function handleChange(event) {
+        // file
+        const file = event.target.files[0];
+        setSelectedFile(file);
+        if (file) {
+            const fileReader = new FileReader();
+            fileReader.readAsDataURL(file);
+            fileReader.onload = () => {
+                setPreviewImage(fileReader.result);
+            };
+        } else {
+            setPreviewImage(null);
+        }
+    }
 
     /**
      * 
@@ -142,18 +140,20 @@ export default function Profile() {
                 <form onSubmit={handleSubmit(submit)}
                 >
                     <section className={`${styles.container}`}>
-                        <div className={`${styles.content}  mb20`}>
-                            <img src={`http://localhost:8000/avatar/${user.avatar}`} className={`${styles.picture}`} alt="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;avatar" />
+                        <div className={`${styles.contentImg}  mb20`}>
+                            {previewImage ? (
+                                <img src={previewImage} className={`${styles.picture}`} alt="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;avatar" />
+                            ) : (
+                                <img src={`http://localhost:8000/avatar/${user.avatar}`} className={`${styles.picture}`} alt="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;avatar" />)}
+
                         </div>
-
-
                         <section className={`${styles.content} mb20`}>
                             <label htmlFor="firstname">Prénom</label>
                             <input {...register("firstname")}
                                 type="text" id="firstname" disabled="disabled" />
                             <label htmlFor="name">Nom</label>
                             <input {...register("name")}
-                                type="text" id="name" disabled="disabled" />
+                                type="text" id="name" disabled="disabled" onChange={handleChange} />
                         </section>
                     </section>
                     <section className={`${styles.containerInput}`}>

@@ -20,6 +20,11 @@
                 width: 80%;
             }
 
+
+            @include mixin.xs {
+                width: 100%;
+            }
+
             @include mixin.intxs {
                 width: 100%;
             }
@@ -51,8 +56,13 @@
                         font-size: 1.8rem;
                     }
 
+                    @include mixin.xs {
+                        padding: 0 0 1% 0;
+                    }
+
                     @include mixin.intxs {
                         font-size: 1.5rem;
+                        padding: 0;
                     }
                 }
 
@@ -65,8 +75,13 @@
                         font-size: 1.8rem;
                     }
 
+                    @include mixin.xs {
+                        padding: 0 0 1% 0;
+                    }
+
                     @include mixin.intxs {
                         font-size: 1.5rem;
+                        padding: 0;
                     }
 
                 }
@@ -101,6 +116,10 @@
         .img {
             width: 50%;
             margin: 0 auto;
+
+            @include mixin.xs {
+                display: none
+            }
 
             @include mixin.intxs {
                 display: none;

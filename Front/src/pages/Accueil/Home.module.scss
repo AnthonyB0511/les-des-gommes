@@ -1,10 +1,101 @@
 @use"../../assets/styles/mixin" as mixin;
 
+.pres {
+    width: 80%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 5% auto 0 auto;
+
+    @include mixin.md-lt {
+
+        background-color: var(--blue);
+        color: var(--text-color);
+        width: 80%;
+        display: flex;
+        align-items: center;
+        padding: 2%;
+        border-radius: 10vh 0 10vh 0;
+        border: solid var(--red) 2px;
+        box-shadow: var(--box-shadow);
+        justify-content: center;
+    }
+
+    @include mixin.xs {
+        border-radius: 5vh 0 5vh 0;
+
+    }
+
+    @include mixin.intxs {
+        border-radius: 5vh 0 5vh 0;
+        width: 90%;
+
+    }
+
+
+    img {
+        width: 30%;
+
+        @include mixin.xs {
+            display: none
+        }
+
+        @include mixin.intxs {
+            display: none
+        }
+    }
+
+    p {
+        width: 50%;
+        font-size: 1.3em;
+        text-align: center;
+
+        @include mixin.xl {
+            font-size: 1.1rem;
+        }
+
+        @include mixin.lg-lt {
+            font-size: 1rem;
+
+        }
+
+        @include mixin.md-lt {
+            width: 60%;
+            font-size: 1.2rem;
+            margin: 0 auto;
+
+        }
+
+        @include mixin.sm-lt {
+            width: 60%;
+            font-size: 1rem;
+            margin: 2% auto;
+
+        }
+
+        @include mixin.xs {
+            width: 60%;
+            font-size: 0.8rem;
+            text-align: center;
+            margin: 0 auto;
+            width: 90%;
+
+        }
+
+        @include mixin.intxs {
+            font-size: 0.8rem;
+            width: 100%;
+            margin-bottom: 10px;
+
+        }
+    }
+}
+
 .flex {
     width: 100%;
     display: flex;
     align-items: center;
-    
+
     @include mixin.md-lt {
         flex-wrap: wrap;
     }

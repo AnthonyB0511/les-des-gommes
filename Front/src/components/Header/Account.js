@@ -6,7 +6,6 @@ export default function Account() {
 
     // gérer l'état d'ouverture du menu déroulant une fois connecté
     const [isOpen, setIsOpen] = useState(false);
-    const [avatar, setAvatar] = useState(null);
     // const [noLog, setNoLog] = useState(false);
     const log = useRef();
 
@@ -18,8 +17,7 @@ export default function Account() {
 
     // useRef allows the animation of the list
     const list = useRef();
-    // useState keeps the picture in memory
-    const [previewImage, setPreviewImage] = useState(null);
+
     /**
      * recover the avatar (on default or not) from user
      */

@@ -9,14 +9,17 @@ import { Link } from "react-router-dom";
 export default function Card({ actu }) {
     return (
         <section className={`${styles.card} m20`}>
-            <div className={`${styles.img}`}>
-                <img src={`http://localhost:8000/imgArticles/${actu.photo}`} alt={actu.descriptionPhoto} />
-            </div>
+            {actu?.photo &&
+                <div className={`${styles.img}`}>
+                    <img src={`http://localhost:8000/imgArticles/${actu.photo}`} alt={actu.descriptionPhoto} />
+                </div>
+            }
+
             <article className={`${styles.content}`}>
-                <p>{actu.content}</p>
+                <p>{actu?.content}</p>
                 <Link to="/presentation" >
                     <Button
-                        needButton={actu.needButton}
+                        needButton={actu?.needButton}
                         txtButton="Cliquer ICI" />
                 </Link>
 
