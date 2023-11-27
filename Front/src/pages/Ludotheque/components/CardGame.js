@@ -26,7 +26,7 @@ export default function CardGame({ game, deleteGameFront }) {
     return (
         <section className={`${styles.container}`}>
             <article className={`${styles.img}`}>
-                <img src={game.photo} alt={game.nameGame} />
+                <img src={`http://localhost:8000/games/${game.photo}`} alt={game.nameGame} />
                 {user?.role === 'admin' &&
                     <i onClick={deleteGame} className="fa-solid fa-circle-xmark"></i>
                 }

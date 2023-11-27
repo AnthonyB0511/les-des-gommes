@@ -10,3 +10,31 @@
   --box-shadow: 0 6px 9px 0 rgb(0 0 0 / 15%);
   --box-shadow-nav: rgb(0 0 0 / 22%) 0 2px 18px 0;
 }
+
+input[type=file]::file-selector-button {
+  text-transform: uppercase;
+  background-color: var(--action);
+  border-radius: 10vh 0 10vh 0;
+  font-weight: 800;
+  padding: 0.2em 1em;
+  font-size: 1rem;
+  overflow: hidden;
+  position: relative;
+  transition: all .3s;
+  z-index: 0;
+  margin-right: 5%;
+  cursor: pointer;
+
+  &:hover {
+    color: var(--primary);
+    transform: scale(1.05);
+    background-color: var(--red);
+
+  }
+}
+
+.feedback {
+  color: var(--red);
+  font-weight: 800;
+  text-align: center;
+}

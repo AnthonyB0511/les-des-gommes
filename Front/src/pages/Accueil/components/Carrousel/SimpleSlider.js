@@ -30,7 +30,7 @@ export const SimpleSlider = ({ nameOfCarrousel }) => {
         <Slider {...settings}>
           {nameOfCarrousel.map((image, i) =>
             <div key={i} className={`${styles.div}`}>
-              <img src={image.image} className={`${styles.border}`} alt="" />
+              <img src={`http://localhost:8000/imgCarrousel/${image.photo}`} className={`${styles.border}`} alt="" />
             </div>
           )}
         </Slider>

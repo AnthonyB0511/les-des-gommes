@@ -1,10 +1,12 @@
 .admin {
-    width: 50%;
     margin: 5% auto;
+    width: 50%;
 
     form {
         display: flex;
         flex-direction: column;
+        border: 2px var(--red) solid;
+        width: 100%
     }
 
     .form {
@@ -13,8 +15,9 @@
         border-radius: 10vh 0 10vh 0;
         background-color: var(--blue);
         padding: 20px;
+        border: 2px var(--red) solid;
 
-        h3 {
+        width: 100% h3 {
             text-align: center;
         }
 
@@ -29,13 +32,4 @@
             margin-bottom: 20px;
         }
     }
-}
-
-.feedbackGood {
-    text-align: center;
-    margin-block: 15px;
-    font-size: 1.5rem;
-    font-weight: 800;
-    color: #000;
-
 }

@@ -1,6 +1,6 @@
 import { useState, useContext } from "react";
 import { ApiContext } from "../../../context/ApiContext";
-
+import styles from "./ModifCarrousel.module.scss";
 import { AuthContext } from "../../../context/AuthContext";
 
 const ModifCarrousel = ({ photo, index }) => {
@@ -43,7 +43,7 @@ const ModifCarrousel = ({ photo, index }) => {
 
 
         } catch (error) {
-            // Gérer les erreurs
+
             console.error('Une erreur s\'est produite lors de l\'envoi des fichiers', error);
         }
     };
@@ -52,9 +52,9 @@ const ModifCarrousel = ({ photo, index }) => {
 
     return (
 
-        <form onSubmit={handleSubmit} encType="multipart/form-data">
+        <form className={`${styles.inputFiles}`} onSubmit={handleSubmit} encType="multipart/form-data">
             <input type="file" name="files" multiple onChange={handleFileChange} />
-            <button type="submit">Envoyer</button>
+            <button className="btn" type="submit">Envoyer</button>
         </form>
     );
 };

@@ -3,7 +3,6 @@ const connection = require("../../database/index");
 const multer = require("multer");
 const path = require("path");
 const fs = require("fs");
-const { log } = require("console");
 const upload = multer({
     storage: multer.diskStorage({
         destination: (req, file, cb) => {

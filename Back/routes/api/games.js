@@ -1,28 +1,62 @@
 const router = require("express").Router();
 const connection = require("../../database/index");
-
-router.post("/addGame", (req, res) => {
-    try {
-        const searchSql = "SELECT * FROM game WHERE nameGame=?";
-        const nameGame = req.body.nameGame;
-        connection.query(searchSql, [nameGame], (err, result) => {
-            if (err) throw err;
-            if (!result.length) {
-                const { author, photo, year, editor, genre } = req.body;
-                const addSql = "INSERT INTO game (nameGame, author, photo, year,editor,idGenre) VALUES(?,?,?,?,?,?)";
-                const values = [nameGame, author, photo, year, editor, genre];
-                connection.query(addSql, values, (err, result) => {
-                    if (err) throw err;
-                    res.status(200).json("Le jeu a bien été ajouté");
-                });
-            } else {
-                res.status(400).json("Le jeu est déjà dans la base de données.");
-            }
-        });
-    } catch (error) {
-        res.status(400).json("Un problème est survenu...");
+const multer = require("multer");
+const path = require("path");
+const fs = require("fs");
+const upload = multer({
+    storage: multer.diskStorage({
+        destination: (req, file, cb) => {
+            cb(null, path.join(__dirname, "../../uploads/games"));
+        },
+        filename: (req, file, cb) => {
+            cb(null, Date.now() + "-" + file.originalname);
+        }
+    }),
+    fileFilter: (req, file, cb) => {
+        // console.log(file);
+        cb(null, true);
     }
 });
+
+router.post("/addGame", upload.single('photo'), (req, res) => {
+    try {
+        console.log(req.body);
+        console.log(req.file);
+        const searchSql = "SELECT * FROM game WHERE nameGame=?";
+        const nameGame = req.body.nameGame;
+        if (req.file) {
+            connection.query(searchSql, [nameGame], (err, result) => {
+                if (err) throw err;
+                if (!result.length) {
+                    const { author, year, editor, genre } = req.body;
+                    const photo = req.file.filename;
+                    const addSql = "INSERT INTO game (nameGame, author, photo, year,editor,idGenre) VALUES(?,?,?,?,?,?)";
+                    const values = [nameGame, author, photo, year, editor, genre];
+                    connection.query(addSql, values, (err, result) => {
+                        if (err) throw err;
+                        res.status(200).json("Le jeu a bien été ajouté");
+                    });
+                } else {
+                    const photo = req.file.filename;
+                    const filePath = path.join(__dirname, "../../uploads/games", photo);
+                    fs.unlink(filePath, (err) => {
+                        if (err) {
+                            console.error;
+                        }
+                    });
+                    res.status(400).json({ errors: { error: "le jeu est déjà en base de données !" } });
+                }
+            });
+        }
+        else {
+            res.status(400).json({ error: "Une petite photo peut être ?" });
+        }
+    } catch (error) {
+        res.status(500).json({ error: "Un problème est survenu..." });
+    }
+});
+
+
 
 router.delete("/deleteGameData/:id", (req, res) => {
     try {
@@ -40,7 +74,7 @@ router.delete("/deleteGameData/:id", (req, res) => {
 
 router.get("/getGames", (req, res) => {
     try {
-        const selectSql = "SELECT * FROM game";
+        const selectSql = "SELECT * FROM game ORDER BY nameGame ASC";
         connection.query(selectSql, (err, result) => {
             if (err) throw err;
             res.send(JSON.stringify(result));

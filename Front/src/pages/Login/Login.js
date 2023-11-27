@@ -5,6 +5,7 @@ import styles from "./Login.module.scss";
 export default function Login() {
     return (
         <main className={`${styles.log} flex-fill`}>
+
             <section className={`${styles.section}`}>
                 <NavLink end to="">
                     <i className="fa-solid fa-right-to-bracket"></i>Connexion</NavLink>

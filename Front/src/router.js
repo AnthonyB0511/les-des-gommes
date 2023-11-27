@@ -13,9 +13,10 @@ const Login = lazy(() => import("./pages/Login/Login"));
 const LoginView = lazy(() => import("./pages/LoginView/LoginView"));
 const Register = lazy(() => import("./pages/Register/Register"));
 const Discussion = lazy(() => import("./pages/Discussion/Discussion"));
-const Admin = lazy(() => import("./pages/Admin/Admin"));
-
-// const Admin = lazy(() => import("./pages/Admin/Admin"));
+const AdminPage = lazy(() => import("./pages/Admin/AdminPage"));
+const Articles = lazy(() => import("./pages/Admin/component/Articles"));
+const ModifCarrousel = lazy(() => import("./pages/Admin/component/ModifCarrousel"));
+const AddGame = lazy(() => import("./pages/Admin/component/AddGame"));
 
 
 export const router = createBrowserRouter([
@@ -32,7 +33,19 @@ export const router = createBrowserRouter([
             },
             {
                 path: "/admin",
-                element: <Admin />
+                element: <AdminPage />,
+                children: [
+                    {
+                        path: "",
+                        element: <Articles />
+                    }, {
+                        path: "ajoutJeu",
+                        element: <AddGame />
+                    }, {
+                        path: "carrousel",
+                        element: <ModifCarrousel />
+                    }
+                ]
             },
             {
                 path: "/presentation",

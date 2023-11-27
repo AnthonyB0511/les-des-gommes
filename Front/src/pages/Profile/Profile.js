@@ -15,7 +15,7 @@ import { ApiContext } from "../../context/ApiContext";
 
 export default function Profile() {
     const { user } = useContext(AuthContext);
-    const { BASE_API_URL } = useContext(ApiContext); console.log({ BASE_API_URL });
+    const { BASE_API_URL } = useContext(ApiContext);
     // need to shows of the user the return
     const [feedback, setFeedback] = useState("");
     const [feedbackGood, setFeedbackGood] = useState("");
@@ -136,7 +136,7 @@ export default function Profile() {
         <>
             <Title title="Votre Profil" />
             <Line />
-            <main className={`${styles.form}`} >
+            <main className={`${styles.profile}`} >
                 <form onSubmit={handleSubmit(submit)}
                 >
                     <section className={`${styles.container}`}>
