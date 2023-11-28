@@ -1,6 +1,5 @@
-import { useState, useContext } from "react";
+import { useState, useContext, useRef } from "react";
 import { ApiContext } from "../../../context/ApiContext";
-import styles from "./ModifCarrousel.module.scss";
 import { AuthContext } from "../../../context/AuthContext";
 
 const ModifCarrousel = ({ photo, index }) => {
@@ -8,6 +7,8 @@ const ModifCarrousel = ({ photo, index }) => {
     // const [errorPhoto, setErrorPhoto] = useState("");
     // const photoRef = useRef();
     const BASE_API_URL = useContext(ApiContext);
+    const [errorPhoto, setErrorPhoto] = useState("");
+    const photoRef = useRef();
 
 
 
@@ -26,6 +27,17 @@ const ModifCarrousel = ({ photo, index }) => {
 
         // Ajouter chaque fichier au FormData
         for (let i = 0; i < selectedFiles.length; i++) {
+            const maxFileSize = 2000000;
+            if (photoRef.current.files[i].size > maxFileSize) {
+                setErrorPhoto("Le fichier est trop lourd");
+                return;
+            }
+            const supportedExtensions = ['jpg', 'webp', 'png', 'jpeg', 'svg'];
+            const fileExtension = photoRef.current.files[i].name.split('.').pop().toLowerCase();
+            if (!supportedExtensions.includes(fileExtension)) {
+                setErrorPhoto("Format de fichier non supporté");
+                return;
+            }
             formData.append('files', selectedFiles[i]);
         }
         formData.append('idUser', idUser);
@@ -52,9 +64,10 @@ const ModifCarrousel = ({ photo, index }) => {
 
     return (
 
-        <form className={`${styles.inputFiles}`} onSubmit={handleSubmit} encType="multipart/form-data">
-            <input type="file" name="files" multiple onChange={handleFileChange} />
+        <form className="form2" onSubmit={handleSubmit} encType="multipart/form-data">
+            <input type="file" name="files" multiple onChange={handleFileChange} ref={photoRef} />
             <button className="btn" type="submit">Envoyer</button>
+            {errorPhoto && <p className="feedback">{errorPhoto} </p>}
         </form>
     );
 };

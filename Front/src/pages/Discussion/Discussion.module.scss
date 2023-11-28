@@ -1,0 +1,31 @@
+.discussion {
+    width: clamp(50%, 75%, 95%);
+    margin: 0 auto;
+
+    section {
+
+        img {
+            width: clamp(5vh, 8vh, 10vh);
+            height: clamp(5vh, 8vh, 10vh);
+            border-radius: 50%;
+        }
+
+        article {
+            i {
+                cursor: pointer;
+                transition: .3s all;
+
+                &:hover {
+                    color: var(--red)
+                }
+            }
+
+            .quote {
+                padding: clamp(2px, 7px, 10px);
+                width: clamp(60vw, 70vw, 80vw);
+                border-radius: clamp(10px, 20px, 25px);
+                border: 2px solid black
+            }
+        }
+    }
+}

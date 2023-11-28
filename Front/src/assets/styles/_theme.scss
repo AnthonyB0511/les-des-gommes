@@ -76,3 +76,38 @@ label {
   margin: 15px auto;
   border: 2px solid var(--red)
 }
+
+.form2 {
+  display: flex;
+  flex-direction: column;
+  border-radius: 10vh 0 10vh 0;
+  background-color: var(--blue);
+  padding: 20px;
+  border: 2px var(--red) solid;
+  width: 50%;
+  margin: 5% auto;
+
+  h3 {
+    text-align: center;
+  }
+
+  .inputAdmin {
+    padding: 10px;
+  }
+
+  select {
+    padding: 5px;
+    border-radius: 10vh;
+    margin-bottom: 20px;
+  }
+
+}
+
+.fw600 {
+  font-weight: 600;
+}
+
+.fw200 {
+  font-weight: 200;
+  font-style: italic;
+}

@@ -20,8 +20,6 @@ const upload = multer({
 
 router.post("/addGame", upload.single('photo'), (req, res) => {
     try {
-        console.log(req.body);
-        console.log(req.file);
         const searchSql = "SELECT * FROM game WHERE nameGame=?";
         const nameGame = req.body.nameGame;
         if (req.file) {
@@ -41,18 +39,18 @@ router.post("/addGame", upload.single('photo'), (req, res) => {
                     const filePath = path.join(__dirname, "../../uploads/games", photo);
                     fs.unlink(filePath, (err) => {
                         if (err) {
-                            console.error;
+                            console.error(err);
                         }
                     });
-                    res.status(400).json({ errors: { error: "le jeu est déjà en base de données !" } });
+                    res.status(400).json("Le jeu est déjà en base de données !");
                 }
             });
         }
         else {
-            res.status(400).json({ error: "Une petite photo peut être ?" });
+            res.status(400).json("Une petite photo peut être ?");
         }
     } catch (error) {
-        res.status(500).json({ error: "Un problème est survenu..." });
+        res.status(500).json("Un problème est survenu...");
     }
 });
 

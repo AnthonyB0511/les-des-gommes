@@ -4,20 +4,26 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { useContext } from "react";
 import { AuthContext } from "../../../context/AuthContext";
 import { ApiContext } from "../../../context/ApiContext";
+import { useState } from "react";
+import style from "./Talk.module.scss";
+
 
 export default function Talk() {
     const { user } = useContext(AuthContext);
     const BASE_API_URL = useContext(ApiContext);
+    const [feedbackGood, setFeedbackGood] = useState("");
+    const [feedback, setFeedback] = useState("");
     const yupSchema = yup.object({
-        message: yup.string().required("Le champ doit être rempli.")
+        content: yup.string().required("Le champ doit être rempli.")
     });
     const defaultValues = {
-        message: ""
+        content: ""
     };
     const {
         register,
         handleSubmit,
-        formState: { errors }
+        formState: { errors },
+        reset
     } = useForm({
         defaultValues,
         resolver: yupResolver(yupSchema)
@@ -27,19 +33,32 @@ export default function Talk() {
         try {
             const response = await fetch(`${BASE_API_URL}/discussion/sendMessage`, {
                 method: "POST",
-                body: JSON.stringify({ values: values, idUser: user.idUser })
+                body: JSON.stringify({ content: values, idUser: user.idUser }),
+                headers: {
+                    "Content-Type": "application/json"
+                },
             });
             if (response.ok) {
-                console.log("Message envoyé");
+                setFeedbackGood("Message envoyé");
+                reset(defaultValues);
+                setTimeout(() => {
+                    setFeedbackGood("");
+                }, 2000);
+            }
+            else {
+                setFeedback("Une erreur est survenue");
+                reset(defaultValues);
             }
         } catch (error) {
             console.error(error);
         }
     }
     return (
-        <form onSubmit={handleSubmit(submit)}>
-            <input {...register("message")} type="textarea" id="textarea" />
+        <form onSubmit={handleSubmit(submit)} className="d-flex align-items-center my30">
+            <input {...register("content")} type="textarea" id="content" />
             <button className="btn">Envoyer</button>
+            {feedbackGood && <p>{feedbackGood}</p>}
+            {feedback && <p>{feedback}</p>}
         </form>
     );
 }

@@ -68,23 +68,23 @@ export default function ModifArticles({ key, article, index }) {
     }
 
     return (
-        <form onSubmit={handleSubmit(submit)} className="my20">
+        <form onSubmit={handleSubmit(submit)} className="my20 form2">
             <section className="d-flex justify-content-center align-items-center">
                 <h3 className="mr10">Modifier l'article n°{index + 1} </h3>
                 <i class="fa-solid fa-chevron-down"></i>
             </section>
 
             <label htmlFor="title">Titre</label>
-            <input type="text" id="title" {...register("title")} />
+            <input type="text" id="title" {...register("title")} className="inputAdmin" />
             {errors?.title && <p className="form-error">{errors.title.message}</p>}
             <label htmlFor="content">Contenu</label>
-            <input type="textArea" id="content" {...register("content")} />
+            <input type="textArea" id="content" {...register("content")} className="inputAdmin" />
             {errors?.content && <p className="form-error">{errors.content.message}</p>}
             <label htmlFor="descriptionPhoto">Description Photo</label>
-            <input type="text" id="descriptionPhoto" {...register("descriptionPhoto")} />
+            <input type="text" id="descriptionPhoto" {...register("descriptionPhoto")} className="inputAdmin" />
             {errors?.descriptionPhoto && <p className="form-error">{errors.descriptionPhoto.message}</p>}
             <label htmlFor="photo">Photo</label>
-            <input type="file" id="photo" {...register("photo")} ref={photoRef} />
+            <input type="file" id="photo" {...register("photo")} ref={photoRef} className="inputAdmin" />
             {errorPhoto && <p className="form-error">{errorPhoto}</p>}
             <button className="btn">Modifier l'article</button>
             {feedbackGood && <p className="feedbackGood">{feedbackGood}</p>}

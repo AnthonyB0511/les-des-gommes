@@ -1,0 +1,6 @@
+form {
+    input {
+        width: clamp(50%, 75%, 95%);
+        min-width: 250px;
+    }
+}

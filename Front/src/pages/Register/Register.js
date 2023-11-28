@@ -72,7 +72,7 @@ export default function Register() {
         }
     }
     return (
-        <form onSubmit={handleSubmit(submit)} className={`${styles.form}`}>
+        <form onSubmit={handleSubmit(submit)} className={`${styles.formRegister}`}>
             <section className="d-flex justify-content-between">
                 <article className={`${styles.container}`}>
                     {/* name user */}
