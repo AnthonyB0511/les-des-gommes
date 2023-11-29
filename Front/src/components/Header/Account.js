@@ -1,5 +1,5 @@
 import styles from "./Account.module.scss";
-import { useState, useRef, useEffect, useContext } from "react";
+import { useState, useRef, useContext } from "react";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../context/AuthContext";
 export default function Account() {
@@ -17,10 +17,6 @@ export default function Account() {
 
     // useRef allows the animation of the list
     const list = useRef();
-
-    /**
-     * recover the avatar (on default or not) from user
-     */
 
 
 

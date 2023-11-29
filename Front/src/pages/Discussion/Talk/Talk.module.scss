@@ -1,6 +1,11 @@
-form {
+.formMessage {
     input {
         width: clamp(50%, 75%, 95%);
         min-width: 250px;
     }
+}
+
+.feed {
+    width: clamp(25%, 33%, 50%);
+    margin: 0 auto;
 }

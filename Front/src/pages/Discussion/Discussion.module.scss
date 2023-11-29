@@ -14,10 +14,19 @@
             i {
                 cursor: pointer;
                 transition: .3s all;
+                font-size: 1.2rem;
 
                 &:hover {
-                    color: var(--red)
+                    transform: scale(1.2);
                 }
+            }
+
+            .no {
+                color: var(--red)
+            }
+
+            .ok {
+                color: var(--blue)
             }
 
             .quote {
@@ -26,6 +35,31 @@
                 border-radius: clamp(10px, 20px, 25px);
                 border: 2px solid black
             }
+
+            .modify {
+                width: clamp(60vw, 70vw, 80vw);
+                padding: clamp(3px, 7px, 10px);
+                height: clam(5vh, 10vh, 12vh)
+            }
+        }
+    }
+}
+
+.chevron {
+    position: fixed;
+    bottom: 5%;
+    right: 5%;
+
+
+
+    i {
+        font-size: clamp(1rem, 1.7rem, 2rem);
+        color: var(--red);
+        transition: .5s all;
+        cursor: pointer;
+
+        &:hover {
+            transform: scale(1.3);
         }
     }
 }

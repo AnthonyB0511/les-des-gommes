@@ -5,10 +5,11 @@ import { useContext } from "react";
 import { AuthContext } from "../../../context/AuthContext";
 import { ApiContext } from "../../../context/ApiContext";
 import { useState } from "react";
+import { useFetchAdmin } from "../../../Hooks/UseFetchAdmin";
 import style from "./Talk.module.scss";
 
 
-export default function Talk() {
+export default function Talk({ addMessage }) {
     const { user } = useContext(AuthContext);
     const BASE_API_URL = useContext(ApiContext);
     const [feedbackGood, setFeedbackGood] = useState("");
@@ -39,7 +40,10 @@ export default function Talk() {
                 },
             });
             if (response.ok) {
+                const newMessage = await response.json();
+                console.log(newMessage);
                 setFeedbackGood("Message envoyé");
+                addMessage(newMessage);
                 reset(defaultValues);
                 setTimeout(() => {
                     setFeedbackGood("");
@@ -54,11 +58,16 @@ export default function Talk() {
         }
     }
     return (
-        <form onSubmit={handleSubmit(submit)} className="d-flex align-items-center my30">
-            <input {...register("content")} type="textarea" id="content" />
-            <button className="btn">Envoyer</button>
-            {feedbackGood && <p>{feedbackGood}</p>}
-            {feedback && <p>{feedback}</p>}
-        </form>
+        <>
+            <form onSubmit={handleSubmit(submit)} className={`d-flex align-items-center my30 ${style.formMessage}`}>
+                <input {...register("content")} type="textarea" id="content" />
+                <button className="btn">Envoyer</button>
+
+            </form>
+            <section className={`d-flex align-items-center my30 ${style.feed}`}>
+                {feedbackGood && <p className="feedbackGood">{feedbackGood}</p>}
+                {feedback && <p className="feedback">{feedback}</p>}
+            </section>
+        </>
     );
 }

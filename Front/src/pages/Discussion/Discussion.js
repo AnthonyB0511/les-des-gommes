@@ -4,48 +4,81 @@ import styles from "./Discussion.module.scss";
 import Talk from "./Talk/Talk";
 import { useFetchData } from "../../Hooks/useFetchData";
 import Loading from "../../components/utils/Loading";
-import { useContext, useEffect } from "react";
+import { useContext } from "react";
+import ScrollToTopButton from "./component/ScrollToTopButton";
 import { ApiContext } from "../../context/ApiContext";
 import { AuthContext } from "../../context/AuthContext";
+import EditMessage from "./component/EditMessage";
+import Message from "./component/Message";
 export default function Discussion() {
     const BASE_API_URL = useContext(ApiContext);
     const [[messages, setMessages], isLoading] = useFetchData(BASE_API_URL, 'discussion/getMessage');
     const { user } = useContext(AuthContext);
-    console.log(messages);
+    function deleteMessageFront(idParam) {
+        console.log(idParam);
+        setMessages(messages.filter((message) => message.idMessage !== idParam));
+    }
+    async function deleteMessage(messageId) {
+        try {
+            const response = await fetch(`${BASE_API_URL}/discussion/deleteMessage`, {
+                method: "DELETE",
+                body: JSON.stringify({ messageId: messageId }),
+                headers: { "Content-type": "application/json" }
+            });
+            if (response.ok) {
+                deleteMessageFront(messageId);
+            }
+
+        } catch (error) {
+            console.error(error);
+        }
+    }
+
+    function updateMessage(newMessage) {
+        setMessages(
+            messages.map((message) =>
+                message.idMessage === newMessage.idMessage
+                    ? newMessage : message
+            ));
+    }
+    async function modifyMessage(message) {
+        try {
+            const response = await fetch(`${BASE_API_URL}/discussion/updateMessage`, {
+                method: "PATCH",
+                body: JSON.stringify(message),
+                headers: { "Content-Type": "application/json" }
+            });
+            if (response.ok) {
+                const newMessage = await response.json();
+                updateMessage(newMessage);
+            }
+        } catch (error) {
+            console.error(error);
+        }
+    }
+    const addMessage = (newMessage) => {
+        setMessages([newMessage, ...messages]);
+    };
     return (
         <main className={`${styles.discussion}`}>
             <Title title="Discussion" />
-            <Line />
+            <Line /><Talk addMessage={addMessage} />
             {isLoading ? (
                 <Loading />
             ) : (
+
                 messages.map((message) => (
-                    <section key={message.idMessage} className="d-flex my20 align-center">
-                        <img src={`${BASE_API_URL}/../avatar/${message.avatar}`} />
-                        <article>
-                            <section className="d-flex">
-                                <p className='mr10 fw600'>{message.username}</p>
-                                <p className="fw200">{message.formattedDate}</p>
-                                {(user.idUser === message.idUser || user.role === 'admin') && (
-                                    <>
-                                        <i className="fa-solid fa-pen mx20"></i>
-                                        <i className="fa-solid fa-trash"></i>
-                                    </>
-                                )
+                    (message.edit && user.idUser === message.idUser) ? (
+                        <EditMessage key={message.idMessage} message={message} modifyMessage={modifyMessage} />
+                    ) : (
+                        <Message key={message.idMessage} message={message} modifyMessage={modifyMessage} deleteMessage={deleteMessage} user={user} />)
 
-                                }
-                            </section>
-                            <p className={`${styles.quote}`}>{message.content}</p>
-                        </article>
-                    </section>
                 ))
-            )}
-            <Talk />
+            )
+            }
+            <ScrollToTopButton />
+            {/* <Talk addMessage={addMessage} /> */}
 
-
-
-
-
-        </main>
+        </main >
     );
 }
