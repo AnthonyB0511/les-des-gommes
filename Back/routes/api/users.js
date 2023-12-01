@@ -6,6 +6,14 @@ const { key, keyPub } = require("../../keys/index");
 const multer = require("multer");
 const path = require("path");
 const fs = require("fs");
+const nodemailer = require("nodemailer");
+const transporter = nodemailer.createTransport({
+    service: "Gmail",
+    auth: {
+        user: "becque.anthony@gmail.com",
+        pass: "bogl evbq rqgu rdvx"
+    }
+});
 const upload = multer({
     storage: multer.diskStorage({
         destination: (req, file, cb) => {
@@ -55,7 +63,8 @@ router.post("/login", (req, res) => {
                         expiresIn: 3600 * 24,
                         algorithm: "RS256"
                     });
-                    res.cookie("token", token, { maxAge: 24 * 60 * 60 * 1000 });
+                    res.cookie
+                        ("token", token, { maxAge: 24 * 60 * 60 * 1000 });
                     res.json(result[0]);
                 } else {
                     res.status(400).json("Email et/ou mot de passe incorrect");
@@ -172,4 +181,85 @@ router.delete('/logout', (req, res) => {
     res.end();
 });
 
+router.get("/mailToReset/:email", (req, res) => {
+    console.log(req.params);
+    const email = req.params.email;
+    const sqlSearchMail = "SELECT * FROM user WHERE email = ?";
+    connection.query(sqlSearchMail, [email], (err, result) => {
+        if (err) throw err;
+        if (result.length !== 0) {
+            const token = jsonwebtoken.sign({}, key, {
+                expiresIn: 600,
+                algorithm: "RS256"
+            });
+            const confirmLink = `http://localhost:3000/modifiermdp?email=${email}&token=${token}`;
+            const mailOptions = {
+                from: 'becque.anthony@gmail.com',
+                to: email,
+                subject: "Mot de passe oublié Les Dés Gommés",
+                text: `Cliquer sur ce lien pour ce lien pour modifier votre mot de passe : ${confirmLink}`
+            };
+            transporter.sendMail(mailOptions, (err, result) => {
+                if (err) {
+                    throw err;
+                } else {
+                    res.status(200).json({ message: "Un mail a été envoyé" });
+                }
+            });
+        } else {
+            res.status(401).json("Cette addresse mail n'est pas utilisée sur ce site");
+        }
+    });
+});
+router.get("/confirmAdress/:email", (req, res) => {
+    console.log(req.params);
+    const email = req.params.email;
+    const sqlSearchMail = "SELECT * FROM user WHERE email = ?";
+    connection.query(sqlSearchMail, [email], (err, result) => {
+        if (err) throw err;
+        console.log(result);
+        if (result.length === 0) {
+            const token = jsonwebtoken.sign({}, key, {
+                expiresIn: 600,
+                algorithm: "RS256"
+            });
+            const confirmLink = `http://localhost:3000/formulaireinscription?email=${email}&token=${token}`;
+            const mailOptions = {
+                from: 'becque.anthony@gmail.com',
+                to: email,
+                subject: "Les Dés Gommés - Inscription",
+                text: `Cliquer sur ce lien pour ce lien pour finaliser votre inscription : ${confirmLink}`
+            };
+            transporter.sendMail(mailOptions, (err, result) => {
+                if (err) {
+                    throw err;
+                } else {
+                    res.status(200).json({ message: "Un mail a été envoyé" });
+                }
+            });
+        } else {
+            res.status(401).json("Cette addresse mail est déjà utilisée pour ce site.");
+        }
+    });
+});
+router.patch("/updatePassword", (req, res) => {
+    const { password } = req.body.password;
+    const { email } = req.body;
+    console.log(password);
+    console.log(email);
+    const sqlSearch = "SELECT * FROM user WHERE email = ? ";
+    connection.query(sqlSearch, [email], async (err, result) => {
+        if (err) throw err;
+        console.log(result);
+        let idUser = result[0].idUser;
+        const sqlUpdatePassword = 'UPDATE user SET password = ? WHERE idUser = ? ';
+        const hashedPassword = await bcrypt.hash(password, 10);
+        connection.query(sqlUpdatePassword, [hashedPassword, idUser], (err, result) => {
+            if (err) throw err;
+            res.status(200).json("Mot de passe modifié");
+        });
+    });
+
+
+});
 module.exports = router;

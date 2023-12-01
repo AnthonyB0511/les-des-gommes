@@ -9,7 +9,7 @@ export default function MustHave({ must }) {
     return (
         <section className={`${styles.div}`}>
             <article className={`${styles.container} ${must.reverse && styles.reverse} d-flex p20 mb20`}>
-                {must.photo &&
+                {must?.photo &&
                     <aside className={`${styles.img}`}>
                         <img src={`http://localhost:8000/imgArticles/${must.photo}`} alt="" />
                     </aside>

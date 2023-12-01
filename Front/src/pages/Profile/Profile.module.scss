@@ -104,16 +104,18 @@
         p {
             text-align: center;
             cursor: pointer;
-            transition: all .3s;
 
-            &:hover {
-                color: var(--red);
+            a {
+                transition: all .3s;
+
+                &:hover {
+                    color: var(--red);
+                }
+
             }
+
         }
 
-        .password {
-            transition: all ease-in-out .3s;
-        }
 
         ;
     }

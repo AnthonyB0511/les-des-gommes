@@ -4,12 +4,10 @@ import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useNavigate } from "react-router-dom";
 import { ApiContext } from "../../context";
-import { Title } from "../../components/utils/Title";
-import styles from "./ForgotPassword.module.scss";
+import styles from "../Security/ForgotPassword.module.scss";
 
-import { Line } from "../../components/utils/Line";
 
-const ForgotPassword = () => {
+const ConfirmAdressRegister = () => {
 
     const [feedback, setFeedBack] = useState("");
     const [feedbackGood, setFeedBackGood] = useState("");
@@ -43,17 +41,15 @@ const ForgotPassword = () => {
         console.log(values);
         try {
             const response = await fetch(
-                `${BASE_API_URL}/users/mailToReset/${values.email}`
+                `${BASE_API_URL}/users/confirmAdress/${values.email}`
             );
             if (response.ok) {
-                const responseBack = response.json();
-                console.log(responseBack);
-                setFeedBackGood(`Un mail de réinitialisation été envoyé sur ${values.email}`);
+                setFeedBackGood(`Un mail avec un lien pour confirmer l'inscription a été envoyé à ${values.email}`);
                 setTimeout(() => {
                     navigate("/");
                 }, 3000);
             } else {
-                setFeedBack("Cette adresse mail n'est pas enregistrée");
+                setFeedBack("Cette adresse mail est déjà utilisée sur ce site.");
             }
             ;
         } catch (error) {
@@ -63,12 +59,10 @@ const ForgotPassword = () => {
     }
     return (
         <>
-            <Title title="Reset du mot de passe" />
-            <Line />
             <form onSubmit={handleSubmit(submit)} className={`${styles.forgotPassword}`}>
                 <div className="d-flex flex-column mb10">
                     <label htmlFor="email" className="mb10">
-                        Email
+                        Votre mail
                     </label>
                     <input type="email" id="email" {...register("email")} />
                     {errors?.email && (
@@ -84,8 +78,8 @@ const ForgotPassword = () => {
                     Envoyer
                 </button>
             </form>
-            <Line /></>
+        </>
     );
 };
 
-export default ForgotPassword;
+export default ConfirmAdressRegister;

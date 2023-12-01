@@ -45,12 +45,15 @@ export default function Login() {
             setFeedbackGood("Connexion réussie. Vous allez être redirigé.");
             reset(defaultValues);
             setTimeout(() => {
-                navigate("/");
+                navigate("/profile");
             }, 2000);
         } catch (error) {
             setError("generic", { type: "generic", message: error });
         }
     }
+    const forgotPassword = () => {
+        navigate("/motdepasseoublie");
+    };
     return (
         <article className={`${styles.login}`}>
             <section className={`${styles.form}`}>
@@ -69,14 +72,6 @@ export default function Login() {
                             {...register("password")} />
                         {errors?.password && <p style={{ color: "red" }}>{errors.password.message}</p>}
                     </section>
-                    <section className={`${styles.remember}`}>
-                        <label htmlFor="remember">Se souvenir de moi</label>
-                        <input type="checkbox" id="remember" className="ml10 mb20" />
-
-                    </section>
-
-
-
                     {/* //button Connexion */}
                     <section>
                         <button
@@ -85,11 +80,11 @@ export default function Login() {
                         </button>
                     </section>
                     {/* //feedback for user */}
-                    {feedbackGood && <p className={`${styles.feedbackGood}`}>{feedbackGood}</p>}
+                    {feedbackGood && <p className='feedbackGoodLight'>{feedbackGood}</p>}
                     {errors.generic && (<p className={`${styles.feedback}`}>{errors.generic.message}</p>)}
                 </form>
 
-                <article className={`${styles.forget}`}>Vous avez oublié votre mot de passe ?</article>
+                <article className={`${styles.forget}`} onClick={forgotPassword}>Vous avez oublié votre mot de passe ?</article>
             </section>
         </article>
     );

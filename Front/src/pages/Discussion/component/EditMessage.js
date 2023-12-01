@@ -22,7 +22,11 @@ export default function EditMessage({ message, modifyMessage }) {
     };
     return (
         <section className="d-flex my20 align-center">
-            <img src={`${BASE_API_URL}/../avatar/${message.avatar}`} alt={message.avatar} />
+            {message.avatar !== null ? (
+                <img src={`${BASE_API_URL}/../../avatar/${message.avatar}`} alt={message.avatar} />
+            ) : (
+                <img src={`${BASE_API_URL}/../../defaultAvatar/default.svg`} alt="default.svg" />
+            )}
             <article>
                 <section className="d-flex align-items-center">
                     <p className='mr10 fw600'>{message.username}</p>

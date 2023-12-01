@@ -3,6 +3,8 @@ import App from "./App";
 import { lazy } from "react";
 import { userLoader } from "./loaders/userLoader";
 import ProtectedRoute from "./components/ProtectedRoute/ProtectedRoute";
+
+
 const Home = lazy(() => import("./pages/Accueil/Home"));
 const Presentation = lazy(() => import("./pages/Presentation/Presentation"));
 const Ludotheque = lazy(() => import("./pages/Ludotheque/Ludotheque"));
@@ -17,6 +19,9 @@ const AdminPage = lazy(() => import("./pages/Admin/AdminPage"));
 const Articles = lazy(() => import("./pages/Admin/component/Articles"));
 const ModifCarrousel = lazy(() => import("./pages/Admin/component/ModifCarrousel"));
 const AddGame = lazy(() => import("./pages/Admin/component/AddGame"));
+const ForgotPassword = lazy(() => import("./pages/Security/ForgotPassword"));
+const ConfirmAdressRegister = lazy(() => import("./pages/Register/ConfirmAdressRegister"));
+const ResetPassword = lazy(() => import("./pages/Security/ResetPassword"));
 
 
 export const router = createBrowserRouter([
@@ -84,10 +89,20 @@ export const router = createBrowserRouter([
                     },
                     {
                         path: "register",
-                        element: <Register />
+                        element: <ConfirmAdressRegister />
                     }
                 ]
-            }
+            }, {
+                path: "formulaireinscription",
+                element: <Register />
+
+            }, {
+                path: "/motdepasseoublie",
+                element: <ForgotPassword />
+            }, {
+                path: "/modifiermdp",
+                element: <ResetPassword />
+            },
         ]
     }
 ]);

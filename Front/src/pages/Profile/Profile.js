@@ -8,6 +8,7 @@ import { Title } from "../../components/utils/Title";
 import { Line } from "../../components/utils/Line";
 import { AuthContext } from "../../context/AuthContext";
 import { ApiContext } from "../../context/ApiContext";
+import { Link } from "react-router-dom";
 /**
  * 
  * @returns change profile
@@ -141,8 +142,8 @@ export default function Profile() {
                 >
                     <section className={`${styles.container}`}>
                         <div className={`${styles.contentImg}  mb20`}>
-                            {previewImage ? (
-                                <img src={previewImage} className={`${styles.picture}`} alt="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;avatar" />
+                            {user.avatar === null ? (
+                                <img src={`http://localhost:8000/avatar/default.svg`} className={`${styles.picture}`} alt="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;avatar" />
                             ) : (
                                 <img src={`http://localhost:8000/avatar/${user.avatar}`} className={`${styles.picture}`} alt="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;avatar" />)}
 
@@ -174,7 +175,7 @@ export default function Profile() {
                             type="text" id="username" />
                         {errors?.username && <p style={{ color: "red" }}>{errors.username.message}</p>}
                     </section>
-                    <p>Souhaitez-vous modifier votre mot de passe ?</p>
+                    <p><Link to="/motdepasseoublie">Souhaitez-vous modifier votre mot de passe ?</Link></p>
 
                     {/* </>} */}
 

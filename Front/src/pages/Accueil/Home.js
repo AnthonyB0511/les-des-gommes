@@ -18,7 +18,9 @@ export default function Home() {
         <>
             <main>
                 <section className={`${styles.pres}`}>
-                    <img src={`http://localhost:8000/imgArticles/${articles[0]?.photo}`} alt="" />
+                    {articles[0]?.photo && <img src={`http://localhost:8000/imgArticles/${articles[0].photo}`} alt="" />
+                    }
+
                     <section></section>
                     <p>{articles[0]?.content}<Link to="/presentation" >
                         <Button

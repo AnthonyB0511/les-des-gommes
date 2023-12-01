@@ -23,5 +23,14 @@
             font-size: 1.2rem;
         }
 
+        .forget {
+            text-align: center;
+            transition: .5s all;
+            cursor: pointer;
+
+            &:hover {
+                color: var(--red);
+            }
+        }
     }
 }
