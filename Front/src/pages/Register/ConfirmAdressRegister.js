@@ -31,20 +31,21 @@ const ConfirmAdressRegister = () => {
     const {
         register,
         handleSubmit,
-        formState: { errors },
+
+        formState: { errors, isSubmitting },
     } = useForm({
         defaultValues,
         mode: "onChange",
         resolver: yupResolver(yupSchema),
     });
     async function submit(values) {
-        console.log(values);
+        setFeedBack("");
         try {
             const response = await fetch(
                 `${BASE_API_URL}/users/confirmAdress/${values.email}`
             );
             if (response.ok) {
-                setFeedBackGood(`Un mail avec un lien pour confirmer l'inscription a été envoyé à ${values.email}`);
+                setFeedBackGood(`Un mail avec un lien pour confirmer l'inscription a été envoyé`);
                 setTimeout(() => {
                     navigate("/");
                 }, 3000);
@@ -53,7 +54,6 @@ const ConfirmAdressRegister = () => {
             }
             ;
         } catch (error) {
-
             console.error(error);
         }
     }
@@ -70,11 +70,11 @@ const ConfirmAdressRegister = () => {
                     )}
                 </div>
 
-                {feedback && <p className={`feedback mb20`}>{feedback}</p>}
+                {feedback && <p className={`form-error mb20`}>{feedback}</p>}
                 {feedbackGood && (
                     <p className={`feedbackGoodLight mb20`}>{feedbackGood}</p>
                 )}
-                <button className="btn">
+                <button type="submit" className="btn" disabled={isSubmitting}>
                     Envoyer
                 </button>
             </form>

@@ -19,7 +19,7 @@ export default function Nav({ open, setOpen }) {
                     <LineNav />
                     <li className={`${styles.li}`} ><Link to="/presentation" onClick={() => setOpen(!open)}> L'ASSO</Link></li>
                     <LineNav />
-                    <li className={`${styles.li}`}><Link to="/ludotheque" onClick={() => setOpen(!open)}>LA LUDOTHEQUE</Link></li>
+                    <li className={`${styles.li}`}><Link to="/ludotheque" onClick={() => setOpen(!open)}>LUDOTHEQUE</Link></li>
                     <LineNav />
                     <li className={`${styles.li}`}><Link to="/contact" onClick={() => setOpen(!open)}>CONTACT</Link></li>
                     <LineNav />
@@ -31,6 +31,10 @@ export default function Nav({ open, setOpen }) {
                         ) : (
                             <Link to="/login" onClick={() => setOpen(!open)}>MON COMPTE</Link>)}
                     </li>
+                    <LineNav />
+                    {user?.role === 'admin' &&
+                        <li className={`${styles.li}`}><Link onClick={() => setOpen(!open)} to="/admin">ADMINISTRATION</Link></li>
+                    }
 
                 </ul>
             </nav>

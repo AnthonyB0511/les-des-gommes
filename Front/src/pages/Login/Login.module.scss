@@ -1,23 +1,29 @@
+@use"../../assets/styles/mixin" as mixin;
+
 .log {
-    min-height: 30vh;
     margin-block: 5%;
 
     .section {
         display: flex;
-        margin-block: 2%;
         justify-content: center;
-        align-items: center;
 
         a {
-            font-size: 2rem;
-            margin: 0 50px;
-            display: flex;
-            align-items: center
+            margin-right: 25px;
+            font-size: 1.5rem;
+
+            @include mixin.intxs {
+                font-size: 1.2rem
+            }
+
+            @include mixin.intxxs {
+                font-size: 1.1rem
+            }
+
+            ;
         }
 
         i {
             margin-right: 10px;
-            font-size: 1.5rem;
         }
     }
 }

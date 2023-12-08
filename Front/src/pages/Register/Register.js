@@ -14,7 +14,7 @@ export default function Register() {
     const [feedbackGood, setFeedbackGood] = useState("");
     const [decodedToken, setDecodedToken] = useState(null);
     useEffect(() => {
-        // Récupérer le token depuis le localStorage
+
         const token = new URLSearchParams(window.location.search).get("token");
         if (token) {
             try {
@@ -22,9 +22,7 @@ export default function Register() {
                 const decoded = jwtDecode(token);
                 if (decoded && decoded.exp * 1000 > Date.now()) {
                     setDecodedToken(decoded);
-                    console.log("le token est ok");
                 } else {
-                    console.log("le token est expiré");
                     console.error('Token expiré');
                 }
             } catch (error) {
@@ -85,11 +83,11 @@ export default function Register() {
         try {
             clearErrors();
             await createUser(values);
-            setFeedbackGood("Félicitations, vous êtes inscrits");
+            setFeedbackGood("Félicitations, vous êtes inscrit");
             reset(defaultValues);
             setTimeout(() => {
                 navigate("/login");
-            }, 2000);
+            }, 3000);
 
         } catch (error) {
             setError("generic", { type: "generic", message: error });
@@ -108,14 +106,14 @@ export default function Register() {
                                 <label htmlFor="name">Nom</label>
                                 <input {...register("name")}
                                     type="text" id="name" />
-                                {errors?.name && <p style={{ color: "red" }}>{errors.name.message}</p>}
+                                {errors?.name && <p className="form-error">{errors.name.message}</p>}
                             </section>
                             {/* firstname */}
                             <section className="d-flex flex-column mb20">
                                 <label htmlFor="firstname">Prénom</label>
                                 <input {...register("firstname")}
                                     type="text" id="firstname" />
-                                {errors?.firstname && <p style={{ color: "red" }}>{errors.firstname.message}</p>}
+                                {errors?.firstname && <p className="form-error">{errors.firstname.message}</p>}
                             </section>
                             {/* email */}
                             <section className="d-flex flex-column mb20">
@@ -123,7 +121,7 @@ export default function Register() {
 
                                 <input {...register("email")} disabled
                                     type="email" id="email" />
-                                {errors?.email && <p style={{ color: "red" }}>{errors.email.message}</p>}
+                                {errors?.email && <p className="form-error">{errors.email.message}</p>}
                             </section>
                         </article>
                         <article className={`${styles.container}`}>
@@ -132,7 +130,7 @@ export default function Register() {
                                 <label htmlFor="username">Nom du profil</label>
                                 <input {...register("username")}
                                     type="text" id="username" />
-                                {errors?.username && <p style={{ color: "red" }}>{errors.username.message}</p>}
+                                {errors?.username && <p className="form-error">{errors.username.message}</p>}
                             </section>
                             {/* password */}
                             <section className="d-flex flex-column mb20">
@@ -140,7 +138,7 @@ export default function Register() {
 
                                 <input {...register("password")}
                                     type="password" id="password" />
-                                {errors?.password && <p style={{ color: "red" }}>{errors.password.message}</p>}
+                                {errors?.password && <p className="form-error">{errors.password.message}</p>}
                             </section>
                             {/* confirm password */}
                             <section className="d-flex flex-column mb20">
@@ -148,15 +146,15 @@ export default function Register() {
                                 {/* on déconstruit en rajoutant la value qu'on modifie */}
                                 <input {...register("confirmPassword")}
                                     type="password" id="confirmPassword" />
-                                {errors?.confirmPassword && <p style={{ color: "red" }}>{errors.confirmPassword.message}</p>}
+                                {errors?.confirmPassword && <p className="form-error">{errors.confirmPassword.message}</p>}
                             </section>
                         </article>
                     </section>
                     {/* button validates the form */}
-                    <button disabled={isSubmitting} className="btn">S'inscrire</button>
+                    <button type="submit" disabled={isSubmitting} className="btn">S'inscrire</button>
                     {/* feedabck for the user */}
                     {feedbackGood && <p className={'feedbackGoodLight'}>{feedbackGood}</p>}
-                    {errors.generic && (<p className={`${styles.feedback}`}>{errors.generic.message}</p>)}
+                    {errors.generic && (<p className={`form-error`}>{errors.generic.message}</p>)}
                 </form>
             ) : (
                 <article className={`${styles.newReset} text-center`}>

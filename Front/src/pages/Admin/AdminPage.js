@@ -6,13 +6,16 @@ import styles from "./AdminPage.module.scss";
 
 export default function AdminPage() {
     return (
-        <main className="flex-fill">
+        <main>
             <Title title="Administration du site" />
             <Line />
             <section className={`${styles.link}`}>
                 <NavLink end to="">Articles</NavLink>
                 <NavLink to="ajoutJeu">Jeux</NavLink>
                 <NavLink to="carrousel">Slider</NavLink>
+            </section>
+            <section className={`${styles.link}`}>
+                <NavLink to="adminUtilisateur">Utilisateur</NavLink>
             </section>
             <Outlet />
 

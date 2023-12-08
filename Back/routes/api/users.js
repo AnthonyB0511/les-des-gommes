@@ -36,7 +36,7 @@ router.post("/register", async (req, res) => {
         try {
             if (result.length === 0) {
                 const hashedPassword = await bcrypt.hash(password, 10);
-                const insertSql = "INSERT INTO user(name,firstname,username, email, password,verify) VALUES(?,?,?,?,?,?)";
+                const insertSql = "INSERT INTO user(name,firstname,username, email, password) VALUES(?,?,?,?,?)";
                 const values = [name, firstname, username, email, hashedPassword, 0];
                 connection.query(insertSql, values, (err, result) => {
                     if (err) throw err;
@@ -48,7 +48,8 @@ router.post("/register", async (req, res) => {
         } catch {
             res.status(400).json("Un problème est survenu...");
         }
-    });
+    }
+    );
 });
 
 router.post("/login", (req, res) => {
@@ -82,7 +83,7 @@ router.patch('/modifyUser', upload.single("avatar"), async (req, res) => {
     const { username, email, idUser } = req.body;
     const sqlVerifyMail = `SELECT idUser, username, email FROM user WHERE email = ? AND idUser != ?`;
     const valuesVerifyMail = [email, idUser];
-    let avatar;
+    let avatar = null;
     if (req.file && req.file.filename) {
         avatar = req.file.filename;
     }
@@ -91,60 +92,61 @@ router.patch('/modifyUser', upload.single("avatar"), async (req, res) => {
 
         if (result.length) {
             let isEmail = { message: "Cette adresse mail est déjà utilisée" };
-            const filePath = path.join(__dirname, "../../uploads/avatar", avatar);
-
-            fs.unlink(filePath, (err) => {
-                if (err) {
-                    console.error("Erreur suppression d'avatar");
-                }
-                console.log("Avatar supprimé");
-            });
-
-            res.send(isEmail);
-        }
-    });
-    if (req.file) {
-        const sqlGetAvatar = "SELECT avatar FROM user WHERE idUser = ?";
-        connection.query(sqlGetAvatar, [idUser], (err, result) => {
-            if (err) throw err;
-
-            if (result[0].avatar !== null) {
-                console.log({ "Result": result[0].avatar });
-                const filePathAvatarDB = path.join(__dirname, "../../uploads/avatar", result[0].avatar);
-                fs.unlink(filePathAvatarDB, (err) => {
+            if (avatar !== null) {
+                const filePath = path.join(__dirname, "../../uploads/avatar", avatar);
+                fs.unlink(filePath, (err) => {
                     if (err) {
                         console.error("Erreur suppression d'avatar");
                     }
-                    console.log("Avatar remplacé");
+                    console.log("Avatar supprimé");
                 });
             }
-            const sqlUpdateWithAvatar = "UPDATE user SET username = ?, email = ?, avatar = ? WHERE idUser = ?";
-            connection.query(sqlUpdateWithAvatar, [username, email, avatar, idUser], (err, result) => {
-                if (err) throw err;
-                const sqlSelectUpdatedData = "SELECT idUser,username,email,avatar FROM user WHERE idUser = ?";
-                connection.query(sqlSelectUpdatedData, [idUser], (err, result) => {
+            res.send(isEmail);
+            return;
+        } else {
+            if (avatar !== null) {
+                const sqlGetAvatar = "SELECT avatar FROM user WHERE idUser = ?";
+                connection.query(sqlGetAvatar, [idUser], (err, result) => {
                     if (err) throw err;
-                    console.log(result[0]);
-                    const updatedData = result[0];
-                    const modifOk = { messageGood: "Votre profil a été mis à jour", updatedData };
-                    res.send(modifOk);
+                    if (result[0].avatar !== null) {
+                        const filePathAvatarDB = path.join(__dirname, "../../uploads/avatar", result[0].avatar);
+                        fs.unlink(filePathAvatarDB, (err) => {
+                            if (err) {
+                                console.error("Erreur suppression d'avatar");
+                            }
+                            console.log("Avatar remplacé");
+                        });
+                    }
+                    const sqlUpdateWithAvatar = "UPDATE user SET username = ?, email = ?, avatar = ? WHERE idUser = ?";
+                    connection.query(sqlUpdateWithAvatar, [username, email, avatar, idUser], (err, result) => {
+                        if (err) throw err;
+                        const sqlSelectUpdatedData = "SELECT idUser,username,email,avatar FROM user WHERE idUser = ?";
+                        connection.query(sqlSelectUpdatedData, [idUser], (err, result) => {
+                            if (err) throw err;
+                            console.log(result[0]);
+                            const updatedData = result[0];
+                            const modifOk = { messageGood: "Votre profil a été mis à jour", updatedData };
+                            res.send(modifOk);
+                        });
+                    });
                 });
-            });
-        });
-    } else {
-        const sqlUpdate = "UPDATE user SET username = ?, email = ? WHERE idUser = ?";
-        connection.query(sqlUpdate, [username, email, idUser], (err, result) => {
-            if (err) throw err;
-            const sqlSelectUpdatedData = "SELECT idUser,username,email,avatar FROM user WHERE idUser = ?";
-            connection.query(sqlSelectUpdatedData, [idUser], (err, result) => {
-                if (err) throw err;
-                console.log(result);
-                const updatedData = result[0];
-                const modifOk = { messageGood: "Votre profil a été mis à jour", updatedData };
-                res.send(modifOk);
-            });
-        });
-    }
+            } else {
+                const sqlUpdate = "UPDATE user SET username = ?, email = ? WHERE idUser = ?";
+                connection.query(sqlUpdate, [username, email, idUser], (err, result) => {
+                    if (err) throw err;
+                    const sqlSelectUpdatedData = "SELECT idUser,username,email,avatar FROM user WHERE idUser = ?";
+                    connection.query(sqlSelectUpdatedData, [idUser], (err, result) => {
+                        if (err) throw err;
+                        console.log(result);
+                        const updatedData = result[0];
+                        const modifOk = { messageGood: "Votre profil a été mis à jour", updatedData };
+                        res.send(modifOk);
+                    });
+                });
+            }
+        }
+    });
+
 
 
 });
@@ -157,10 +159,11 @@ router.get('/userConnected', (req, res) => {
             const decodedToken = jsonwebtoken.verify(token, keyPub, {
                 algorithms: "RS256",
             });
-            const sql = "SELECT username, idUser,firstname, name,password, email,avatar,role FROM user WHERE idUser = ?";
+            const sql = "SELECT username, idUser,firstname, name,password, email,avatar,ban,role FROM user WHERE idUser = ?";
             connection.query(sql, [decodedToken.sub], (err, result) => {
                 if (err) throw err;
                 const connectedUser = result[0];
+                console.log(connectedUser);
                 connectedUser.password = "";
                 if (connectedUser) {
                     res.json(connectedUser);
@@ -182,7 +185,6 @@ router.delete('/logout', (req, res) => {
 });
 
 router.get("/mailToReset/:email", (req, res) => {
-    console.log(req.params);
     const email = req.params.email;
     const sqlSearchMail = "SELECT * FROM user WHERE email = ?";
     connection.query(sqlSearchMail, [email], (err, result) => {
@@ -259,7 +261,52 @@ router.patch("/updatePassword", (req, res) => {
             res.status(200).json("Mot de passe modifié");
         });
     });
-
-
 });
+router.get("/verify/:email", (req, res) => {
+    const email = req.params.email;
+    const token = jsonwebtoken.sign({}, key, {
+        expiresIn: 600,
+        algorithm: "RS256"
+    });
+    const confirmLink = `http://localhost:3000/suppressioncompte?email=${email}&token=${token}`;
+    const mailOptions = {
+        from: 'becque.anthony@gmail.com',
+        to: email,
+        subject: "Les Dés Gommés - Suppression de votre compte",
+        text: `Cliquer sur ce lien pour ce lien pour supprimer votre compte : ${confirmLink}`
+    };
+    transporter.sendMail(mailOptions, (err, result) => {
+        if (err) {
+            throw err;
+        } else {
+            res.status(200).json({ message: "Un mail a été envoyé" });
+        }
+    });
+});
+router.delete("/deleteAccount/:email", (req, res) => {
+    const email = req.params.email;
+    const password = req.body.password;
+    console.log(password);
+    const sql = "SELECT * from user WHERE email = ?";
+    connection.query(sql, [email], async (err, result) => {
+        if (err) throw err;
+        console.log(result[0].password);
+        if (result[0] && bcrypt.compareSync(password, result[0].password)) {
+            const sqlDeleteMessage = "DELETE FROM message WHERE idUser = ?";
+            connection.query(sqlDeleteMessage, [result[0].idUser], (err, result) => {
+                if (err) throw err;
+                console.log('message supprimé');
+            });
+            const sqlDeleteUser = "DELETE FROM user WHERE idUser = ?";
+            connection.query(sqlDeleteUser, [result[0].idUser], (err, result) => {
+                if (err) throw err;
+                console.log('user supprimé');
+                res.status(200).json('compte utilisateur supprimé');
+            });
+        } else {
+            res.status(400).json("Mot de passe");
+        }
+    });
+});
+
 module.exports = router;

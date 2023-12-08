@@ -9,6 +9,7 @@ import { Line } from "../../components/utils/Line";
 import { AuthContext } from "../../context/AuthContext";
 import { ApiContext } from "../../context/ApiContext";
 import { Link } from "react-router-dom";
+import SuspendAccountAdmin from "../Security/SuspendAccountAdmin";
 /**
  * 
  * @returns change profile
@@ -16,16 +17,15 @@ import { Link } from "react-router-dom";
 
 export default function Profile() {
     const { user } = useContext(AuthContext);
-    const { BASE_API_URL } = useContext(ApiContext);
+    const BASE_API_URL = useContext(ApiContext);
     // need to shows of the user the return
     const [feedback, setFeedback] = useState("");
     const [feedbackGood, setFeedbackGood] = useState("");
+    const [mailSend, setMailSend] = useState("");
     const [errorAvatar, setErrorAvatar] = useState("");
+    const [submitForm, setSubmitForm] = useState(false);
     const avatarRef = useRef();
-    // useState of inputFile
-    const [selectedFile, setSelectedFile] = useState(null);
-    // to keep the avatar
-    const [previewImage, setPreviewImage] = useState(null);
+
 
     //
     const navigate = useNavigate();
@@ -51,7 +51,8 @@ export default function Profile() {
         register,
         handleSubmit,
         getValues,
-        formState: { errors }
+
+        formState: { errors, isSubmitting }
     } = useForm({
         defaultValues,
         mode: "onChange",
@@ -108,29 +109,27 @@ export default function Profile() {
             console.error(error);
         }
     }
+    async function handleDeleteAccount() {
+        setSubmitForm(true);
+        try {
+            const response = await fetch(`${BASE_API_URL}/users/verify/${user.email}`);
+            console.log(user.email);
+            if (response.ok) {
+                setMailSend("Un mail a été envoyé");
+                setTimeout(() => {
+                    setMailSend("");
+                }, 3000);
+            }
 
-
-
-    // function shows the avatar befor validation;
-    function handleChange(event) {
-        // file
-        const file = event.target.files[0];
-        setSelectedFile(file);
-        if (file) {
-            const fileReader = new FileReader();
-            fileReader.readAsDataURL(file);
-            fileReader.onload = () => {
-                setPreviewImage(fileReader.result);
-            };
-        } else {
-            setPreviewImage(null);
+        } catch (error) {
+            console.error(error);
+        } finally {
+            setSubmitForm(false);
         }
     }
 
-    /**
-     * 
-     * @returns modify the avatar iin BDD
-     */
+
+
 
 
     return (
@@ -138,7 +137,7 @@ export default function Profile() {
             <Title title="Votre Profil" />
             <Line />
             <main className={`${styles.profile}`} >
-                <form onSubmit={handleSubmit(submit)}
+                <form onSubmit={handleSubmit(submit)} className="form2"
                 >
                     <section className={`${styles.container}`}>
                         <div className={`${styles.contentImg}  mb20`}>
@@ -154,7 +153,7 @@ export default function Profile() {
                                 type="text" id="firstname" disabled="disabled" />
                             <label htmlFor="name">Nom</label>
                             <input {...register("name")}
-                                type="text" id="name" disabled="disabled" onChange={handleChange} />
+                                type="text" id="name" disabled="disabled" />
                         </section>
                     </section>
                     <section className={`${styles.containerInput}`}>
@@ -165,7 +164,7 @@ export default function Profile() {
                         <label htmlFor="mail">E-mail</label>
                         <input {...register("email")}
                             type="email" id="email" />
-                        {errors?.email && <p style={{ color: "red" }}>{errors.email.message}</p>}
+                        {errors?.email && <p className="form-error">{errors.email.message}</p>}
                     </section>
 
 
@@ -173,17 +172,20 @@ export default function Profile() {
                         <label htmlFor="username">Nom du profil</label>
                         <input {...register("username")}
                             type="text" id="username" />
-                        {errors?.username && <p style={{ color: "red" }}>{errors.username.message}</p>}
+                        {errors?.username && <p className="form-error">{errors.username.message}</p>}
                     </section>
                     <p><Link to="/motdepasseoublie">Souhaitez-vous modifier votre mot de passe ?</Link></p>
 
                     {/* </>} */}
 
-                    <button className={`btn`}>Enregistrer les modifications</button>
+                    <button className={`btn`} disabled={isSubmitting} type="submit">Enregistrer les modifications</button>
                     {feedback && <p className={`${styles.feedback}`}>{feedback}</p>}
-                    {feedbackGood && <p className={`${styles.feedbackGood}`}>{feedbackGood}</p>}
+                    {feedbackGood && <p className={`feedbackGood`}>{feedbackGood}</p>}
 
                 </form>
+                <button className="btn mb20" onClick={handleDeleteAccount} disabled={submitForm}>Supprimer votre compte</button>
+                {mailSend && <p className="feedbackGoodLight mb20">{mailSend}</p>}
+
             </main>
         </>
     );

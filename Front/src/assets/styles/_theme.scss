@@ -1,3 +1,5 @@
+@use"./mixin" as mixin;
+
 .btn {
   display: flex;
   margin-block: 15px;
@@ -13,6 +15,20 @@
   z-index: 0;
   margin: 0 auto;
   cursor: pointer;
+
+  @include mixin.xs {
+    font-size: 0.8rem;
+  }
+
+  @include mixin.intxs {
+    font-size: 0.8rem
+  }
+
+  @include mixin.intxxs {
+    font-size: 0.7rem;
+    padding: 4px 10px;
+  }
+
 
   &:before {
     content: '';
@@ -65,18 +81,19 @@ label {
   font-size: clamp(1rem, 1.2rem, 1.5rem);
 }
 
-.feedbackGood {
-  text-transform: uppercase;
-  background-color: var(--action);
-  border-radius: 10vh 0 10vh 0;
-  font-weight: 800;
-  padding: 7px 18px;
-  font-size: 1rem;
-  text-align: center;
-  width: 66%;
-  margin: 15px auto;
-  border: 2px solid var(--red)
-}
+// .feedbackGood {
+//   text-transform: uppercase;
+//   background-color: var(--action);
+//   border-radius: 10vh 0 10vh 0;
+//   font-weight: 800;
+//   padding: 7px 18px;
+//   font-size: 1rem;
+//   text-align: center;
+//   width: 66%;
+//   margin: 15px auto;
+//   border: 2px solid var(--red)
+// }
+
 
 .form2 {
   display: flex;
@@ -88,8 +105,37 @@ label {
   width: 50%;
   margin: 5% auto;
 
-  .h3 {
+  @include mixin.sm-lt {
+    width: 66%
+  }
+
+  @include mixin.sm {
+    width: 80%;
+  }
+
+  @include mixin.xs {
+    width: 82%;
+  }
+
+  @include mixin.intxs {
+    width: 85%;
+  }
+
+  @include mixin.xxs {
+    width: 90%;
+  }
+
+  @include mixin.intxxs {
+    width: 95%;
+  }
+
+
+  h2 {
     text-align: center;
+
+    @include mixin.intxs {
+      font-size: 1.3rem;
+    }
   }
 
   .labelAdmin {
@@ -136,5 +182,18 @@ label {
   text-align: center;
   color: var(--blue);
   font-weight: 600;
-  font-size: clamp(0.8rem, 1.3rem, 1.7rem)
+  font-size: clamp(1rem, 1.2rem, 1.5rem);
+  margin-top: 15px;
+  -webkit-text-stroke-width: 0.1px;
+  -webkit-text-stroke-color: black;
+}
+
+.feedbackGood {
+  text-align: center;
+  color: white;
+  font-weight: 600;
+  font-size: clamp(0.8rem, 1.3rem, 1.7rem);
+  margin-top: 15px;
+  -webkit-text-stroke-width: 0.1px;
+  -webkit-text-stroke-color: black;
 }

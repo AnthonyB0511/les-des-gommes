@@ -12,7 +12,6 @@ import style from "./Talk.module.scss";
 export default function Talk({ addMessage }) {
     const { user } = useContext(AuthContext);
     const BASE_API_URL = useContext(ApiContext);
-    const [feedbackGood, setFeedbackGood] = useState("");
     const [feedback, setFeedback] = useState("");
     const yupSchema = yup.object({
         content: yup.string().required("Le champ doit être rempli.")
@@ -30,7 +29,7 @@ export default function Talk({ addMessage }) {
         resolver: yupResolver(yupSchema)
     });
     async function submit(values) {
-        console.log(values);
+
         try {
             const response = await fetch(`${BASE_API_URL}/discussion/sendMessage`, {
                 method: "POST",
@@ -41,13 +40,8 @@ export default function Talk({ addMessage }) {
             });
             if (response.ok) {
                 const newMessage = await response.json();
-                console.log(newMessage);
-                setFeedbackGood("Message envoyé");
                 addMessage(newMessage);
                 reset(defaultValues);
-                setTimeout(() => {
-                    setFeedbackGood("");
-                }, 2000);
             }
             else {
                 setFeedback("Une erreur est survenue");
@@ -65,7 +59,6 @@ export default function Talk({ addMessage }) {
 
             </form>
             <section className={`d-flex align-items-center my30 ${style.feed}`}>
-                {feedbackGood && <p className="feedbackGood">{feedbackGood}</p>}
                 {feedback && <p className="feedback">{feedback}</p>}
             </section>
         </>

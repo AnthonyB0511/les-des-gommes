@@ -74,19 +74,19 @@ export default function ModifArticles({ key, article, index }) {
                 <i class="fa-solid fa-chevron-down"></i>
             </section>
 
-            <label htmlFor="title">Titre</label>
+            <label htmlFor="title" className="labelAdmin">Titre</label>
             <input type="text" id="title" {...register("title")} className="inputAdmin" />
             {errors?.title && <p className="form-error">{errors.title.message}</p>}
-            <label htmlFor="content">Contenu</label>
-            <input type="textArea" id="content" {...register("content")} className="inputAdmin" />
+            <label htmlFor="content" className="labelAdmin">Contenu</label>
+            <textarea id="content" {...register("content")} className="inputAdmin" />
             {errors?.content && <p className="form-error">{errors.content.message}</p>}
-            <label htmlFor="descriptionPhoto">Description Photo</label>
+            <label htmlFor="descriptionPhoto" className="labelAdmin">Description Photo</label>
             <input type="text" id="descriptionPhoto" {...register("descriptionPhoto")} className="inputAdmin" />
             {errors?.descriptionPhoto && <p className="form-error">{errors.descriptionPhoto.message}</p>}
-            <label htmlFor="photo">Photo</label>
+            <label htmlFor="photo" className="labelAdmin">Photo</label>
             <input type="file" id="photo" {...register("photo")} ref={photoRef} className="inputAdmin" />
             {errorPhoto && <p className="form-error">{errorPhoto}</p>}
-            <button className="btn">Modifier l'article</button>
+            <button className="btn mt20">Modifier l'article</button>
             {feedbackGood && <p className="feedbackGood">{feedbackGood}</p>}
 
         </form>

@@ -6,16 +6,22 @@ import AuthProvider from "./components/Authprovider/Authprovider";
 
 function App() {
   const user = useLoaderData();
-  console.log({ user });
   return (
     <>
-      <AuthProvider>
-        <Header />
-        <Suspense>
-          <Outlet />
-        </Suspense>
-        <Footer />
-      </AuthProvider>
+      <body>
+        <AuthProvider>
+          <header><Header /></header>
+
+          <Suspense>
+            <main>
+              <Outlet />
+            </main>
+
+          </Suspense>
+          <footer><Footer /></footer>
+
+        </AuthProvider>
+      </body>
     </>
   );
 }

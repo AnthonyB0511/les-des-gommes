@@ -1,8 +1,29 @@
+@use"../../assets/styles/mixin" as mixin;
+
 .discussion {
-    width: clamp(50%, 75%, 95%);
+    width: 80%;
     margin: 0 auto;
 
+    @include mixin.intxs {
+        width: 90%;
+    }
+
+    @include mixin.intxxs {
+        width: 95%;
+
+    }
+
     section {
+        .date {
+            @include mixin.intxs {
+                font-size: 0.7rem;
+            }
+
+            @include mixin.intxxs {
+                font-size: 0.6rem;
+            }
+
+        }
 
         img {
             width: clamp(5vh, 8vh, 10vh);
@@ -11,6 +32,7 @@
         }
 
         article {
+
             i {
                 cursor: pointer;
                 transition: .3s all;
@@ -61,5 +83,38 @@
         &:hover {
             transform: scale(1.3);
         }
+    }
+}
+
+.feedback {
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    margin: 0 auto;
+    background-color: var(--action);
+    border-radius: 5vh 0 5vh 0;
+    border: var(--red) 2px solid;
+    padding: 1vh 5vh;
+    font-weight: 700;
+
+    @include mixin.sm {
+        padding: 1vh 3vh;
+    }
+
+    @include mixin.xs {
+        padding: 1vh 2vh;
+    }
+
+    @include mixin.intxs {
+        padding: 1vw 1vw;
+        text-align: center;
+        width: 70%;
+    }
+
+    @include mixin.intxs {
+        padding: 1vw 1vw;
+        text-align: center;
+        width: 90%;
     }
 }

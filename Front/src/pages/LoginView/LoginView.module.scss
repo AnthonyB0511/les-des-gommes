@@ -1,27 +1,28 @@
+@use"../../assets/styles/mixin" as mixin;
+
 .login {
 
     .form {
         width: 33%;
         margin: 0 auto;
 
-        .feedbackGood {
-            color: var(--text-color);
-            text-align: center;
-            margin-block: 25px;
-            font-size: 1.2rem;
-            font-weight: 500;
-            background-color: var(--action);
-            border-radius: 10vh 0 10vh 0;
-            border: inset 2px var(--red);
+        @include mixin.md-lt {
+            width: 50%
         }
 
-        .feedback {
-            text-align: center;
-            color: var(--red);
-            font-weight: 600;
-            margin-top: 25px;
-            font-size: 1.2rem;
+        @include mixin.sm-lt {
+            width: 65%
         }
+
+        @include mixin.intxs {
+            width: 70%
+        }
+
+        @include mixin.intxxs {
+            width: 85%
+        }
+
+
 
         .forget {
             text-align: center;

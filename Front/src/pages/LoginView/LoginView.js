@@ -10,6 +10,7 @@ import { AuthContext } from "../../context/AuthContext";
 
 export default function Login() {
     const [feedbackGood, setFeedbackGood] = useState("");
+    const { user } = useContext(AuthContext);
     /**
      * yupschema to validate the form Login with params
      */
@@ -25,6 +26,7 @@ export default function Login() {
         register,
         handleSubmit,
         reset,
+        isSubmitting,
         formState: { errors },
         clearErrors,
         setError
@@ -42,11 +44,9 @@ export default function Login() {
         try {
             clearErrors();
             await login(values);
-            setFeedbackGood("Connexion réussie. Vous allez être redirigé.");
             reset(defaultValues);
-            setTimeout(() => {
-                navigate("/profile");
-            }, 2000);
+            setFeedbackGood("Connexion réussie. Vous allez être redirigé.");
+
         } catch (error) {
             setError("generic", { type: "generic", message: error });
         }
@@ -55,6 +55,7 @@ export default function Login() {
         navigate("/motdepasseoublie");
     };
     return (
+
         <article className={`${styles.login}`}>
             <section className={`${styles.form}`}>
                 <form onSubmit={handleSubmit(submit)} className="d-flex flex-column card p20 mb20">
@@ -63,25 +64,25 @@ export default function Login() {
                         <label htmlFor="email"> Votre mail</label>
                         <input type="email" id="email"
                             {...register("email")} />
-                        {errors?.email && <p style={{ color: "red" }}>{errors.email.message}</p>}
+                        {errors?.email && <p className="form-error">{errors.email.message}</p>}
                     </section>
                     {/* password user */}
                     <section className="d-flex flex-column mb20">
                         <label htmlFor="password">Mot de passe</label>
                         <input type="password" id="Password"
                             {...register("password")} />
-                        {errors?.password && <p style={{ color: "red" }}>{errors.password.message}</p>}
+                        {errors?.password && <p className="form-error">{errors.password.message}</p>}
                     </section>
                     {/* //button Connexion */}
                     <section>
                         <button
-                            className="btn"
+                            className="btn" type="submit" disabled={isSubmitting}
                         >Connexion
                         </button>
                     </section>
                     {/* //feedback for user */}
                     {feedbackGood && <p className='feedbackGoodLight'>{feedbackGood}</p>}
-                    {errors.generic && (<p className={`${styles.feedback}`}>{errors.generic.message}</p>)}
+                    {errors.generic && (<p className={`form-error`}>{errors.generic.message}</p>)}
                 </form>
 
                 <article className={`${styles.forget}`} onClick={forgotPassword}>Vous avez oublié votre mot de passe ?</article>

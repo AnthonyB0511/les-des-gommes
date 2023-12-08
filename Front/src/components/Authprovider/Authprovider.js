@@ -12,7 +12,10 @@ export default function AuthProvider({ children }) {
     const [unlogged, setUnlogged] = useState(false);
     async function login(values) {
         const newUser = await signin(values);
-        setUser(newUser);
+        setTimeout(() => {
+            setUser(newUser);
+        }, 3000);
+
     }
     async function logout() {
         await signout();
@@ -26,7 +29,7 @@ export default function AuthProvider({ children }) {
 
     return (
         <AuthContext.Provider value={{
-            user, login, logout, unlogged
+            user, login, logout, unlogged, setUser
         }}>
             {children}
         </AuthContext.Provider>

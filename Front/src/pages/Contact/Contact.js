@@ -1,6 +1,5 @@
 import { Title } from "../../components/utils/Title";
 import { Line } from "../../components/utils/Line";
-import styles from "./Contact.module.scss";
 import { useState, useContext } from "react";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";

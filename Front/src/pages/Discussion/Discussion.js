@@ -4,7 +4,7 @@ import styles from "./Discussion.module.scss";
 import Talk from "./Talk/Talk";
 import { useFetchData } from "../../Hooks/useFetchData";
 import Loading from "../../components/utils/Loading";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import ScrollToTopButton from "./component/ScrollToTopButton";
 import { ApiContext } from "../../context/ApiContext";
 import { AuthContext } from "../../context/AuthContext";
@@ -14,8 +14,8 @@ export default function Discussion() {
     const BASE_API_URL = useContext(ApiContext);
     const [[messages, setMessages], isLoading] = useFetchData(BASE_API_URL, 'discussion/getMessage');
     const { user } = useContext(AuthContext);
+    const [feedback, setFeedBack] = useState("");
     function deleteMessageFront(idParam) {
-        console.log(idParam);
         setMessages(messages.filter((message) => message.idMessage !== idParam));
     }
     async function deleteMessage(messageId) {
@@ -41,6 +41,26 @@ export default function Discussion() {
                     ? newMessage : message
             ));
     }
+    async function alertMessage(message) {
+        try {
+            const response = await fetch(`${BASE_API_URL}/discussion/alertMessage/${user.email}`, {
+                method: "POST",
+                body: JSON.stringify(message),
+                headers: { "Content-type": "application/json" }
+            });
+            if (response.ok) {
+                const messagesBack = await response.json();
+                setFeedBack("Le message a été signalé");
+                setTimeout(() => {
+                    setMessages(messagesBack);
+                    setFeedBack("");
+                }, 2000);
+
+            }
+        } catch (error) {
+            console.error(error);
+        }
+    }
     async function modifyMessage(message) {
         try {
             const response = await fetch(`${BASE_API_URL}/discussion/updateMessage`, {
@@ -59,6 +79,7 @@ export default function Discussion() {
     const addMessage = (newMessage) => {
         setMessages([newMessage, ...messages]);
     };
+    console.log(messages);
     return (
         <main className={`${styles.discussion}`}>
             <Title title="Discussion" />
@@ -68,14 +89,22 @@ export default function Discussion() {
             ) : (
 
                 messages.map((message) => (
-                    (message.edit && user.idUser === message.idUser) ? (
-                        <EditMessage key={message.idMessage} message={message} modifyMessage={modifyMessage} />
+                    (message.edit && (user.idUser === message.idUser || user.role === 'admin')) ? (
+
+                        <EditMessage key={message.idMessage} message={message} modifyMessage={modifyMessage} alertMessage={alertMessage} feedback={feedback} user={user} />
+
                     ) : (
-                        <Message key={message.idMessage} message={message} modifyMessage={modifyMessage} deleteMessage={deleteMessage} user={user} />)
+
+                        !(message.report === 1 && user.role !== 'admin') &&
+                        (
+                            <Message key={message.idMessage} message={message} modifyMessage={modifyMessage} deleteMessage={deleteMessage} user={user} alertMessage={alertMessage} feedback={feedback} />
+                        ))
 
                 ))
+
             )
             }
+            {feedback && <p className={`${styles.feedback}`}>{feedback}</p>}
             <ScrollToTopButton />
             {/* <Talk addMessage={addMessage} /> */}
 

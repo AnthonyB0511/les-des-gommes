@@ -3,8 +3,9 @@ import App from "./App";
 import { lazy } from "react";
 import { userLoader } from "./loaders/userLoader";
 import ProtectedRoute from "./components/ProtectedRoute/ProtectedRoute";
-
-
+import ProtectedRouteAdmin from "./components/ProtectedRoute/ProtectedRouteAdmin";
+import ProtectedRouteUser from "./components/ProtectedRoute/ProtectedRouteUser";
+import ProtectedRouteBlacklist from "./components/ProtectedRoute/ProtectedRouteBlacklist";
 const Home = lazy(() => import("./pages/Accueil/Home"));
 const Presentation = lazy(() => import("./pages/Presentation/Presentation"));
 const Ludotheque = lazy(() => import("./pages/Ludotheque/Ludotheque"));
@@ -22,8 +23,8 @@ const AddGame = lazy(() => import("./pages/Admin/component/AddGame"));
 const ForgotPassword = lazy(() => import("./pages/Security/ForgotPassword"));
 const ConfirmAdressRegister = lazy(() => import("./pages/Register/ConfirmAdressRegister"));
 const ResetPassword = lazy(() => import("./pages/Security/ResetPassword"));
-
-
+const DeleteAccount = lazy(() => import("./pages/Security/DeleteAccount"));
+const AdminUser = lazy(() => import("./pages/Security/SuspendAccountAdmin"));
 export const router = createBrowserRouter([
     {
         path: "/",
@@ -38,7 +39,13 @@ export const router = createBrowserRouter([
             },
             {
                 path: "/admin",
-                element: <AdminPage />,
+                element: (
+                    <ProtectedRouteAdmin>
+                        <AdminPage />
+                    </ProtectedRouteAdmin>)
+
+
+                ,
                 children: [
                     {
                         path: "",
@@ -49,6 +56,9 @@ export const router = createBrowserRouter([
                     }, {
                         path: "carrousel",
                         element: <ModifCarrousel />
+                    }, {
+                        path: "adminUtilisateur",
+                        element: <AdminUser />
                     }
                 ]
             },
@@ -75,13 +85,17 @@ export const router = createBrowserRouter([
             {
                 path: "/discussion",
                 element: (
-                    <ProtectedRoute>
+                    <ProtectedRouteBlacklist>
                         <Discussion />
-                    </ProtectedRoute>)
+                    </ProtectedRouteBlacklist>)
             },
             {
                 path: "/login",
-                element: <Login />,
+                element: (
+                    <ProtectedRouteUser>
+                        <Login />
+                    </ProtectedRouteUser>
+                ),
                 children: [
                     {
                         path: "",
@@ -98,11 +112,24 @@ export const router = createBrowserRouter([
 
             }, {
                 path: "/motdepasseoublie",
-                element: <ForgotPassword />
+                element:
+                    (<ProtectedRoute>
+                        <ForgotPassword />
+                    </ProtectedRoute>)
             }, {
                 path: "/modifiermdp",
-                element: <ResetPassword />
-            },
+                element: (
+                    <ProtectedRoute>
+                        <ResetPassword />
+                    </ProtectedRoute>)
+            }, {
+                path: "/suppressioncompte",
+                element:
+                    (
+                        <ProtectedRoute>
+                            <DeleteAccount />
+                        </ProtectedRoute>)
+            }
         ]
     }
 ]);

@@ -1,16 +1,9 @@
+@use"../../assets/styles/mixin" as mixin;
+
 .profile {
-    width: 40%;
-    margin: 0 auto;
-    margin-block: 3%;
-    background-color: var(--blue);
-    border-radius: 10vh 0 10vh 0;
-    border: solid var(--red) 2px;
-    box-shadow: var(--box-shadow);
-    transition: ease-in-out all .3s;
+
 
     form {
-        width: 100%;
-        padding: 5%;
 
         .container {
             display: flex;
@@ -47,6 +40,18 @@
                 height: 18vh;
                 border-radius: 100%;
 
+                @include mixin.xxxs {
+                    width: 15vh;
+                    height: 15vh;
+                }
+
+                @include mixin.intxxs {
+                    width: 13vh;
+                    height: 13vh;
+                    align-self: center;
+                }
+
+
 
                 .picture {
                     border-radius: 100%;
@@ -68,6 +73,14 @@
 
         label {
             font-size: 1.5rem;
+
+            @include mixin.intxs {
+                font-size: 1.2rem;
+            }
+
+            @include mixin.intxxs {
+                font-size: 1rem;
+            }
         }
 
         input:-webkit-autofill,
@@ -85,21 +98,16 @@
             font-size: 1.3rem;
             font-style: italic;
             color: #000;
+
+            @include mixin.intxs {
+                font-size: 1.2rem;
+            }
+
+            @include mixin.intxxs {
+                font-size: 1rem;
+            }
         }
 
-        .feedback {
-            color: var(--red);
-            text-align: center;
-            margin-top: 3%;
-            font-size: 1.3rem;
-        }
-
-        .feedbackGood {
-            color: green;
-            text-align: center;
-            margin-top: 3%;
-            font-size: 1.3rem;
-        }
 
         p {
             text-align: center;

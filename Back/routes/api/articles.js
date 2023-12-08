@@ -3,7 +3,6 @@ const connection = require("../../database/index");
 const multer = require("multer");
 const path = require("path");
 const fs = require("fs");
-const { log } = require("console");
 const upload = multer({
     storage: multer.diskStorage({
         destination: (req, file, cb) => {
@@ -14,7 +13,6 @@ const upload = multer({
         }
     }),
     fileFilter: (req, file, cb) => {
-        // console.log(file);
         cb(null, true);
     }
 });
@@ -34,18 +32,15 @@ router.get('/readArticle', (req, res) => {
 router.patch('/updateArticle', upload.single("photo"), async (req, res) => {
     const { title, content, descriptionPhoto } = req.body;
     const idArticle = req.query.idArticle;
-    console.log(idArticle);
     let photo;
     if (req.file) {
         photo = req.file.filename;
     } else {
         photo = null;
     }
-
     const sqlGetPhoto = "SELECT * FROM article WHERE idArticle = ?";
     connection.query(sqlGetPhoto, [idArticle], (err, result) => {
         if (err) throw err;
-        console.log(result[0].photo);
         const filePathPhotoDB = path.join(__dirname, "../../uploads/imgArticles", result[0].photo);
         fs.unlink(filePathPhotoDB, (err) => {
             if (err) {

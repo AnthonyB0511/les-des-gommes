@@ -33,7 +33,7 @@ const ForgotPassword = () => {
     const {
         register,
         handleSubmit,
-        formState: { errors },
+        formState: { errors, isSubmitting },
     } = useForm({
         defaultValues,
         mode: "onChange",
@@ -80,7 +80,7 @@ const ForgotPassword = () => {
                 {feedbackGood && (
                     <p className={`feedbackGoodLight mb20`}>{feedbackGood}</p>
                 )}
-                <button className="btn">
+                <button type="submit" disabled={isSubmitting} className="btn">
                     Envoyer
                 </button>
             </form>

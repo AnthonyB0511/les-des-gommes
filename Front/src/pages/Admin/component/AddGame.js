@@ -106,23 +106,23 @@ export default function Admin() {
 
 
         <form onSubmit={handleSubmit(submitGames)} className="form2">
-            <h3>Ajouter un jeu</h3>
-            <label htmlFor="nameGame">Nom du jeu</label>
+            <h3 className='text-center'>Ajouter un jeu</h3>
+            <label htmlFor="nameGame" className="labelAdmin">Nom du jeu</label>
             <input type="text" id="nameGame" {...register("nameGame")} className="inputAdmin" />
             {errors?.nameGame && <p className="feedback">{errors.nameGame.message}</p>}
-            <label htmlFor="editor">Editeur de jeu </label>
+            <label htmlFor="editor" className="labelAdmin">Editeur de jeu </label>
             <input type="text" id="editor" {...register("editor")} className="inputAdmin" />
             {errors?.editor && <p className="feedback">{errors.editor.message}</p>}
-            <label htmlFor="author">Auteur du jeu </label>
+            <label htmlFor="author" className="labelAdmin">Auteur du jeu </label>
             <input type="text" id="author" {...register("author")} className="inputAdmin" />
             {errors?.author && <p className="feedback">{errors.author.message}</p>}
-            <label htmlFor="year">Année de sortie du jeu </label>
+            <label htmlFor="year" className="labelAdmin">Année de sortie du jeu </label>
             <input type="number" id="year" {...register("year")} className="inputAdmin" />
             {errors?.year && <p className="feedback">{errors.year.message}</p>}
-            <label htmlFor="photo">Ajouter les liens d'image</label>
+            <label htmlFor="photo" className="labelAdmin">Ajouter les liens d'image</label>
             <input type="file" id="photo" ref={photoRef} className="inputAdmin" />
             {errorPhoto && <p className="feedback">{errorPhoto}</p>}
-            <label htmlFor="genre">Quel est le genre du jeu ?</label>
+            <label htmlFor="genre" className="labelAdmin">Quel est le genre du jeu ?</label>
             <select id="genre" {...register(`genre`)}>
                 {genre.map((g) => (
                     <option key={g.idGenre} value={g.idGenre}>{g.genre}</option>

@@ -58,8 +58,18 @@ router.post("/addGame", upload.single('photo'), (req, res) => {
 
 router.delete("/deleteGameData/:id", (req, res) => {
     try {
-        console.log(req.params);
         const idGame = req.params.id;
+        const selectGames = "SELECT * FROM game WHERE idGame = ?";
+        connection.query(selectGames, [idGame], (err, result) => {
+            if (err) throw err;
+            const filePath = path.join(__dirname, "../../uploads/games", result[0].photo);
+            fs.unlink(filePath, (err) => {
+                if (err) {
+                    console.error(err);
+                }
+            });
+
+        });
         const deleteGameSql = "DELETE FROM game WHERE idGame = ?";
         connection.query(deleteGameSql, [idGame], (err, result) => {
             if (err) throw err;

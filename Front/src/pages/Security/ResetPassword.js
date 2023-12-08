@@ -124,14 +124,14 @@ export default function ResetPassword() {
                     <label htmlFor="confirmPassword">Confirmer le mot de passe</label>
                     <input type="password" id="confirmPassword"{...register("confirmPassword")} />
                     {errors?.confirmPassword && <p className="form-error">{errors.confirmPassword.message}</p>}
-                    <button isSubmitting={isSubmitting} className='btn'>Envoyer</button>
+                    <button disabled={isSubmitting} type="submit" className='btn'>Envoyer</button>
                     {feedbackGood && <p className='feedbackGoodLight'>{feedbackGood}</p>}
                 </form>
             ) : (
                 <article className={`${styles.newReset} text-center`}>
                     <p>Votre lien a expiré. </p>
                     <p>Souhaiter-vous obtenir un nouveau lien ?</p>
-                    <button className="btn" onClick={submitNewLink}>Obtenir un nouveau lien</button>
+                    <button className="btn" type="submit" onClick={submitNewLink}>Obtenir un nouveau lien</button>
                     {feedbackGood && <p className='feedbackGoodLight'>Un email a été envoyé sur {email}</p>}
                 </article>
             )}

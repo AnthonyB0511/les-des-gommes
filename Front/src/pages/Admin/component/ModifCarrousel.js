@@ -63,7 +63,6 @@ const ModifCarrousel = ({ photo, index }) => {
 
 
     return (
-
         <form className="form2" onSubmit={handleSubmit} encType="multipart/form-data">
             <input type="file" name="files" multiple onChange={handleFileChange} ref={photoRef} />
             <button className="btn" type="submit">Envoyer</button>

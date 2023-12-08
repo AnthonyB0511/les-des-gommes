@@ -6,6 +6,8 @@ footer {
     padding: 2%;
     border-radius: 10vh 0 0 0;
 
+    bottom: 0;
+
     @include mixin.md-lt {
         font-size: 14px;
         border-radius: 7vh 0 0 0;

@@ -1,9 +1,44 @@
+@use"../../assets/styles/mixin" as mixin;
+
 .formRegister {
     width: 45%;
     margin: 6% auto;
 
+    @include mixin.intxl {
+        width: 80%
+    }
+
+    @include mixin.intxs {
+        width: 100%
+    }
+
+    section {
+        display: flex;
+        flex-wrap: wrap;
+
+
+    }
+
+
     .container {
         width: 40%;
+        margin: 0 auto;
+
+        @include mixin.md-lt {
+            width: 80%
+        }
+
+        @include mixin.sm-lt {
+            width: 85%
+        }
+
+        @include mixin.intxs {
+            width: 87%
+        }
+
+        @include mixin.intxxs {
+            width: 90%
+        }
     }
 
 }
