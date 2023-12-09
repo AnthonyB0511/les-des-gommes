@@ -1,50 +1,39 @@
 @use"../../assets/styles/mixin" as mixin;
 
 .search {
-    margin-left: 70%;
-
-
-    @include mixin.lg-lt {
-        margin-left: 70%;
-    }
-
-    @include mixin.md-lt {
-        margin-left: 65%;
-    }
-
-    @include mixin.sm-lt {
-        margin-left: 55%;
-    }
-
-    @include mixin.intxxs {
-        margin-left: 45%;
-    }
-
-    @include mixin.smallest {
-        margin-left: 35%
-    }
-
-
+    margin: 0 auto;
 
     input {
         padding: 2%;
-        border: none;
+        // border: none;
         background-color: var(--primary);
         font-size: 1.5rem;
         font-family: var(--font);
-        width: 100%;
+        width: 50%;
+
+        @include mixin.intxs {
+            padding: 2px;
+            font-size: 1rem;
+
+        }
     }
 }
 
 
 
 .grid {
-    margin: 8% 0;
+    margin: 5% 0;
     display: grid;
     place-content: center;
-    grid-template-columns: repeat(3, 350px);
-    grid-auto-columns: repeat(3, 350px);
-    gap: 100px;
+    grid-template-columns: repeat(4, 300px);
+    grid-auto-columns: repeat(4, 300px);
+    gap: 75px;
+
+    @include mixin.intxl {
+        grid-template-columns: repeat(4, 275px);
+        grid-auto-columns: repeat(3, 275px);
+        gap: 50px;
+    }
 
     @include mixin.xl {
         grid-template-columns: repeat(3, 325px);
@@ -65,26 +54,23 @@
     }
 
     @include mixin.sm-lt {
-        grid-template-columns: repeat(2, 250px);
-        grid-auto-columns: repeat(2, 250px);
+        grid-template-columns: repeat(2, 275px);
+        grid-auto-columns: repeat(2, 275px);
         gap: 40px;
     }
 
 
     @include mixin.xs {
-        grid-template-columns: 430px;
-        grid-auto-columns: 430px;
+        grid-template-columns: repeat(2, 200px);
+        grid-auto-columns: repeat(2, 200px);
     }
 
     @include mixin.intxs {
-        grid-template-columns: 375px;
-        grid-auto-columns: 375px;
+        grid-template-columns: 250px;
+        grid-auto-columns: 250px;
     }
 
-    @include mixin.xxxxs {
-        grid-template-columns: 310px;
-        grid-auto-columns: 310px;
-    }
+
 
     @include mixin.smallest {
         grid-template-columns: 1fr;

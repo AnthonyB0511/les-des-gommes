@@ -1,3 +1,5 @@
+@use"../../../assets/styles/mixin" as mixin;
+
 .container {
     position: relative;
 
@@ -23,6 +25,21 @@
             border-radius: 10vh 0 0 0;
             box-shadow: var(--box-shadow-nav);
             transition: 1s transform;
+            height: 30vh;
+            width: 100%;
+
+            @include mixin.sm-lt {
+                height: 25vh
+            }
+
+            @include mixin.xs {
+                height: 22vh
+            }
+
+            @include mixin.intxs {
+                height: 25vh
+            }
+
 
             &:hover {
                 transform: scale(1.1);
@@ -32,11 +49,22 @@
 
     .title {
         background-color: var(--blue);
-        padding: 7%;
+        padding: 5% 1%;
         text-align: center;
         font-weight: 600;
         border-radius: 0 0 10vh 0;
-        font-size: 1.5rem;
+        font-size: 1.2rem;
         box-shadow: var(--box-shadow-nav);
+
+        @include mixin.sm-lt {
+            font-size: 1.3rem;
+        }
+
+        @include mixin.intxs {
+            padding: 3% 1%;
+            font-size: 1.2rem;
+        }
+
     }
+
 }

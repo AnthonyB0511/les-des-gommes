@@ -30,7 +30,6 @@ export default function CardGame({ game, deleteGameFront }) {
                 {user?.role === 'admin' &&
                     <i onClick={deleteGame} className="fa-solid fa-circle-xmark"></i>
                 }
-                <section className={`${styles.heart}`}><i className="fa-regular fa-heart"></i></section>
 
             </article>
             <p className={`${styles.title}`}>{game.nameGame}</p>
