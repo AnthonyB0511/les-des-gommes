@@ -11,9 +11,9 @@ export default function Footer() {
             <section className={`${styles.mention} d-flex justify-content-center align-items-center`}>
                 <Link>Mentions légales</Link>
                 <p className="space"> | </p>
-                <Link>Politiques de confidentialités</Link>
+                <Link to='politiquedeconfidentialite'>Politiques de confidentialités</Link>
                 <p className="space"> | </p>
-                <Link>Conditions d'utilisations</Link>
+                <Link to='/conditionsgenerales'>Conditions d'utilisations</Link>
             </section>
         </footer>
     );

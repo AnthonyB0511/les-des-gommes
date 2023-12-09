@@ -1,8 +1,8 @@
 .loading {
-    display: flex;
-    justify-content: center;
-    flex: 1 1 auto;
     min-height: 60vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
     .spinner {
         font-size: 40px;

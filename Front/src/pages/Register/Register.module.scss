@@ -43,6 +43,30 @@
 
 }
 
+.rules {
+    display: flex;
+    margin: 20px auto;
+    align-items: center;
+
+    @include mixin.intxs {
+        width: 80%
+    }
+
+
+    label {
+        font-size: 0.8rem;
+        width: 75%;
+
+        @include mixin.intxs {
+            width: 80%;
+        }
+
+        a {
+            color: var(--red);
+        }
+    }
+}
+
 .newReset {
     margin-block: 5%;
     font-size: clamp(1.2rem, 1.3rem, 2rem);

@@ -2,27 +2,28 @@ import Header from "./components/Header/Header";
 import Footer from "./components/Footer/Footer";
 import { Outlet, useLoaderData } from "react-router-dom";
 import { Suspense } from "react";
+import styles from "./App.module.scss";
 import AuthProvider from "./components/Authprovider/Authprovider";
 
 function App() {
   const user = useLoaderData();
   return (
-    <>
-      <body>
-        <AuthProvider>
-          <header><Header /></header>
 
-          <Suspense>
-            <main>
-              <Outlet />
-            </main>
+    <body className={`${styles.app}`}>
+      <AuthProvider>
+        <Header />
 
-          </Suspense>
-          <footer><Footer /></footer>
+        <Suspense>
+          <div className={`${styles.containerApp}`}>
+            <Outlet />
+          </div>
 
-        </AuthProvider>
-      </body>
-    </>
+        </Suspense>
+        <Footer />
+
+      </AuthProvider>
+    </body>
+
   );
 }
 

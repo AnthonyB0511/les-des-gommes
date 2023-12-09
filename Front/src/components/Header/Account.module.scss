@@ -238,6 +238,13 @@
         padding-block: 10px;
         text-align: center;
         font-size: 0.8rem;
+
+        @include mixin.intxs {
+            paddding-block: 5px;
+            font-size: 0.6rem;
+            width: 100%;
+            border-radius: 5vh 0 5vh 0;
+        }
     }
 
 

@@ -8,7 +8,7 @@ import { useState, useEffect } from "react";
 import { Title } from "../../components/utils/Title";
 import { Line } from "../../components/utils/Line";
 import { jwtDecode } from 'jwt-decode';
-import { NavLink } from "react-router-dom";
+import { NavLink, Link } from "react-router-dom";
 export default function Register() {
     const email = new URLSearchParams(window.location.search).get("email");
     const [feedbackGood, setFeedbackGood] = useState("");
@@ -57,7 +57,11 @@ export default function Register() {
             .required("Veuillez confirmer votre mot de passe")
             .oneOf([yup.ref("password", "")],
                 "Les mots de passe ne correspondent pas"),
+        rules: yup
+            .boolean()
+            .oneOf([true], 'Veuillez cocher la case si vous souhaitez continuer'),
     });
+
     const defaultValues = {
         name: "",
         firstname: "",
@@ -66,6 +70,7 @@ export default function Register() {
         age: "",
         password: "",
         confirmPassword: "",
+        rules: false
     };
     const {
         register,
@@ -148,7 +153,15 @@ export default function Register() {
                                     type="password" id="confirmPassword" />
                                 {errors?.confirmPassword && <p className="form-error">{errors.confirmPassword.message}</p>}
                             </section>
+
                         </article>
+                        <section className={`${styles.rules}`}>
+
+                            <input {...register("rules")}
+                                type="checkbox" id="rules" />
+                            <label>Je déclare accepter les termes des<Link to="/conditionsgenerales"> conditions générales</Link>   et d’utilisation ainsi que <Link to="/politiquedeconfidentialite">la politique de confidentialité </Link></label>
+                            {errors?.rules && <p className="form-error text-center">{errors.rules.message}</p>}
+                        </section>
                     </section>
                     {/* button validates the form */}
                     <button type="submit" disabled={isSubmitting} className="btn">S'inscrire</button>

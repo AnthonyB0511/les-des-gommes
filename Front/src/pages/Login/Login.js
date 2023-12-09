@@ -4,7 +4,7 @@ import styles from "./Login.module.scss";
 
 export default function Login() {
     return (
-        <main className={`${styles.log} flex-fill`}>
+        <main className={`${styles.log}`}>
 
             <section className={`${styles.section}`}>
                 <NavLink end to="">

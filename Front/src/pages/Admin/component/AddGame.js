@@ -120,7 +120,7 @@ export default function Admin() {
             <input type="number" id="year" {...register("year")} className="inputAdmin" />
             {errors?.year && <p className="feedback">{errors.year.message}</p>}
             <label htmlFor="photo" className="labelAdmin">Ajouter les liens d'image</label>
-            <input type="file" id="photo" ref={photoRef} className="inputAdmin" />
+            <input type="file" id="photo" ref={photoRef} className="inputAdminFile" />
             {errorPhoto && <p className="feedback">{errorPhoto}</p>}
             <label htmlFor="genre" className="labelAdmin">Quel est le genre du jeu ?</label>
             <select id="genre" {...register(`genre`)}>

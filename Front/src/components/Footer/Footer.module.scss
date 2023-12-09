@@ -3,10 +3,8 @@
 footer {
     background-color: var(--blue);
     color: var(--text-color);
-    padding: 2%;
+    padding: 1%;
     border-radius: 10vh 0 0 0;
-
-    bottom: 0;
 
     @include mixin.md-lt {
         font-size: 14px;

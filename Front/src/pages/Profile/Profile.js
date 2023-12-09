@@ -9,7 +9,7 @@ import { Line } from "../../components/utils/Line";
 import { AuthContext } from "../../context/AuthContext";
 import { ApiContext } from "../../context/ApiContext";
 import { Link } from "react-router-dom";
-import SuspendAccountAdmin from "../Security/SuspendAccountAdmin";
+
 /**
  * 
  * @returns change profile
@@ -136,7 +136,7 @@ export default function Profile() {
         <>
             <Title title="Votre Profil" />
             <Line />
-            <main className={`${styles.profile}`} >
+            <section className={`${styles.profile}`} >
                 <form onSubmit={handleSubmit(submit)} className="form2"
                 >
                     <section className={`${styles.container}`}>
@@ -186,7 +186,7 @@ export default function Profile() {
                 <button className="btn mb20" onClick={handleDeleteAccount} disabled={submitForm}>Supprimer votre compte</button>
                 {mailSend && <p className="feedbackGoodLight mb20">{mailSend}</p>}
 
-            </main>
+            </section>
         </>
     );
 }

@@ -1,9 +1,10 @@
 @use"../../assets/styles/mixin" as mixin;
 
 .login {
+    width: 100%;
 
     .form {
-        width: 33%;
+        width: 50%;
         margin: 0 auto;
 
         @include mixin.md-lt {

@@ -1,7 +1,11 @@
 @use"../../assets/styles/mixin" as mixin;
 
 .log {
-    margin-block: 5%;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    padding-block: 7%;
+    align-items: center;
 
     .section {
         display: flex;

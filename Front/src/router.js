@@ -6,6 +6,7 @@ import ProtectedRoute from "./components/ProtectedRoute/ProtectedRoute";
 import ProtectedRouteAdmin from "./components/ProtectedRoute/ProtectedRouteAdmin";
 import ProtectedRouteUser from "./components/ProtectedRoute/ProtectedRouteUser";
 import ProtectedRouteBlacklist from "./components/ProtectedRoute/ProtectedRouteBlacklist";
+
 const Home = lazy(() => import("./pages/Accueil/Home"));
 const Presentation = lazy(() => import("./pages/Presentation/Presentation"));
 const Ludotheque = lazy(() => import("./pages/Ludotheque/Ludotheque"));
@@ -25,6 +26,8 @@ const ConfirmAdressRegister = lazy(() => import("./pages/Register/ConfirmAdressR
 const ResetPassword = lazy(() => import("./pages/Security/ResetPassword"));
 const DeleteAccount = lazy(() => import("./pages/Security/DeleteAccount"));
 const AdminUser = lazy(() => import("./pages/Security/SuspendAccountAdmin"));
+const Confidentialite = lazy(() => import('./pages/Confidentialite/Confidentialite'));
+const GeneralsConditions = lazy(() => import('./pages/Conditions/GeneralsConditions'));
 export const router = createBrowserRouter([
     {
         path: "/",
@@ -129,6 +132,12 @@ export const router = createBrowserRouter([
                         <ProtectedRoute>
                             <DeleteAccount />
                         </ProtectedRoute>)
+            }, {
+                path: "/conditionsgenerales",
+                element: <GeneralsConditions />
+            }, {
+                path: "/politiquedeconfidentialite",
+                element: <Confidentialite />
             }
         ]
     }
