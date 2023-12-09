@@ -7,6 +7,7 @@ import CardGame from "./components/CardGame";
 import { ApiContext } from "../../context/ApiContext";
 import { useFetchData } from "../../Hooks/useFetchData";
 import Loading from "../../components/utils/Loading";
+import ScrollToTopButton from "../Discussion/component/ScrollToTopButton";
 
 /**
  * 
@@ -52,14 +53,17 @@ export default function Ludotheque() {
             {isLoading ? (
                 <Loading />
             ) : (
-                <main className={`${styles.grid}`}>
-                    {games
-                        .filter((g) => g.nameGame.toLowerCase().includes(filter))
-                        .map((game, i) => (
-                            <CardGame
-                                game={game} key={i} deleteGameFront={deleteGameFront} />
-                        ))}
-                </main>
+                <>
+                    <main className={`${styles.grid}`}>
+                        {games
+                            .filter((g) => g.nameGame.toLowerCase().includes(filter))
+                            .map((game, i) => (
+                                <CardGame
+                                    game={game} key={i} deleteGameFront={deleteGameFront} />
+                            ))}
+                    </main>
+                    <ScrollToTopButton />
+                </>
             )}
 
 
