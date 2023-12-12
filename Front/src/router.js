@@ -7,6 +7,7 @@ import ProtectedRouteAdmin from "./components/ProtectedRoute/ProtectedRouteAdmin
 import ProtectedRouteUser from "./components/ProtectedRoute/ProtectedRouteUser";
 import ProtectedRouteBlacklist from "./components/ProtectedRoute/ProtectedRouteBlacklist";
 
+
 const Home = lazy(() => import("./pages/Accueil/Home"));
 const Presentation = lazy(() => import("./pages/Presentation/Presentation"));
 const Ludotheque = lazy(() => import("./pages/Ludotheque/Ludotheque"));
@@ -28,6 +29,7 @@ const DeleteAccount = lazy(() => import("./pages/Security/DeleteAccount"));
 const AdminUser = lazy(() => import("./pages/Security/SuspendAccountAdmin"));
 const Confidentialite = lazy(() => import('./pages/Confidentialite/Confidentialite'));
 const GeneralsConditions = lazy(() => import('./pages/Conditions/GeneralsConditions'));
+const MentionsLegales = lazy(() => import('./pages/Mentions légales/MentionsLegales'));
 export const router = createBrowserRouter([
     {
         path: "/",
@@ -138,6 +140,9 @@ export const router = createBrowserRouter([
             }, {
                 path: "/politiquedeconfidentialite",
                 element: <Confidentialite />
+            }, {
+                path: "/mentionslegales",
+                element: <MentionsLegales />
             }
         ]
     }

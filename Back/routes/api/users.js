@@ -247,12 +247,10 @@ router.get("/confirmAdress/:email", (req, res) => {
 router.patch("/updatePassword", (req, res) => {
     const { password } = req.body.password;
     const { email } = req.body;
-    console.log(password);
-    console.log(email);
     const sqlSearch = "SELECT * FROM user WHERE email = ? ";
     connection.query(sqlSearch, [email], async (err, result) => {
         if (err) throw err;
-        console.log(result);
+
         let idUser = result[0].idUser;
         const sqlUpdatePassword = 'UPDATE user SET password = ? WHERE idUser = ? ';
         const hashedPassword = await bcrypt.hash(password, 10);
@@ -286,21 +284,17 @@ router.get("/verify/:email", (req, res) => {
 router.delete("/deleteAccount/:email", (req, res) => {
     const email = req.params.email;
     const password = req.body.password;
-    console.log(password);
     const sql = "SELECT * from user WHERE email = ?";
     connection.query(sql, [email], async (err, result) => {
         if (err) throw err;
-        console.log(result[0].password);
         if (result[0] && bcrypt.compareSync(password, result[0].password)) {
             const sqlDeleteMessage = "DELETE FROM message WHERE idUser = ?";
             connection.query(sqlDeleteMessage, [result[0].idUser], (err, result) => {
                 if (err) throw err;
-                console.log('message supprimé');
             });
             const sqlDeleteUser = "DELETE FROM user WHERE idUser = ?";
             connection.query(sqlDeleteUser, [result[0].idUser], (err, result) => {
                 if (err) throw err;
-                console.log('user supprimé');
                 res.status(200).json('compte utilisateur supprimé');
             });
         } else {

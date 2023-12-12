@@ -49,7 +49,7 @@ const ModifCarrousel = ({ photo, index }) => {
                 body: formData,
             });
             if (response.ok) {
-                console.log("Ok");
+
             }
             // Traiter la réponse du serveur si nécessaire
 
@@ -64,8 +64,8 @@ const ModifCarrousel = ({ photo, index }) => {
 
     return (
         <form className="form2" onSubmit={handleSubmit} encType="multipart/form-data">
-            <input type="file" name="files" multiple onChange={handleFileChange} ref={photoRef} />
-            <button className="btn" type="submit">Envoyer</button>
+            <input type="file" name="files" multiple onChange={handleFileChange} ref={photoRef} title="Choisir plusieurs photos" />
+            <button className="btn" type="submit" title="Modifier le slider">Envoyer</button>
             {errorPhoto && <p className="feedback">{errorPhoto} </p>}
         </form>
     );

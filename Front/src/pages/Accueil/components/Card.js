@@ -20,7 +20,8 @@ export default function Card({ actu }) {
                 <Link to="/presentation" >
                     <Button
                         needButton={actu?.needButton}
-                        txtButton="Cliquer ICI" />
+                        txtButton="Cliquer ICI"
+                    />
                 </Link>
 
             </article>

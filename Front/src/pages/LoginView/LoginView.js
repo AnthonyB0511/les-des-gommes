@@ -10,7 +10,7 @@ import { AuthContext } from "../../context/AuthContext";
 
 export default function Login() {
     const [feedbackGood, setFeedbackGood] = useState("");
-    const { user } = useContext(AuthContext);
+
     /**
      * yupschema to validate the form Login with params
      */

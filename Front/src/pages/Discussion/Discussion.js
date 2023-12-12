@@ -79,7 +79,7 @@ export default function Discussion() {
     const addMessage = (newMessage) => {
         setMessages([newMessage, ...messages]);
     };
-    console.log(messages);
+
     return (
         <main className={`${styles.discussion}`}>
             <Title title="Discussion" />

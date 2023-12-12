@@ -1,11 +1,9 @@
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { useContext } from "react";
 import { AuthContext } from "../../../context/AuthContext";
 import { ApiContext } from "../../../context/ApiContext";
-import { useState } from "react";
-import { useFetchAdmin } from "../../../Hooks/UseFetchAdmin";
+import { useState, useContext } from "react";
 import style from "./Talk.module.scss";
 
 
@@ -54,9 +52,9 @@ export default function Talk({ addMessage }) {
     return (
         <>
             <form onSubmit={handleSubmit(submit)} className={`d-flex align-items-center my30 ${style.formMessage}`}>
-                <input {...register("content")} type="textarea" id="content" />
-                <button className="btn">Envoyer</button>
-
+                <input {...register("content")} type="textarea" id="content" title="Renseigner le contenu de votre message" />
+                <button className="btn" title="Envoyer votre message">Envoyer</button>
+                {errors?.content && <p className="form-error">{errors.content.message}</p>}
             </form>
             <section className={`d-flex align-items-center my30 ${style.feed}`}>
                 {feedback && <p className="feedback">{feedback}</p>}

@@ -32,9 +32,9 @@ export default function Burger() {
     </>;
 
     return (
-        <div>
+        <section>
             {open ? CloseIcon : HamburgerIcon}
-        </div>
+        </section>
 
     );
 }

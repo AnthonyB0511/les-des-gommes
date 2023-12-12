@@ -6,7 +6,7 @@ import styles from "./AdminPage.module.scss";
 
 export default function AdminPage() {
     return (
-        <main>
+        <section>
             <Title title="Administration du site" />
             <Line />
             <section className={`${styles.link}`}>
@@ -19,6 +19,6 @@ export default function AdminPage() {
             </section>
             <Outlet />
 
-        </main>
+        </section>
     );
 }

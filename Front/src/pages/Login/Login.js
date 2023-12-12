@@ -7,9 +7,9 @@ export default function Login() {
         <main className={`${styles.log}`}>
 
             <section className={`${styles.section}`}>
-                <NavLink end to="">
+                <NavLink end to="" title="Aller au formulaire de connexion">
                     <i className="fa-solid fa-right-to-bracket"></i>Connexion</NavLink>
-                <NavLink to="register"><i className="fa-solid fa-user-plus"></i>Inscription</NavLink>
+                <NavLink to="register" title="Aller au formulaire d'inscription"><i className="fa-solid fa-user-plus"></i>Inscription</NavLink>
             </section>
             <Outlet />
         </main>

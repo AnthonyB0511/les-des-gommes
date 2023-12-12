@@ -13,7 +13,6 @@ const upload = multer({
         }
     }),
     fileFilter: (req, file, cb) => {
-        // console.log(file);
         cb(null, true);
     }
 });

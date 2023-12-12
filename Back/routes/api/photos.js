@@ -13,7 +13,6 @@ const upload = multer({
         }
     }),
     fileFilter: (req, file, cb) => {
-        // console.log(file);
         cb(null, true);
     }
 });
@@ -36,14 +35,12 @@ router.patch('/modifyCarrousel', upload.array('files'), (req, res) => {
         const sqlOldImages = 'SELECT photo FROM photos';
         connection.query(sqlOldImages, (err, result) => {
             if (err) throw err;
-            console.log(result);
             result.map((photoDB) => {
                 const filePathPhotoDB = path.join(__dirname, "../../uploads/imgCarrousel", photoDB.photo);
                 fs.unlink(filePathPhotoDB, (err) => {
                     if (err) {
                         console.error;
                     }
-                    console.log(`photo ${photoDB.photo} supprimée`);
                 });
             });
 
@@ -51,14 +48,13 @@ router.patch('/modifyCarrousel', upload.array('files'), (req, res) => {
         const sqlDelete = 'DELETE FROM photos';
         connection.query(sqlDelete, (err, result) => {
             if (err) throw err;
-            console.log("supprimé en BDD");
         });
         const imageNames = req.files.map(file => file.filename);
         imageNames.forEach(imageName => {
             const sqlAdd = 'INSERT INTO photos (photo,idUser) VALUES (?,?) ';
             connection.query(sqlAdd, [imageName, idUser], (err, result) => {
                 if (err) throw err;
-                console.log("c'est Ok");
+
             });
         });
         res.status(200).json({ message: "Images ajoutées avec succès" });

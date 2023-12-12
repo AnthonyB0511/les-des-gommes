@@ -33,7 +33,6 @@ router.post("/sendMessage", (req, res) => {
             const sqlGetNewMessage = "SELECT message.idMessage, message.content,DATE_FORMAT(message.date, '%d-%m-%Y %H:%i:%s') AS formattedDate,message.idUser,message.edit,user.username,user.avatar,user.idUser FROM message,user WHERE message.idUser = user.idUser AND idMessage = ?";;
             connection.query(sqlGetNewMessage, [messageId], (err, result) => {
                 if (err) throw err;
-                console.log(result[0]);
                 res.json(result[0]);
 
             });

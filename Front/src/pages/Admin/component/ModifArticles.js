@@ -75,18 +75,18 @@ export default function ModifArticles({ key, article, index }) {
             </section>
 
             <label htmlFor="title" className="labelAdmin">Titre</label>
-            <input type="text" id="title" {...register("title")} className="inputAdmin" />
+            <input type="text" id="title" {...register("title")} className="inputAdmin" title="Renseigner le nom de l'article" />
             {errors?.title && <p className="form-error">{errors.title.message}</p>}
             <label htmlFor="content" className="labelAdmin">Contenu</label>
-            <textarea id="content" {...register("content")} className="inputAdmin" />
+            <textarea id="content" {...register("content")} className="inputAdmin" title="Renseigner le contenu du jeu" />
             {errors?.content && <p className="form-error">{errors.content.message}</p>}
             <label htmlFor="descriptionPhoto" className="labelAdmin">Description Photo</label>
-            <input type="text" id="descriptionPhoto" {...register("descriptionPhoto")} className="inputAdmin" />
+            <input type="text" id="descriptionPhoto" {...register("descriptionPhoto")} className="inputAdmin" title="Renseigner la description de la photo" />
             {errors?.descriptionPhoto && <p className="form-error">{errors.descriptionPhoto.message}</p>}
             <label htmlFor="photo" className="labelAdmin">Photo</label>
-            <input type="file" id="photo" {...register("photo")} ref={photoRef} className="inputAdmin" />
+            <input type="file" id="photo" {...register("photo")} ref={photoRef} className="inputAdmin" title="Ajouter une photo de l'article" />
             {errorPhoto && <p className="form-error">{errorPhoto}</p>}
-            <button className="btn mt20">Modifier l'article</button>
+            <button className="btn mt20" title="Modifier l'article">Modifier l'article</button>
             {feedbackGood && <p className="feedbackGood">{feedbackGood}</p>}
 
         </form>

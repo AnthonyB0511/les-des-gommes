@@ -25,7 +25,7 @@
             border-radius: 10vh 0 0 0;
             box-shadow: var(--box-shadow-nav);
             transition: 1s transform;
-            height: 30vh;
+            height: 275px;
             width: 100%;
 
             @include mixin.sm-lt {

@@ -220,3 +220,21 @@ label {
   -webkit-text-stroke-width: 0.1px;
   -webkit-text-stroke-color: black;
 }
+
+.rules {
+  margin: 0 auto;
+  width: 40%;
+
+  @include mixin.sm-lt {
+    width: 50%;
+  }
+
+  @include mixin.intxs {
+    width: 75%;
+  }
+
+  .linkMentions {
+    color: var(--red);
+    cursor: pointer;
+  }
+}

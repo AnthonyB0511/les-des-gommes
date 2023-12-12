@@ -16,8 +16,11 @@ export default function ResetPassword() {
     const yupSchema = yup.object({
         password: yup
             .string()
-            .required("Le mot de passe est obligatoire")
-            .min(3, "Mot de passe trop court"),
+            .matches(
+                /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/,
+                'Le mot de passe doit contenir au moins 8 caractères, dont une minuscule, une majuscule, un chiffre et un caractère spécial.'
+            )
+            .required('Le mot de passe est requis.'),
         confirmPassword: yup
             .string()
             .required("Veuillez confirmer votre mot de passe")
@@ -38,9 +41,7 @@ export default function ResetPassword() {
                 const decoded = jwtDecode(token);
                 if (decoded && decoded.exp * 1000 > Date.now()) {
                     setDecodedToken(decoded);
-                    console.log("le token est ok");
                 } else {
-                    console.log("le token est expiré");
                     console.error('Token expiré');
                 }
             } catch (error) {
@@ -56,8 +57,6 @@ export default function ResetPassword() {
                 `${BASE_API_URL}/users/mailToReset/${email}`
             );
             if (response.ok) {
-                const responseBack = response.json();
-                console.log(responseBack);
                 setFeedbackGood(`Un mail de réinitialisation été envoyé sur ${email}`);
                 setTimeout(() => {
                     navigate("/");

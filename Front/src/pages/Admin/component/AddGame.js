@@ -51,7 +51,6 @@ export default function Admin() {
         handleSubmit,
         reset,
         setError,
-        clearErrors,
         getValues,
 
     } = useForm({
@@ -81,7 +80,7 @@ export default function Admin() {
                 return;
             }
             formData.append("photo", photoRef.current.files[0]);
-        } console.log(values);
+        }
         try {
             const response = await fetch(`${BASE_API_URL}/games/addGame`, {
                 method: "POST",

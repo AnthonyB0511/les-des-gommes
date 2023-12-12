@@ -15,8 +15,8 @@ export default function Presentation() {
 
             <Title title="L'association" />
             <Line />
-            <main className={`${styles.presentation}`}>
-                <section className={`${styles.container} d-flex justify-content-center`}>
+            <section className={`${styles.presentation}`}>
+                <article className={`${styles.container} d-flex justify-content-center`}>
                     <div className={`${styles.img}`}>
                         <img src={logo} alt="logo complet de l'association" />
                     </div>
@@ -35,7 +35,7 @@ export default function Presentation() {
                             Les Dés Gommés est une association loi 1901 qui réunit des passionnés de jeux de société pour promouvoir cette passion entre personnes de tout horizon.
                         </p>
                     </article>
-                </section>
+                </article>
                 <section className={`${styles.whatElse}`}>
                     <section className={`${styles.title} d-flex align-items-center justify-content-center`}>
                         <i className="fa-solid fa-comment"></i>
@@ -99,7 +99,7 @@ export default function Presentation() {
                         </a>
                     </article>
                 </section>
-            </main>
+            </section>
 
         </>
     );

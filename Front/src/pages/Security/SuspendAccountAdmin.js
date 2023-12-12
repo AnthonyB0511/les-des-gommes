@@ -41,10 +41,9 @@ export default function DeleteAccountAdmin() {
                 method: "PATCH"
             }
 
-            ); console.log(values);
+            );
             if (response.ok) {
                 setFeedbackGood("L'utilisateur est banni de l'espace discussion");
-                console.log("ok");
             } else {
                 setFeedback("L'adresse mail n'existe pas sur ce site");
                 reset(defaultValues);
@@ -63,9 +62,9 @@ export default function DeleteAccountAdmin() {
             <h3 className="text-center">Adresse email</h3>
             <p className="text-center">Quelle est l'email à bannir ?</p>
             <label htmlFor="email">Email</label>
-            <input type="email" id="email" {...register("email")} />
+            <input type="email" id="email" {...register("email")} title="Renseigner l'email à bannir" />
             {errors?.email && <p className="form-error">{errors.email.message}</p>}
-            <button type="submit" disabled={isSubmitting} className="btn">Envoyer</button>
+            <button type="submit" disabled={isSubmitting} className="btn" title="Envoyer le mail à bloquer">Envoyer</button>
             {feedback && <p className="form-error">{feedback}</p>}
             {feedbackGood && <p className="feedbackGood">{feedbackGood}</p>}
         </form>

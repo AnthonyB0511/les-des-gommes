@@ -28,7 +28,7 @@ export default function CardGame({ game, deleteGameFront }) {
             <article className={`${styles.img}`}>
                 <img src={`http://localhost:8000/games/${game.photo}`} alt={game.nameGame} />
                 {user?.role === 'admin' &&
-                    <i onClick={deleteGame} className="fa-solid fa-circle-xmark"></i>
+                    <i onClick={deleteGame} className="fa-solid fa-circle-xmark" title="Supprimer le jeu"></i>
                 }
 
             </article>

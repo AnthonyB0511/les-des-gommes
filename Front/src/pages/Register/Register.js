@@ -46,12 +46,18 @@ export default function Register() {
             .required("Ce champ est obligatoire"),
         email: yup
             .string()
-            .required("L'adresse mail est nécessaire pour s'inscrire")
-            .email("Ceci n'est pas une adresse mail valide"),
+            .required("Le champ est obligatoire")
+            .matches(
+                /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/,
+                "Le format d'email n'est pas le bon"
+            ),
         password: yup
             .string()
-            .required("Le mot de passe est obligatoire")
-            .min(3, "Mot de passe trop court"),
+            .matches(
+                /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/,
+                'Le mot de passe doit contenir au moins 8 caractères, dont une minuscule, une majuscule, un chiffre et un caractère spécial.'
+            )
+            .required('Le mot de passe est requis.'),
         confirmPassword: yup
             .string()
             .required("Veuillez confirmer votre mot de passe")

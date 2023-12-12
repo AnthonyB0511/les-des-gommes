@@ -40,14 +40,11 @@ const ForgotPassword = () => {
         resolver: yupResolver(yupSchema),
     });
     async function submit(values) {
-        console.log(values);
         try {
             const response = await fetch(
                 `${BASE_API_URL}/users/mailToReset/${values.email}`
             );
             if (response.ok) {
-                const responseBack = response.json();
-                console.log(responseBack);
                 setFeedBackGood(`Un mail de réinitialisation été envoyé sur ${values.email}`);
                 setTimeout(() => {
                     navigate("/");

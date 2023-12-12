@@ -37,7 +37,13 @@ export default function Profile() {
             .string()
             .min(2, "Le champ doit contenir au moins 2 caractères")
             .max(12, "Le champ doit contenir au maximum 12 caractères"),
-        email: yup.string().email("Ceci n'est pas une adresse mail valide"),
+        email: yup
+            .string()
+            .required("Le champ est obligatoire")
+            .matches(
+                /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/,
+                "Le format d'email n'est pas le bon"
+            ),
     });
 
     const defaultValues = {
@@ -92,11 +98,9 @@ export default function Profile() {
             if (response.ok) {
                 const userBack = await response.json();
                 if (userBack.message) {
-                    console.log(userBack.message);
                     setFeedback(userBack.message);
                 } else {
                     setFeedbackGood(userBack.messageGood);
-                    console.log({ userBack });
                     user.username = userBack.updatedData.username;
                     user.email = userBack.updatedData.email;
                     user.avatar = userBack.updatedData.avatar;
@@ -113,7 +117,7 @@ export default function Profile() {
         setSubmitForm(true);
         try {
             const response = await fetch(`${BASE_API_URL}/users/verify/${user.email}`);
-            console.log(user.email);
+
             if (response.ok) {
                 setMailSend("Un mail a été envoyé");
                 setTimeout(() => {
@@ -139,7 +143,7 @@ export default function Profile() {
             <section className={`${styles.profile}`} >
                 <form onSubmit={handleSubmit(submit)} className="form2"
                 >
-                    <section className={`${styles.container}`}>
+                    <article className={`${styles.container}`}>
                         <div className={`${styles.contentImg}  mb20`}>
                             {user.avatar === null ? (
                                 <img src={`http://localhost:8000/avatar/default.svg`} className={`${styles.picture}`} alt="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;avatar" />
@@ -147,23 +151,23 @@ export default function Profile() {
                                 <img src={`http://localhost:8000/avatar/${user.avatar}`} className={`${styles.picture}`} alt="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;avatar" />)}
 
                         </div>
-                        <section className={`${styles.content} mb20`}>
+                        <div className={`${styles.content} mb20`}>
                             <label htmlFor="firstname">Prénom</label>
                             <input {...register("firstname")}
                                 type="text" id="firstname" disabled="disabled" />
                             <label htmlFor="name">Nom</label>
                             <input {...register("name")}
                                 type="text" id="name" disabled="disabled" />
-                        </section>
-                    </section>
+                        </div>
+                    </article>
                     <section className={`${styles.containerInput}`}>
-                        <input type="file" className={`${styles.inputFile}`} id="avatar" ref={avatarRef} />
+                        <input type="file" className={`${styles.inputFile}`} id="avatar" ref={avatarRef} title="Modifier votre avatar" />
                         {errorAvatar && <p className="form-error">{errorAvatar}</p>}
                     </section>
                     <section className="d-flex flex-column mb20">
                         <label htmlFor="mail">E-mail</label>
                         <input {...register("email")}
-                            type="email" id="email" />
+                            type="email" id="email" title="Modifier votre email" />
                         {errors?.email && <p className="form-error">{errors.email.message}</p>}
                     </section>
 
@@ -174,16 +178,16 @@ export default function Profile() {
                             type="text" id="username" />
                         {errors?.username && <p className="form-error">{errors.username.message}</p>}
                     </section>
-                    <p><Link to="/motdepasseoublie">Souhaitez-vous modifier votre mot de passe ?</Link></p>
+                    <p><Link to="/motdepasseoublie" title="Modifier votre mot de passe">Souhaitez-vous modifier votre mot de passe ?</Link></p>
 
                     {/* </>} */}
 
-                    <button className={`btn`} disabled={isSubmitting} type="submit">Enregistrer les modifications</button>
+                    <button className={`btn`} disabled={isSubmitting} type="submit" title="Enregistrer vos modifications">Enregistrer les modifications</button>
                     {feedback && <p className={`${styles.feedback}`}>{feedback}</p>}
                     {feedbackGood && <p className={`feedbackGood`}>{feedbackGood}</p>}
 
                 </form>
-                <button className="btn mb20" onClick={handleDeleteAccount} disabled={submitForm}>Supprimer votre compte</button>
+                <button className="btn mb20" onClick={handleDeleteAccount} disabled={submitForm} title="Supprimmer votre compte">Supprimer votre compte</button>
                 {mailSend && <p className="feedbackGoodLight mb20">{mailSend}</p>}
 
             </section>

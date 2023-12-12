@@ -42,7 +42,7 @@ export default function Contact() {
         resolver: yupResolver(yupSchema),
     });
     const submit = async (values) => {
-        console.log(values);
+
         try {
             const response = await fetch(`${BASE_API_URL}/contact/send`, {
                 method: "POST",
@@ -72,26 +72,26 @@ export default function Contact() {
             <form onSubmit={handleSubmit(submit)} className="form2">
                 <h2 className="text-center">Vous avez une question ? C'est par ici !</h2>
 
-                <label htmlFor="name" className="labelAdmin">Nom *</label>
-                <input type="text" id="name" className="inputAdmin"{...register("name")} />
+                <label htmlFor="name" className="labelAdmin">Nom </label>
+                <input type="text" id="name" className="inputAdmin"{...register("name")} title="Votre nom" />
                 {errors?.name && <p className="form-error">{errors.name.message}</p>}
 
                 <label htmlFor="firstname" className="labelAdmin">Prénom *</label>
-                <input type="text" id="firstname" className="inputAdmin"{...register("firstname")} />
+                <input type="text" id="firstname" className="inputAdmin"{...register("firstname")} title="Votre prénom" />
                 {errors?.firstname && <p className="form-error">{errors.firstname.message}</p>}
 
                 <label htmlFor="email" className="labelAdmin">Email *</label>
-                <input type="text" id="email" className="inputAdmin"{...register("email")} />
+                <input type="text" id="email" className="inputAdmin"{...register("email")} title="Renseigner votre email" />
                 {errors?.email && <p className="form-error">{errors.email.message}</p>}
 
                 <label htmlFor="subject" className="labelAdmin">Sujet de votre demande</label>
-                <input type="text" id="subject" className="inputAdmin" {...register("subject")} />
+                <input type="text" id="subject" className="inputAdmin" {...register("subject")} title="Renseigner le sujet de votre demande" />
                 {errors?.subject && <p className="form-error">{errors.subject.message}</p>}
 
                 <label htmlFor="message" className="labelAdmin">Votre message</label>
-                <textarea id="message" {...register("message")} />
+                <textarea id="message" {...register("message")} title="Renseigner le contenu de votre message" />
                 {errors?.message && <p className="form-error">{errors.message.message}</p>}
-                <button className="btn mt20">Envoyer</button>
+                <button className="btn mt20" title="Soumettre le formulaire">Envoyer</button>
                 {feedback && <p className='form-error'>{feedback}</p>}
                 {feedbackGood && <p className="feedbackGood">{feedbackGood}</p>}
 

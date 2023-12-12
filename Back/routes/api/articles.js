@@ -46,7 +46,6 @@ router.patch('/updateArticle', upload.single("photo"), async (req, res) => {
             if (err) {
                 console.error;
             }
-            console.log("Photo remplacée");
         });
         const sqlUpdate = "UPDATE article SET title = ?, content = ? , descriptionPhoto = ? , photo = ? WHERE idArticle = ?";
         connection.query(sqlUpdate, [title, content, descriptionPhoto, photo, idArticle], (err, result) => {
