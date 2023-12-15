@@ -9,6 +9,10 @@
         margin: 1% auto;
     }
 
+    @include mixin.intxs {
+        margin-top: 4vh;
+    }
+
     h2 {
         text-align: center;
     }

@@ -75,7 +75,7 @@ const ConfirmAdressRegister = () => {
                     <p className={`feedbackGoodLight mb20`}>{feedbackGood}</p>
                 )}
                 <button type="submit" className="btn" disabled={isSubmitting}>
-                    Envoyer
+                    Recevoir un mail
                 </button>
             </form>
         </>

@@ -1,5 +1,6 @@
 import { Title } from "../../components/utils/Title";
 import { Line } from "../../components/utils/Line";
+import { Link } from "react-router-dom";
 import ScrollToTopButton from "../Discussion/component/ScrollToTopButton";
 const Confidentialite = () => {
     return (
@@ -15,7 +16,7 @@ const Confidentialite = () => {
                 <article className="my30">
                     <h3>Age minimum</h3>
                     <li className="my20">La préservation de la sécurité et de la vie privée des enfants est très importante . Nous ne recueillons ni n’utilisons volontairement des Données Personnelles de personnes n’ayant pas atteint l’âge de 15 ans, sans le consentement à la fois de l’enfant et du titulaire de la responsabilité parentale.</li>
-                    <li className="my20">Aussi, vous confirmez que vous avez au moins 15 ans ou plus lorsque vous fournissez vos données personnelles en lien avec l’utilisation de nos services. Si Vous n’avez pas au moins 15 ans, Vous devez demander l’autorisation de Vos parents ou tuteur légal pour nous fournir Vos Données Personnelles. Pour ce faire, veuillez nous contacter aux coordonnées indiquées sur <a className="linkMentions" href="mailto:lesdesgommes@gmail.com" title="Envoyer un mail à l'association">lesdesgommes@gmail.com</a></li>
+                    <li className="my20">Aussi, vous confirmez que vous avez au moins 15 ans ou plus lorsque vous fournissez vos données personnelles en lien avec l’utilisation de nos services. Si Vous n’avez pas au moins 15 ans, Vous devez demander l’autorisation de Vos parents ou tuteur légal pour nous fournir Vos Données Personnelles. Pour ce faire, veuillez nous contacter aux coordonnées indiquées sur <Link className="linkMentions" to="mailto:lesdesgommes@gmail.com" title="Envoyer un mail à l'association">lesdesgommes@gmail.com</Link></li>
 
 
                 </article>

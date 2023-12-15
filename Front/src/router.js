@@ -118,15 +118,13 @@ export const router = createBrowserRouter([
             }, {
                 path: "/motdepasseoublie",
                 element:
-                    (<ProtectedRoute>
-                        <ForgotPassword />
-                    </ProtectedRoute>)
+                    <ForgotPassword />
             }, {
                 path: "/modifiermdp",
-                element: (
-                    <ProtectedRoute>
-                        <ResetPassword />
-                    </ProtectedRoute>)
+                element:
+
+                    <ResetPassword />
+
             }, {
                 path: "/suppressioncompte",
                 element:

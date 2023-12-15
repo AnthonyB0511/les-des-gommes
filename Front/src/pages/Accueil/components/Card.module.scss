@@ -11,7 +11,7 @@
     border: solid var(--red) 2px;
     box-shadow: var(--box-shadow);
     justify-content: center;
-    margin: 10% auto;
+    margin: 5% auto;
 
     @include mixin.md-lt {
         width: 100%;
@@ -20,6 +20,8 @@
 
         @include mixin.intxs {
             border-radius: 5vh 0 5vh 0;
+            flex-wrap: wrap;
+            width: 80%;
 
         }
 
@@ -39,9 +41,8 @@
         height: 100%;
 
         @include mixin.md-lt {
-            width: 40%;
+            width: 50%;
             margin: 0 auto;
-
         }
 
         @include mixin.xs {
@@ -51,6 +52,8 @@
 
         @include mixin.intxs {
             display: flex;
+            margin-top: 5px;
+            width: 75%;
         }
 
         @include mixin.intxxs {
@@ -63,11 +66,16 @@
         img {
             width: 100%;
             display: block;
-            border-radius: 10vh 0 10vh 0;
+            border-radius: 8vh 0 10vh 0;
             margin: 1% auto;
 
             @include mixin.md-lt {
                 width: 75%;
+            }
+
+            @include mixin.intxs {
+                width: 75%;
+
             }
 
 
@@ -124,8 +132,8 @@
         }
 
         @include mixin.intxs {
-            font-size: 0.8rem;
-
+            font-size: 0.9rem;
+            width: 90%
         }
     }
 }

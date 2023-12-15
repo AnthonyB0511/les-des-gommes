@@ -6,6 +6,7 @@ import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { ApiContext } from "../../context";
 import { useNavigate } from "react-router-dom";
+import styles from "./Contact.module.scss";
 
 export default function Contact() {
     const [feedbackGood, setFeedbackGood] = useState("");
@@ -17,13 +18,16 @@ export default function Contact() {
         firstname: yup.string().required("Ce champ est obligatoire "),
         email: yup
             .string()
-            .required("Le champ est obligatoire")
+            .required("ce champ est obligatoire")
             .matches(
                 /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/,
                 "Votre email n'est pas valide"
             ),
         subject: yup.string().required("Ce champ est obligatoire "),
-        message: yup.string().required("cechamp est obligatoire")
+        message: yup.string().required("Ce champ est obligatoire"),
+        rules: yup
+            .boolean()
+            .oneOf([true], 'Veuillez cocher la case si vous souhaitez envoyer votre formulaire'),
     });
     const defaultValues = {
         name: "",
@@ -31,6 +35,7 @@ export default function Contact() {
         email: "",
         subject: "",
         message: "",
+        rules: false
     };
     const {
         register,
@@ -65,7 +70,7 @@ export default function Contact() {
     };
 
     return (
-        // <main className={`${styles.contactForm}`}>
+
         <>
             <Title title="Contact" />
             <Line />
@@ -76,22 +81,32 @@ export default function Contact() {
                 <input type="text" id="name" className="inputAdmin"{...register("name")} title="Votre nom" />
                 {errors?.name && <p className="form-error">{errors.name.message}</p>}
 
-                <label htmlFor="firstname" className="labelAdmin">Prénom *</label>
+                <label htmlFor="firstname" className="labelAdmin">Prénom </label>
                 <input type="text" id="firstname" className="inputAdmin"{...register("firstname")} title="Votre prénom" />
                 {errors?.firstname && <p className="form-error">{errors.firstname.message}</p>}
 
-                <label htmlFor="email" className="labelAdmin">Email *</label>
+                <label htmlFor="email" className="labelAdmin">Email </label>
                 <input type="text" id="email" className="inputAdmin"{...register("email")} title="Renseigner votre email" />
                 {errors?.email && <p className="form-error">{errors.email.message}</p>}
 
                 <label htmlFor="subject" className="labelAdmin">Sujet de votre demande</label>
-                <input type="text" id="subject" className="inputAdmin" {...register("subject")} title="Renseigner le sujet de votre demande" />
+                <select name="" id="subject" className="inputAdmin" {...register(`subject`)} >
+                    <option value="Adhésion">Adhésion</option>
+                    <option value="Demandes d'informations">Demandes d'informations</option>
+                    <option value="Autre">Autre</option>
+                </select>
+                {/* <input type="text" id="subject" className="inputAdmin" {...register("subject")} title="Renseigner le sujet de votre demande" /> */}
                 {errors?.subject && <p className="form-error">{errors.subject.message}</p>}
 
                 <label htmlFor="message" className="labelAdmin">Votre message</label>
                 <textarea id="message" {...register("message")} title="Renseigner le contenu de votre message" />
                 {errors?.message && <p className="form-error">{errors.message.message}</p>}
-                <button className="btn mt20" title="Soumettre le formulaire">Envoyer</button>
+                <section className={`${styles.rules}`}>
+                    <input type="checkbox" id="rules" {...register("rules")} />
+                    <p>En soumettant ce formulaire, j’accepte que mes informations soient utilisées exclusivement dans le cadre de ma demande</p></section>
+                {errors?.rules && <p className="form-error text-center">{errors.rules.message}</p>}
+
+                <button className="btn mt20" title="Soumettre le formulaire">Envoyer votre message</button>
                 {feedback && <p className='form-error'>{feedback}</p>}
                 {feedbackGood && <p className="feedbackGood">{feedbackGood}</p>}
 

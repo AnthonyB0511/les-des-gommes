@@ -16,10 +16,12 @@ export default function MustHave({ must }) {
                 }
 
                 <div className={`${styles.content}`}>
-                    <h3 className="p">{must.title}</h3>
-                    <Line
-                        reverse={true} />
-                    <p>{must.content}</p>
+                    <section>
+                        <h3 className="p">{must.title}</h3>
+                        <Line
+                            reverse={true} />
+                        <p className="text-center">{must.content}</p>
+                    </section>
                 </div>
             </article>
 

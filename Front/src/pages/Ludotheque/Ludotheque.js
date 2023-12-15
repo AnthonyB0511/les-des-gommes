@@ -8,6 +8,7 @@ import { ApiContext } from "../../context/ApiContext";
 import { useFetchData } from "../../Hooks/useFetchData";
 import Loading from "../../components/utils/Loading";
 import ScrollToTopButton from "../Discussion/component/ScrollToTopButton";
+import { Link } from "react-router-dom";
 
 /**
  * 
@@ -84,17 +85,17 @@ export default function Ludotheque() {
                     <nav className="d-flex justify-content-center mb20">
                         <ul className="d-flex">
                             <li className="mr10">
-                                <a href="#" onClick={previousPage} className='page-link'>Précédent</a>
+                                <Link to="#" onClick={previousPage} className='page-link'>Précédent</Link>
                             </li>
                             {numbers.map((n, i) => (
                                 <li key={i} className={`mr10 ${currentPage === n ? "active" : ""}`}>
-                                    <a href="#" onClick={() => changeCurrentPage(n)}  >
+                                    <Link to="#" onClick={() => changeCurrentPage(n)}  >
                                         {n}
-                                    </a>
+                                    </Link>
                                 </li>
                             ))}
                             <li className="mr10">
-                                <a href="#" onClick={nextPage} className='page-link'>Suivant</a>
+                                <Link to="#" onClick={nextPage} className='page-link'>Suivant</Link>
                             </li>
                         </ul>
                     </nav>

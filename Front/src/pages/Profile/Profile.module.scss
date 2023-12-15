@@ -113,6 +113,11 @@
             text-align: center;
             cursor: pointer;
 
+            @include mixin.intxs {
+                font-size: 0.8rem;
+                margin-bottom: 15px;
+            }
+
             a {
                 transition: all .3s;
 
@@ -129,15 +134,21 @@
     }
 
     .containerInput {
-        display: inline-block;
+        display: flex;
+        flex-direction: column;
         position: relative;
         overflow: hidden;
         width: 100%;
 
         .inputFile {
             width: 100%;
-            font-size: 1rem;
+            font-size: 1.2rem;
             border: black inset 2px;
+
+            @include mixin.intxs {
+                font-size: 0.7rem;
+                margin-bottom: 15px;
+            }
         }
 
         input[type=file]::file-selector-button {
@@ -146,13 +157,18 @@
             border-radius: 10vh 0 10vh 0;
             font-weight: 800;
             padding: 0.2em 1em;
-            font-size: 0.7rem;
+            font-size: 0.8rem;
             overflow: hidden;
             position: relative;
             transition: all .3s;
             z-index: 0;
             margin-right: 5%;
             cursor: pointer;
+
+            @include mixin.intxs {
+                font-size: 0.7rem;
+                border-radius: 3vh 0 3vh 0;
+            }
 
             &:hover {
                 color: var(--primary);

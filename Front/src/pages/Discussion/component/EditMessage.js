@@ -27,10 +27,10 @@ export default function EditMessage({ message, modifyMessage, alertMessage, user
                     {message.avatar !== null ? (
                         <img src={`${BASE_API_URL}/../../avatar/${message.avatar}`} alt={message.avatar} />
                     ) : (
-                        <img src={`${BASE_API_URL}/../../avatar/default.svg`} alt="default.svg" />
+                        <img src={`${BASE_API_URL}/../../avatar/default.svg`} alt="default avatar" />
                     )}
                     <article>
-                        <section className="d-flex align-items-center">
+                        <section className="d-flex align-items-center ml10">
                             <p className='mr10 fw600'>{message.username}</p>
                             <p className={`${styles.date} fw200`}>{message.formattedDate}</p>
                             <i className={`fa-solid fa-square-check mx20 ${styles.ok}`} onClick={handleClick} title="Valider votre modification"></i>
@@ -42,7 +42,7 @@ export default function EditMessage({ message, modifyMessage, alertMessage, user
                         <input
                             type='textarea'
                             rows="5" cols="33"
-                            className={`${styles.modify}`}
+                            className={`${styles.modify} ml10`}
                             onChange={handleChange}
                             onKeyDown={handleKeyDown}
                             value={contentInput} />

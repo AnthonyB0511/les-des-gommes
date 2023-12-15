@@ -1,6 +1,7 @@
 import styles from "./Card.module.scss";
 import { Button } from "../../../components/utils/Button";
 import { Link } from "react-router-dom";
+import { Line } from "../../../components/utils/Line";
 /**
  * 
  * @param {object} param0 (object with 1 string 1 link of image) 
@@ -16,7 +17,10 @@ export default function Card({ actu }) {
             }
 
             <article className={`${styles.content}`}>
-                <p>{actu?.content}</p>
+                <h3 className="mt20">{actu.title}</h3>
+                <Line
+                    reverse={true} />
+                <p className="my20">{actu?.content}</p>
                 <Link to="/presentation" >
                     <Button
                         needButton={actu?.needButton}

@@ -52,7 +52,7 @@ export default function Talk({ addMessage }) {
     return (
         <>
             <form onSubmit={handleSubmit(submit)} className={`d-flex align-items-center my30 ${style.formMessage}`}>
-                <input {...register("content")} type="textarea" id="content" title="Renseigner le contenu de votre message" />
+                <textarea {...register("content")} type="textarea" id="content" title="Renseigner le contenu de votre message" placeholder="Inscrire votre message" />
                 <button className="btn" title="Envoyer votre message">Envoyer</button>
                 {errors?.content && <p className="form-error">{errors.content.message}</p>}
             </form>

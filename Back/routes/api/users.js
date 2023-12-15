@@ -24,23 +24,31 @@ const upload = multer({
         }
     }),
     fileFilter: (req, file, cb) => {
-        console.log(file);
         cb(null, true);
     }
 });
 
 router.post("/register", async (req, res) => {
-    const { name, firstname, username, email, password } = req.body;
+    const { username, email, password } = req.body;
     const sql = `SELECT * FROM user WHERE email=?`;
     connection.query(sql, [email], async (err, result) => {
         try {
             if (result.length === 0) {
-                const hashedPassword = await bcrypt.hash(password, 10);
-                const insertSql = "INSERT INTO user(name,firstname,username, email, password) VALUES(?,?,?,?,?)";
-                const values = [name, firstname, username, email, hashedPassword, 0];
-                connection.query(insertSql, values, (err, result) => {
+                const sqlUsername = "SELECT * FROM user WHERE username = ?";
+                connection.query(sqlUsername, [username], async (err, result) => {
                     if (err) throw err;
-                    res.status(200).json("Félicitation, votre inscription est validée");
+                    if (result.length === 0) {
+                        const hashedPassword = await bcrypt.hash(password, 10);
+                        const insertSql = "INSERT INTO user(username, email, password) VALUES(?,?,?)";
+                        const values = [username, email, hashedPassword, 0];
+                        connection.query(insertSql, values, (err, result) => {
+                            if (err) throw err;
+                            res.status(200).json("Félicitation, votre inscription est validée");
+                        });
+                    } else {
+                        res.status(400).json("Ce nom d'utilisateur est déjà utilisé");
+
+                    }
                 });
             } else {
                 res.status(400).json("Cet email est déjà utilisé pour ce site");
@@ -98,7 +106,6 @@ router.patch('/modifyUser', upload.single("avatar"), async (req, res) => {
                     if (err) {
                         console.error("Erreur suppression d'avatar");
                     }
-                    console.log("Avatar supprimé");
                 });
             }
             res.send(isEmail);
@@ -114,7 +121,7 @@ router.patch('/modifyUser', upload.single("avatar"), async (req, res) => {
                             if (err) {
                                 console.error("Erreur suppression d'avatar");
                             }
-                            console.log("Avatar remplacé");
+
                         });
                     }
                     const sqlUpdateWithAvatar = "UPDATE user SET username = ?, email = ?, avatar = ? WHERE idUser = ?";
@@ -123,7 +130,7 @@ router.patch('/modifyUser', upload.single("avatar"), async (req, res) => {
                         const sqlSelectUpdatedData = "SELECT idUser,username,email,avatar FROM user WHERE idUser = ?";
                         connection.query(sqlSelectUpdatedData, [idUser], (err, result) => {
                             if (err) throw err;
-                            console.log(result[0]);
+
                             const updatedData = result[0];
                             const modifOk = { messageGood: "Votre profil a été mis à jour", updatedData };
                             res.send(modifOk);
@@ -137,7 +144,7 @@ router.patch('/modifyUser', upload.single("avatar"), async (req, res) => {
                     const sqlSelectUpdatedData = "SELECT idUser,username,email,avatar FROM user WHERE idUser = ?";
                     connection.query(sqlSelectUpdatedData, [idUser], (err, result) => {
                         if (err) throw err;
-                        console.log(result);
+
                         const updatedData = result[0];
                         const modifOk = { messageGood: "Votre profil a été mis à jour", updatedData };
                         res.send(modifOk);
@@ -159,11 +166,10 @@ router.get('/userConnected', (req, res) => {
             const decodedToken = jsonwebtoken.verify(token, keyPub, {
                 algorithms: "RS256",
             });
-            const sql = "SELECT username, idUser,firstname, name,password, email,avatar,ban,role FROM user WHERE idUser = ?";
+            const sql = "SELECT username, idUser,password, email,avatar,ban,role FROM user WHERE idUser = ?";
             connection.query(sql, [decodedToken.sub], (err, result) => {
                 if (err) throw err;
                 const connectedUser = result[0];
-                console.log(connectedUser);
                 connectedUser.password = "";
                 if (connectedUser) {
                     res.json(connectedUser);
@@ -214,12 +220,11 @@ router.get("/mailToReset/:email", (req, res) => {
     });
 });
 router.get("/confirmAdress/:email", (req, res) => {
-    console.log(req.params);
+
     const email = req.params.email;
     const sqlSearchMail = "SELECT * FROM user WHERE email = ?";
     connection.query(sqlSearchMail, [email], (err, result) => {
         if (err) throw err;
-        console.log(result);
         if (result.length === 0) {
             const token = jsonwebtoken.sign({}, key, {
                 expiresIn: 600,

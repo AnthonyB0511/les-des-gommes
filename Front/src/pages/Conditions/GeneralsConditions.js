@@ -1,6 +1,7 @@
 import { Title } from "../../components/utils/Title";
 import { Line } from "../../components/utils/Line";
 import ScrollToTopButton from "../Discussion/component/ScrollToTopButton";
+import { Link } from "react-router-dom";
 export default function GeneralsConditions() {
     return (
         <>
@@ -34,7 +35,7 @@ export default function GeneralsConditions() {
                     </li>
                     <li className="my20">
                         Les parents ou représentants légaux peuvent clôturer à tout moment le compte du mineur en faisant parvenir  un courrier éléctronique à l'adresse mail suivante :
-                        <a className="linkMentions" href="mailto:lesdesgommes@gmail.com" title="Envoyer un mail à l'association"> lesdesgommes@gmail.com</a>
+                        <Link className="linkMentions" to="mailto:lesdesgommes@gmail.com" title="Envoyer un mail à l'association"> lesdesgommes@gmail.com</Link>
                     </li>
                     <li className="my20">L'association les dés Gommés se réservent le droit de restreindre l'accès à certains services pour les enfants de moins de 15 ans.</li>
                     <li>Toute utilisation des services par un mineur sera présumée validée par les représentants légaux</li>

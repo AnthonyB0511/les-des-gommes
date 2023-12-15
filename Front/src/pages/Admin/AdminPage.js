@@ -13,10 +13,12 @@ export default function AdminPage() {
                 <NavLink end to="">Articles</NavLink>
                 <NavLink to="ajoutJeu">Jeux</NavLink>
                 <NavLink to="carrousel">Slider</NavLink>
-            </section>
-            <section className={`${styles.link}`}>
                 <NavLink to="adminUtilisateur">Utilisateur</NavLink>
             </section>
+            <section className={`${styles.link}`}>
+
+            </section>
+            {/* montre les autres routes composants */}
             <Outlet />
 
         </section>

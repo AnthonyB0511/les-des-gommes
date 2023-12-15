@@ -6,11 +6,11 @@ export default function Account() {
 
     // gérer l'état d'ouverture du menu déroulant une fois connecté
     const [isOpen, setIsOpen] = useState(false);
-    // const [noLog, setNoLog] = useState(false);
+
     const log = useRef();
 
     /**
-     * function shows the p with "vous allez être déconnecté"
+     * function shows the p with "deconnexion"
      * With the Timeout the user becomes null, the form close and the P don't show
      */
     const { user, logout, unlogged } = useContext(AuthContext);
@@ -77,21 +77,6 @@ export default function Account() {
                         <Link to="/login">
                             <i className="fa-solid fa-circle-user"></i></Link>
                     </section>
-
-                    {/* {seeForm === "login" ? (
-                        <Login
-                            // on passe en props la façon de passer de la co à l'inscription
-                            // la gestion de la fermeture du form
-                            seeRegisterForm={seeRegisterForm}
-                            closeForm={closeForm} />
-                    ) :
-                        seeForm === "register" ? (<Register
-                            // repasser au form de connexion et gestion de la fermeture
-                            seeLoginForm={seeLoginForm}
-                            closeForm={closeForm} />
-                        ) : (null) */}
-                    {/* 
-                    } */}
                 </>
             )
             }

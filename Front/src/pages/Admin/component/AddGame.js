@@ -2,7 +2,6 @@ import { useForm } from "react-hook-form";
 import * as yup from 'yup';
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useState, useContext, useRef } from "react";
-
 import { ApiContext } from "../../../context/ApiContext";
 import { useFetchAdmin } from "../../../Hooks/UseFetchAdmin";
 
@@ -12,11 +11,15 @@ import { useFetchAdmin } from "../../../Hooks/UseFetchAdmin";
 
 
 export default function Admin() {
+
     const BASE_API_URL = useContext(ApiContext);
+    // useState gérant le feedback utilisateur
     const [feedbackGood, setFeedbackGood] = useState("");
     const [feedback, setFeedback] = useState("");
     const [errorPhoto, setErrorPhoto] = useState("");
+    // récupère les données
     const genre = useFetchAdmin(BASE_API_URL, "genre/getGenre");
+    // utilisation de la ref avec multer
     const photoRef = useRef();
 
     /**
@@ -59,14 +62,19 @@ export default function Admin() {
         resolver: yupResolver(gameSchema)
     });
     async function submitGames() {
+        // réinitialisation du feedBack négatif à 0
         setFeedback("");
+        // on récupère les valuers du form
         const values = getValues();
+        // nouveau formData
         const formData = new FormData();
+        // on ajoute les difféérentes valeurs
         formData.append("nameGame", values.nameGame);
         formData.append("editor", values.editor);
         formData.append("year", values.year);
         formData.append("author", values.author);
         formData.append("genre", values.genre);
+        // gestion des photos  poids et format
         if (photoRef.current && photoRef.current.files[0]) {
             const maxFileSize = 2000000;
             if (photoRef.current.files[0].size > maxFileSize) {
@@ -79,18 +87,22 @@ export default function Admin() {
                 setErrorPhoto("Format de fichier non supporté");
                 return;
             }
+            // si tout est ok on envoie le fichier
             formData.append("photo", photoRef.current.files[0]);
         }
         try {
             const response = await fetch(`${BASE_API_URL}/games/addGame`, {
                 method: "POST",
+                // pas besoin de headers dans ca cas là
                 body: formData,
             });
             const responseData = await response.json();
             if (response.ok) {
-
+                // feedback pour l'utilisateur
                 setFeedbackGood("Le jeu a bien été ajouté.");
+                // on réinitialise les données
                 reset(defaultValues);
+                // au bout d'un
                 setTimeout(() => {
                     setFeedbackGood("");
                 }, 2000);
@@ -122,14 +134,14 @@ export default function Admin() {
             <input type="file" id="photo" ref={photoRef} className="inputAdminFile" />
             {errorPhoto && <p className="feedback">{errorPhoto}</p>}
             <label htmlFor="genre" className="labelAdmin">Quel est le genre du jeu ?</label>
-            <select id="genre" {...register(`genre`)}>
+            <select id="genre" {...register(`genre`)} className="inputAdmin">
                 {genre.map((g) => (
                     <option key={g.idGenre} value={g.idGenre}>{g.genre}</option>
                 ))}
             </select>
             {feedbackGood && <p className='feedbackGood'>{feedbackGood}</p>}
             {feedback && (<p className="feedback">{feedback}</p>)}
-            <button className="btn">Ajouter le jeu</button>
+            <button className="btn mt20">Ajouter le jeu</button>
         </form>
 
     );

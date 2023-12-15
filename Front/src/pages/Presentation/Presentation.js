@@ -7,6 +7,7 @@ import Map from "./components/Map";
 import town from "../../assets/images/laventie.jpg";
 import shop1 from "../../assets/images/village.png";
 import shop2 from "../../assets/images/antre.png";
+import { Link } from "react-router-dom";
 
 
 export default function Presentation() {
@@ -22,12 +23,10 @@ export default function Presentation() {
                     </div>
                     <article className={`${styles.content}`}>
                         <section className={`${styles.title} d-flex justify-content-center align-items-center`}>
-                            <div className={`${styles.question1}`}>
+                            <div className={`${styles.question1} mr10`}>
                                 <i className="fa-solid fa-circle-question"></i>
                             </div>
-                            <div className={`${styles.question2}`}>
-                                <i className="fa-solid fa-circle-question"></i>
-                            </div>
+
                             <SecondTitle name="Qui sommes Nous ?" />
 
                         </section>
@@ -88,15 +87,15 @@ export default function Presentation() {
                     </article>
                     <article className={`${styles.images} d-flex
                 align-items-center justify-content-around`}>
-                        <a href="https://www.laventie.fr/">
-                            <img src={town} alt="logo de la ville de Laventie" />
-                        </a>
-                        <a href="https://www.villagedujeu.com/">
+                        <Link to="https://www.laventie.fr/">
+                            <img src={town} alt="logo de la ville de Laventie" target="_blank" />
+                        </Link>
+                        <Link to="https://www.villagedujeu.com/" target="_blank">
                             <img src={shop1} alt="logo du village du jeu" />
-                        </a>
-                        <a href="https://lantredudragon.fr/">
+                        </Link>
+                        <Link to="https://lantredudragon.fr/" target="_blank">
                             <img src={shop2} alt="logo antre du dragon" />
-                        </a>
+                        </Link>
                     </article>
                 </section>
             </section>

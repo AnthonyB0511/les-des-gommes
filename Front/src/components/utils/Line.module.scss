@@ -3,7 +3,7 @@
 .line {
     height: 3px;
     width: 30%;
-    margin: 1.5em auto;
+    margin: 1em auto;
     background: linear-gradient(to left, #F3EADB, #1AA89E 25%, #1AA89E 75%, #F3EADB);
 
     @include mixin.intxs {

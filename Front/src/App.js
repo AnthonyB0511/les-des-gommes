@@ -12,12 +12,10 @@ function App() {
     <body className={`${styles.app}`}>
       <AuthProvider>
         <Header />
-
         <Suspense>
           <main className={`${styles.containerApp}`}>
             <Outlet />
           </main>
-
         </Suspense>
         <Footer />
 

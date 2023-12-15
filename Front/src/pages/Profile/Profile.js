@@ -143,24 +143,17 @@ export default function Profile() {
             <section className={`${styles.profile}`} >
                 <form onSubmit={handleSubmit(submit)} className="form2"
                 >
-                    <article className={`${styles.container}`}>
-                        <div className={`${styles.contentImg}  mb20`}>
+                    <article className={`${styles.container} mb20`}>
+                        <div className={`${styles.contentImg}`}>
                             {user.avatar === null ? (
                                 <img src={`http://localhost:8000/avatar/default.svg`} className={`${styles.picture}`} alt="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;avatar" />
                             ) : (
                                 <img src={`http://localhost:8000/avatar/${user.avatar}`} className={`${styles.picture}`} alt="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;avatar" />)}
 
                         </div>
-                        <div className={`${styles.content} mb20`}>
-                            <label htmlFor="firstname">Prénom</label>
-                            <input {...register("firstname")}
-                                type="text" id="firstname" disabled="disabled" />
-                            <label htmlFor="name">Nom</label>
-                            <input {...register("name")}
-                                type="text" id="name" disabled="disabled" />
-                        </div>
                     </article>
-                    <section className={`${styles.containerInput}`}>
+                    <section className={`${styles.containerInput} mb20`}>
+                        <label htmlFor="mail">Avatar <span className="formatAccepted">Formats acceptés : jpg, webp, png, jpeg, svg</span></label>
                         <input type="file" className={`${styles.inputFile}`} id="avatar" ref={avatarRef} title="Modifier votre avatar" />
                         {errorAvatar && <p className="form-error">{errorAvatar}</p>}
                     </section>
@@ -178,11 +171,11 @@ export default function Profile() {
                             type="text" id="username" />
                         {errors?.username && <p className="form-error">{errors.username.message}</p>}
                     </section>
-                    <p><Link to="/motdepasseoublie" title="Modifier votre mot de passe">Souhaitez-vous modifier votre mot de passe ?</Link></p>
+                    <p className={`${styles}`}><Link to="/motdepasseoublie" title="Modifier votre mot de passe">Souhaitez-vous modifier votre mot de passe ?</Link></p>
 
                     {/* </>} */}
 
-                    <button className={`btn`} disabled={isSubmitting} type="submit" title="Enregistrer vos modifications">Enregistrer les modifications</button>
+                    <button className={`btn mb20`} disabled={isSubmitting} type="submit" title="Enregistrer vos modifications">Enregistrer les modifications</button>
                     {feedback && <p className={`${styles.feedback}`}>{feedback}</p>}
                     {feedbackGood && <p className={`feedbackGood`}>{feedbackGood}</p>}
 

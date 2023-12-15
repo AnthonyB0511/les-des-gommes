@@ -13,7 +13,7 @@ export default function Message({ message, modifyMessage, deleteMessage, user, a
                 <img src={`${BASE_API_URL}/../../avatar/default.svg`} alt="default.svg" />
             )}
             <article>
-                <section className="d-flex align-items-center">
+                <section className="d-flex align-items-center ml10">
                     <p className='mr10 fw600'>{message.username}</p>
                     <p className={`${styles.date} fw200`}>{message.formattedDate}</p>
                     {(user.idUser === message.idUser || user.role === 'admin') && (
@@ -27,7 +27,7 @@ export default function Message({ message, modifyMessage, deleteMessage, user, a
                     {(message.report === 1 && user.role === 'admin') && <i className={`fa-solid fa-check-to-slot ml20 ${styles.ok}`} onClick={() => modifyMessage({ ...message, report: 0 })} title="Revalider le message"></i>}
 
                 </section>
-                <p className={`${styles.quote}`}>{message.content}</p>
+                <p className={`${styles.quote} ml10`}>{message.content}</p>
 
             </article>
         </section>

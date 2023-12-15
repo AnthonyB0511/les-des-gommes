@@ -5,11 +5,19 @@ import { useState, useRef, useContext } from "react";
 import { ApiContext } from "../../../context/ApiContext";
 
 
-export default function ModifArticles({ key, article, index }) {
+export default function ModifArticles({ article, selectedIndex }) {
     const [feedbackGood, setFeedbackGood] = useState("");
     const [errorPhoto, setErrorPhoto] = useState("");
+
     const photoRef = useRef();
     const BASE_API_URL = useContext(ApiContext);
+    let index = parseInt(selectedIndex);
+    index += 1;
+
+
+
+
+
     const defaultValues = {
         content: "",
         photo: "",
@@ -60,6 +68,9 @@ export default function ModifArticles({ key, article, index }) {
             if (response.ok) {
                 setFeedbackGood("L'article a été modifié");
                 reset(defaultValues);
+                setTimeout(() => {
+                    setFeedbackGood("");
+                }, 3000);
             }
 
         } catch (error) {
@@ -67,11 +78,11 @@ export default function ModifArticles({ key, article, index }) {
         }
     }
 
+
     return (
-        <form onSubmit={handleSubmit(submit)} className="my20 form2">
+        <form onSubmit={handleSubmit(submit)} className="my30 form2">
             <section className="d-flex justify-content-center align-items-center">
-                <h3 className="mr10">Modifier l'article n°{index + 1} </h3>
-                <i class="fa-solid fa-chevron-down"></i>
+                <h3 className="text-center">Article n° {index} : {article?.title}     </h3>
             </section>
 
             <label htmlFor="title" className="labelAdmin">Titre</label>

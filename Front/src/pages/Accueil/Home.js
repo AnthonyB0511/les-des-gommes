@@ -10,6 +10,7 @@ import { useContext } from "react";
 import { ApiContext } from "../../context/ApiContext";
 import { Link } from "react-router-dom";
 
+
 export default function Home() {
     const BASE_API_URL = useContext(ApiContext);
     const articles = useFetchAdmin(BASE_API_URL, "articles/readArticle");
@@ -17,19 +18,27 @@ export default function Home() {
         <>
 
             <section className={`${styles.pres}`}>
-                {articles[0]?.photo && <img src={`http://localhost:8000/imgArticles/${articles[0].photo}`} alt="" />
-                }
-
-                <section></section>
-                <p>{articles[0]?.content}<Link to="/presentation" >
-                    <Button
-                        needButton={articles[0]?.needButton}
-                        txtButton="Cliquer ICI" />
-                </Link></p>
-
+                <div className={`${styles.imgAsso}`}>
+                    {articles[0]?.photo && <img src={`http://localhost:8000/imgArticles/${articles[0].photo}`} alt="" />
+                    }
+                </div>
+                <section className={`${styles.presAsso}`}>
+                    <h1 className="text-center">Les Dés Gommés</h1>
+                    <Line />
+                    <p>{articles[0]?.content}</p>
+                    <Link to="/presentation" className="mt30 d-flex justify-content-center" >
+                        <Button
+                            needButton={articles[0]?.needButton}
+                            txtButton="En savoir plus" />
+                    </Link>
+                </section>
             </section>
             <section className={`${styles.flex}`}>
+                {/* <SecondTitle name="Les actualités" className='text-center' /> */}
                 <article className={`${styles.container}`}>
+                    <SecondTitle name="Les actualités" />
+                    <Line />
+
                     {articles.slice(1, 3).map((article, i) => (
                         <Card actu={article} key={i} />
                     ))}

@@ -17,7 +17,6 @@ export default function DernieresSeances() {
         <section className={`${styles.seances}`}>
             <SecondTitle name="Les dernières séances en photos" />
             <Line />
-
             <SimpleSlider
                 nameOfCarrousel={carrousel} />
 

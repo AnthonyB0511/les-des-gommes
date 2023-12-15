@@ -2,24 +2,86 @@
 
 
 .pres {
-    width: 80%;
+    width: 90%;
     display: flex;
     align-items: center;
     justify-content: center;
-    margin: 5% auto 0 auto;
+    margin: 5% auto 3% auto;
+
+    .presAsso {
+        display: flex;
+        flex-direction: column;
+        width: 45%;
+
+        @include mixin.md-lt {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            padding: 2%;
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 3rem;
+            font-weight: 400;
+            color: var(--text-color);
+
+            @include mixin.md-lt {
+                font-size: 2.5rem;
+            }
+
+            @include mixin.intxs {
+                font-size: 2.1rem;
+            }
+
+            @include mixin.xxxs {
+                font-size: 1.9rem;
+            }
+
+            @include mixin.intxs {
+                font-size: 1.6rem;
+            }
+
+            @include mixin.smallest {
+                font-size: 1.5rem;
+            }
+        }
+
+        p {
+            align-self: center;
+            width: 75%;
+            margin-bottom: 15px;
+
+            @include mixin.md-lt {
+                width: 100%;
+            }
+        }
+    }
+
+    .imgAsso {
+        width: 50%;
+        display: flex;
+        justify-content: center;
+
+        @include mixin.md-lt {
+            display: none;
+        }
+
+        img {
+            width: 50%;
+        }
+    }
+
+
 
     @include mixin.md-lt {
 
-        background-color: var(--blue);
-        color: var(--text-color);
+
+
         width: 80%;
         display: flex;
         align-items: center;
         padding: 2%;
-        border-radius: 10vh 0 10vh 0;
-        border: solid var(--red) 2px;
-        box-shadow: var(--box-shadow);
-        justify-content: center;
     }
 
     @include mixin.xs {
@@ -96,9 +158,14 @@
     width: 100%;
     display: flex;
     align-items: center;
+    margin-top: 5vh;
 
     @include mixin.md-lt {
         flex-wrap: wrap;
+    }
+
+    @include mixin.intxs {
+        margin-bottom: 5vh;
     }
 
     .container {

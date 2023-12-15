@@ -1,7 +1,7 @@
 @use"../../../assets/styles/mixin" as mixin;
 
 .div {
-    margin-bottom: 5%;
+
 
     .container {
         width: 60%;
@@ -44,9 +44,8 @@
         }
 
         .img {
-            width: 40%;
+            width: 30%;
             display: flex;
-            align-items: stretch;
 
             @include mixin.xxs {
                 width: 100%;
@@ -74,6 +73,7 @@
                 border-left: solid 2px var(--red);
                 border-bottom: solid 2px var(--red);
                 box-shadow: var(--box-shadow);
+                width: 100%;
 
 
                 @include mixin.intxs {
@@ -98,13 +98,14 @@
         }
 
         .content {
-            width: 60%;
+            width: 70%;
             background-color: var(--blue);
             border-radius: 0 0 10vh 0;
             border-top: solid 2px var(--red);
             border-right: solid 2px var(--red);
             border-bottom: solid 2px var(--red);
             box-shadow: var(--box-shadow);
+
 
             @include mixin.intxs {
                 width: 100%;

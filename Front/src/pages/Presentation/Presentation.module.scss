@@ -1,8 +1,16 @@
 @use"../../assets/styles/mixin" as mixin;
 
 .presentation {
-    width: 80%;
+    width: 60%;
     margin: 0 auto;
+
+    @include mixin.md {
+        width: 80%;
+    }
+
+    @include mixin.sm-lt {
+        width: 85%;
+    }
 
     @include mixin.intxs {
         width: 90%;
@@ -49,7 +57,6 @@
 
                 .question1 {
                     font-size: 2rem;
-                    transform: rotate(-12deg);
                     padding: 0 1%;
 
                     @include mixin.md-lt {
@@ -66,25 +73,6 @@
                     }
                 }
 
-                .question2 {
-                    font-size: 2rem;
-                    transform: rotate(12deg);
-                    padding: 0 1%;
-
-                    @include mixin.md-lt {
-                        font-size: 1.8rem;
-                    }
-
-                    @include mixin.xs {
-                        padding: 0 0 1% 0;
-                    }
-
-                    @include mixin.intxs {
-                        font-size: 1.5rem;
-                        padding: 0;
-                    }
-
-                }
             }
 
             p {
@@ -114,7 +102,7 @@
         }
 
         .img {
-            width: 50%;
+            width: 60%;
             margin: 0 auto;
 
             @include mixin.xs {
@@ -138,6 +126,12 @@
 
     .whatElse {
         margin-block: 7%;
+
+        .title {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
 
         i {
             font-size: 2em;
@@ -212,9 +206,13 @@
         margin-block: 10%;
 
         .title {
+            display: flex;
+            align-items: center;
+
             i {
                 font-size: 2em;
                 padding: 0 2%;
+                align-self: center;
 
                 @include mixin.md-lt {
                     font-size: 1.8rem;
@@ -346,6 +344,10 @@
 
     .partners {
         .title {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
             i {
                 font-size: 2em;
                 padding: 0 2%;

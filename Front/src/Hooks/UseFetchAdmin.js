@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-
+// hook personnalisé qui récupère une donnée qui n'est aps censé être modifié par exemple la liste des messages.
 export function useFetchAdmin(url, way) {
     const [datas, setDatas] = useState([]);
     useEffect(() => {

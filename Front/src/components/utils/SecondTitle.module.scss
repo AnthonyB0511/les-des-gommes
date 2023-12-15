@@ -5,6 +5,7 @@
     font-size: 2rem;
     text-align: center;
 
+
     @include mixin.md-lt {
         font-size: 1.7rem;
     }

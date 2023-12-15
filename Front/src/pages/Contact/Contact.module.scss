@@ -1,4 +1,20 @@
-.contactForm {
-    width: 50%;
-    margin: 0 auto;
+@use"../../assets/styles/mixin" as mixin;
+
+.rules {
+    width: 90%;
+    margin: 15px auto;
+    display: flex;
+
+    input {
+        margin-right: 15px;
+    }
+
+    p {
+        font-size: 0.9rem;
+
+        @include mixin.intxs {
+            font-size: 0.7rem;
+        }
+
+    }
 }

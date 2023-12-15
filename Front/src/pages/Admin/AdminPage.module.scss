@@ -1,11 +1,17 @@
+@use"../../assets/styles/mixin" as mixin;
+
 .link {
     display: flex;
     justify-content: center;
     margin-block: 2%;
+    flex: wrap;
 
     a {
         margin-right: 15px;
         font-size: 1.5rem;
-        ;
+
+        @include mixin.intxs {
+            font-size: 1.2rem;
+        }
     }
 }

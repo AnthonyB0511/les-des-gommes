@@ -1,34 +1,40 @@
 const router = require("express").Router();
 const nodemailer = require("nodemailer");
+const transporter = nodemailer.createTransport({
+    service: 'Gmail',
+    auth: {
+        user: "becque.anthony@gmail.com",
+        pass: "bogl evbq rqgu rdvx",
+    },
+});
 
 
 router.post('/send', (req, res) => {
     const { name, firstname, email, subject, message } = req.body;
     // Configurer le transporteur Nodemailer
-    const transporter = nodemailer.createTransport({
-        service: 'Gmail',
-        auth: {
-            user: "becque.anthony@gmail.com",
-            pass: "bogl evbq rqgu rdvx",
-        },
-    });
+    try {
+        // Options du message
+        const mailOptions = {
+            from: email,
+            to: 'becque.anthony@gmail.com', // Adresse e-mail de destination
+            subject: subject,
+            text: `Nom: ${name}\nPrénom: ${firstname}\nEmail: ${email}\nMessage: ${message}`,
+        };
+
+        // Envoyer l'email
+        transporter.sendMail(mailOptions, (error, info) => {
+            if (error) {
+                console.error(error);
+                res.send('Erreur lors de l\'envoi de l\'email.');
+            } else {
+                res.status(200).json('Ok');
+            }
+        });
+    } catch (error) {
+        console.error(error);
+    }
 
     // Options du message
-    const mailOptions = {
-        from: email,
-        to: 'becque.anthony@gmail.com', // Adresse e-mail de destination
-        subject: subject,
-        text: `Nom: ${name}\nPrénom: ${firstname}\nEmail: ${email}\nMessage: ${message}`,
-    };
 
-    // Envoyer l'email
-    transporter.sendMail(mailOptions, (error, info) => {
-        if (error) {
-            console.error(error);
-            res.send('Erreur lors de l\'envoi de l\'email.');
-        } else {
-            res.status(200).json('Ok');
-        }
-    });
 });
 module.exports = router;

@@ -38,12 +38,6 @@ export default function Register() {
             .required("Ce champ est obligatoire")
             .min(2, "Le champ doit contenir au moins 2 caractères")
             .max(12),
-        name: yup
-            .string()
-            .required("Ce champ est obligatoire"),
-        firstname: yup
-            .string()
-            .required("Ce champ est obligatoire"),
         email: yup
             .string()
             .required("Le champ est obligatoire")
@@ -69,8 +63,6 @@ export default function Register() {
     });
 
     const defaultValues = {
-        name: "",
-        firstname: "",
         username: "",
         email: email,
         age: "",
@@ -112,20 +104,6 @@ export default function Register() {
                 <form onSubmit={handleSubmit(submit)} className={`${styles.formRegister}`}>
                     <section className="d-flex justify-content-between">
                         <article className={`${styles.container}`}>
-                            {/* name user */}
-                            <section className="d-flex flex-column mb20">
-                                <label htmlFor="name">Nom</label>
-                                <input {...register("name")}
-                                    type="text" id="name" />
-                                {errors?.name && <p className="form-error">{errors.name.message}</p>}
-                            </section>
-                            {/* firstname */}
-                            <section className="d-flex flex-column mb20">
-                                <label htmlFor="firstname">Prénom</label>
-                                <input {...register("firstname")}
-                                    type="text" id="firstname" />
-                                {errors?.firstname && <p className="form-error">{errors.firstname.message}</p>}
-                            </section>
                             {/* email */}
                             <section className="d-flex flex-column mb20">
                                 <label htmlFor="age">E-mail</label>
@@ -134,8 +112,6 @@ export default function Register() {
                                     type="email" id="email" />
                                 {errors?.email && <p className="form-error">{errors.email.message}</p>}
                             </section>
-                        </article>
-                        <article className={`${styles.container}`}>
                             <section className="d-flex flex-column mb20">
                                 {/* username */}
                                 <label htmlFor="username">Nom du profil</label>
@@ -143,6 +119,9 @@ export default function Register() {
                                     type="text" id="username" />
                                 {errors?.username && <p className="form-error">{errors.username.message}</p>}
                             </section>
+                        </article>
+                        <article className={`${styles.container}`}>
+
                             {/* password */}
                             <section className="d-flex flex-column mb20">
                                 <label htmlFor="password">Mot de passe</label>
@@ -165,7 +144,7 @@ export default function Register() {
 
                             <input {...register("rules")}
                                 type="checkbox" id="rules" />
-                            <label>Je déclare accepter les termes des<Link to="/conditionsgenerales"> conditions générales</Link>   et d’utilisation ainsi que <Link to="/politiquedeconfidentialite">la politique de confidentialité </Link></label>
+                            <label>Je déclare accepter les termes des<Link to="/conditionsgenerales" target="_blank"> conditions générales</Link>   et d’utilisation ainsi que <Link to="/politiquedeconfidentialite" target="_blank">la politique de confidentialité </Link></label>
                             {errors?.rules && <p className="form-error text-center">{errors.rules.message}</p>}
                         </section>
                     </section>
