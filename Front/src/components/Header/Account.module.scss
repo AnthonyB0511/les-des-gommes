@@ -240,9 +240,10 @@
         font-size: 0.8rem;
 
         @include mixin.intxs {
-            font-size: 0.7rem;
+            font-size: 0.6rem;
             width: 125%;
             border-radius: 5vh 0 5vh 0;
+            padding-block: 5px;
         }
     }
 
