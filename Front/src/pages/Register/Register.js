@@ -109,7 +109,7 @@ export default function Register() {
                                 <label htmlFor="age">E-mail</label>
 
                                 <input {...register("email")} disabled
-                                    type="email" id="email" />
+                                    type="email" id="email" title="Renseigner votre nom d'utilisateur" />
                                 {errors?.email && <p className="form-error">{errors.email.message}</p>}
                             </section>
                             <section className="d-flex flex-column mb20">
@@ -127,7 +127,7 @@ export default function Register() {
                                 <label htmlFor="password">Mot de passe</label>
 
                                 <input {...register("password")}
-                                    type="password" id="password" />
+                                    type="password" id="password" title="Renseigner votre mot de passe" />
                                 {errors?.password && <p className="form-error">{errors.password.message}</p>}
                             </section>
                             {/* confirm password */}
@@ -135,7 +135,7 @@ export default function Register() {
                                 <label htmlFor="confirmPassword">Confirmation du mot de passe</label>
                                 {/* on déconstruit en rajoutant la value qu'on modifie */}
                                 <input {...register("confirmPassword")}
-                                    type="password" id="confirmPassword" />
+                                    type="password" id="confirmPassword" title="Confirmer votre mot de passe" />
                                 {errors?.confirmPassword && <p className="form-error">{errors.confirmPassword.message}</p>}
                             </section>
 
@@ -144,12 +144,12 @@ export default function Register() {
 
                             <input {...register("rules")}
                                 type="checkbox" id="rules" />
-                            <label>Je déclare accepter les termes des<Link to="/conditionsgenerales" target="_blank"> conditions générales</Link>   et d’utilisation ainsi que <Link to="/politiquedeconfidentialite" target="_blank">la politique de confidentialité </Link></label>
+                            <label>Je déclare accepter les termes des<Link to="/conditionsgenerales" target="_blank" title="Redirection vers les conditions générales"> conditions générales</Link>   et d’utilisation ainsi que <Link to="/politiquedeconfidentialite" target="_blank" title="Redirection vers les politiques de confidentialité">la politique de confidentialité </Link></label>
                             {errors?.rules && <p className="form-error text-center">{errors.rules.message}</p>}
                         </section>
                     </section>
                     {/* button validates the form */}
-                    <button type="submit" disabled={isSubmitting} className="btn">S'inscrire</button>
+                    <button type="submit" disabled={isSubmitting} className="btn" title="Inscription">S'inscrire</button>
                     {/* feedabck for the user */}
                     {feedbackGood && <p className={'feedbackGoodLight'}>{feedbackGood}</p>}
                     {errors.generic && (<p className={`form-error`}>{errors.generic.message}</p>)}
@@ -158,7 +158,7 @@ export default function Register() {
                 <article className={`${styles.newReset} text-center`}>
                     <p>Votre lien a expiré. </p>
                     <p>Souhaiter-vous obtenir un nouveau lien ?</p>
-                    <NavLink to="/login/register"><button className="btn">Obtenir un nouveau lien</button></NavLink>
+                    <NavLink to="/login/register" title="Obtenir un nouveau lien"><button className="btn">Obtenir un nouveau lien</button></NavLink>
 
                 </article>
             )}

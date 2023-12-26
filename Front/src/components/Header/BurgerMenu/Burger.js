@@ -15,7 +15,7 @@ export default function Burger() {
             className={`${styles.icon}`}
             onClick={() => setOpen(!open)}
         >
-            <i className="fa-solid fa-bars"></i>
+            <i className="fa-solid fa-bars" title="Ouvrir le menu"></i>
         </div>
     </>;
     // const shows the menu
@@ -27,7 +27,7 @@ export default function Burger() {
         <div
             className={`${styles.icon}`}
             onClick={() => setOpen(!open)}>
-            <i className="fa-solid fa-circle-xmark"></i>
+            <i className="fa-solid fa-circle-xmark" title="Fermer le menu"></i>
         </div>
     </>;
 

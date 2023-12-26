@@ -83,7 +83,7 @@ export default function GeneralsConditions() {
                 </article>
                 <article className="my30">
                     <h3>Suppresion de compte</h3>
-                    <li>vous avez la possibilité de supprimer votre compte à tout moment. cette opération est définitivé.</li>
+                    <li>Vous avez la possibilité de supprimer votre compte à tout moment. cette opération est définitivé.</li>
                 </article>
 
             </section >

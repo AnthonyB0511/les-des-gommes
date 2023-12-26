@@ -17,7 +17,7 @@ export default function Card({ actu }) {
             }
 
             <article className={`${styles.content}`}>
-                <h3 className="mt20">{actu.title}</h3>
+                <h3 className="mt10">{actu.title}</h3>
                 <Line
                     reverse={true} />
                 <p className="my20">{actu?.content}</p>

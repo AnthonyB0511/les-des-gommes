@@ -88,9 +88,9 @@ export default function DeleteAccount() {
             {decodedToken ? (
                 <form className={`${styles.forgotPassword}`} onSubmit={handleSubmit(submit)}>
                     <label htmlFor="password">Mot de passe</label>
-                    <input type="password" id="password" {...register("password")} />
+                    <input type="password" id="password" {...register("password")} title="Enregistrer votre mot de passe" />
                     {errors?.password && <p className="form-error">{errors.password.message}</p>}
-                    <button type="submit" disabled={isSubmitting} className="btn">
+                    <button type="submit" disabled={isSubmitting} className="btn" title="Suppression du compte">
                         Envoyer
                     </button>
                     {feedbackGood && <p className='feedbackGoodLight'>{feedbackGood}</p>}

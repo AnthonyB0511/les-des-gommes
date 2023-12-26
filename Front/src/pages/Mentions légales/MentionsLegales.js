@@ -1,5 +1,6 @@
 import { Title } from "../../components/utils/Title";
 import { Line } from "../../components/utils/Line";
+import { Link } from "react-router-dom";
 
 
 export default function MentionsLegales() {
@@ -20,7 +21,7 @@ export default function MentionsLegales() {
                 </article>
                 <article className="my20">
                     <h3>Hébergement :</h3>
-                    <p></p>
+                    <Link to="https://vercel.com/" title="redirection vers Vercel">Vercel</Link>
                 </article>
             </section >
         </>

@@ -27,7 +27,7 @@ export default function Account() {
                 <>
                     <section className={`${styles.icon}`}
                         onClick={() => setIsOpen(!isOpen)}>
-                        {user.avatar ? (<img src={`http://localhost:8000/avatar/${user.avatar}`} className={`${styles.image}`} alt="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;avatar" />) : (<i className="fa-solid fa-circle-user"></i>)}
+                        {user.avatar ? (<img src={`http://localhost:8000/avatar/${user.avatar}`} title="Redirection vers le profil" className={`${styles.image}`} alt="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;avatar" />) : (<i className="fa-solid fa-circle-user" title="Redirection vers le profil"></i>)}
                         <div className={`${styles.check}`}>
                             <i className="fa-solid fa-circle-check"></i>
                         </div>
@@ -42,7 +42,7 @@ export default function Account() {
                                         // au moment du clic on referme l'élément
                                         onClick={() => setIsOpen(!isOpen)}
                                     >
-                                        <button className={`${styles.btn}`}>
+                                        <button className={`${styles.btn}`} title="Gestion de votre profil">
                                             Gestion du profil
                                         </button>
                                     </Link>
@@ -52,7 +52,7 @@ export default function Account() {
                                     <Link to="/">
                                         <button
                                             className={`${styles.btn}`}
-                                            onClick={logout}>
+                                            onClick={logout} title="Se déconnecter">
                                             Se déconnecter
                                         </button>
                                     </Link>
@@ -74,7 +74,7 @@ export default function Account() {
                 // no user
                 <>
                     <section className={`${styles.icon}`}>
-                        <Link to="/login">
+                        <Link to="/login" title="Aller à la connexion">
                             <i className="fa-solid fa-circle-user"></i></Link>
                     </section>
                 </>

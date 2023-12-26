@@ -64,7 +64,7 @@ const ConfirmAdressRegister = () => {
                     <label htmlFor="email" className="mb10">
                         Votre mail
                     </label>
-                    <input type="email" id="email" {...register("email")} />
+                    <input type="email" id="email" {...register("email")} title="Enregistrer votre email" />
                     {errors?.email && (
                         <p className={`feedback`}>{errors.email.message}</p>
                     )}

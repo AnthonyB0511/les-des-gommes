@@ -67,7 +67,7 @@ const ForgotPassword = () => {
                     <label htmlFor="email" className="mb10">
                         Email
                     </label>
-                    <input type="email" id="email" {...register("email")} />
+                    <input type="email" id="email" {...register("email")} title="Renseigner votre email" />
                     {errors?.email && (
                         <p className={`feedback`}>{errors.email.message}</p>
                     )}
@@ -77,7 +77,7 @@ const ForgotPassword = () => {
                 {feedbackGood && (
                     <p className={`feedbackGoodLight mb20`}>{feedbackGood}</p>
                 )}
-                <button type="submit" disabled={isSubmitting} className="btn">
+                <button type="submit" disabled={isSubmitting} className="btn" title="Soumettre le formulaire" >
                     Envoyer
                 </button>
             </form>

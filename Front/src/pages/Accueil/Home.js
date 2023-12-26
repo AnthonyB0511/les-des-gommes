@@ -19,14 +19,14 @@ export default function Home() {
 
             <section className={`${styles.pres}`}>
                 <div className={`${styles.imgAsso}`}>
-                    {articles[0]?.photo && <img src={`http://localhost:8000/imgArticles/${articles[0].photo}`} alt="" />
+                    {articles[0]?.photo && <img src={`http://localhost:8000/imgArticles/${articles[0].photo}`} alt={articles[0]?.descriptionPhoto} />
                     }
                 </div>
                 <section className={`${styles.presAsso}`}>
-                    <h1 className="text-center">Les Dés Gommés</h1>
+                    <h1 className="text-center"><strong>Les Dés Gommés</strong></h1>
                     <Line />
                     <p>{articles[0]?.content}</p>
-                    <Link to="/presentation" className="mt30 d-flex justify-content-center" >
+                    <Link to="/presentation" className="mt30 d-flex justify-content-center" title="Lien vers présentation" >
                         <Button
                             needButton={articles[0]?.needButton}
                             txtButton="En savoir plus" />

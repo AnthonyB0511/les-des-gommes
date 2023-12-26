@@ -118,12 +118,12 @@ export default function ResetPassword() {
             {decodedToken ? (
                 <form className={`${styles.forgotPassword}`} onSubmit={handleSubmit(submit)}>
                     <label htmlFor="password">Mot de passe</label>
-                    <input type="password" id="password" {...register("password")} />
+                    <input type="password" id="password" {...register("password")} title="Inscrire votre mot de passe" />
                     {errors?.password && <p className="form-error">{errors.password.message}</p>}
                     <label htmlFor="confirmPassword">Confirmer le mot de passe</label>
-                    <input type="password" id="confirmPassword"{...register("confirmPassword")} />
+                    <input type="password" id="confirmPassword"{...register("confirmPassword")} title="Confirmer votre mot de passe" />
                     {errors?.confirmPassword && <p className="form-error">{errors.confirmPassword.message}</p>}
-                    <button disabled={isSubmitting} type="submit" className='btn'>Envoyer</button>
+                    <button disabled={isSubmitting} type="submit" className='btn' title="Envoyer le mail">Envoyer</button>
                     {feedbackGood && <p className='feedbackGoodLight'>{feedbackGood}</p>}
                 </form>
             ) : (

@@ -50,12 +50,7 @@ router.patch('/updateArticle', upload.single("photo"), async (req, res) => {
         const sqlUpdate = "UPDATE article SET title = ?, content = ? , descriptionPhoto = ? , photo = ? WHERE idArticle = ?";
         connection.query(sqlUpdate, [title, content, descriptionPhoto, photo, idArticle], (err, result) => {
             if (err) throw err;
-            res.status(200);
-        });
-        const sqlGetArticleUpdate = "SELECT * FROM article";
-        connection.query(sqlGetArticleUpdate, (err, result) => {
-            if (err) throw err;
-            res.send(JSON.stringify(result));
+            res.status(200).json("l'article a été modifié");
         });
     });
 });

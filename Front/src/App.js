@@ -9,7 +9,7 @@ function App() {
 
   return (
 
-    <body className={`${styles.app}`}>
+    <div className={`${styles.app}`}>
       <AuthProvider>
         <Header />
         <Suspense>
@@ -20,7 +20,7 @@ function App() {
         <Footer />
 
       </AuthProvider>
-    </body>
+    </div>
 
   );
 }

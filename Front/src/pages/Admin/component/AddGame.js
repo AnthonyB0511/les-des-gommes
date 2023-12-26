@@ -119,29 +119,29 @@ export default function Admin() {
         <form onSubmit={handleSubmit(submitGames)} className="form2">
             <h3 className='text-center'>Ajouter un jeu</h3>
             <label htmlFor="nameGame" className="labelAdmin">Nom du jeu</label>
-            <input type="text" id="nameGame" {...register("nameGame")} className="inputAdmin" />
+            <input type="text" id="nameGame" {...register("nameGame")} className="inputAdmin" title="Nom du jeu" />
             {errors?.nameGame && <p className="feedback">{errors.nameGame.message}</p>}
             <label htmlFor="editor" className="labelAdmin">Editeur de jeu </label>
-            <input type="text" id="editor" {...register("editor")} className="inputAdmin" />
+            <input type="text" id="editor" {...register("editor")} className="inputAdmin" title="Nom de l'éditeur" />
             {errors?.editor && <p className="feedback">{errors.editor.message}</p>}
             <label htmlFor="author" className="labelAdmin">Auteur du jeu </label>
-            <input type="text" id="author" {...register("author")} className="inputAdmin" />
+            <input type="text" id="author" {...register("author")} className="inputAdmin" title="Nom de l'auteur" />
             {errors?.author && <p className="feedback">{errors.author.message}</p>}
             <label htmlFor="year" className="labelAdmin">Année de sortie du jeu </label>
-            <input type="number" id="year" {...register("year")} className="inputAdmin" />
+            <input type="number" id="year" {...register("year")} className="inputAdmin" title="Année de sortie du jeu" />
             {errors?.year && <p className="feedback">{errors.year.message}</p>}
             <label htmlFor="photo" className="labelAdmin">Ajouter les liens d'image</label>
-            <input type="file" id="photo" ref={photoRef} className="inputAdminFile" />
+            <input type="file" id="photo" ref={photoRef} className="inputAdminFile" title="Ajouter la photo du jeu" />
             {errorPhoto && <p className="feedback">{errorPhoto}</p>}
             <label htmlFor="genre" className="labelAdmin">Quel est le genre du jeu ?</label>
-            <select id="genre" {...register(`genre`)} className="inputAdmin">
+            <select id="genre" {...register(`genre`)} className="inputAdmin" title="Quel est le genre du jeu" >
                 {genre.map((g) => (
                     <option key={g.idGenre} value={g.idGenre}>{g.genre}</option>
                 ))}
             </select>
             {feedbackGood && <p className='feedbackGood'>{feedbackGood}</p>}
             {feedback && (<p className="feedback">{feedback}</p>)}
-            <button className="btn mt20">Ajouter le jeu</button>
+            <button className="btn mt20" title="Ajouter un jeu" >Ajouter le jeu</button>
         </form>
 
     );

@@ -63,20 +63,20 @@ export default function Login() {
                     <section className="d-flex flex-column mb20">
                         <label htmlFor="email"> Votre mail</label>
                         <input type="email" id="email"
-                            {...register("email")} />
+                            {...register("email")} title="Renseigner votre mail" />
                         {errors?.email && <p className="form-error">{errors.email.message}</p>}
                     </section>
                     {/* password user */}
                     <section className="d-flex flex-column mb20">
                         <label htmlFor="password">Mot de passe</label>
                         <input type="password" id="Password"
-                            {...register("password")} />
+                            {...register("password")} title="Renseigner votre mot de passe" />
                         {errors?.password && <p className="form-error">{errors.password.message}</p>}
                     </section>
                     {/* //button Connexion */}
                     <section>
                         <button
-                            className="btn" type="submit" disabled={isSubmitting}
+                            className="btn" type="submit" disabled={isSubmitting} title="Connexion"
                         >Connexion
                         </button>
                     </section>

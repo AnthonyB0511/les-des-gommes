@@ -88,12 +88,12 @@ export default function Presentation() {
                     <article className={`${styles.images} d-flex
                 align-items-center justify-content-around`}>
                         <Link to="https://www.laventie.fr/">
-                            <img src={town} alt="logo de la ville de Laventie" target="_blank" />
+                            <img src={town} alt="logo de la ville de Laventie" target="_blank" title="Ouvrir un nouvel onglet vers le site de la commune de Laventie" />
                         </Link>
-                        <Link to="https://www.villagedujeu.com/" target="_blank">
+                        <Link to="https://www.villagedujeu.com/" target="_blank" title="Ouvrir un nouvel onglet vers le Village du jeu">
                             <img src={shop1} alt="logo du village du jeu" />
                         </Link>
-                        <Link to="https://lantredudragon.fr/" target="_blank">
+                        <Link to="https://lantredudragon.fr/" target="_blank" title="Ouvrir un nouvel onglet vers l'Antre du Dragon">
                             <img src={shop2} alt="logo antre du dragon" />
                         </Link>
                     </article>
