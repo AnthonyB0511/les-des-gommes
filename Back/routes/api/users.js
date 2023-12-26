@@ -40,7 +40,7 @@ router.post("/register", async (req, res) => {
                     if (result.length === 0) {
                         const hashedPassword = await bcrypt.hash(password, 10);
                         const insertSql = "INSERT INTO user(username, email, password) VALUES(?,?,?)";
-                        const values = [username, email, hashedPassword, 0];
+                        const values = [username, email, hashedPassword];
                         connection.query(insertSql, values, (err, result) => {
                             if (err) throw err;
                             res.status(200).json("Félicitation, votre inscription est validée");
@@ -220,7 +220,6 @@ router.get("/mailToReset/:email", (req, res) => {
     });
 });
 router.get("/confirmAdress/:email", (req, res) => {
-
     const email = req.params.email;
     const sqlSearchMail = "SELECT * FROM user WHERE email = ?";
     connection.query(sqlSearchMail, [email], (err, result) => {

@@ -2,7 +2,7 @@
 import { useContext } from 'react';
 import styles from "../Discussion.module.scss";
 import { ApiContext } from '../../../context/ApiContext';
-export default function Message({ message, modifyMessage, deleteMessage, user, alertMessage }) {
+export default function Message({ message, modifyMessage, deleteMessage, user, alertMessage, deleteConfirm }) {
     const BASE_API_URL = useContext(ApiContext);
 
     return (
@@ -30,6 +30,8 @@ export default function Message({ message, modifyMessage, deleteMessage, user, a
                 <p className={`${styles.quote} ml10`}>{message.content}</p>
 
             </article>
+
         </section>
+
     );
 }

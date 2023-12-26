@@ -27,7 +27,6 @@ export default function Talk({ addMessage }) {
         resolver: yupResolver(yupSchema)
     });
     async function submit(values) {
-
         try {
             const response = await fetch(`${BASE_API_URL}/discussion/sendMessage`, {
                 method: "POST",

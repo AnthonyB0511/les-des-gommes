@@ -83,8 +83,8 @@ export default function Register() {
         resolver: yupResolver(yupSchema),
     });
     async function submit(values) {
+        clearErrors();
         try {
-            clearErrors();
             await createUser(values);
             setFeedbackGood("Félicitations, vous êtes inscrit");
             reset(defaultValues);

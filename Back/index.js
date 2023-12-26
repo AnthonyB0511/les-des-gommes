@@ -20,9 +20,6 @@ app.use((req, res, next) => {
     next();
 });
 app.use(routes);
-app.use("*", (req, res) => {
-    res.status(404).end();
-});
 app.listen(port, () => {
     console.log(`serveur Node écoutant sur le port ${port}`);
 });

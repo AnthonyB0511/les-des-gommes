@@ -23,15 +23,14 @@ export default function Ludotheque() {
         game.nameGame.toLowerCase().includes(filter.toLowerCase())
     );
 
-    const [currentPage, setCurrentPage] = useState(1);//page en cours
-    const viewPerPage = 12;//nb de vues par pages
-    const lastIndex = currentPage * viewPerPage;//dernier index affiché
-    const firstIndex = lastIndex - viewPerPage; //premier index
-    const viewsGames = filteredGames.slice(firstIndex, lastIndex); //récupère depuis firtstIndex mais lastindex ne l'est pas
-    const numberOfPage = Math.ceil(filteredGames.length / viewPerPage); //nbr total de pages
+    const [currentPage, setCurrentPage] = useState(1);
+    const viewPerPage = 12;
+    const [noGames, setNoGames] = useState(false);
+    const lastIndex = currentPage * viewPerPage;
+    const firstIndex = lastIndex - viewPerPage;
+    const viewsGames = filteredGames.slice(firstIndex, lastIndex);
+    const numberOfPage = Math.ceil(filteredGames.length / viewPerPage);
     const numbers = [...Array(numberOfPage + 1).keys()].slice(1);
-
-
     function previousPage() {
         if (currentPage !== 1) {
             setCurrentPage(currentPage - 1);
@@ -45,6 +44,9 @@ export default function Ludotheque() {
     function changeCurrentPage(id) {
         setCurrentPage(id);
     }
+    useEffect(() => {
+        (viewsGames.length === 0) ? (setNoGames(true)) : (setNoGames(false));
+    }, [viewsGames]);
 
 
     ;
@@ -74,14 +76,17 @@ export default function Ludotheque() {
                 <Loading />
             ) : (
                 <>
-                    <main className={`${styles.grid}`}>
+
+                    <section className={`${styles.grid}`}>
                         {viewsGames
                             .filter((g) => g.nameGame.toLowerCase().includes(filter))
                             .map((game, i) => (
                                 <CardGame
                                     game={game} key={i} deleteGameFront={deleteGameFront} />
                             ))}
-                    </main>
+                    </section>
+                    {noGames && <p className="form-error text-center my20"> Aucun jeu trouvé à ce nom ...</p>}
+
                     <nav className="d-flex justify-content-center mb20">
                         <ul className="d-flex">
                             <li className="mr10">

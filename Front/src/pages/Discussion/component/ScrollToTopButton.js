@@ -2,15 +2,12 @@
 import styles from '../Discussion.module.scss';
 
 export default function ScrollToTopButton() {
-
-
     const scrollToTop = () => {
         window.scrollTo({
             top: 0,
             behavior: 'smooth',
         });
     };
-
     return (
         <section
             className={`${styles.chevron}`}>

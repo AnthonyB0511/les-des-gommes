@@ -152,7 +152,7 @@ export default function Profile() {
 
                         </div>
                     </article>
-                    <section className={`${styles.containerInput} mb20`}>
+                    <section className={`${styles.containerInput} mb10`}>
                         <label htmlFor="mail">Avatar <span className="formatAccepted">Formats acceptés : jpg, webp, png, jpeg, svg</span></label>
                         <input type="file" className={`${styles.inputFile}`} id="avatar" ref={avatarRef} title="Modifier votre avatar" />
                         {errorAvatar && <p className="form-error">{errorAvatar}</p>}

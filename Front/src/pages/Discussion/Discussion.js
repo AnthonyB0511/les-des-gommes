@@ -10,14 +10,30 @@ import { ApiContext } from "../../context/ApiContext";
 import { AuthContext } from "../../context/AuthContext";
 import EditMessage from "./component/EditMessage";
 import Message from "./component/Message";
+import Modal from "../../components/utils/Modal";
 export default function Discussion() {
     const BASE_API_URL = useContext(ApiContext);
     const [[messages, setMessages], isLoading] = useFetchData(BASE_API_URL, 'discussion/getMessage');
     const { user } = useContext(AuthContext);
     const [feedback, setFeedBack] = useState("");
+    const [deleteMessageId, setDeleteMessageId] = useState(null);
+    const [showModal, setShowModal] = useState(false);
+    const [reportMessageId, setReportMessageId] = useState(null);
+    const [showModalReport, setShowModalReport] = useState(null);
     function deleteMessageFront(idParam) {
         setMessages(messages.filter((message) => message.idMessage !== idParam));
     }
+    const handleDelete = (messageId) => {
+        setShowModal(true);
+        setDeleteMessageId(messageId);
+    };
+    const handleReport = (messageId) => {
+        setShowModalReport(true);
+        setReportMessageId(messageId);
+    };
+    const handleCancel = () => {
+        setShowModal(false);
+    };
     async function deleteMessage(messageId) {
         try {
             const response = await fetch(`${BASE_API_URL}/discussion/deleteMessage`, {
@@ -27,19 +43,12 @@ export default function Discussion() {
             });
             if (response.ok) {
                 deleteMessageFront(messageId);
+                setShowModal(false);
             }
 
         } catch (error) {
             console.error(error);
         }
-    }
-
-    function updateMessage(newMessage) {
-        setMessages(
-            messages.map((message) =>
-                message.idMessage === newMessage.idMessage
-                    ? newMessage : message
-            ));
     }
     async function alertMessage(message) {
         try {
@@ -60,6 +69,14 @@ export default function Discussion() {
         } catch (error) {
             console.error(error);
         }
+    }
+
+    function updateMessage(newMessage) {
+        setMessages(
+            messages.map((message) =>
+                message.idMessage === newMessage.idMessage
+                    ? newMessage : message
+            ));
     }
     async function modifyMessage(message) {
         try {
@@ -91,13 +108,13 @@ export default function Discussion() {
                 messages.map((message) => (
                     (message.edit && (user.idUser === message.idUser || user.role === 'admin')) ? (
 
-                        <EditMessage key={message.idMessage} message={message} modifyMessage={modifyMessage} alertMessage={alertMessage} feedback={feedback} user={user} />
+                        <EditMessage key={message.idMessage} message={message} modifyMessage={modifyMessage} alertMessage={handleReport} feedback={feedback} user={user} deleteConfirm={deleteMessage} />
 
                     ) : (
 
                         !(message.report === 1 && user.role !== 'admin') &&
                         (
-                            <Message key={message.idMessage} message={message} modifyMessage={modifyMessage} deleteMessage={deleteMessage} user={user} alertMessage={alertMessage} feedback={feedback} />
+                            <Message key={message.idMessage} message={message} modifyMessage={modifyMessage} deleteMessage={handleDelete} user={user} alertMessage={handleReport} feedback={feedback} deleteConfirm={deleteMessage} />
                         ))
 
                 ))
@@ -105,8 +122,26 @@ export default function Discussion() {
             )
             }
             {feedback && <p className={`${styles.feedback}`}>{feedback}</p>}
+            {showModal && (
+                <Modal
+                    message={`Souhaitez-vous vraiment supprimer ce message ? Cette action est irréversible.`}
+                    onConfirm={() => deleteMessage(deleteMessageId)}
+                    onCancel={handleCancel}
+                />
+            )}
+            {showModalReport && (
+                <Modal
+                    message={`Souhaitez-vous signaler ce message ?`}
+                    onConfirm={() => {
+                        alertMessage(reportMessageId);
+                        setShowModalReport(false);
+                    }}
+                    onCancel={() => setShowModalReport(false)}
+                />
+            )}
+
             <ScrollToTopButton />
-            {/* <Talk addMessage={addMessage} /> */}
+
 
         </main >
     );
