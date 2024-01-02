@@ -19,31 +19,43 @@ export default function Ludotheque() {
     const [[games, setGames], isLoading] = useFetchData(BASE_API_URL, "games/getGames");
     //useState modifies the statut f search
     const [filter, Setfilter] = useState("");
+    // nouveau tableau filtrer en fonction de la recherche
     const filteredGames = games.filter(game =>
         game.nameGame.toLowerCase().includes(filter.toLowerCase())
     );
-
+    // useState sur la page current
     const [currentPage, setCurrentPage] = useState(1);
+    // nb de vue par pages
     const viewPerPage = 12;
+    // si pas de jeu ce useState passe à true (lors de la recherche)
     const [noGames, setNoGames] = useState(false);
+    // dernier jeu affiché
     const lastIndex = currentPage * viewPerPage;
+    // premier jeu affiché
     const firstIndex = lastIndex - viewPerPage;
+    // tableau avec les jeux montrés
     const viewsGames = filteredGames.slice(firstIndex, lastIndex);
+    // nombre de pages
     const numberOfPage = Math.ceil(filteredGames.length / viewPerPage);
+    // les nombres en tableau +1 (index tableau à 0) avec les clés
     const numbers = [...Array(numberOfPage + 1).keys()].slice(1);
+    // fonction de clique page précédente
     function previousPage() {
         if (currentPage !== 1) {
             setCurrentPage(currentPage - 1);
         }
     }
+    // fonction quand on clique sur la page suivante
     function nextPage() {
         if (currentPage !== numberOfPage) {
             setCurrentPage(currentPage + 1);
         }
     }
+    // fonction pour changer de page
     function changeCurrentPage(id) {
         setCurrentPage(id);
     }
+    // modifie la valeur quand viewsGames est modifiée
     useEffect(() => {
         (viewsGames.length === 0) ? (setNoGames(true)) : (setNoGames(false));
     }, [viewsGames]);
@@ -54,6 +66,7 @@ export default function Ludotheque() {
         setGames(games.filter((game) => game.idGame !== index));
 
     };
+    // quand on fait une recherche la page courante redevient la 1 quand filter est modifié
     useEffect(() => {
         setCurrentPage(1);
     }, [filter]);
@@ -73,11 +86,13 @@ export default function Ludotheque() {
             </section>
 
             {isLoading ? (
+                // chargement de la BDD
                 <Loading />
             ) : (
                 <>
 
                     <section className={`${styles.grid}`}>
+                        {/* on filtre et on amp */}
                         {viewsGames
                             .filter((g) => g.nameGame.toLowerCase().includes(filter))
                             .map((game, i) => (
@@ -85,8 +100,9 @@ export default function Ludotheque() {
                                     game={game} key={i} deleteGameFront={deleteGameFront} />
                             ))}
                     </section>
+                    {/* pas de jeu */}
                     {noGames && <p className="form-error text-center my20"> Aucun jeu trouvé à ce nom ...</p>}
-
+                    {/* nav pagination */}
                     <nav className="d-flex justify-content-center mb20">
                         <ul className="d-flex">
                             <li className="mr10">
@@ -104,6 +120,7 @@ export default function Ludotheque() {
                             </li>
                         </ul>
                     </nav>
+                    {/* retour en haut de page */}
                     <ScrollToTopButton />
                 </>
             )}

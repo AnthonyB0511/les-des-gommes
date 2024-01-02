@@ -37,7 +37,7 @@ export default function Register() {
             .string()
             .required("Ce champ est obligatoire")
             .min(2, "Le champ doit contenir au moins 2 caractères")
-            .max(12),
+            .max(12, "Maximum 12 caractères"),
         email: yup
             .string()
             .required("Le champ est obligatoire")

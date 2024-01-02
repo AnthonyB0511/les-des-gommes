@@ -2,10 +2,9 @@
 
 .btn {
   display: flex;
-  margin-block: 15px;
   text-transform: uppercase;
   background-color: var(--action);
-  border-radius: 10vh 0 10vh 0;
+  border-radius: 8vh 0 8vh 0;
   font-weight: 800;
   padding: 7px 18px;
   font-size: 1rem;
@@ -13,7 +12,7 @@
   position: relative;
   transition: all .3s;
   z-index: 0;
-  margin: 0 auto;
+  margin: 10px auto;
   cursor: pointer;
 
   @include mixin.xs {
@@ -94,20 +93,6 @@ label {
   -webkit-text-stroke-width: 0.2px;
   -webkit-text-stroke-color: black;
 }
-
-// .feedbackGood {
-//   text-transform: uppercase;
-//   background-color: var(--action);
-//   border-radius: 10vh 0 10vh 0;
-//   font-weight: 800;
-//   padding: 7px 18px;
-//   font-size: 1rem;
-//   text-align: center;
-//   width: 66%;
-//   margin: 15px auto;
-//   border: 2px solid var(--red)
-// }
-
 
 .form2 {
   display: flex;
@@ -196,6 +181,8 @@ label {
 
     padding: 5px;
     font-size: 0.7rem;
+    border-radius: 3vh 0 3vh 0;
+
 
     @include mixin.intxs {
       padding: 8px;

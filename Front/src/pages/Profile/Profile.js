@@ -176,7 +176,7 @@ export default function Profile() {
                     {/* </>} */}
 
                     <button className={`btn mb20`} disabled={isSubmitting} type="submit" title="Enregistrer vos modifications">Enregistrer les modifications</button>
-                    {feedback && <p className={`${styles.feedback}`}>{feedback}</p>}
+                    {feedback && <p className={`feedback`}>{feedback}</p>}
                     {feedbackGood && <p className={`feedbackGood`}>{feedbackGood}</p>}
 
                 </form>

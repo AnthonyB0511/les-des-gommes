@@ -27,7 +27,7 @@ export default function Account() {
                 <>
                     <section className={`${styles.icon}`}
                         onClick={() => setIsOpen(!isOpen)}>
-                        {user.avatar ? (<img src={`http://localhost:8000/avatar/${user.avatar}`} title="Redirection vers le profil" className={`${styles.image}`} alt="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;avatar" />) : (<i className="fa-solid fa-circle-user" title="Redirection vers le profil"></i>)}
+                        {user.avatar ? (<img src={`http://localhost:8000/avatar/${user.avatar}`} className={`${styles.image}`} alt="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;avatar" />) : (<i className="fa-solid fa-circle-user" title="Redirection vers le profil"></i>)}
                         <div className={`${styles.check}`}>
                             <i className="fa-solid fa-circle-check"></i>
                         </div>

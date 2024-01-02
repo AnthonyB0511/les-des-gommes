@@ -3,9 +3,7 @@ import { ApiContext } from "../../../context/ApiContext";
 import { AuthContext } from "../../../context/AuthContext";
 
 const ModifCarrousel = ({ photo, index }) => {
-    // const [feedbackGood, setFeedbackGood] = useState("");
-    // const [errorPhoto, setErrorPhoto] = useState("");
-    // const photoRef = useRef();
+    const [feedbackGood, setFeedbackGood] = useState("");
     const BASE_API_URL = useContext(ApiContext);
     const [errorPhoto, setErrorPhoto] = useState("");
     const photoRef = useRef();
@@ -49,9 +47,12 @@ const ModifCarrousel = ({ photo, index }) => {
                 body: formData,
             });
             if (response.ok) {
-
+                setFeedbackGood("Les photos ont été remplacées");
+                setTimeout(() => {
+                    setFeedbackGood("");
+                }, 3000);
             }
-            // Traiter la réponse du serveur si nécessaire
+
 
 
         } catch (error) {
@@ -67,6 +68,7 @@ const ModifCarrousel = ({ photo, index }) => {
             <input type="file" name="files" multiple onChange={handleFileChange} ref={photoRef} title="Choisir plusieurs photos" />
             <button className="btn" type="submit" title="Modifier le slider">Envoyer les nouvelles photos</button>
             {errorPhoto && <p className="feedback">{errorPhoto} </p>}
+            {feedbackGood && <p className="feedbackGood">{feedbackGood}</p>}
         </form>
     );
 };

@@ -41,17 +41,22 @@ export default function ModifArticles({ article, selectedIndex }) {
         resolver: yupResolver(articleSchema)
     });
     async function submit() {
+        // récupère les valeurs
         const values = getValues();
+        // créer un formdata
         const formData = new FormData();
+        // on ajoute les valeurs
         formData.append("content", values.content);
         formData.append("descriptionPhoto", values.descriptionPhoto);
         formData.append("title", values.title);
+        // vérifie la taille de l'image
         if (photoRef.current && photoRef.current.files[0]) {
             const maxFileSize = 5000000;
             if (photoRef.current.files[0].size > maxFileSize) {
                 setErrorPhoto("Le fichier est trop lourd");
                 return;
             }
+            // vérifie le format du fichier
             const supportedExtensions = ['jpg', 'webp', 'png', 'jpeg', 'svg'];
             const fileExtension = photoRef.current.files[0].name.split('.').pop().toLowerCase();
             if (!supportedExtensions.includes(fileExtension)) {

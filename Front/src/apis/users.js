@@ -1,5 +1,6 @@
 const API_USERS = "/api/users";
 
+// créer un utilisateur
 export async function createUser(newUser) {
     const response = await fetch(`${API_USERS}/register`, {
         method: "POST",
@@ -17,7 +18,7 @@ export async function createUser(newUser) {
         }
     }
 };
-
+// connexion
 export async function signin(values) {
     const response = await fetch(`${API_USERS}/login`, {
         method: "POST",
@@ -35,13 +36,14 @@ export async function signin(values) {
         }
     }
 };
+// déconnexion
 
 export async function signout() {
     await fetch(`${API_USERS}/logout`, {
         method: "DELETE"
     });
 }
-
+// user with cookies
 export async function getConnectedUser() {
     const response = await fetch(`${API_USERS}/userConnected`);
     return response.json();

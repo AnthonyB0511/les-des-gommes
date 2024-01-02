@@ -7,7 +7,7 @@ export function SamplePrevArrow(props) {
     <div
       className={`${styles.container}`}
       onClick={onClick}>
-      <img src={arrow} className={`${styles.arrow}`} alt="" />
+      <img src={arrow} className={`${styles.arrow}`} alt="flèche pour le carrousel" />
     </div>
   );
 }

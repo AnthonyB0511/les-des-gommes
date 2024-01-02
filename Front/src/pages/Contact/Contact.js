@@ -19,6 +19,7 @@ export default function Contact() {
         email: yup
             .string()
             .required("ce champ est obligatoire")
+            // format de l'email
             .matches(
                 /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/,
                 "Votre email n'est pas valide"
@@ -27,7 +28,7 @@ export default function Contact() {
         message: yup.string().required("Ce champ est obligatoire"),
         rules: yup
             .boolean()
-            .oneOf([true], 'Veuillez cocher la case si vous souhaitez envoyer votre formulaire'),
+            .oneOf([true], 'Veuillez cocher la case si vous souhaitez envoyer votre message'),
     });
     const defaultValues = {
         name: "",

@@ -2,7 +2,7 @@ const router = require("express").Router();
 const connection = require("../../database/index");
 
 /**
- * 
+ * récupération des genres de jeu
  */
 router.get("/getGenre", (req, res) => {
     try {

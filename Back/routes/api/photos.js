@@ -39,7 +39,7 @@ router.patch('/modifyCarrousel', upload.array('files'), (req, res) => {
                 const filePathPhotoDB = path.join(__dirname, "../../uploads/imgCarrousel", photoDB.photo);
                 fs.unlink(filePathPhotoDB, (err) => {
                     if (err) {
-                        console.error;
+                        console.error(err);
                     }
                 });
             });

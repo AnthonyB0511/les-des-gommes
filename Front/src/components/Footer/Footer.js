@@ -9,11 +9,11 @@ export default function Footer() {
             </section>
             <Contact />
             <section className={`${styles.mention} d-flex justify-content-center align-items-center`}>
-                <Link to="/mentionslegales">Mentions légales</Link>
+                <Link to="/mentionslegales" title="voir les mentiosn légales">Mentions légales</Link>
                 <p className="space"> | </p>
-                <Link to='/politiquedeconfidentialite'>Politiques de confidentialités</Link>
+                <Link to='/politiquedeconfidentialite' title="voir la politique de confidentialités">Politiques de confidentialités</Link>
                 <p className="space"> | </p>
-                <Link to='/conditionsgenerales'>Conditions d'utilisations</Link>
+                <Link to='/conditionsgenerales' title="Voir les conditions générales">Conditions d'utilisations</Link>
             </section>
         </footer>
     );

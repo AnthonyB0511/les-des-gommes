@@ -14,6 +14,7 @@ export default function Articles() {
         <>
             <section className="d-flex justify-content-center align-items-center">
                 <h3>Remplacer l'article n°</h3>
+                {/* modifie l'article à changer */}
                 <select onChange={handleSelectChange} value={selectedArticle}>
                     {articles.map((article, i) => (
                         <option key={i} value={i}>{`${i + 1}`}</option>
@@ -22,9 +23,6 @@ export default function Articles() {
             </section>
             <ModifArticles article={articles[selectedArticle]} selectedIndex={selectedArticle} />
         </>
-        // {/* {articles.map((article, i) => (
-        //     <ModifArticles key={i} article={article} index={i} />
-        // ))} */}
 
 
     );

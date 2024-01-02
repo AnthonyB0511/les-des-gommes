@@ -16,7 +16,7 @@ const upload = multer({
         cb(null, true);
     }
 });
-
+// ajout d'un jeu
 router.post("/addGame", upload.single('photo'), (req, res) => {
     try {
         const searchSql = "SELECT * FROM game WHERE nameGame=?";
@@ -34,6 +34,7 @@ router.post("/addGame", upload.single('photo'), (req, res) => {
                         res.status(200).json("Le jeu a bien été ajouté");
                     });
                 } else {
+                    // si déjà dans la BDD alors on supprime le fichier qui vient d'être ajouté
                     const photo = req.file.filename;
                     const filePath = path.join(__dirname, "../../uploads/games", photo);
                     fs.unlink(filePath, (err) => {
@@ -54,10 +55,11 @@ router.post("/addGame", upload.single('photo'), (req, res) => {
 });
 
 
-
+// suppresion du jeu
 router.delete("/deleteGameData/:id", (req, res) => {
     try {
         const idGame = req.params.id;
+        // on récupère la photo et on la supprime du serveur
         const selectGames = "SELECT * FROM game WHERE idGame = ?";
         connection.query(selectGames, [idGame], (err, result) => {
             if (err) throw err;
@@ -69,6 +71,7 @@ router.delete("/deleteGameData/:id", (req, res) => {
             });
 
         });
+        // on supprime de la base de données
         const deleteGameSql = "DELETE FROM game WHERE idGame = ?";
         connection.query(deleteGameSql, [idGame], (err, result) => {
             if (err) throw err;
@@ -78,7 +81,7 @@ router.delete("/deleteGameData/:id", (req, res) => {
         res.sendStatus(400).json("Un problème est survenu...");
     }
 });
-
+// récupération du jeu
 router.get("/getGames", (req, res) => {
     try {
         const selectSql = "SELECT * FROM game ORDER BY nameGame ASC";

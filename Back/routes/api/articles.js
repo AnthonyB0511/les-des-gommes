@@ -16,7 +16,7 @@ const upload = multer({
         cb(null, true);
     }
 });
-
+// récupère les données de l'article
 router.get('/readArticle', (req, res) => {
     try {
         const sql = "SELECT * FROM article";
@@ -28,7 +28,7 @@ router.get('/readArticle', (req, res) => {
         console.error(error);
     }
 });
-
+// modifie l'article
 router.patch('/updateArticle', upload.single("photo"), async (req, res) => {
     const { title, content, descriptionPhoto } = req.body;
     const idArticle = req.query.idArticle;
@@ -41,12 +41,14 @@ router.patch('/updateArticle', upload.single("photo"), async (req, res) => {
     const sqlGetPhoto = "SELECT * FROM article WHERE idArticle = ?";
     connection.query(sqlGetPhoto, [idArticle], (err, result) => {
         if (err) throw err;
+        // suppression de la photo de l'ancien article sur le serveur
         const filePathPhotoDB = path.join(__dirname, "../../uploads/imgArticles", result[0].photo);
         fs.unlink(filePathPhotoDB, (err) => {
             if (err) {
                 console.error;
             }
         });
+        // modifie l'article
         const sqlUpdate = "UPDATE article SET title = ?, content = ? , descriptionPhoto = ? , photo = ? WHERE idArticle = ?";
         connection.query(sqlUpdate, [title, content, descriptionPhoto, photo, idArticle], (err, result) => {
             if (err) throw err;

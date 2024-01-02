@@ -60,7 +60,7 @@ const ForgotPassword = () => {
     }
     return (
         <>
-            <Title title="Reset du mot de passe" />
+            <Title title="Réinitialisation du mot de passe" />
             <Line />
             <form onSubmit={handleSubmit(submit)} className={`${styles.forgotPassword}`}>
                 <div className="d-flex flex-column mb10">

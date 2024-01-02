@@ -13,7 +13,7 @@ export default function MentionsLegales() {
                     <p>Le site internet est édité et exploité par :</p>
                     <h3>LES DES GOMMES</h3>
                     <p>Association loi 1901</p>
-                    <p>E-mail : <a className="linkMentions" href="mailto:lesdesgommes@gmail.com" title="Envoyer un mail à l'association">lesdesgommes@gmail.com</a> </p>
+                    <p>E-mail : <Link className="linkMentions" to="mailto:lesdesgommes@gmail.com" title="Envoyer un mail à l'association">lesdesgommes@gmail.com</Link> </p>
                 </article>
                 <article className="my20">
                     <h3>Propriété intellectuelle</h3>

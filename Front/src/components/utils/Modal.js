@@ -1,4 +1,5 @@
 import styles from "./Modal.module.scss";
+// vérification pour l'utilisateur & confirmation de la volonté de suppression
 export default function Modal({ message, onConfirm, onCancel }) {
     return (
 

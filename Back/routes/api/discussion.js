@@ -8,7 +8,7 @@ const transporter = nodemailer.createTransport({
         pass: "bogl evbq rqgu rdvx"
     }
 });
-
+// récupère les messages avec plus d'informations de l'utilisateur
 router.get('/getMessage', (req, res) => {
     try {
         const sql = "SELECT message.idMessage,message.content,DATE_FORMAT(message.date, '%d-%m-%Y %H:%i:%s') AS formattedDate,message.idUser,message.edit,message.report, user.username,user.avatar,user.idUser FROM message,user WHERE message.idUser = user.idUser ORDER BY message.date DESC";
@@ -20,7 +20,7 @@ router.get('/getMessage', (req, res) => {
         console.error(error);
     }
 });
-
+// ajout du message avec la date
 router.post("/sendMessage", (req, res) => {
     try {
         const idUser = req.body.idUser;
@@ -30,6 +30,7 @@ router.post("/sendMessage", (req, res) => {
         connection.query(sqlAddMessage, values, (err, result) => {
             if (err) throw err;
             const messageId = result.insertId;
+            // on récupère les données
             const sqlGetNewMessage = "SELECT message.idMessage, message.content,DATE_FORMAT(message.date, '%d-%m-%Y %H:%i:%s') AS formattedDate,message.idUser,message.edit,user.username,user.avatar,user.idUser FROM message,user WHERE message.idUser = user.idUser AND idMessage = ?";;
             connection.query(sqlGetNewMessage, [messageId], (err, result) => {
                 if (err) throw err;
@@ -42,7 +43,7 @@ router.post("/sendMessage", (req, res) => {
         res.status(500).json("Une erreur est survenue");
     }
 });
-
+// suppresion du message
 router.delete("/deleteMessage", (req, res) => {
     try {
         const idMessage = req.body.messageId;
@@ -55,7 +56,7 @@ router.delete("/deleteMessage", (req, res) => {
         console.error(error);
     }
 });
-
+// modifier les messages
 router.patch("/updateMessage", (req, res) => {
     try {
         const edit = req.body.edit === true ? "1" : "0";
@@ -71,6 +72,7 @@ router.patch("/updateMessage", (req, res) => {
         console.error(error);
     }
 });
+// signaler un message
 router.post("/alertMessage/:email", (req, res) => {
     try {
         const emailSend = req.params.email;
@@ -78,6 +80,7 @@ router.post("/alertMessage/:email", (req, res) => {
         const sql = "SELECT email FROM user WHERE idUser = ?";
         connection.query(sql, [idUser], (err, result) => {
             if (err) throw err;
+            // avertir l'administrateur du message
             const mailOptions = {
                 from: emailSend,
                 to: 'becque.anthony@gmail.com',

@@ -18,7 +18,7 @@ export default function DeleteAccount() {
     const BASE_API_URL = useContext(ApiContext);
     const email = new URLSearchParams(window.location.search).get("email");
     const navigate = useNavigate();
-    const { logout } = useContext(AuthContext);
+    const { logout, setUser } = useContext(AuthContext);
     const yupSchema = yup.object({
         password: yup
             .string()
@@ -67,9 +67,10 @@ export default function DeleteAccount() {
             if (response.ok) {
                 setFeedbackGood("Votre compte est supprimé");
                 reset(defaultValues);
-                logout();
                 setTimeout(() => {
                     navigate("/");
+                    setUser(null);
+                    logout();
                 }, 2000);
 
             }
