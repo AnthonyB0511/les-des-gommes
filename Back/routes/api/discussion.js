@@ -1,11 +1,12 @@
 const router = require("express").Router();
 const connection = require("../../database/index");
 const nodemailer = require("nodemailer");
+
 const transporter = nodemailer.createTransport({
     service: "Gmail",
     auth: {
-        user: "becque.anthony@gmail.com",
-        pass: "bogl evbq rqgu rdvx"
+        user: "lesdesgommes@gmail.com",
+        pass: "kmky tuwj bxhs xcgx"
     }
 });
 // récupère les messages avec plus d'informations de l'utilisateur
@@ -83,7 +84,7 @@ router.post("/alertMessage/:email", (req, res) => {
             // avertir l'administrateur du message
             const mailOptions = {
                 from: emailSend,
-                to: 'becque.anthony@gmail.com',
+                to: 'lesdesgommes@gmail.com',
                 subject: "Un message a été signalé",
                 text: `Le message suivant a été signalé : ${content} écrit le ${formattedDate} par ${username} ayant pour adresse mail ${result[0].email}`
             };
